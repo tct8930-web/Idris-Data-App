@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idris Data App</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 25px;
+        }
+
+        .tabs button {
+            width: 50%;
+            padding: 12px;
+            border: none;
+            background: #eee;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .tabs button.active {
+            background: #111;
+            color: white;
+        }
+
+        label {
+            display: block;
+            margin: 12px 0 6px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            margin-top: 22px;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #111;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background: #333;
+        }
+
+        .message {
+            margin-top: 15px;
+            text-align: center;
+            color: #555;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Idris Data App</h1>
+
+    <p class="subtitle">
+        Buy data and airtime easily
+    </p>
+
+    <div class="tabs">
+        <button id="loginTab" class="active" onclick="showLogin()">
+            Login
+        </button>
+
+        <button id="registerTab" onclick="showRegister()">
+            Create Account
+        </button>
+    </div>
+
+    <!-- LOGIN -->
+
+    <form id="loginForm">
+
+        <label>Email Address</label>
+        <input
+            type="email"
+            id="loginEmail"
+            placeholder="Enter your email"
+            required
+        >
+
+        <label>Password</label>
+        <input
+            type="password"
+            id="loginPassword"
+            placeholder="Enter your password"
+            required
+        >
+
+        <button class="submit-btn" type="submit">
+            Login
+        </button>
+
+        <div class="message" id="loginMessage"></div>
+
+    </form>
+
+
+    <!-- REGISTER -->
+
+    <form id="registerForm" class="hidden">
+
+        <label>Full Name</label>
+        <input
+            type="text"
+            id="fullName"
+            placeholder="Enter your full name"
+            required
+        >
+
+        <label>Email Address</label>
+        <input
+            type="email"
+            id="registerEmail"
+            placeholder="Enter your email"
+            required
+        >
+
+        <label>Phone Number</label>
+        <input
+            type="tel"
+            id="phoneNumber"
+            placeholder="Enter your phone number"
+            required
+        >
+
+        <label>Password</label>
+        <input
+            type="password"
+            id="registerPassword"
+            placeholder="Create a password"
+            minlength="8"
+            required
+        >
+
+        <button class="submit-btn" type="submit">
+            Create Account
+        </button>
+
+        <div class="message" id="registerMessage"></div>
+
+    </form>
+
+</div>
+
+
+<script>
+
+function showLogin() {
+
+    document.getElementById("loginForm").classList.remove("hidden");
+    document.getElementById("registerForm").classList.add("hidden");
+
+    document.getElementById("loginTab").classList.add("active");
+    document.getElementById("registerTab").classList.remove("active");
+}
+
+
+function showRegister() {
+
+    document.getElementById("loginForm").classList.add("hidden");
+    document.getElementById("registerForm").classList.remove("hidden");
+
+    document.getElementById("loginTab").classList.remove("active");
+    document.getElementById("registerTab").classList.add("active");
+}
+
+
+document.getElementById("loginForm").addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    document.getElementById("loginMessage").textContent =
+        "Account authentication will be connected next.";
+
+});
+
+
+document.getElementById("registerForm").addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    document.getElementById("registerMessage").textContent =
+        "Secure account registration will be connected next.";
+
+});
+
+</script>
+
+</body>
+</html>
