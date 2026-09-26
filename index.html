@@ -64,8 +64,7 @@
             gap: 15px;
         }
 
-        .button {
-            display: block;
+        button {
             padding: 18px;
             border: none;
             border-radius: 12px;
@@ -75,8 +74,45 @@
             cursor: pointer;
         }
 
-        .button:hover {
+        button:hover {
             transform: translateY(-2px);
+        }
+
+        .screen {
+            display: none;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        .screen h2 {
+            margin-top: 0;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin: 10px 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .continue {
+            width: 100%;
+            background: #111827;
+            color: white;
+        }
+
+        .back {
+            margin-top: 10px;
+            width: 100%;
+            background: #eee;
         }
 
         footer {
@@ -96,16 +132,47 @@
 
     <div class="container">
 
-        <div class="balance">
-            <h2>Wallet Balance</h2>
-            <div class="amount">₦0.00</div>
+        <!-- HOME SCREEN -->
+        <div id="homeScreen" class="screen active">
+
+            <div class="balance">
+                <h2>Wallet Balance</h2>
+                <div class="amount">₦0.00</div>
+            </div>
+
+            <div class="buttons">
+                <button onclick="showFundWallet()">💰 Fund Wallet</button>
+                <button>📱 Buy Data</button>
+                <button>☎️ Buy Airtime</button>
+                <button>📋 Transactions</button>
+            </div>
+
         </div>
 
-        <div class="buttons">
-            <button class="button">💰 Fund Wallet</button>
-            <button class="button">📱 Buy Data</button>
-            <button class="button">☎️ Buy Airtime</button>
-            <button class="button">📋 Transactions</button>
+        <!-- FUND WALLET SCREEN -->
+        <div id="fundScreen" class="screen">
+
+            <h2>Fund Wallet</h2>
+
+            <p>Enter the amount you want to deposit into your wallet.</p>
+
+            <label for="amount">Amount (₦)</label>
+
+            <input
+                type="number"
+                id="amount"
+                placeholder="Enter amount"
+                min="100"
+            >
+
+            <button class="continue" onclick="startFunding()">
+                Continue
+            </button>
+
+            <button class="back" onclick="goHome()">
+                Back
+            </button>
+
         </div>
 
     </div>
@@ -113,6 +180,33 @@
     <footer>
         © 2026 Idris Data App
     </footer>
+
+    <script>
+        function showFundWallet() {
+            document.getElementById("homeScreen").classList.remove("active");
+            document.getElementById("fundScreen").classList.add("active");
+        }
+
+        function goHome() {
+            document.getElementById("fundScreen").classList.remove("active");
+            document.getElementById("homeScreen").classList.add("active");
+        }
+
+        function startFunding() {
+            const amount = document.getElementById("amount").value;
+
+            if (!amount || amount < 100) {
+                alert("Please enter an amount of at least ₦100.");
+                return;
+            }
+
+            alert(
+                "Funding amount: ₦" +
+                Number(amount).toLocaleString() +
+                "\n\nPayment connection will be added next."
+            );
+        }
+    </script>
 
 </body>
 </html>
