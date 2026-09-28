@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account - Idris Data App</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+        }
+
+        .container {
+            max-width: 420px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin: 8px 0 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            background: #111827;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        #message {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .login {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .login a {
+            color: #111827;
+            font-weight: bold;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="card">
+
+            <h1>Create Account</h1>
+
+            <p class="subtitle">
+                Create your Idris Data App account.
+            </p>
+
+            <label for="fullName">Full Name</label>
+
+            <input
+                type="text"
+                id="fullName"
+                placeholder="Enter your full name"
+            >
+
+            <label for="phone">Phone Number</label>
+
+            <input
+                type="tel"
+                id="phone"
+                placeholder="Enter your phone number"
+            >
+
+            <label for="email">Email</label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+            >
+
+            <label for="password">Password</label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Create a password"
+            >
+
+            <button onclick="signup()">
+                Create Account
+            </button>
+
+            <div id="message"></div>
+
+            <div class="login">
+                Already have an account?
+                <a href="login.html">Login</a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+
+    <script>
+        const supabaseClient = window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+        async function signup() {
+
+            const fullName = document.getElementById("fullName").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value;
+
+            const message = document.getElementById("message");
+
+            if (!fullName || !phone || !email || !password) {
+                message.textContent = "Please fill in all fields.";
+                return;
+            }
+
+            if (password.length < 6) {
+                message.textContent =
+                    "Password must be at least 6 characters.";
+                return;
+            }
+
+            message.textContent = "Creating your account...";
+
+            const { data, error } = await supabaseClient.auth.signUp({
+                email: email,
+                password: password
+            });
+
+            if (error) {
+                message.textContent = error.message;
+                return;
+            }
+
+            if (!data.user) {
+                message.textContent =
+                    "Account could not be created. Please try again.";
+                return;
+            }
+
+            const { error: profileError } = await supabaseClient
+                .from("Idris-Data-App")
+                .insert({
+                    id: data.user.id,
+                    full_name: fullName,
+                    phone: phone
+                });
+
+            if (profileError) {
+                message.textContent =
+                    "Account created, but profile setup failed: " +
+                    profileError.message;
+                return;
+            }
+
+            message.textContent =
+                "Account created successfully!";
+
+            setTimeout(function() {
+                window.location.href = "login.html";
+            }, 1500);
+        }
+    </script>
+
+</body>
+</html>
