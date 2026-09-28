@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Login - Idris Data App</title>
+    <title>Idris Data App</title>
 
     <style>
         * {
@@ -17,148 +17,235 @@
             background: #f4f6f8;
         }
 
-        .container {
-            max-width: 420px;
-            margin: 60px auto;
-            padding: 20px;
+        header {
+            background: #111827;
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
         }
 
-        .card {
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        header p {
+            margin: 8px 0 0;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 25px auto;
+            padding: 0 20px;
+        }
+
+        .balance {
             background: white;
-            padding: 30px;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .balance h2 {
+            margin: 0 0 10px;
+            font-size: 18px;
+        }
+
+        .amount {
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        button {
+            padding: 18px;
+            border: none;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        .screen {
+            display: none;
+            background: white;
+            padding: 25px;
             border-radius: 15px;
             box-shadow: 0 3px 10px rgba(0,0,0,0.08);
         }
 
-        h1 {
-            text-align: center;
-            margin-top: 0;
+        .screen.active {
+            display: block;
         }
 
-        p {
-            text-align: center;
-            color: #666;
+        .screen h2 {
+            margin-top: 0;
         }
 
         input {
             width: 100%;
             padding: 14px;
-            margin: 8px 0 15px;
+            margin: 10px 0 15px;
             border: 1px solid #ccc;
             border-radius: 8px;
             font-size: 16px;
         }
 
-        button {
+        .continue {
             width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 8px;
             background: #111827;
             color: white;
-            font-size: 16px;
-            cursor: pointer;
         }
 
-        .signup {
-            margin-top: 20px;
+        .back {
+            margin-top: 10px;
+            width: 100%;
+            background: #eee;
         }
 
-        .signup a {
-            color: #111827;
-            font-weight: bold;
-            text-decoration: none;
-        }
-
-        #message {
-            margin-top: 15px;
+        footer {
             text-align: center;
+            padding: 30px 10px;
+            color: #666;
         }
     </style>
 </head>
 
 <body>
 
+    <header>
+        <h1>Idris Data App</h1>
+        <p>Data, Airtime & Payments</p>
+    </header>
+
     <div class="container">
 
-        <div class="card">
+        <!-- HOME SCREEN -->
+        <div id="homeScreen" class="screen active">
 
-            <h1>Welcome Back</h1>
+            <div class="balance">
+                <h2>Wallet Balance</h2>
+                <div class="amount">₦0.00</div>
+            </div>
 
-            <p>Login to your Idris Data App account.</p>
+            <div class="buttons">
 
-            <label for="email">Email</label>
+                <!-- LOGIN -->
+                <button onclick="window.location.href='login.html'">
+                    🔐 Login
+                </button>
+
+                <!-- CREATE ACCOUNT -->
+                <button onclick="window.location.href='signup.html'">
+                    👤 Create Account
+                </button>
+
+                <!-- FUND WALLET -->
+                <button onclick="showFundWallet()">
+                    💰 Fund Wallet
+                </button>
+
+                <!-- BUY DATA -->
+                <button>
+                    📱 Buy Data
+                </button>
+
+                <!-- BUY AIRTIME -->
+                <button>
+                    ☎️ Buy Airtime
+                </button>
+
+                <!-- TRANSACTIONS -->
+                <button>
+                    📋 Transactions
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- FUND WALLET SCREEN -->
+        <div id="fundScreen" class="screen">
+
+            <h2>Fund Wallet</h2>
+
+            <p>Enter the amount you want to deposit into your wallet.</p>
+
+            <label for="amount">Amount (₦)</label>
 
             <input
-                type="email"
-                id="email"
-                placeholder="Enter your email"
+                type="number"
+                id="amount"
+                placeholder="Enter amount"
+                min="100"
             >
 
-            <label for="password">Password</label>
-
-            <input
-                type="password"
-                id="password"
-                placeholder="Enter your password"
-            >
-
-            <button onclick="login()">
-                Login
+            <button class="continue" onclick="startFunding()">
+                Continue
             </button>
 
-            <div id="message"></div>
-
-            <div class="signup">
-                <p>
-                    Don't have an account?
-                    <a href="signup.html">Create Account</a>
-                </p>
-            </div>
+            <button class="back" onclick="goHome()">
+                Back
+            </button>
 
         </div>
 
     </div>
 
-    <!-- Supabase -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="config.js"></script>
+    <footer>
+        ©️ 2026 Idris Data App
+    </footer>
 
     <script>
-        const supabaseClient = window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_KEY
-        );
+        function showFundWallet() {
+            document.getElementById("homeScreen").classList.remove("active");
+            document.getElementById("fundScreen").classList.add("active");
+        }
 
-        async function login() {
+        function goHome() {
+            document.getElementById("fundScreen").classList.remove("active");
+            document.getElementById("homeScreen").classList.add("active");
+        }
 
-            const email = document.getElementById("email").value.trim();
-            const password = document.getElementById("password").value;
+        function startFunding() {
+            const amount = document.getElementById("amount").value;
 
-            const message = document.getElementById("message");
-
-            if (!email || !password) {
-                message.textContent = "Please enter your email and password.";
+            if (!amount || amount < 100) {
+                alert("Please enter an amount of at least ₦100.");
                 return;
             }
 
-            message.textContent = "Logging in...";
-
-            const { error } = await supabaseClient.auth.signInWithPassword({
-                email: email,
-                password: password
-            });
-
-            if (error) {
-                message.textContent = error.message;
-                return;
-            }
-
-            message.textContent = "Login successful!";
-
-            window.location.href = "index.html";
+            alert(
+                "Funding amount: ₦" +
+                Number(amount).toLocaleString() +
+                "\n\nPayment connection will be added next."
+            );
         }
     </script>
+
+    <!-- TEST SUPABASE CONNECTION -->
+    <script>
+        console.log("Supabase URL:", SUPABASE_URL);
+        console.log("Supabase connection is ready.");
+    </script>
+
+    <!-- SUPABASE JAVASCRIPT LIBRARY -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- CONNECT SUPABASE CONFIGURATION -->
+    <script src="config.js"></script>
 
 </body>
 </html>
