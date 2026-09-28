@@ -74,10 +74,6 @@
             cursor: pointer;
         }
 
-        button:hover {
-            transform: translateY(-2px);
-        }
-
         .screen {
             display: none;
             background: white;
@@ -88,10 +84,6 @@
 
         .screen.active {
             display: block;
-        }
-
-        .screen h2 {
-            margin-top: 0;
         }
 
         input {
@@ -132,7 +124,7 @@
 
     <div class="container">
 
-        <!-- HOME SCREEN -->
+        <!-- HOME -->
         <div id="homeScreen" class="screen active">
 
             <div class="balance">
@@ -141,20 +133,41 @@
             </div>
 
             <div class="buttons">
-                <button onclick="showFundWallet()">💰 Fund Wallet</button>
-                <button>📱 Buy Data</button>
-                <button>☎️ Buy Airtime</button>
-                <button>📋 Transactions</button>
+
+                <button onclick="window.location.href='login.html'">
+                    🔐 Login
+                </button>
+
+                <button onclick="window.location.href='signup.html'">
+                    👤 Create Account
+                </button>
+
+                <button onclick="showFundWallet()">
+                    💰 Fund Wallet
+                </button>
+
+                <button>
+                    📱 Buy Data
+                </button>
+
+                <button>
+                    ☎️ Buy Airtime
+                </button>
+
+                <button>
+                    📋 Transactions
+                </button>
+
             </div>
 
         </div>
 
-        <!-- FUND WALLET SCREEN -->
+        <!-- FUND WALLET -->
         <div id="fundScreen" class="screen">
 
             <h2>Fund Wallet</h2>
 
-            <p>Enter the amount you want to deposit into your wallet.</p>
+            <p>Enter the amount you want to deposit.</p>
 
             <label for="amount">Amount (₦)</label>
 
@@ -178,10 +191,11 @@
     </div>
 
     <footer>
-        ©️ 2026 Idris Data App
+        © 2026 Idris Data App
     </footer>
 
     <script>
+
         function showFundWallet() {
             document.getElementById("homeScreen").classList.remove("active");
             document.getElementById("fundScreen").classList.add("active");
@@ -193,6 +207,7 @@
         }
 
         function startFunding() {
+
             const amount = document.getElementById("amount").value;
 
             if (!amount || amount < 100) {
@@ -206,19 +221,8 @@
                 "\n\nPayment connection will be added next."
             );
         }
+
     </script>
-
-    <!-- TEST SUPABASE CONNECTION -->
-    <script>
-        console.log("Supabase URL:", SUPABASE_URL);
-        console.log("Supabase connection is ready.");
-    </script>
-
-    <!-- SUPABASE JAVASCRIPT LIBRARY -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <!-- CONNECT SUPABASE CONFIGURATION -->
-    <script src="config.js"></script>
 
 </body>
 </html>
