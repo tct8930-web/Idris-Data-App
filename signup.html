@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Create Account - Idris Data App</title>
+    <title>Create Account - Velqora</title>
 
     <style>
         * {
@@ -95,7 +95,7 @@
             <h1>Create Account</h1>
 
             <p class="subtitle">
-                Create your Idris Data App account.
+                Create your Velqora account.
             </p>
 
             <label for="fullName">Full Name</label>
@@ -203,13 +203,6 @@
                     "Account could not be created.";
                 return;
             }
-
-            /*
-             If email confirmation is required,
-             the user may not have a session yet.
-             We therefore save the profile only
-             when a session is available.
-            */
 
             if (data.session) {
 
