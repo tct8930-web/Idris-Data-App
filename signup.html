@@ -145,11 +145,11 @@
 
     </div>
 
-    <!-- Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="config.js"></script>
 
     <script>
+
         const supabaseClient = window.supabase.createClient(
             SUPABASE_URL,
             SUPABASE_KEY
@@ -157,15 +157,24 @@
 
         async function signup() {
 
-            const fullName = document.getElementById("fullName").value.trim();
-            const phone = document.getElementById("phone").value.trim();
-            const email = document.getElementById("email").value.trim();
-            const password = document.getElementById("password").value;
+            const fullName =
+                document.getElementById("fullName").value.trim();
 
-            const message = document.getElementById("message");
+            const phone =
+                document.getElementById("phone").value.trim();
+
+            const email =
+                document.getElementById("email").value.trim();
+
+            const password =
+                document.getElementById("password").value;
+
+            const message =
+                document.getElementById("message");
 
             if (!fullName || !phone || !email || !password) {
-                message.textContent = "Please fill in all fields.";
+                message.textContent =
+                    "Please fill in all fields.";
                 return;
             }
 
@@ -175,12 +184,14 @@
                 return;
             }
 
-            message.textContent = "Creating your account...";
+            message.textContent =
+                "Creating your account...";
 
-            const { data, error } = await supabaseClient.auth.signUp({
-                email: email,
-                password: password
-            });
+            const { data, error } =
+                await supabaseClient.auth.signUp({
+                    email: email,
+                    password: password
+                });
 
             if (error) {
                 message.textContent = error.message;
@@ -189,32 +200,50 @@
 
             if (!data.user) {
                 message.textContent =
-                    "Account could not be created. Please try again.";
+                    "Account could not be created.";
                 return;
             }
 
-            const { error: profileError } = await supabaseClient
-                .from("Idris-Data-App")
-                .insert({
-                    id: data.user.id,
-                    full_name: fullName,
-                    phone: phone
-                });
+            /*
+             If email confirmation is required,
+             the user may not have a session yet.
+             We therefore save the profile only
+             when a session is available.
+            */
 
-            if (profileError) {
+            if (data.session) {
+
+                const { error: profileError } =
+                    await supabaseClient
+                    .from("Idris-Data-App")
+                    .insert({
+                        id: data.user.id,
+                        full_name: fullName,
+                        phone: phone
+                    });
+
+                if (profileError) {
+                    message.textContent =
+                        "Account created, but profile setup failed: " +
+                        profileError.message;
+                    return;
+                }
+
                 message.textContent =
-                    "Account created, but profile setup failed: " +
-                    profileError.message;
-                return;
-            }
+                    "Account created successfully!";
 
-            message.textContent =
-                "Account created successfully!";
+            } else {
+
+                message.textContent =
+                    "Account created! Please check your email to confirm your account, then log in.";
+
+            }
 
             setTimeout(function() {
                 window.location.href = "login.html";
-            }, 1500);
+            }, 2000);
         }
+
     </script>
 
 </body>
