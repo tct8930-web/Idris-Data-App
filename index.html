@@ -158,12 +158,10 @@
 
     <div class="container">
 
-        <!-- LOADING -->
         <div id="loading">
             Checking your account...
         </div>
 
-        <!-- WELCOME SCREEN -->
         <div id="welcomeScreen" class="welcome" style="display: none;">
 
             <h2>Welcome to Velqora</h2>
@@ -187,11 +185,11 @@
 
         </div>
 
-        <!-- DASHBOARD -->
         <div id="dashboard" class="dashboard">
 
             <div class="balance">
                 <h2>Wallet Balance</h2>
+
                 <div class="amount" id="walletBalance">
                     Checking...
                 </div>
@@ -260,7 +258,7 @@
                 console.error("Wallet error:", error);
 
                 balanceElement.textContent =
-                    "Wallet unavailable";
+                    "Error: " + error.message;
 
                 return;
             }
@@ -268,7 +266,7 @@
             if (!data) {
 
                 balanceElement.textContent =
-                    "Wallet unavailable";
+                    "Wallet not found";
 
                 return;
             }
