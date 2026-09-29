@@ -16,155 +16,440 @@
 
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f6f8;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
             color: #111827;
         }
 
-        header {
-            background: #111827;
-            color: white;
-            padding: 30px 20px;
+        button {
+            font-family: inherit;
+        }
+
+        /* =========================
+           LOADING
+        ========================= */
+
+        #loading {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
+            color: #64748b;
+            padding: 20px;
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 32px;
-        }
+        /* =========================
+           WELCOME SCREEN
+        ========================= */
 
-        header p {
-            margin: 8px 0 0;
-        }
-
-        .container {
-            max-width: 500px;
-            margin: 30px auto;
-            padding: 0 20px;
+        .welcome-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            background:
+                radial-gradient(circle at top right, #dbeafe, transparent 35%),
+                #f5f7fb;
         }
 
         .welcome {
+            width: 100%;
+            max-width: 430px;
             background: white;
             padding: 35px 25px;
-            border-radius: 18px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            border-radius: 24px;
+            box-shadow: 0 15px 45px rgba(15, 23, 42, 0.10);
             text-align: center;
         }
 
+        .logo {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 18px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: bold;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25);
+        }
+
+        .welcome h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
         .welcome h2 {
-            margin-top: 0;
-            font-size: 26px;
+            margin: 8px 0 12px;
+            font-size: 22px;
         }
 
         .welcome p {
-            color: #666;
+            color: #64748b;
             line-height: 1.6;
+            margin-bottom: 25px;
         }
 
         .welcome button {
             width: 100%;
-            padding: 16px;
-            margin-top: 12px;
+            padding: 15px;
+            margin-top: 10px;
             border: none;
-            border-radius: 10px;
+            border-radius: 13px;
             font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
         }
 
         .login-button {
-            background: #111827;
+            background: #2563eb;
             color: white;
         }
 
         .signup-button {
-            background: #eee;
-            color: #111827;
+            background: #eef2ff;
+            color: #1d4ed8;
         }
+
+        /* =========================
+           DASHBOARD
+        ========================= */
 
         .dashboard {
             display: none;
+            min-height: 100vh;
         }
 
         .dashboard.active {
             display: block;
         }
 
-        .balance {
+        .topbar {
             background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-            text-align: center;
-            margin-bottom: 20px;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
 
-        .balance h2 {
-            margin: 0 0 10px;
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-logo {
+            width: 42px;
+            height: 42px;
+            border-radius: 13px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
             font-size: 18px;
         }
 
-        .amount {
-            font-size: 32px;
+        .brand-name {
+            font-size: 20px;
             font-weight: bold;
         }
 
-        .buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .buttons button {
-            padding: 18px;
+        .profile-button {
+            width: 42px;
+            height: 42px;
             border: none;
-            border-radius: 12px;
-            background: white;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-            font-size: 16px;
+            border-radius: 50%;
+            background: #eff6ff;
+            color: #2563eb;
+            font-size: 19px;
             cursor: pointer;
         }
+
+        .container {
+            width: 100%;
+            max-width: 1050px;
+            margin: 0 auto;
+            padding: 25px 18px 100px;
+        }
+
+        .greeting {
+            margin-bottom: 20px;
+        }
+
+        .greeting p {
+            margin: 0 0 5px;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .greeting h2 {
+            margin: 0;
+            font-size: 25px;
+        }
+
+        /* =========================
+           BALANCE CARD
+        ========================= */
+
+        .balance-card {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            border-radius: 24px;
+            padding: 25px;
+            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.25);
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .balance-card::after {
+            content: "";
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            right: -70px;
+            top: -70px;
+        }
+
+        .balance-label {
+            font-size: 14px;
+            opacity: 0.85;
+        }
+
+        .balance-amount {
+            font-size: 36px;
+            font-weight: bold;
+            margin: 10px 0 22px;
+            letter-spacing: -1px;
+        }
+
+        .fund-button {
+            border: none;
+            background: white;
+            color: #1d4ed8;
+            padding: 13px 20px;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* =========================
+           QUICK ACTIONS
+        ========================= */
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 25px 0 15px;
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .action {
+            border: none;
+            background: white;
+            border-radius: 17px;
+            padding: 18px 10px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.06);
+            transition: transform 0.15s ease;
+        }
+
+        .action:active {
+            transform: scale(0.97);
+        }
+
+        .action-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 10px;
+            border-radius: 15px;
+            background: #eff6ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .action-title {
+            font-size: 13px;
+            font-weight: bold;
+            color: #1f2937;
+        }
+
+        /* =========================
+           RECENT TRANSACTIONS
+        ========================= */
+
+        .transactions {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.06);
+            overflow: hidden;
+        }
+
+        .transaction-empty {
+            padding: 30px 20px;
+            text-align: center;
+            color: #94a3b8;
+        }
+
+        .transaction-empty-icon {
+            font-size: 35px;
+            margin-bottom: 8px;
+        }
+
+        /* =========================
+           LOGOUT
+        ========================= */
 
         .logout {
             width: 100%;
-            margin-top: 20px;
+            margin-top: 25px;
             padding: 15px;
             border: none;
-            border-radius: 10px;
-            background: #dc2626;
-            color: white;
-            font-size: 16px;
+            border-radius: 13px;
+            background: #fee2e2;
+            color: #dc2626;
+            font-size: 15px;
+            font-weight: bold;
             cursor: pointer;
         }
 
-        footer {
-            text-align: center;
-            padding: 30px 10px;
-            color: #666;
+        /* =========================
+           BOTTOM NAVIGATION
+        ========================= */
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            height: 68px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 20;
         }
 
-        #loading {
-            text-align: center;
-            padding: 40px 20px;
+        .nav-button {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 11px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-button span {
+            font-size: 21px;
+        }
+
+        .nav-button.active {
+            color: #2563eb;
+        }
+
+        /* =========================
+           DESKTOP
+        ========================= */
+
+        @media (min-width: 700px) {
+
+            .bottom-nav {
+                position: static;
+                max-width: 1050px;
+                margin: 0 auto 20px;
+                border: none;
+                border-radius: 18px;
+                box-shadow: 0 5px 18px rgba(15, 23, 42, 0.06);
+            }
+
+            .container {
+                padding-bottom: 25px;
+            }
+
+            .actions {
+                grid-template-columns: repeat(6, 1fr);
+            }
+        }
+
+        @media (max-width: 420px) {
+
+            .actions {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .action {
+                padding: 14px 5px;
+            }
+
+            .action-icon {
+                width: 42px;
+                height: 42px;
+            }
+
+            .balance-amount {
+                font-size: 31px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <header>
-        <h1>Velqora</h1>
-        <p>Data, Airtime & Payments</p>
-    </header>
+    <!-- =========================
+         LOADING
+    ========================= -->
 
-    <div class="container">
+    <div id="loading">
+        Checking your Velqora account...
+    </div>
 
-        <div id="loading">
-            Checking your account...
-        </div>
 
-        <div id="welcomeScreen" class="welcome" style="display: none;">
+    <!-- =========================
+         WELCOME SCREEN
+    ========================= -->
 
-            <h2>Welcome to Velqora</h2>
+    <div
+        id="welcomeScreen"
+        class="welcome-page"
+        style="display: none;"
+    >
+
+        <div class="welcome">
+
+            <div class="logo">
+                V
+            </div>
+
+            <h1>Velqora</h1>
+
+            <h2>Welcome</h2>
 
             <p>
                 Your simple platform for data, airtime,
@@ -173,76 +458,269 @@
 
             <button
                 class="login-button"
-                onclick="window.location.href='login.html'">
+                onclick="window.location.href='login.html'"
+            >
                 🔐 Login
             </button>
 
             <button
                 class="signup-button"
-                onclick="window.location.href='signup.html'">
+                onclick="window.location.href='signup.html'"
+            >
                 👤 Create Account
-            </button>
-
-        </div>
-
-        <div id="dashboard" class="dashboard">
-
-            <div class="balance">
-
-                <h2>Wallet Balance</h2>
-
-                <div class="amount" id="walletBalance">
-                    Checking...
-                </div>
-
-            </div>
-
-            <div class="buttons">
-
-                <button onclick="startFunding()">
-                    💰 Fund Wallet
-                </button>
-
-                <button>
-                    📱 Buy Data
-                </button>
-
-                <button>
-                    ☎️ Buy Airtime
-                </button>
-
-                <button>
-                    💸 Transfer
-                </button>
-
-                <button>
-                    📋 Transactions
-                </button>
-
-                <button>
-                    👤 Profile
-                </button>
-
-            </div>
-
-            <button class="logout" onclick="logout()">
-                🚪 Logout
             </button>
 
         </div>
 
     </div>
 
-    <footer>
-        © 2026 Velqora
-    </footer>
+
+    <!-- =========================
+         DASHBOARD
+    ========================= -->
+
+    <div id="dashboard" class="dashboard">
+
+        <header class="topbar">
+
+            <div class="brand">
+
+                <div class="brand-logo">
+                    V
+                </div>
+
+                <div class="brand-name">
+                    Velqora
+                </div>
+
+            </div>
+
+            <button
+                class="profile-button"
+                onclick="goToProfile()"
+            >
+                👤
+            </button>
+
+        </header>
+
+
+        <main class="container">
+
+            <div class="greeting">
+
+                <p>Welcome back</p>
+
+                <h2>Your finances, simplified.</h2>
+
+            </div>
+
+
+            <!-- BALANCE -->
+
+            <div class="balance-card">
+
+                <div class="balance-label">
+                    Available Wallet Balance
+                </div>
+
+                <div
+                    class="balance-amount"
+                    id="walletBalance"
+                >
+                    Checking...
+                </div>
+
+                <button
+                    class="fund-button"
+                    onclick="startFunding()"
+                >
+                    + Fund Wallet
+                </button>
+
+            </div>
+
+
+            <!-- QUICK ACTIONS -->
+
+            <div class="section-title">
+                Quick Services
+            </div>
+
+            <div class="actions">
+
+                <button
+                    class="action"
+                    onclick="startFunding()"
+                >
+                    <div class="action-icon">
+                        💰
+                    </div>
+
+                    <div class="action-title">
+                        Fund Wallet
+                    </div>
+                </button>
+
+
+                <button
+                    class="action"
+                    onclick="buyData()"
+                >
+                    <div class="action-icon">
+                        📱
+                    </div>
+
+                    <div class="action-title">
+                        Buy Data
+                    </div>
+                </button>
+
+
+                <button
+                    class="action"
+                    onclick="buyAirtime()"
+                >
+                    <div class="action-icon">
+                        ☎️
+                    </div>
+
+                    <div class="action-title">
+                        Airtime
+                    </div>
+                </button>
+
+
+                <button
+                    class="action"
+                    onclick="makeTransfer()"
+                >
+                    <div class="action-icon">
+                        💸
+                    </div>
+
+                    <div class="action-title">
+                        Transfer
+                    </div>
+                </button>
+
+
+                <button
+                    class="action"
+                    onclick="viewTransactions()"
+                >
+                    <div class="action-icon">
+                        📋
+                    </div>
+
+                    <div class="action-title">
+                        Transactions
+                    </div>
+                </button>
+
+
+                <button
+                    class="action"
+                    onclick="goToProfile()"
+                >
+                    <div class="action-icon">
+                        👤
+                    </div>
+
+                    <div class="action-title">
+                        Profile
+                    </div>
+                </button>
+
+            </div>
+
+
+            <!-- RECENT TRANSACTIONS -->
+
+            <div class="section-title">
+                Recent Transactions
+            </div>
+
+            <div class="transactions">
+
+                <div class="transaction-empty">
+
+                    <div class="transaction-empty-icon">
+                        🧾
+                    </div>
+
+                    <div>
+                        No transactions yet
+                    </div>
+
+                    <small>
+                        Your real transactions will appear here.
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="logout"
+                onclick="logout()"
+            >
+                🚪 Log Out
+            </button>
+
+        </main>
+
+
+        <!-- BOTTOM NAVIGATION -->
+
+        <nav class="bottom-nav">
+
+            <button
+                class="nav-button active"
+                onclick="goHome()"
+            >
+                <span>⌂</span>
+                Home
+            </button>
+
+            <button
+                class="nav-button"
+                onclick="viewTransactions()"
+            >
+                <span>▣</span>
+                Activity
+            </button>
+
+            <button
+                class="nav-button"
+                onclick="goToProfile()"
+            >
+                <span>♙</span>
+                Profile
+            </button>
+
+        </nav>
+
+    </div>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
 
     <script>
 
-        const supabaseClient = window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_KEY
-        );
+        const supabaseClient =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_KEY
+            );
+
+
+        /* =========================
+           LOAD WALLET
+        ========================= */
 
         async function loadWallet(userId) {
 
@@ -255,18 +733,26 @@
                 .eq("user_id", userId)
                 .maybeSingle();
 
+
             const balanceElement =
-                document.getElementById("walletBalance");
+                document.getElementById(
+                    "walletBalance"
+                );
+
 
             if (error) {
 
-                console.error("Wallet error:", error);
+                console.error(
+                    "Wallet error:",
+                    error
+                );
 
                 balanceElement.textContent =
-                    "Error: " + error.message;
+                    "Unable to load";
 
                 return;
             }
+
 
             if (!data) {
 
@@ -276,60 +762,94 @@
                 return;
             }
 
-            const balance = Number(data.balance);
+
+            const balance =
+                Number(data.balance);
+
 
             balanceElement.textContent =
-                "₦" + balance.toLocaleString("en-NG", {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
-                });
+                "₦" +
+                balance.toLocaleString(
+                    "en-NG",
+                    {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    }
+                );
         }
 
+
+        /* =========================
+           CHECK USER
+        ========================= */
 
         async function checkUser() {
 
             const {
                 data: { user }
-            } = await supabaseClient.auth.getUser();
+            } =
+                await supabaseClient.auth.getUser();
 
-            document.getElementById("loading").style.display = "none";
+
+            document.getElementById(
+                "loading"
+            ).style.display = "none";
+
 
             if (user) {
 
-                document.getElementById("dashboard")
-                    .classList.add("active");
+                document.getElementById(
+                    "dashboard"
+                ).classList.add("active");
+
 
                 await loadWallet(user.id);
 
             } else {
 
-                document.getElementById("welcomeScreen")
-                    .style.display = "block";
+                document.getElementById(
+                    "welcomeScreen"
+                ).style.display = "flex";
 
             }
         }
 
 
+        /* =========================
+           FUND WALLET
+        ========================= */
+
         async function startFunding() {
 
-            const amountInput = prompt(
-                "Enter the amount you want to fund your wallet in Naira:"
-            );
+            const amountInput =
+                prompt(
+                    "Enter the amount you want to fund your wallet in Naira:"
+                );
+
 
             if (amountInput === null) {
                 return;
             }
 
-            const amount = Number(
-                amountInput.replace(/,/g, "")
-            );
 
-            if (!Number.isFinite(amount) || amount <= 0) {
+            const amount =
+                Number(
+                    amountInput.replace(/,/g, "")
+                );
 
-                alert("Please enter a valid amount.");
+
+            if (
+                !Number.isFinite(amount) ||
+                amount <= 0
+            ) {
+
+                alert(
+                    "Please enter a valid amount."
+                );
 
                 return;
             }
+
 
             if (amount < 100) {
 
@@ -340,21 +860,29 @@
                 return;
             }
 
+
             try {
 
-                alert("Creating your secure payment...");
+                alert(
+                    "Creating your secure payment..."
+                );
+
 
                 const {
                     data,
                     error
-                } = await supabaseClient.functions.invoke(
-                    "rapid-api",
-                    {
-                        body: {
-                            amount: amount
-                        }
-                    }
-                );
+                } =
+                    await supabaseClient
+                        .functions
+                        .invoke(
+                            "rapid-api",
+                            {
+                                body: {
+                                    amount: amount
+                                }
+                            }
+                        );
+
 
                 if (error) {
 
@@ -362,6 +890,7 @@
                         "Payment function error:",
                         error
                     );
+
 
                     alert(
                         "Unable to start payment: " +
@@ -371,7 +900,11 @@
                     return;
                 }
 
-                if (!data || !data.success) {
+
+                if (
+                    !data ||
+                    !data.success
+                ) {
 
                     alert(
                         data?.error ||
@@ -381,7 +914,10 @@
                     return;
                 }
 
-                if (!data.payment_link) {
+
+                if (
+                    !data.payment_link
+                ) {
 
                     alert(
                         "Payment link was not returned."
@@ -390,8 +926,10 @@
                     return;
                 }
 
+
                 window.location.href =
                     data.payment_link;
+
 
             } catch (error) {
 
@@ -400,6 +938,7 @@
                     error
                 );
 
+
                 alert(
                     "Something went wrong while starting the payment."
                 );
@@ -407,13 +946,75 @@
         }
 
 
+        /* =========================
+           FUTURE SERVICES
+        ========================= */
+
+        function buyData() {
+
+            alert(
+                "Data service is being connected next."
+            );
+        }
+
+
+        function buyAirtime() {
+
+            alert(
+                "Airtime service is being connected next."
+            );
+        }
+
+
+        function makeTransfer() {
+
+            alert(
+                "Transfer service is being connected next."
+            );
+        }
+
+
+        function viewTransactions() {
+
+            alert(
+                "Transaction history is being connected next."
+            );
+        }
+
+
+        function goToProfile() {
+
+            alert(
+                "Profile page is being connected next."
+            );
+        }
+
+
+        function goHome() {
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+
+
+        /* =========================
+           LOGOUT
+        ========================= */
+
         async function logout() {
 
             await supabaseClient.auth.signOut();
 
-            window.location.href = "index.html";
+            window.location.href =
+                "index.html";
         }
 
+
+        /* =========================
+           START
+        ========================= */
 
         checkUser();
 
