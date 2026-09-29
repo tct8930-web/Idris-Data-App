@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Velqora - Profile</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #111827;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            padding: 25px 20px 35px;
+            border-radius: 0 0 25px 25px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 25px;
+        }
+
+        .header p {
+            margin: 7px 0 0;
+            opacity: 0.85;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: -20px auto 40px;
+            padding: 0 16px;
+        }
+
+        .profile-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #2563eb;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            font-weight: bold;
+            margin: 0 auto 15px;
+        }
+
+        .name {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .email {
+            text-align: center;
+            color: #6b7280;
+            margin-bottom: 25px;
+            word-break: break-word;
+        }
+
+        .info {
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .row {
+            padding: 17px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .label {
+            font-size: 13px;
+            color: #6b7280;
+            margin-bottom: 5px;
+        }
+
+        .value {
+            font-size: 16px;
+            font-weight: 600;
+            word-break: break-word;
+        }
+
+        .buttons {
+            margin-top: 25px;
+            display: grid;
+            gap: 12px;
+        }
+
+        button,
+        a {
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .back {
+            background: #eef2ff;
+            color: #2563eb;
+        }
+
+        .logout {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px 20px;
+            color: #6b7280;
+        }
+
+        .error {
+            text-align: center;
+            color: #dc2626;
+            padding: 30px 10px;
+        }
+
+        @media (min-width: 700px) {
+            .header {
+                padding-left: 30px;
+            }
+
+            .container {
+                margin-top: -30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>Velqora</h1>
+        <p>My Profile</p>
+    </div>
+
+    <div class="container">
+
+        <div class="profile-card">
+
+            <div id="loading" class="loading">
+                Loading your profile...
+            </div>
+
+            <div id="profileContent" style="display:none;">
+
+                <div class="avatar" id="avatar">
+                    V
+                </div>
+
+                <div class="name" id="fullName">
+                    Velqora User
+                </div>
+
+                <div class="email" id="email">
+                    -
+                </div>
+
+                <div class="info">
+
+                    <div class="row">
+                        <div class="label">Full Name</div>
+                        <div class="value" id="profileName">
+                            -
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="label">Phone Number</div>
+                        <div class="value" id="phone">
+                            -
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="label">Email Address</div>
+                        <div class="value" id="profileEmail">
+                            -
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="label">User ID</div>
+                        <div class="value" id="userId">
+                            -
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="buttons">
+
+                    <a href="index.html" class="back">
+                        ← Back to Dashboard
+                    </a>
+
+                    <button class="logout" onclick="logout()">
+                        Log Out
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div id="errorMessage" class="error" style="display:none;">
+                Unable to load your profile.
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="config.js"></script>
+
+    <script>
+        const supabaseClient = window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+        async function loadProfile() {
+
+            const {
+                data: { session },
+                error: sessionError
+            } = await supabaseClient.auth.getSession();
+
+            if (sessionError || !session) {
+                window.location.href = "login.html";
+                return;
+            }
+
+            const user = session.user;
+
+            document.getElementById("email").textContent =
+                user.email || "-";
+
+            document.getElementById("profileEmail").textContent =
+                user.email || "-";
+
+            document.getElementById("userId").textContent =
+                user.id;
+
+            const { data: profile, error } = await supabaseClient
+                .from("Idris-Data-App")
+                .select("full_name, phone")
+                .eq("id", user.id)
+                .maybeSingle();
+
+            if (error) {
+                console.error("Profile error:", error);
+
+                document.getElementById("loading").style.display = "none";
+                document.getElementById("errorMessage").style.display = "block";
+
+                return;
+            }
+
+            const fullName =
+                profile?.full_name ||
+                user.user_metadata?.full_name ||
+                "Velqora User";
+
+            const phone =
+                profile?.phone ||
+                user.user_metadata?.phone ||
+                "Not provided";
+
+            document.getElementById("fullName").textContent =
+                fullName;
+
+            document.getElementById("profileName").textContent =
+                fullName;
+
+            document.getElementById("phone").textContent =
+                phone;
+
+            const firstLetter =
+                fullName.charAt(0).toUpperCase();
+
+            document.getElementById("avatar").textContent =
+                firstLetter;
+
+            document.getElementById("loading").style.display = "none";
+            document.getElementById("profileContent").style.display = "block";
+        }
+
+        async function logout() {
+
+            const { error } = await supabaseClient.auth.signOut();
+
+            if (error) {
+                alert("Unable to log out. Please try again.");
+                return;
+            }
+
+            window.location.href = "login.html";
+        }
+
+        loadProfile();
+    </script>
+
+</body>
+</html>
