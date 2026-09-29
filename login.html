@@ -40,13 +40,19 @@
             height: 65px;
             margin: 0 auto 12px;
             border-radius: 20px;
-            background: linear-gradient(135deg, #25d366, #0f9f6e);
+            overflow: hidden;
+            background: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 30px;
-            font-weight: 800;
             box-shadow: 0 12px 30px rgba(37, 211, 102, 0.2);
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .brand-name {
@@ -210,7 +216,10 @@
     <div class="container">
 
         <div class="brand">
-            <div class="logo">V</div>
+
+            <div class="logo">
+                <img src="velqora.png.PNG" alt="Velqora Logo">
+            </div>
 
             <div class="brand-name">
                 Velqora
@@ -219,6 +228,7 @@
             <div class="tagline">
                 Simple. Secure. Built for your money.
             </div>
+
         </div>
 
         <div class="card">
@@ -230,7 +240,10 @@
             </div>
 
             <div class="input-group">
-                <label for="email">Email Address</label>
+
+                <label for="email">
+                    Email Address
+                </label>
 
                 <input
                     type="email"
@@ -238,10 +251,14 @@
                     placeholder="Enter your email"
                     autocomplete="email"
                 >
+
             </div>
 
             <div class="input-group">
-                <label for="password">Password</label>
+
+                <label for="password">
+                    Password
+                </label>
 
                 <input
                     type="password"
@@ -249,23 +266,36 @@
                     placeholder="Enter your password"
                     autocomplete="current-password"
                 >
+
             </div>
 
-            <button type="button" id="loginButton" onclick="login()">
+            <button
+                type="button"
+                id="loginButton"
+                onclick="login()"
+            >
                 Login to Velqora
             </button>
 
             <div id="message"></div>
 
             <div class="signup">
+
                 <p>
                     Don't have an account?
-                    <a href="signup.html">Create Account</a>
+                    <a href="signup.html">
+                        Create Account
+                    </a>
                 </p>
+
             </div>
 
             <div class="back">
-                <a href="index.html">← Back to Velqora</a>
+
+                <a href="index.html">
+                    ← Back to Velqora
+                </a>
+
             </div>
 
             <div class="security">
@@ -305,6 +335,7 @@
                 message.style.display = "block";
                 message.style.background = "rgba(255, 80, 80, 0.12)";
                 message.style.color = "#ff9b9b";
+
                 message.textContent =
                     "Please enter your email and password.";
 
@@ -330,13 +361,15 @@
                 message.style.background =
                     "rgba(255, 80, 80, 0.12)";
 
-                message.style.color = "#ff9b9b";
+                message.style.color =
+                    "#ff9b9b";
 
                 message.textContent =
                     error.message;
 
                 button.disabled = false;
-                button.textContent = "Login to Velqora";
+                button.textContent =
+                    "Login to Velqora";
 
                 return;
             }
@@ -346,13 +379,15 @@
                 message.style.background =
                     "rgba(255, 80, 80, 0.12)";
 
-                message.style.color = "#ff9b9b";
+                message.style.color =
+                    "#ff9b9b";
 
                 message.textContent =
                     "Login was not completed. Please try again.";
 
                 button.disabled = false;
-                button.textContent = "Login to Velqora";
+                button.textContent =
+                    "Login to Velqora";
 
                 return;
             }
@@ -360,13 +395,17 @@
             message.style.background =
                 "rgba(37, 211, 102, 0.12)";
 
-            message.style.color = "#65e993";
+            message.style.color =
+                "#65e993";
 
             message.textContent =
                 "Login successful! Welcome back.";
 
             setTimeout(function() {
-                window.location.href = "index.html";
+
+                window.location.href =
+                    "index.html";
+
             }, 700);
         }
 
