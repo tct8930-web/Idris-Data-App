@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Velqora - Transactions</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #111827;
+        }
+
+        .topbar {
+            background: white;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .back-button {
+            border: none;
+            background: #eff6ff;
+            color: #2563eb;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .topbar h1 {
+            margin: 0;
+            font-size: 21px;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 25px 16px 40px;
+        }
+
+        .intro {
+            margin-bottom: 20px;
+        }
+
+        .intro h2 {
+            margin: 0 0 7px;
+            font-size: 25px;
+        }
+
+        .intro p {
+            margin: 0;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        .transactions {
+            display: grid;
+            gap: 12px;
+        }
+
+        .transaction {
+            background: white;
+            border-radius: 18px;
+            padding: 17px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.06);
+        }
+
+        .transaction-left {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            min-width: 0;
+        }
+
+        .transaction-icon {
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+            border-radius: 15px;
+            background: #eff6ff;
+            color: #2563eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
+        }
+
+        .transaction-info {
+            min-width: 0;
+        }
+
+        .transaction-title {
+            font-weight: bold;
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        .transaction-date {
+            color: #94a3b8;
+            font-size: 12px;
+        }
+
+        .transaction-right {
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .transaction-amount {
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .amount-positive {
+            color: #16a34a;
+        }
+
+        .amount-pending {
+            color: #d97706;
+        }
+
+        .amount-failed {
+            color: #dc2626;
+        }
+
+        .status {
+            font-size: 11px;
+            font-weight: bold;
+            padding: 5px 8px;
+            border-radius: 20px;
+            display: inline-block;
+            text-transform: capitalize;
+        }
+
+        .status-pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-success {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-failed {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .empty {
+            background: white;
+            border-radius: 20px;
+            padding: 45px 20px;
+            text-align: center;
+            color: #94a3b8;
+            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.06);
+        }
+
+        .empty-icon {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        .empty h3 {
+            color: #334155;
+            margin: 0 0 7px;
+        }
+
+        .empty p {
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .loading {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 20px;
+            text-align: center;
+            color: #64748b;
+        }
+
+        .error {
+            background: #fee2e2;
+            color: #991b1b;
+            border-radius: 15px;
+            padding: 18px;
+            text-align: center;
+        }
+
+        .bottom-button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 15px;
+            border: none;
+            border-radius: 13px;
+            background: #2563eb;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        @media (max-width: 480px) {
+
+            .transaction {
+                padding: 14px;
+            }
+
+            .transaction-icon {
+                width: 43px;
+                height: 43px;
+            }
+
+            .transaction-title {
+                font-size: 14px;
+            }
+
+            .transaction-amount {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="topbar">
+
+        <button
+            class="back-button"
+            onclick="goBack()"
+        >
+            ←
+        </button>
+
+        <h1>Velqora</h1>
+
+    </header>
+
+
+    <main class="container">
+
+        <div class="intro">
+
+            <h2>Transactions</h2>
+
+            <p>
+                View your wallet activity and payment history.
+            </p>
+
+        </div>
+
+
+        <div id="content">
+
+            <div class="loading">
+                Loading your transactions...
+            </div>
+
+        </div>
+
+
+        <button
+            class="bottom-button"
+            onclick="goBack()"
+        >
+            ← Back to Dashboard
+        </button>
+
+    </main>
+
+
+    <script>
+
+        const supabaseClient =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_KEY
+            );
+
+
+        function formatAmount(amount) {
+
+            const number =
+                Number(amount);
+
+            return "₦" +
+                number.toLocaleString(
+                    "en-NG",
+                    {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    }
+                );
+        }
+
+
+        function formatDate(dateValue) {
+
+            const date =
+                new Date(dateValue);
+
+            return date.toLocaleString(
+                "en-NG",
+                {
+                    dateStyle: "medium",
+                    timeStyle: "short"
+                }
+            );
+        }
+
+
+        function getStatusClass(status) {
+
+            const cleanStatus =
+                String(status || "")
+                    .toLowerCase();
+
+            if (
+                cleanStatus === "successful" ||
+                cleanStatus === "success" ||
+                cleanStatus === "completed"
+            ) {
+                return "status-success";
+            }
+
+            if (
+                cleanStatus === "failed" ||
+                cleanStatus === "cancelled" ||
+                cleanStatus === "canceled"
+            ) {
+                return "status-failed";
+            }
+
+            return "status-pending";
+        }
+
+
+        function getAmountClass(status) {
+
+            const cleanStatus =
+                String(status || "")
+                    .toLowerCase();
+
+            if (
+                cleanStatus === "failed" ||
+                cleanStatus === "cancelled" ||
+                cleanStatus === "canceled"
+            ) {
+                return "amount-failed";
+            }
+
+            if (
+                cleanStatus === "successful" ||
+                cleanStatus === "success" ||
+                cleanStatus === "completed"
+            ) {
+                return "amount-positive";
+            }
+
+            return "amount-pending";
+        }
+
+
+        function getIcon(status) {
+
+            const cleanStatus =
+                String(status || "")
+                    .toLowerCase();
+
+            if (
+                cleanStatus === "successful" ||
+                cleanStatus === "success" ||
+                cleanStatus === "completed"
+            ) {
+                return "✓";
+            }
+
+            if (
+                cleanStatus === "failed" ||
+                cleanStatus === "cancelled" ||
+                cleanStatus === "canceled"
+            ) {
+                return "!";
+            }
+
+            return "₦";
+        }
+
+
+        async function loadTransactions() {
+
+            const content =
+                document.getElementById(
+                    "content"
+                );
+
+
+            const {
+                data: { user },
+                error: userError
+            } =
+                await supabaseClient.auth.getUser();
+
+
+            if (
+                userError ||
+                !user
+            ) {
+
+                window.location.href =
+                    "login.html";
+
+                return;
+            }
+
+
+            const {
+                data,
+                error
+            } =
+                await supabaseClient
+                    .from("wallet_transactions")
+                    .select(
+                        "id, created_at, amount, tx_ref, currency, status"
+                    )
+                    .eq(
+                        "user_id",
+                        user.id
+                    )
+                    .order(
+                        "created_at",
+                        {
+                            ascending: false
+                        }
+                    );
+
+
+            if (error) {
+
+                console.error(
+                    "Transaction error:",
+                    error
+                );
+
+                content.innerHTML = `
+                    <div class="error">
+                        Unable to load your transactions right now.
+                    </div>
+                `;
+
+                return;
+            }
+
+
+            if (
+                !data ||
+                data.length === 0
+            ) {
+
+                content.innerHTML = `
+                    <div class="empty">
+
+                        <div class="empty-icon">
+                            🧾
+                        </div>
+
+                        <h3>No transactions yet</h3>
+
+                        <p>
+                            Your wallet activity will appear here
+                            after you make a transaction.
+                        </p>
+
+                    </div>
+                `;
+
+                return;
+            }
+
+
+            let html = `
+                <div class="transactions">
+            `;
+
+
+            data.forEach(
+                transaction => {
+
+                    const status =
+                        String(
+                            transaction.status ||
+                            "pending"
+                        );
+
+
+                    html += `
+
+                        <div class="transaction">
+
+                            <div class="transaction-left">
+
+                                <div class="transaction-icon">
+                                    ${getIcon(status)}
+                                </div>
+
+                                <div class="transaction-info">
+
+                                    <div class="transaction-title">
+                                        Wallet Funding
+                                    </div>
+
+                                    <div class="transaction-date">
+                                        ${formatDate(transaction.created_at)}
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="transaction-right">
+
+                                <div
+                                    class="transaction-amount ${getAmountClass(status)}"
+                                >
+                                    ${formatAmount(transaction.amount)}
+                                </div>
+
+                                <span
+                                    class="status ${getStatusClass(status)}"
+                                >
+                                    ${status}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    `;
+                }
+            );
+
+
+            html += `
+                </div>
+            `;
+
+
+            content.innerHTML =
+                html;
+        }
+
+
+        function goBack() {
+
+            window.location.href =
+                "index.html";
+        }
+
+
+        loadTransactions();
+
+    </script>
+
+</body>
+</html>
