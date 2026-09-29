@@ -6,6 +6,9 @@
 
     <title>Velqora</title>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+
     <style>
         * {
             box-sizing: border-box;
@@ -15,18 +18,19 @@
             margin: 0;
             font-family: Arial, sans-serif;
             background: #f4f6f8;
+            color: #111827;
         }
 
         header {
             background: #111827;
             color: white;
-            padding: 25px 20px;
+            padding: 30px 20px;
             text-align: center;
         }
 
         header h1 {
             margin: 0;
-            font-size: 28px;
+            font-size: 32px;
         }
 
         header p {
@@ -35,8 +39,54 @@
 
         .container {
             max-width: 500px;
-            margin: 25px auto;
+            margin: 30px auto;
             padding: 0 20px;
+        }
+
+        .welcome {
+            background: white;
+            padding: 35px 25px;
+            border-radius: 18px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .welcome h2 {
+            margin-top: 0;
+            font-size: 26px;
+        }
+
+        .welcome p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .welcome button {
+            width: 100%;
+            padding: 16px;
+            margin-top: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .login-button {
+            background: #111827;
+            color: white;
+        }
+
+        .signup-button {
+            background: #eee;
+            color: #111827;
+        }
+
+        .dashboard {
+            display: none;
+        }
+
+        .dashboard.active {
+            display: block;
         }
 
         .balance {
@@ -64,7 +114,7 @@
             gap: 15px;
         }
 
-        button {
+        .buttons button {
             padding: 18px;
             border: none;
             border-radius: 12px;
@@ -74,43 +124,27 @@
             cursor: pointer;
         }
 
-        .screen {
-            display: none;
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-        }
-
-        .screen.active {
-            display: block;
-        }
-
-        input {
+        .logout {
             width: 100%;
-            padding: 14px;
-            margin: 10px 0 15px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 16px;
-        }
-
-        .continue {
-            width: 100%;
-            background: #111827;
+            margin-top: 20px;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: #dc2626;
             color: white;
-        }
-
-        .back {
-            margin-top: 10px;
-            width: 100%;
-            background: #eee;
+            font-size: 16px;
+            cursor: pointer;
         }
 
         footer {
             text-align: center;
             padding: 30px 10px;
             color: #666;
+        }
+
+        #loading {
+            text-align: center;
+            padding: 40px 20px;
         }
     </style>
 </head>
@@ -124,8 +158,37 @@
 
     <div class="container">
 
-        <!-- HOME -->
-        <div id="homeScreen" class="screen active">
+        <!-- LOADING -->
+        <div id="loading">
+            Checking your account...
+        </div>
+
+        <!-- WELCOME SCREEN -->
+        <div id="welcomeScreen" class="welcome" style="display: none;">
+
+            <h2>Welcome to Velqora</h2>
+
+            <p>
+                Your simple platform for data, airtime,
+                payments and more.
+            </p>
+
+            <button
+                class="login-button"
+                onclick="window.location.href='login.html'">
+                🔐 Login
+            </button>
+
+            <button
+                class="signup-button"
+                onclick="window.location.href='signup.html'">
+                👤 Create Account
+            </button>
+
+        </div>
+
+        <!-- DASHBOARD -->
+        <div id="dashboard" class="dashboard">
 
             <div class="balance">
                 <h2>Wallet Balance</h2>
@@ -134,15 +197,7 @@
 
             <div class="buttons">
 
-                <button onclick="window.location.href='login.html'">
-                    🔐 Login
-                </button>
-
-                <button onclick="window.location.href='signup.html'">
-                    👤 Create Account
-                </button>
-
-                <button onclick="showFundWallet()">
+                <button onclick="startFunding()">
                     💰 Fund Wallet
                 </button>
 
@@ -155,35 +210,21 @@
                 </button>
 
                 <button>
+                    💸 Transfer
+                </button>
+
+                <button>
                     📋 Transactions
+                </button>
+
+                <button>
+                    👤 Profile
                 </button>
 
             </div>
 
-        </div>
-
-        <!-- FUND WALLET -->
-        <div id="fundScreen" class="screen">
-
-            <h2>Fund Wallet</h2>
-
-            <p>Enter the amount you want to deposit.</p>
-
-            <label for="amount">Amount (₦)</label>
-
-            <input
-                type="number"
-                id="amount"
-                placeholder="Enter amount"
-                min="100"
-            >
-
-            <button class="continue" onclick="startFunding()">
-                Continue
-            </button>
-
-            <button class="back" onclick="goHome()">
-                Back
+            <button class="logout" onclick="logout()">
+                🚪 Logout
             </button>
 
         </div>
@@ -196,31 +237,48 @@
 
     <script>
 
-        function showFundWallet() {
-            document.getElementById("homeScreen").classList.remove("active");
-            document.getElementById("fundScreen").classList.add("active");
+        const supabaseClient = window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+        async function checkUser() {
+
+            const {
+                data: { user }
+            } = await supabaseClient.auth.getUser();
+
+            document.getElementById("loading").style.display = "none";
+
+            if (user) {
+
+                document.getElementById("dashboard")
+                    .classList.add("active");
+
+            } else {
+
+                document.getElementById("welcomeScreen")
+                    .style.display = "block";
+
+            }
         }
 
-        function goHome() {
-            document.getElementById("fundScreen").classList.remove("active");
-            document.getElementById("homeScreen").classList.add("active");
+        async function logout() {
+
+            await supabaseClient.auth.signOut();
+
+            window.location.href = "index.html";
         }
 
         function startFunding() {
 
-            const amount = document.getElementById("amount").value;
-
-            if (!amount || amount < 100) {
-                alert("Please enter an amount of at least ₦100.");
-                return;
-            }
-
             alert(
-                "Funding amount: ₦" +
-                Number(amount).toLocaleString() +
-                "\n\nPayment connection will be added next."
+                "Wallet funding will be connected securely to the payment provider next."
             );
+
         }
+
+        checkUser();
 
     </script>
 
