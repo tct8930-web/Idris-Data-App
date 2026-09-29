@@ -192,7 +192,9 @@
 
             <div class="balance">
                 <h2>Wallet Balance</h2>
-                <div class="amount">₦0.00</div>
+                <div class="amount" id="walletBalance">
+                    Checking...
+                </div>
             </div>
 
             <div class="buttons">
@@ -242,6 +244,44 @@
             SUPABASE_KEY
         );
 
+        async function loadWallet(userId) {
+
+            const { data, error } = await supabaseClient
+                .from("wallets")
+                .select("balance")
+                .eq("user_id", userId)
+                .maybeSingle();
+
+            const balanceElement =
+                document.getElementById("walletBalance");
+
+            if (error) {
+
+                console.error("Wallet error:", error);
+
+                balanceElement.textContent =
+                    "Wallet unavailable";
+
+                return;
+            }
+
+            if (!data) {
+
+                balanceElement.textContent =
+                    "Wallet unavailable";
+
+                return;
+            }
+
+            const balance = Number(data.balance);
+
+            balanceElement.textContent =
+                "₦" + balance.toLocaleString("en-NG", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                });
+        }
+
         async function checkUser() {
 
             const {
@@ -254,6 +294,8 @@
 
                 document.getElementById("dashboard")
                     .classList.add("active");
+
+                await loadWallet(user.id);
 
             } else {
 
