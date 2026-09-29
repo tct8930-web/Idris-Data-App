@@ -190,7 +190,12 @@
             const { data, error } =
                 await supabaseClient.auth.signUp({
                     email: email,
-                    password: password
+                    password: password,
+
+                    options: {
+                        emailRedirectTo:
+                            "https://tct8930-web.github.io/Idris-Data-App/"
+                    }
                 });
 
             if (error) {
