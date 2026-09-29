@@ -25,10 +25,6 @@
             font-family: inherit;
         }
 
-        /* =========================
-           LOADING
-        ========================= */
-
         #loading {
             min-height: 100vh;
             display: flex;
@@ -38,10 +34,6 @@
             color: #64748b;
             padding: 20px;
         }
-
-        /* =========================
-           WELCOME SCREEN
-        ========================= */
 
         .welcome-page {
             min-height: 100vh;
@@ -115,10 +107,6 @@
             background: #eef2ff;
             color: #1d4ed8;
         }
-
-        /* =========================
-           DASHBOARD
-        ========================= */
 
         .dashboard {
             display: none;
@@ -198,10 +186,6 @@
             font-size: 25px;
         }
 
-        /* =========================
-           BALANCE CARD
-        ========================= */
-
         .balance-card {
             background: linear-gradient(135deg, #2563eb, #1d4ed8);
             color: white;
@@ -248,10 +232,6 @@
             z-index: 2;
         }
 
-        /* =========================
-           QUICK ACTIONS
-        ========================= */
-
         .section-title {
             font-size: 18px;
             font-weight: bold;
@@ -297,10 +277,6 @@
             color: #1f2937;
         }
 
-        /* =========================
-           RECENT TRANSACTIONS
-        ========================= */
-
         .transactions {
             background: white;
             border-radius: 20px;
@@ -319,10 +295,6 @@
             margin-bottom: 8px;
         }
 
-        /* =========================
-           LOGOUT
-        ========================= */
-
         .logout {
             width: 100%;
             margin-top: 25px;
@@ -335,10 +307,6 @@
             font-weight: bold;
             cursor: pointer;
         }
-
-        /* =========================
-           BOTTOM NAVIGATION
-        ========================= */
 
         .bottom-nav {
             position: fixed;
@@ -373,10 +341,6 @@
         .nav-button.active {
             color: #2563eb;
         }
-
-        /* =========================
-           DESKTOP
-        ========================= */
 
         @media (min-width: 700px) {
 
@@ -422,18 +386,9 @@
 
 <body>
 
-    <!-- =========================
-         LOADING
-    ========================= -->
-
     <div id="loading">
         Checking your Velqora account...
     </div>
-
-
-    <!-- =========================
-         WELCOME SCREEN
-    ========================= -->
 
     <div
         id="welcomeScreen"
@@ -474,11 +429,6 @@
 
     </div>
 
-
-    <!-- =========================
-         DASHBOARD
-    ========================= -->
-
     <div id="dashboard" class="dashboard">
 
         <header class="topbar">
@@ -504,7 +454,6 @@
 
         </header>
 
-
         <main class="container">
 
             <div class="greeting">
@@ -514,9 +463,6 @@
                 <h2>Your finances, simplified.</h2>
 
             </div>
-
-
-            <!-- BALANCE -->
 
             <div class="balance-card">
 
@@ -540,9 +486,6 @@
 
             </div>
 
-
-            <!-- QUICK ACTIONS -->
-
             <div class="section-title">
                 Quick Services
             </div>
@@ -562,7 +505,6 @@
                     </div>
                 </button>
 
-
                 <button
                     class="action"
                     onclick="buyData()"
@@ -575,7 +517,6 @@
                         Buy Data
                     </div>
                 </button>
-
 
                 <button
                     class="action"
@@ -590,7 +531,6 @@
                     </div>
                 </button>
 
-
                 <button
                     class="action"
                     onclick="makeTransfer()"
@@ -604,7 +544,6 @@
                     </div>
                 </button>
 
-
                 <button
                     class="action"
                     onclick="viewTransactions()"
@@ -617,7 +556,6 @@
                         Transactions
                     </div>
                 </button>
-
 
                 <button
                     class="action"
@@ -633,9 +571,6 @@
                 </button>
 
             </div>
-
-
-            <!-- RECENT TRANSACTIONS -->
 
             <div class="section-title">
                 Recent Transactions
@@ -661,7 +596,6 @@
 
             </div>
 
-
             <button
                 class="logout"
                 onclick="logout()"
@@ -670,9 +604,6 @@
             </button>
 
         </main>
-
-
-        <!-- BOTTOM NAVIGATION -->
 
         <nav class="bottom-nav">
 
@@ -704,11 +635,6 @@
 
     </div>
 
-
-    <!-- =========================
-         JAVASCRIPT
-    ========================= -->
-
     <script>
 
         const supabaseClient =
@@ -716,11 +642,6 @@
                 SUPABASE_URL,
                 SUPABASE_KEY
             );
-
-
-        /* =========================
-           LOAD WALLET
-        ========================= */
 
         async function loadWallet(userId) {
 
@@ -733,12 +654,10 @@
                 .eq("user_id", userId)
                 .maybeSingle();
 
-
             const balanceElement =
                 document.getElementById(
                     "walletBalance"
                 );
-
 
             if (error) {
 
@@ -753,7 +672,6 @@
                 return;
             }
 
-
             if (!data) {
 
                 balanceElement.textContent =
@@ -762,10 +680,8 @@
                 return;
             }
 
-
             const balance =
                 Number(data.balance);
-
 
             balanceElement.textContent =
                 "₦" +
@@ -778,11 +694,6 @@
                 );
         }
 
-
-        /* =========================
-           CHECK USER
-        ========================= */
-
         async function checkUser() {
 
             const {
@@ -790,18 +701,15 @@
             } =
                 await supabaseClient.auth.getUser();
 
-
             document.getElementById(
                 "loading"
             ).style.display = "none";
-
 
             if (user) {
 
                 document.getElementById(
                     "dashboard"
                 ).classList.add("active");
-
 
                 await loadWallet(user.id);
 
@@ -814,11 +722,6 @@
             }
         }
 
-
-        /* =========================
-           FUND WALLET
-        ========================= */
-
         async function startFunding() {
 
             const amountInput =
@@ -826,17 +729,14 @@
                     "Enter the amount you want to fund your wallet in Naira:"
                 );
 
-
             if (amountInput === null) {
                 return;
             }
-
 
             const amount =
                 Number(
                     amountInput.replace(/,/g, "")
                 );
-
 
             if (
                 !Number.isFinite(amount) ||
@@ -850,7 +750,6 @@
                 return;
             }
 
-
             if (amount < 100) {
 
                 alert(
@@ -860,13 +759,11 @@
                 return;
             }
 
-
             try {
 
                 alert(
                     "Creating your secure payment..."
                 );
-
 
                 const {
                     data,
@@ -883,14 +780,12 @@
                             }
                         );
 
-
                 if (error) {
 
                     console.error(
                         "Payment function error:",
                         error
                     );
-
 
                     alert(
                         "Unable to start payment: " +
@@ -899,7 +794,6 @@
 
                     return;
                 }
-
 
                 if (
                     !data ||
@@ -914,7 +808,6 @@
                     return;
                 }
 
-
                 if (
                     !data.payment_link
                 ) {
@@ -926,10 +819,8 @@
                     return;
                 }
 
-
                 window.location.href =
                     data.payment_link;
-
 
             } catch (error) {
 
@@ -938,17 +829,11 @@
                     error
                 );
 
-
                 alert(
                     "Something went wrong while starting the payment."
                 );
             }
         }
-
-
-        /* =========================
-           FUTURE SERVICES
-        ========================= */
 
         function buyData() {
 
@@ -957,14 +842,12 @@
             );
         }
 
-
         function buyAirtime() {
 
             alert(
                 "Airtime service is being connected next."
             );
         }
-
 
         function makeTransfer() {
 
@@ -973,7 +856,6 @@
             );
         }
 
-
         function viewTransactions() {
 
             alert(
@@ -981,14 +863,11 @@
             );
         }
 
-
         function goToProfile() {
 
-            alert(
-                "Profile page is being connected next."
-            );
+            window.location.href =
+                "profile.html";
         }
-
 
         function goHome() {
 
@@ -998,11 +877,6 @@
             });
         }
 
-
-        /* =========================
-           LOGOUT
-        ========================= */
-
         async function logout() {
 
             await supabaseClient.auth.signOut();
@@ -1010,11 +884,6 @@
             window.location.href =
                 "index.html";
         }
-
-
-        /* =========================
-           START
-        ========================= */
 
         checkUser();
 
