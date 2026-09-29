@@ -40,13 +40,19 @@
             height: 65px;
             margin: 0 auto 12px;
             border-radius: 20px;
-            background: linear-gradient(135deg, #25d366, #0f9f6e);
+            overflow: hidden;
+            background: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 30px;
-            font-weight: 800;
             box-shadow: 0 12px 30px rgba(37, 211, 102, 0.2);
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .brand-name {
@@ -209,7 +215,10 @@
     <div class="container">
 
         <div class="brand">
-            <div class="logo">V</div>
+
+            <div class="logo">
+                <img src="velqora.png.PNG" alt="Velqora Logo">
+            </div>
 
             <div class="brand-name">
                 Velqora
@@ -218,6 +227,7 @@
             <div class="tagline">
                 Simple. Secure. Built for your money.
             </div>
+
         </div>
 
         <div class="card">
@@ -382,7 +392,8 @@
                     message.style.background =
                         "rgba(255, 80, 80, 0.12)";
 
-                    message.style.color = "#ff9b9b";
+                    message.style.color =
+                        "#ff9b9b";
 
                     message.textContent =
                         error.message;
@@ -395,7 +406,8 @@
                     message.style.background =
                         "rgba(255, 80, 80, 0.12)";
 
-                    message.style.color = "#ff9b9b";
+                    message.style.color =
+                        "#ff9b9b";
 
                     message.textContent =
                         "Account could not be created.";
@@ -419,7 +431,8 @@
                         message.style.background =
                             "rgba(255, 80, 80, 0.12)";
 
-                        message.style.color = "#ff9b9b";
+                        message.style.color =
+                            "#ff9b9b";
 
                         message.textContent =
                             "Account created, but profile setup failed: " +
@@ -431,7 +444,8 @@
                     message.style.background =
                         "rgba(37, 211, 102, 0.12)";
 
-                    message.style.color = "#65e993";
+                    message.style.color =
+                        "#65e993";
 
                     message.textContent =
                         "Account created successfully!";
@@ -441,7 +455,8 @@
                     message.style.background =
                         "rgba(37, 211, 102, 0.12)";
 
-                    message.style.color = "#65e993";
+                    message.style.color =
+                        "#65e993";
 
                     message.textContent =
                         "Account created! Please check your email to confirm your account, then log in.";
@@ -458,7 +473,8 @@
                 message.style.background =
                     "rgba(255, 80, 80, 0.12)";
 
-                message.style.color = "#ff9b9b";
+                message.style.color =
+                    "#ff9b9b";
 
                 message.textContent =
                     "Something went wrong. Please try again.";
@@ -466,7 +482,8 @@
             } finally {
 
                 button.disabled = false;
-                button.textContent = "Create Velqora Account";
+                button.textContent =
+                    "Create Velqora Account";
 
             }
         }
