@@ -43,6 +43,27 @@
             border: none;
             font-size: 22px;
             cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .brand-logo {
+            width: 42px;
+            height: 42px;
+            border-radius: 13px;
+            overflow: hidden;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 16px rgba(37,211,102,0.18);
+            flex-shrink: 0;
+        }
+
+        .brand-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .brand {
@@ -193,8 +214,6 @@
             line-height: 1.5;
         }
 
-        /* Bottom navigation */
-
         .bottom-nav {
             position: fixed;
             left: 0;
@@ -254,6 +273,13 @@
             <button class="back-btn" onclick="goBack()">
                 ←
             </button>
+
+            <div class="brand-logo">
+                <img
+                    src="velqora.png.PNG"
+                    alt="Velqora Logo"
+                >
+            </div>
 
             <div>
                 <div class="brand">Velqora</div>
@@ -375,8 +401,6 @@
 
     </div>
 
-
-    <!-- Bottom Navigation -->
 
     <div class="bottom-nav">
 
