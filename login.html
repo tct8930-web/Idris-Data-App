@@ -13,67 +13,194 @@
 
         body {
             margin: 0;
+            min-height: 100vh;
             font-family: Arial, sans-serif;
-            background: #f4f6f8;
+            background:
+                radial-gradient(circle at top left, #164e41 0%, transparent 35%),
+                linear-gradient(145deg, #061612, #0b211c 55%, #07110f);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: white;
         }
 
         .container {
-            max-width: 420px;
-            margin: 60px auto;
-            padding: 20px;
+            width: 100%;
+            max-width: 430px;
+        }
+
+        .brand {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .logo {
+            width: 65px;
+            height: 65px;
+            margin: 0 auto 12px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #25d366, #0f9f6e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            font-weight: 800;
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.2);
+        }
+
+        .brand-name {
+            font-size: 30px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .tagline {
+            margin-top: 7px;
+            color: #9bb3ac;
+            font-size: 14px;
         }
 
         .card {
-            background: white;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-radius: 24px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(18px);
         }
 
         h1 {
-            text-align: center;
-            margin-top: 0;
+            margin: 0;
+            font-size: 28px;
         }
 
-        p {
-            text-align: center;
-            color: #666;
+        .intro {
+            margin: 9px 0 25px;
+            color: #9bb3ac;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #d0ddd9;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .input-group {
+            margin-bottom: 18px;
         }
 
         input {
             width: 100%;
-            padding: 14px;
-            margin: 8px 0 15px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 16px;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 13px;
+            background: rgba(0, 0, 0, 0.22);
+            color: white;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input::placeholder {
+            color: #71847e;
+        }
+
+        input:focus {
+            border-color: #25d366;
+            box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.10);
         }
 
         button {
             width: 100%;
-            padding: 15px;
+            padding: 16px;
             border: none;
-            border-radius: 8px;
-            background: #111827;
+            border-radius: 13px;
+            background: linear-gradient(135deg, #25d366, #12a86c);
             color: white;
             font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.20);
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
         }
 
         #message {
+            display: none;
             margin-top: 15px;
+            padding: 12px;
+            border-radius: 10px;
             text-align: center;
+            font-size: 13px;
+            line-height: 1.4;
         }
 
         .signup {
-            margin-top: 20px;
+            margin-top: 22px;
             text-align: center;
+            color: #9bb3ac;
+            font-size: 14px;
+        }
+
+        .signup p {
+            margin: 0;
         }
 
         .signup a {
-            color: #111827;
+            color: #45df82;
             font-weight: bold;
             text-decoration: none;
+        }
+
+        .signup a:hover {
+            text-decoration: underline;
+        }
+
+        .back {
+            text-align: center;
+            margin-top: 18px;
+        }
+
+        .back a {
+            color: #839b94;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .security {
+            margin-top: 22px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center;
+            color: #71857f;
+            font-size: 12px;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 16px;
+            }
+
+            .card {
+                padding: 24px 20px;
+            }
+
+            .brand-name {
+                font-size: 27px;
+            }
         }
     </style>
 </head>
@@ -82,30 +209,50 @@
 
     <div class="container">
 
+        <div class="brand">
+            <div class="logo">V</div>
+
+            <div class="brand-name">
+                Velqora
+            </div>
+
+            <div class="tagline">
+                Simple. Secure. Built for your money.
+            </div>
+        </div>
+
         <div class="card">
 
             <h1>Welcome Back</h1>
 
-            <p>Login to your Velqora account.</p>
+            <div class="intro">
+                Login to your Velqora account to access your wallet and financial services.
+            </div>
 
-            <label for="email">Email</label>
+            <div class="input-group">
+                <label for="email">Email Address</label>
 
-            <input
-                type="email"
-                id="email"
-                placeholder="Enter your email"
-            >
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    autocomplete="email"
+                >
+            </div>
 
-            <label for="password">Password</label>
+            <div class="input-group">
+                <label for="password">Password</label>
 
-            <input
-                type="password"
-                id="password"
-                placeholder="Enter your password"
-            >
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                >
+            </div>
 
-            <button type="button" onclick="login()">
-                Login
+            <button type="button" id="loginButton" onclick="login()">
+                Login to Velqora
             </button>
 
             <div id="message"></div>
@@ -115,6 +262,14 @@
                     Don't have an account?
                     <a href="signup.html">Create Account</a>
                 </p>
+            </div>
+
+            <div class="back">
+                <a href="index.html">← Back to Velqora</a>
+            </div>
+
+            <div class="security">
+                🔒 Your login is securely handled by Supabase.
             </div>
 
         </div>
@@ -142,31 +297,77 @@
             const message =
                 document.getElementById("message");
 
+            const button =
+                document.getElementById("loginButton");
+
             if (!email || !password) {
+
+                message.style.display = "block";
+                message.style.background = "rgba(255, 80, 80, 0.12)";
+                message.style.color = "#ff9b9b";
                 message.textContent =
                     "Please enter your email and password.";
+
                 return;
             }
 
+            button.disabled = true;
+            button.textContent = "Logging in...";
+
+            message.style.display = "block";
+            message.style.background = "rgba(255,255,255,0.06)";
+            message.style.color = "#c9d8d3";
             message.textContent = "Logging in...";
 
-            const { error } =
+            const { data, error } =
                 await supabaseClient.auth.signInWithPassword({
                     email: email,
                     password: password
                 });
 
             if (error) {
-                message.textContent = error.message;
+
+                message.style.background =
+                    "rgba(255, 80, 80, 0.12)";
+
+                message.style.color = "#ff9b9b";
+
+                message.textContent =
+                    error.message;
+
+                button.disabled = false;
+                button.textContent = "Login to Velqora";
+
                 return;
             }
 
+            if (!data.session) {
+
+                message.style.background =
+                    "rgba(255, 80, 80, 0.12)";
+
+                message.style.color = "#ff9b9b";
+
+                message.textContent =
+                    "Login was not completed. Please try again.";
+
+                button.disabled = false;
+                button.textContent = "Login to Velqora";
+
+                return;
+            }
+
+            message.style.background =
+                "rgba(37, 211, 102, 0.12)";
+
+            message.style.color = "#65e993";
+
             message.textContent =
-                "Login successful!";
+                "Login successful! Welcome back.";
 
             setTimeout(function() {
                 window.location.href = "index.html";
-            }, 1000);
+            }, 700);
         }
 
     </script>
