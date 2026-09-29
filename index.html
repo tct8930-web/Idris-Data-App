@@ -21,12 +21,13 @@
         body {
             margin: 0;
             font-family: Arial, Helvetica, sans-serif;
-            background: #f5f7fb;
-            color: #0f172a;
+            background: #f5f8f7;
+            color: #10201b;
         }
 
         button {
             font-family: inherit;
+            -webkit-tap-highlight-color: transparent;
         }
 
         #loading {
@@ -35,9 +36,9 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            color: #64748b;
+            color: #668078;
             padding: 20px;
-            background: #f8fafc;
+            background: #f5f8f7;
         }
 
         /* =========================
@@ -51,20 +52,28 @@
             justify-content: center;
             padding: 24px;
             background:
-                radial-gradient(circle at 15% 10%, rgba(59,130,246,0.16), transparent 30%),
-                radial-gradient(circle at 90% 90%, rgba(99,102,241,0.12), transparent 30%),
-                #f5f7fb;
+                radial-gradient(
+                    circle at 10% 5%,
+                    rgba(37, 211, 102, 0.12),
+                    transparent 32%
+                ),
+                radial-gradient(
+                    circle at 90% 90%,
+                    rgba(15, 159, 110, 0.10),
+                    transparent 32%
+                ),
+                #f5f8f7;
         }
 
         .welcome {
             width: 100%;
             max-width: 450px;
-            background: rgba(255,255,255,0.97);
-            padding: 38px 26px 30px;
+            background: white;
+            padding: 40px 27px 30px;
             border-radius: 28px;
-            box-shadow: 0 25px 70px rgba(15,23,42,0.12);
+            box-shadow: 0 25px 70px rgba(8, 35, 27, 0.12);
             text-align: center;
-            border: 1px solid rgba(226,232,240,0.8);
+            border: 1px solid #e2ebe7;
         }
 
         .logo {
@@ -72,14 +81,14 @@
             height: 76px;
             margin: 0 auto 18px;
             border-radius: 23px;
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            background: linear-gradient(135deg, #25d366, #0f9f6e);
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 31px;
             font-weight: bold;
-            box-shadow: 0 14px 30px rgba(37,99,235,0.25);
+            box-shadow: 0 14px 30px rgba(37, 211, 102, 0.25);
         }
 
         .welcome h1 {
@@ -89,12 +98,12 @@
         }
 
         .welcome h2 {
-            margin: 10px 0 10px;
+            margin: 10px 0;
             font-size: 21px;
         }
 
         .welcome p {
-            color: #64748b;
+            color: #668078;
             line-height: 1.65;
             margin: 0 auto 25px;
             max-width: 350px;
@@ -113,19 +122,19 @@
         }
 
         .login-button {
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            background: linear-gradient(135deg, #25d366, #0f9f6e);
             color: white;
-            box-shadow: 0 10px 24px rgba(37,99,235,0.20);
+            box-shadow: 0 10px 24px rgba(37, 211, 102, 0.20);
         }
 
         .signup-button {
-            background: #eff6ff;
-            color: #1d4ed8;
+            background: #eaf8f1;
+            color: #087f55;
         }
 
         .welcome-note {
             margin-top: 22px;
-            color: #94a3b8;
+            color: #8ba099;
             font-size: 12px;
         }
 
@@ -143,16 +152,16 @@
         }
 
         .topbar {
-            background: rgba(255,255,255,0.96);
-            padding: 15px 18px;
+            background: rgba(255, 255, 255, 0.96);
+            padding: 14px 18px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid #e5e7eb;
+            border-bottom: 1px solid #e2ebe7;
             position: sticky;
             top: 0;
             z-index: 10;
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(15px);
         }
 
         .brand {
@@ -165,14 +174,14 @@
             width: 43px;
             height: 43px;
             border-radius: 14px;
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            background: linear-gradient(135deg, #25d366, #0f9f6e);
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
             font-size: 19px;
-            box-shadow: 0 7px 18px rgba(37,99,235,0.20);
+            box-shadow: 0 7px 18px rgba(37, 211, 102, 0.20);
         }
 
         .brand-name {
@@ -184,10 +193,10 @@
         .profile-button {
             width: 43px;
             height: 43px;
-            border: none;
+            border: 1px solid #dcebe4;
             border-radius: 50%;
-            background: #eff6ff;
-            color: #2563eb;
+            background: #effaf4;
+            color: #0f9f6e;
             font-size: 19px;
             cursor: pointer;
         }
@@ -205,7 +214,7 @@
 
         .greeting p {
             margin: 0 0 6px;
-            color: #64748b;
+            color: #668078;
             font-size: 14px;
         }
 
@@ -216,18 +225,27 @@
         }
 
         /* =========================
-           BALANCE
+           BALANCE CARD
         ========================= */
 
         .balance-card {
             background:
-                radial-gradient(circle at 90% 10%, rgba(255,255,255,0.18), transparent 25%),
-                linear-gradient(135deg, #2563eb, #1d4ed8);
+                radial-gradient(
+                    circle at 90% 10%,
+                    rgba(255,255,255,0.18),
+                    transparent 27%
+                ),
+                radial-gradient(
+                    circle at 10% 100%,
+                    rgba(0,0,0,0.08),
+                    transparent 35%
+                ),
+                linear-gradient(135deg, #0b7654, #064d3c);
             color: white;
-            border-radius: 26px;
+            border-radius: 27px;
             padding: 25px;
-            box-shadow: 0 18px 40px rgba(37,99,235,0.25);
-            margin-bottom: 26px;
+            box-shadow: 0 20px 45px rgba(6, 77, 60, 0.23);
+            margin-bottom: 28px;
             position: relative;
             overflow: hidden;
         }
@@ -235,23 +253,53 @@
         .balance-card::after {
             content: "";
             position: absolute;
-            width: 190px;
-            height: 190px;
+            width: 210px;
+            height: 210px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.08);
-            right: -75px;
-            top: -75px;
+            background: rgba(255,255,255,0.07);
+            right: -85px;
+            top: -85px;
+        }
+
+        .balance-card::before {
+            content: "";
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: rgba(37, 211, 102, 0.08);
+            left: -50px;
+            bottom: -50px;
+        }
+
+        .balance-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 2;
         }
 
         .balance-label {
             font-size: 13px;
-            opacity: 0.85;
+            opacity: 0.78;
+        }
+
+        .eye-button {
+            width: 34px;
+            height: 34px;
+            border: 1px solid rgba(255,255,255,0.20);
+            border-radius: 10px;
+            background: rgba(255,255,255,0.10);
+            color: white;
+            cursor: pointer;
+            font-size: 15px;
         }
 
         .balance-amount {
             font-size: 37px;
             font-weight: bold;
-            margin: 10px 0 23px;
+            margin: 11px 0 23px;
             letter-spacing: -1px;
             position: relative;
             z-index: 2;
@@ -260,7 +308,7 @@
         .fund-button {
             border: none;
             background: white;
-            color: #1d4ed8;
+            color: #087f55;
             padding: 13px 20px;
             border-radius: 12px;
             font-weight: bold;
@@ -273,10 +321,22 @@
            QUICK SERVICES
         ========================= */
 
+        .section-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 28px 0 15px;
+        }
+
         .section-title {
             font-size: 18px;
             font-weight: bold;
-            margin: 27px 0 15px;
+            margin: 0;
+        }
+
+        .section-subtitle {
+            color: #8ba099;
+            font-size: 12px;
         }
 
         .actions {
@@ -286,14 +346,19 @@
         }
 
         .action {
-            border: 1px solid #eef2f7;
+            border: 1px solid #e5eee9;
             background: white;
             border-radius: 18px;
             padding: 17px 8px;
             text-align: center;
             cursor: pointer;
-            box-shadow: 0 6px 20px rgba(15,23,42,0.055);
+            box-shadow: 0 7px 22px rgba(15, 50, 39, 0.055);
             transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 11px 25px rgba(15, 50, 39, 0.08);
         }
 
         .action:active {
@@ -305,7 +370,7 @@
             height: 48px;
             margin: 0 auto 10px;
             border-radius: 15px;
-            background: #eff6ff;
+            background: #effaf4;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -315,25 +380,25 @@
         .action-title {
             font-size: 12px;
             font-weight: bold;
-            color: #1f2937;
+            color: #263a33;
         }
 
         /* =========================
-           TRANSACTIONS
+           RECENT ACTIVITY
         ========================= */
 
         .transactions {
             background: white;
             border-radius: 20px;
-            box-shadow: 0 6px 20px rgba(15,23,42,0.055);
+            box-shadow: 0 7px 22px rgba(15, 50, 39, 0.055);
             overflow: hidden;
-            border: 1px solid #eef2f7;
+            border: 1px solid #e5eee9;
         }
 
         .transaction-empty {
-            padding: 32px 20px;
+            padding: 34px 20px;
             text-align: center;
-            color: #94a3b8;
+            color: #8ba099;
         }
 
         .transaction-empty-icon {
@@ -341,7 +406,7 @@
             height: 58px;
             margin: 0 auto 12px;
             border-radius: 18px;
-            background: #f1f5f9;
+            background: #eff6f3;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -350,8 +415,20 @@
 
         .transaction-empty strong {
             display: block;
-            color: #475569;
+            color: #40554d;
             margin-bottom: 5px;
+        }
+
+        .view-all {
+            width: 100%;
+            border: none;
+            border-top: 1px solid #edf2ef;
+            background: white;
+            color: #087f55;
+            padding: 14px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
         }
 
         /* =========================
@@ -362,10 +439,10 @@
             width: 100%;
             margin-top: 25px;
             padding: 15px;
-            border: none;
+            border: 1px solid #f2d4d4;
             border-radius: 14px;
-            background: #fee2e2;
-            color: #dc2626;
+            background: #fff3f3;
+            color: #d33b3b;
             font-size: 15px;
             font-weight: bold;
             cursor: pointer;
@@ -381,19 +458,19 @@
             left: 0;
             right: 0;
             background: rgba(255,255,255,0.97);
-            border-top: 1px solid #e5e7eb;
+            border-top: 1px solid #e2ebe7;
             height: 70px;
             display: flex;
             justify-content: space-around;
             align-items: center;
             z-index: 20;
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(15px);
         }
 
         .nav-button {
             background: none;
             border: none;
-            color: #94a3b8;
+            color: #94a59e;
             font-size: 11px;
             cursor: pointer;
             display: flex;
@@ -408,7 +485,8 @@
         }
 
         .nav-button.active {
-            color: #2563eb;
+            color: #0f9f6e;
+            font-weight: bold;
         }
 
         /* =========================
@@ -421,9 +499,9 @@
                 position: static;
                 max-width: 1050px;
                 margin: 0 auto 20px;
-                border: none;
+                border: 1px solid #e2ebe7;
                 border-radius: 18px;
-                box-shadow: 0 6px 20px rgba(15,23,42,0.055);
+                box-shadow: 0 7px 22px rgba(15, 50, 39, 0.055);
             }
 
             .container {
@@ -468,7 +546,7 @@
     </div>
 
     <!-- =========================
-         WELCOME / OUTSIDE
+         WELCOME SCREEN
     ========================== -->
 
     <div
@@ -479,9 +557,7 @@
 
         <div class="welcome">
 
-            <div class="logo">
-                V
-            </div>
+            <div class="logo">V</div>
 
             <h1>Velqora</h1>
 
@@ -554,10 +630,25 @@
 
             </div>
 
+            <!-- WALLET -->
+
             <div class="balance-card">
 
-                <div class="balance-label">
-                    Available Wallet Balance
+                <div class="balance-top">
+
+                    <div class="balance-label">
+                        Available Wallet Balance
+                    </div>
+
+                    <button
+                        class="eye-button"
+                        id="balanceEye"
+                        onclick="toggleBalance()"
+                        aria-label="Hide balance"
+                    >
+                        👁
+                    </button>
+
                 </div>
 
                 <div
@@ -576,8 +667,18 @@
 
             </div>
 
-            <div class="section-title">
-                Quick Services
+            <!-- SERVICES -->
+
+            <div class="section-heading">
+
+                <div class="section-title">
+                    Quick Services
+                </div>
+
+                <div class="section-subtitle">
+                    Available
+                </div>
+
             </div>
 
             <div class="actions">
@@ -662,8 +763,18 @@
 
             </div>
 
-            <div class="section-title">
-                Recent Transactions
+            <!-- RECENT ACTIVITY -->
+
+            <div class="section-heading">
+
+                <div class="section-title">
+                    Recent Activity
+                </div>
+
+                <div class="section-subtitle">
+                    Wallet
+                </div>
+
             </div>
 
             <div class="transactions">
@@ -675,14 +786,21 @@
                     </div>
 
                     <strong>
-                        No transactions yet
+                        No recent activity
                     </strong>
 
                     <small>
-                        Your real transactions will appear here.
+                        Your wallet activity will appear here.
                     </small>
 
                 </div>
+
+                <button
+                    class="view-all"
+                    onclick="viewTransactions()"
+                >
+                    View All Activity →
+                </button>
 
             </div>
 
@@ -694,6 +812,8 @@
             </button>
 
         </main>
+
+        <!-- BOTTOM NAV -->
 
         <nav class="bottom-nav">
 
@@ -733,6 +853,9 @@
                 SUPABASE_KEY
             );
 
+        let actualBalance = null;
+        let balanceHidden = false;
+
         async function loadWallet(userId) {
 
             const {
@@ -770,18 +893,67 @@
                 return;
             }
 
-            const balance =
+            actualBalance =
                 Number(data.balance);
+
+            displayBalance();
+        }
+
+        function displayBalance() {
+
+            const balanceElement =
+                document.getElementById(
+                    "walletBalance"
+                );
+
+            const eye =
+                document.getElementById(
+                    "balanceEye"
+                );
+
+            if (actualBalance === null) {
+                return;
+            }
+
+            if (balanceHidden) {
+
+                balanceElement.textContent =
+                    "₦••••••";
+
+                eye.textContent = "🙈";
+
+                eye.setAttribute(
+                    "aria-label",
+                    "Show balance"
+                );
+
+                return;
+            }
 
             balanceElement.textContent =
                 "₦" +
-                balance.toLocaleString(
+                actualBalance.toLocaleString(
                     "en-NG",
                     {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2
                     }
                 );
+
+            eye.textContent = "👁";
+
+            eye.setAttribute(
+                "aria-label",
+                "Hide balance"
+            );
+        }
+
+        function toggleBalance() {
+
+            balanceHidden =
+                !balanceHidden;
+
+            displayBalance();
         }
 
         async function checkUser() {
