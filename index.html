@@ -14,11 +14,15 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             margin: 0;
             font-family: Arial, Helvetica, sans-serif;
             background: #f5f7fb;
-            color: #111827;
+            color: #0f172a;
         }
 
         button {
@@ -33,80 +37,101 @@
             text-align: center;
             color: #64748b;
             padding: 20px;
+            background: #f8fafc;
         }
+
+        /* =========================
+           WELCOME SCREEN
+        ========================= */
 
         .welcome-page {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 25px;
+            padding: 24px;
             background:
-                radial-gradient(circle at top right, #dbeafe, transparent 35%),
+                radial-gradient(circle at 15% 10%, rgba(59,130,246,0.16), transparent 30%),
+                radial-gradient(circle at 90% 90%, rgba(99,102,241,0.12), transparent 30%),
                 #f5f7fb;
         }
 
         .welcome {
             width: 100%;
-            max-width: 430px;
-            background: white;
-            padding: 35px 25px;
-            border-radius: 24px;
-            box-shadow: 0 15px 45px rgba(15, 23, 42, 0.10);
+            max-width: 450px;
+            background: rgba(255,255,255,0.97);
+            padding: 38px 26px 30px;
+            border-radius: 28px;
+            box-shadow: 0 25px 70px rgba(15,23,42,0.12);
             text-align: center;
+            border: 1px solid rgba(226,232,240,0.8);
         }
 
         .logo {
-            width: 70px;
-            height: 70px;
+            width: 76px;
+            height: 76px;
             margin: 0 auto 18px;
-            border-radius: 20px;
+            border-radius: 23px;
             background: linear-gradient(135deg, #2563eb, #1d4ed8);
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
+            font-size: 31px;
             font-weight: bold;
-            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25);
+            box-shadow: 0 14px 30px rgba(37,99,235,0.25);
         }
 
         .welcome h1 {
             margin: 0;
-            font-size: 30px;
+            font-size: 32px;
+            letter-spacing: -0.7px;
         }
 
         .welcome h2 {
-            margin: 8px 0 12px;
-            font-size: 22px;
+            margin: 10px 0 10px;
+            font-size: 21px;
         }
 
         .welcome p {
             color: #64748b;
-            line-height: 1.6;
-            margin-bottom: 25px;
+            line-height: 1.65;
+            margin: 0 auto 25px;
+            max-width: 350px;
+            font-size: 15px;
         }
 
         .welcome button {
             width: 100%;
-            padding: 15px;
+            padding: 16px;
             margin-top: 10px;
             border: none;
-            border-radius: 13px;
+            border-radius: 14px;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
         }
 
         .login-button {
-            background: #2563eb;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
             color: white;
+            box-shadow: 0 10px 24px rgba(37,99,235,0.20);
         }
 
         .signup-button {
-            background: #eef2ff;
+            background: #eff6ff;
             color: #1d4ed8;
         }
+
+        .welcome-note {
+            margin-top: 22px;
+            color: #94a3b8;
+            font-size: 12px;
+        }
+
+        /* =========================
+           DASHBOARD
+        ========================= */
 
         .dashboard {
             display: none;
@@ -118,8 +143,8 @@
         }
 
         .topbar {
-            background: white;
-            padding: 18px 20px;
+            background: rgba(255,255,255,0.96);
+            padding: 15px 18px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -127,6 +152,7 @@
             position: sticky;
             top: 0;
             z-index: 10;
+            backdrop-filter: blur(12px);
         }
 
         .brand {
@@ -136,26 +162,28 @@
         }
 
         .brand-logo {
-            width: 42px;
-            height: 42px;
-            border-radius: 13px;
+            width: 43px;
+            height: 43px;
+            border-radius: 14px;
             background: linear-gradient(135deg, #2563eb, #1d4ed8);
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 18px;
+            font-size: 19px;
+            box-shadow: 0 7px 18px rgba(37,99,235,0.20);
         }
 
         .brand-name {
             font-size: 20px;
             font-weight: bold;
+            letter-spacing: -0.3px;
         }
 
         .profile-button {
-            width: 42px;
-            height: 42px;
+            width: 43px;
+            height: 43px;
             border: none;
             border-radius: 50%;
             background: #eff6ff;
@@ -176,7 +204,7 @@
         }
 
         .greeting p {
-            margin: 0 0 5px;
+            margin: 0 0 6px;
             color: #64748b;
             font-size: 14px;
         }
@@ -184,15 +212,22 @@
         .greeting h2 {
             margin: 0;
             font-size: 25px;
+            letter-spacing: -0.5px;
         }
 
+        /* =========================
+           BALANCE
+        ========================= */
+
         .balance-card {
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            background:
+                radial-gradient(circle at 90% 10%, rgba(255,255,255,0.18), transparent 25%),
+                linear-gradient(135deg, #2563eb, #1d4ed8);
             color: white;
-            border-radius: 24px;
+            border-radius: 26px;
             padding: 25px;
-            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.25);
-            margin-bottom: 25px;
+            box-shadow: 0 18px 40px rgba(37,99,235,0.25);
+            margin-bottom: 26px;
             position: relative;
             overflow: hidden;
         }
@@ -200,24 +235,26 @@
         .balance-card::after {
             content: "";
             position: absolute;
-            width: 180px;
-            height: 180px;
+            width: 190px;
+            height: 190px;
             border-radius: 50%;
             background: rgba(255,255,255,0.08);
-            right: -70px;
-            top: -70px;
+            right: -75px;
+            top: -75px;
         }
 
         .balance-label {
-            font-size: 14px;
+            font-size: 13px;
             opacity: 0.85;
         }
 
         .balance-amount {
-            font-size: 36px;
+            font-size: 37px;
             font-weight: bold;
-            margin: 10px 0 22px;
+            margin: 10px 0 23px;
             letter-spacing: -1px;
+            position: relative;
+            z-index: 2;
         }
 
         .fund-button {
@@ -232,10 +269,14 @@
             z-index: 2;
         }
 
+        /* =========================
+           QUICK SERVICES
+        ========================= */
+
         .section-title {
             font-size: 18px;
             font-weight: bold;
-            margin: 25px 0 15px;
+            margin: 27px 0 15px;
         }
 
         .actions {
@@ -245,18 +286,18 @@
         }
 
         .action {
-            border: none;
+            border: 1px solid #eef2f7;
             background: white;
-            border-radius: 17px;
-            padding: 18px 10px;
+            border-radius: 18px;
+            padding: 17px 8px;
             text-align: center;
             cursor: pointer;
-            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.06);
-            transition: transform 0.15s ease;
+            box-shadow: 0 6px 20px rgba(15,23,42,0.055);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
         }
 
         .action:active {
-            transform: scale(0.97);
+            transform: scale(0.96);
         }
 
         .action-icon {
@@ -268,39 +309,61 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
+            font-size: 21px;
         }
 
         .action-title {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: bold;
             color: #1f2937;
         }
 
+        /* =========================
+           TRANSACTIONS
+        ========================= */
+
         .transactions {
             background: white;
             border-radius: 20px;
-            box-shadow: 0 5px 18px rgba(15, 23, 42, 0.06);
+            box-shadow: 0 6px 20px rgba(15,23,42,0.055);
             overflow: hidden;
+            border: 1px solid #eef2f7;
         }
 
         .transaction-empty {
-            padding: 30px 20px;
+            padding: 32px 20px;
             text-align: center;
             color: #94a3b8;
         }
 
         .transaction-empty-icon {
-            font-size: 35px;
-            margin-bottom: 8px;
+            width: 58px;
+            height: 58px;
+            margin: 0 auto 12px;
+            border-radius: 18px;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 27px;
         }
+
+        .transaction-empty strong {
+            display: block;
+            color: #475569;
+            margin-bottom: 5px;
+        }
+
+        /* =========================
+           LOGOUT
+        ========================= */
 
         .logout {
             width: 100%;
             margin-top: 25px;
             padding: 15px;
             border: none;
-            border-radius: 13px;
+            border-radius: 14px;
             background: #fee2e2;
             color: #dc2626;
             font-size: 15px;
@@ -308,18 +371,23 @@
             cursor: pointer;
         }
 
+        /* =========================
+           BOTTOM NAV
+        ========================= */
+
         .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background: white;
+            background: rgba(255,255,255,0.97);
             border-top: 1px solid #e5e7eb;
-            height: 68px;
+            height: 70px;
             display: flex;
             justify-content: space-around;
             align-items: center;
             z-index: 20;
+            backdrop-filter: blur(12px);
         }
 
         .nav-button {
@@ -332,6 +400,7 @@
             flex-direction: column;
             align-items: center;
             gap: 4px;
+            min-width: 70px;
         }
 
         .nav-button span {
@@ -342,6 +411,10 @@
             color: #2563eb;
         }
 
+        /* =========================
+           DESKTOP
+        ========================= */
+
         @media (min-width: 700px) {
 
             .bottom-nav {
@@ -350,7 +423,7 @@
                 margin: 0 auto 20px;
                 border: none;
                 border-radius: 18px;
-                box-shadow: 0 5px 18px rgba(15, 23, 42, 0.06);
+                box-shadow: 0 6px 20px rgba(15,23,42,0.055);
             }
 
             .container {
@@ -364,6 +437,10 @@
 
         @media (max-width: 420px) {
 
+            .welcome {
+                padding: 32px 21px 27px;
+            }
+
             .actions {
                 grid-template-columns: repeat(3, 1fr);
             }
@@ -373,8 +450,8 @@
             }
 
             .action-icon {
-                width: 42px;
-                height: 42px;
+                width: 43px;
+                height: 43px;
             }
 
             .balance-amount {
@@ -390,6 +467,10 @@
         Checking your Velqora account...
     </div>
 
+    <!-- =========================
+         WELCOME / OUTSIDE
+    ========================== -->
+
     <div
         id="welcomeScreen"
         class="welcome-page"
@@ -404,18 +485,18 @@
 
             <h1>Velqora</h1>
 
-            <h2>Welcome</h2>
+            <h2>Welcome to Velqora</h2>
 
             <p>
-                Your simple platform for data, airtime,
-                payments and more.
+                A simple place to manage your wallet,
+                data, airtime, payments and transfers.
             </p>
 
             <button
                 class="login-button"
                 onclick="window.location.href='login.html'"
             >
-                🔐 Login
+                🔐 Log In
             </button>
 
             <button
@@ -425,9 +506,17 @@
                 👤 Create Account
             </button>
 
+            <div class="welcome-note">
+                Secure account access powered by Velqora.
+            </div>
+
         </div>
 
     </div>
+
+    <!-- =========================
+         LOGGED-IN DASHBOARD
+    ========================== -->
 
     <div id="dashboard" class="dashboard">
 
@@ -448,6 +537,7 @@
             <button
                 class="profile-button"
                 onclick="goToProfile()"
+                aria-label="Open profile"
             >
                 👤
             </button>
@@ -458,7 +548,7 @@
 
             <div class="greeting">
 
-                <p>Welcome back</p>
+                <p>Welcome back 👋</p>
 
                 <h2>Your finances, simplified.</h2>
 
@@ -584,9 +674,9 @@
                         🧾
                     </div>
 
-                    <div>
+                    <strong>
                         No transactions yet
-                    </div>
+                    </strong>
 
                     <small>
                         Your real transactions will appear here.
@@ -718,7 +808,6 @@
                 document.getElementById(
                     "welcomeScreen"
                 ).style.display = "flex";
-
             }
         }
 
@@ -808,9 +897,7 @@
                     return;
                 }
 
-                if (
-                    !data.payment_link
-                ) {
+                if (!data.payment_link) {
 
                     alert(
                         "Payment link was not returned."
