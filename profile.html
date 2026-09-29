@@ -16,137 +16,230 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #f5f7fb;
-            color: #111827;
+            background: #f4f8f6;
+            color: #10231c;
+            padding-bottom: 90px;
         }
 
-        .header {
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        .top {
+            background: linear-gradient(135deg, #063d2b, #087f5b);
             color: white;
-            padding: 25px 20px 35px;
-            border-radius: 0 0 25px 25px;
+            padding: 20px 18px 55px;
+            border-radius: 0 0 28px 28px;
         }
 
-        .header h1 {
-            margin: 0;
-            font-size: 25px;
+        .top-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        .header p {
-            margin: 7px 0 0;
-            opacity: 0.85;
+        .back-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 13px;
+            background: rgba(255,255,255,0.14);
+            color: white;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .brand {
+            font-size: 23px;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            margin: 3px 0 0;
+            font-size: 13px;
+            opacity: 0.8;
         }
 
         .container {
             max-width: 650px;
-            margin: -20px auto 40px;
+            margin: -30px auto 0;
             padding: 0 16px;
         }
 
         .profile-card {
             background: white;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            border-radius: 24px;
+            padding: 25px 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+        }
+
+        .profile-top {
+            text-align: center;
         }
 
         .avatar {
-            width: 80px;
-            height: 80px;
+            width: 88px;
+            height: 88px;
             border-radius: 50%;
-            background: #2563eb;
+            background: linear-gradient(135deg, #0aa66f, #087f5b);
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 30px;
-            font-weight: bold;
-            margin: 0 auto 15px;
+            font-size: 34px;
+            font-weight: 800;
+            margin: 0 auto 14px;
+            box-shadow: 0 8px 20px rgba(8,127,91,0.25);
         }
 
         .name {
-            text-align: center;
-            font-size: 22px;
-            font-weight: bold;
+            font-size: 23px;
+            font-weight: 800;
             margin-bottom: 5px;
         }
 
         .email {
-            text-align: center;
-            color: #6b7280;
-            margin-bottom: 25px;
+            color: #708078;
+            font-size: 14px;
             word-break: break-word;
+        }
+
+        .section-title {
+            margin: 28px 0 10px;
+            font-size: 14px;
+            font-weight: 800;
+            color: #52645d;
         }
 
         .info {
-            border-top: 1px solid #e5e7eb;
+            border: 1px solid #e5eee9;
+            border-radius: 17px;
+            overflow: hidden;
         }
 
         .row {
-            padding: 17px 0;
-            border-bottom: 1px solid #e5e7eb;
+            padding: 16px;
+            border-bottom: 1px solid #e8efeb;
+            background: #fff;
+        }
+
+        .row:last-child {
+            border-bottom: none;
         }
 
         .label {
-            font-size: 13px;
-            color: #6b7280;
-            margin-bottom: 5px;
+            font-size: 12px;
+            color: #7a8983;
+            margin-bottom: 6px;
         }
 
         .value {
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 15px;
+            font-weight: 700;
             word-break: break-word;
+            color: #17372b;
         }
 
         .buttons {
-            margin-top: 25px;
+            margin-top: 24px;
             display: grid;
-            gap: 12px;
+            gap: 11px;
         }
 
         button,
         a {
             width: 100%;
             padding: 15px;
-            border-radius: 12px;
+            border-radius: 14px;
             border: none;
-            font-size: 16px;
-            font-weight: bold;
+            font-size: 15px;
+            font-weight: 800;
             text-align: center;
             text-decoration: none;
             cursor: pointer;
         }
 
-        .back {
-            background: #eef2ff;
-            color: #2563eb;
+        .dashboard {
+            background: #087f5b;
+            color: white;
+        }
+
+        .dashboard:hover {
+            background: #066b4d;
         }
 
         .logout {
-            background: #fee2e2;
-            color: #dc2626;
+            background: #fff0f0;
+            color: #d93030;
         }
 
         .loading {
             text-align: center;
-            padding: 40px 20px;
-            color: #6b7280;
+            padding: 45px 15px;
+            color: #718078;
         }
 
         .error {
             text-align: center;
-            color: #dc2626;
-            padding: 30px 10px;
+            color: #d93030;
+            padding: 35px 10px;
+            line-height: 1.5;
+        }
+
+        .secure-note {
+            margin-top: 18px;
+            padding: 13px;
+            border-radius: 13px;
+            background: #f0faf5;
+            color: #477064;
+            font-size: 12px;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        /* Bottom navigation */
+
+        .bottom-nav {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 72px;
+            background: white;
+            border-top: 1px solid #e5eee9;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 20;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #87938e;
+            font-size: 11px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .nav-item span {
+            display: block;
+            font-size: 21px;
+            margin-bottom: 3px;
+        }
+
+        .nav-item.active {
+            color: #087f5b;
         }
 
         @media (min-width: 700px) {
-            .header {
+
+            .top {
                 padding-left: 30px;
+                padding-right: 30px;
             }
 
             .container {
-                margin-top: -30px;
+                margin-top: -35px;
+            }
+
+            .profile-card {
+                padding: 30px;
             }
         }
     </style>
@@ -154,10 +247,23 @@
 
 <body>
 
-    <div class="header">
-        <h1>Velqora</h1>
-        <p>My Profile</p>
+    <div class="top">
+
+        <div class="top-bar">
+
+            <button class="back-btn" onclick="goBack()">
+                ←
+            </button>
+
+            <div>
+                <div class="brand">Velqora</div>
+                <div class="subtitle">My Profile</div>
+            </div>
+
+        </div>
+
     </div>
+
 
     <div class="container">
 
@@ -167,45 +273,71 @@
                 Loading your profile...
             </div>
 
+
             <div id="profileContent" style="display:none;">
 
-                <div class="avatar" id="avatar">
-                    V
+                <div class="profile-top">
+
+                    <div class="avatar" id="avatar">
+                        V
+                    </div>
+
+                    <div class="name" id="fullName">
+                        Velqora User
+                    </div>
+
+                    <div class="email" id="email">
+                        -
+                    </div>
+
                 </div>
 
-                <div class="name" id="fullName">
-                    Velqora User
+
+                <div class="section-title">
+                    Account Information
                 </div>
 
-                <div class="email" id="email">
-                    -
-                </div>
 
                 <div class="info">
 
                     <div class="row">
-                        <div class="label">Full Name</div>
+                        <div class="label">
+                            Full Name
+                        </div>
+
                         <div class="value" id="profileName">
                             -
                         </div>
                     </div>
 
+
                     <div class="row">
-                        <div class="label">Phone Number</div>
+                        <div class="label">
+                            Phone Number
+                        </div>
+
                         <div class="value" id="phone">
                             -
                         </div>
                     </div>
 
+
                     <div class="row">
-                        <div class="label">Email Address</div>
+                        <div class="label">
+                            Email Address
+                        </div>
+
                         <div class="value" id="profileEmail">
                             -
                         </div>
                     </div>
 
+
                     <div class="row">
-                        <div class="label">User ID</div>
+                        <div class="label">
+                            User ID
+                        </div>
+
                         <div class="value" id="userId">
                             -
                         </div>
@@ -213,9 +345,15 @@
 
                 </div>
 
+
+                <div class="secure-note">
+                    🔒 Your account information is securely connected to Velqora.
+                </div>
+
+
                 <div class="buttons">
 
-                    <a href="index.html" class="back">
+                    <a href="index.html" class="dashboard">
                         ← Back to Dashboard
                     </a>
 
@@ -227,21 +365,53 @@
 
             </div>
 
+
             <div id="errorMessage" class="error" style="display:none;">
-                Unable to load your profile.
+                Unable to load your profile.<br>
+                Please try again.
             </div>
 
         </div>
 
     </div>
 
+
+    <!-- Bottom Navigation -->
+
+    <div class="bottom-nav">
+
+        <a href="index.html" class="nav-item">
+            <span>⌂</span>
+            Home
+        </a>
+
+        <a href="transactions.html" class="nav-item">
+            <span>▣</span>
+            Activity
+        </a>
+
+        <a href="profile.html" class="nav-item active">
+            <span>●</span>
+            Profile
+        </a>
+
+    </div>
+
+
     <script src="config.js"></script>
 
     <script>
+
         const supabaseClient = window.supabase.createClient(
             SUPABASE_URL,
             SUPABASE_KEY
         );
+
+
+        function goBack() {
+            window.location.href = "index.html";
+        }
+
 
         async function loadProfile() {
 
@@ -250,79 +420,118 @@
                 error: sessionError
             } = await supabaseClient.auth.getSession();
 
+
             if (sessionError || !session) {
+
                 window.location.href = "login.html";
+
                 return;
             }
 
+
             const user = session.user;
+
 
             document.getElementById("email").textContent =
                 user.email || "-";
 
+
             document.getElementById("profileEmail").textContent =
                 user.email || "-";
+
 
             document.getElementById("userId").textContent =
                 user.id;
 
+
             const { data: profile, error } = await supabaseClient
+
                 .from("Idris-Data-App")
+
                 .select("full_name, phone")
+
                 .eq("id", user.id)
+
                 .maybeSingle();
 
+
             if (error) {
+
                 console.error("Profile error:", error);
 
-                document.getElementById("loading").style.display = "none";
-                document.getElementById("errorMessage").style.display = "block";
+                document.getElementById("loading").style.display =
+                    "none";
+
+                document.getElementById("errorMessage").style.display =
+                    "block";
 
                 return;
             }
+
 
             const fullName =
                 profile?.full_name ||
                 user.user_metadata?.full_name ||
                 "Velqora User";
 
+
             const phone =
                 profile?.phone ||
                 user.user_metadata?.phone ||
                 "Not provided";
 
+
             document.getElementById("fullName").textContent =
                 fullName;
+
 
             document.getElementById("profileName").textContent =
                 fullName;
 
+
             document.getElementById("phone").textContent =
                 phone;
+
 
             const firstLetter =
                 fullName.charAt(0).toUpperCase();
 
+
             document.getElementById("avatar").textContent =
                 firstLetter;
 
-            document.getElementById("loading").style.display = "none";
-            document.getElementById("profileContent").style.display = "block";
+
+            document.getElementById("loading").style.display =
+                "none";
+
+
+            document.getElementById("profileContent").style.display =
+                "block";
         }
+
 
         async function logout() {
 
-            const { error } = await supabaseClient.auth.signOut();
+            const { error } =
+                await supabaseClient.auth.signOut();
+
 
             if (error) {
-                alert("Unable to log out. Please try again.");
+
+                alert(
+                    "Unable to log out. Please try again."
+                );
+
                 return;
             }
+
 
             window.location.href = "login.html";
         }
 
+
         loadProfile();
+
     </script>
 
 </body>
