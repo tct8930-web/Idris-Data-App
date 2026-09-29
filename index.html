@@ -188,11 +188,13 @@
         <div id="dashboard" class="dashboard">
 
             <div class="balance">
+
                 <h2>Wallet Balance</h2>
 
                 <div class="amount" id="walletBalance">
                     Checking...
                 </div>
+
             </div>
 
             <div class="buttons">
@@ -244,7 +246,10 @@
 
         async function loadWallet(userId) {
 
-            const { data, error } = await supabaseClient
+            const {
+                data,
+                error
+            } = await supabaseClient
                 .from("wallets")
                 .select("balance")
                 .eq("user_id", userId)
@@ -280,6 +285,7 @@
                 });
         }
 
+
         async function checkUser() {
 
             const {
@@ -303,6 +309,104 @@
             }
         }
 
+
+        async function startFunding() {
+
+            const amountInput = prompt(
+                "Enter the amount you want to fund your wallet in Naira:"
+            );
+
+            if (amountInput === null) {
+                return;
+            }
+
+            const amount = Number(
+                amountInput.replace(/,/g, "")
+            );
+
+            if (!Number.isFinite(amount) || amount <= 0) {
+
+                alert("Please enter a valid amount.");
+
+                return;
+            }
+
+            if (amount < 100) {
+
+                alert(
+                    "The minimum wallet funding amount is ₦100."
+                );
+
+                return;
+            }
+
+            try {
+
+                alert("Creating your secure payment...");
+
+                const {
+                    data,
+                    error
+                } = await supabaseClient.functions.invoke(
+                    "rapid-api",
+                    {
+                        body: {
+                            amount: amount
+                        }
+                    }
+                );
+
+                if (error) {
+
+                    console.error(
+                        "Payment function error:",
+                        error
+                    );
+
+                    alert(
+                        "Unable to start payment: " +
+                        error.message
+                    );
+
+                    return;
+                }
+
+                if (!data || !data.success) {
+
+                    alert(
+                        data?.error ||
+                        "Unable to create payment."
+                    );
+
+                    return;
+                }
+
+                if (!data.payment_link) {
+
+                    alert(
+                        "Payment link was not returned."
+                    );
+
+                    return;
+                }
+
+                window.location.href =
+                    data.payment_link;
+
+            } catch (error) {
+
+                console.error(
+                    "Funding error:",
+                    error
+                );
+
+                alert(
+                    "Something went wrong while starting the payment."
+                );
+            }
+        }
+
+
         async function logout() {
 
             await supabaseClient.auth.signOut();
@@ -310,13 +414,6 @@
             window.location.href = "index.html";
         }
 
-        function startFunding() {
-
-            alert(
-                "Wallet funding will be connected securely to the payment provider next."
-            );
-
-        }
 
         checkUser();
 
