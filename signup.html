@@ -13,75 +13,193 @@
 
         body {
             margin: 0;
+            min-height: 100vh;
             font-family: Arial, sans-serif;
-            background: #f4f6f8;
+            background:
+                radial-gradient(circle at top left, #164e41 0%, transparent 35%),
+                linear-gradient(145deg, #061612, #0b211c 55%, #07110f);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: white;
         }
 
         .container {
-            max-width: 420px;
-            margin: 40px auto;
-            padding: 20px;
+            width: 100%;
+            max-width: 430px;
+        }
+
+        .brand {
+            text-align: center;
+            margin-bottom: 22px;
+        }
+
+        .logo {
+            width: 65px;
+            height: 65px;
+            margin: 0 auto 12px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #25d366, #0f9f6e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            font-weight: 800;
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.2);
+        }
+
+        .brand-name {
+            font-size: 30px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .tagline {
+            margin-top: 7px;
+            color: #9bb3ac;
+            font-size: 14px;
         }
 
         .card {
-            background: white;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-radius: 24px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(18px);
         }
 
         h1 {
-            text-align: center;
-            margin-top: 0;
+            margin: 0;
+            font-size: 28px;
         }
 
         .subtitle {
-            text-align: center;
-            color: #666;
-            margin-bottom: 25px;
+            margin: 9px 0 24px;
+            color: #9bb3ac;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .input-group {
+            margin-bottom: 16px;
         }
 
         label {
             display: block;
-            margin-top: 12px;
+            margin-bottom: 8px;
+            color: #d0ddd9;
+            font-size: 13px;
             font-weight: bold;
         }
 
         input {
             width: 100%;
-            padding: 14px;
-            margin: 8px 0 15px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 16px;
+            padding: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 13px;
+            background: rgba(0, 0, 0, 0.22);
+            color: white;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input::placeholder {
+            color: #71847e;
+        }
+
+        input:focus {
+            border-color: #25d366;
+            box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.10);
         }
 
         button {
             width: 100%;
-            padding: 15px;
+            padding: 16px;
             border: none;
-            border-radius: 8px;
-            background: #111827;
+            border-radius: 13px;
+            background: linear-gradient(135deg, #25d366, #12a86c);
             color: white;
             font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
-            margin-top: 5px;
+            transition: 0.2s;
+            margin-top: 3px;
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.20);
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
 
         #message {
+            display: none;
             margin-top: 15px;
+            padding: 12px;
+            border-radius: 10px;
             text-align: center;
+            font-size: 13px;
+            line-height: 1.4;
         }
 
         .login {
-            margin-top: 20px;
+            margin-top: 22px;
             text-align: center;
+            color: #9bb3ac;
+            font-size: 14px;
         }
 
         .login a {
-            color: #111827;
+            color: #45df82;
             font-weight: bold;
             text-decoration: none;
+        }
+
+        .login a:hover {
+            text-decoration: underline;
+        }
+
+        .back {
+            text-align: center;
+            margin-top: 18px;
+        }
+
+        .back a {
+            color: #839b94;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .security {
+            margin-top: 20px;
+            padding-top: 17px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center;
+            color: #71857f;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 16px;
+            }
+
+            .card {
+                padding: 24px 20px;
+            }
+
+            .brand-name {
+                font-size: 27px;
+            }
         }
     </style>
 </head>
@@ -90,48 +208,72 @@
 
     <div class="container">
 
+        <div class="brand">
+            <div class="logo">V</div>
+
+            <div class="brand-name">
+                Velqora
+            </div>
+
+            <div class="tagline">
+                Simple. Secure. Built for your money.
+            </div>
+        </div>
+
         <div class="card">
 
             <h1>Create Account</h1>
 
-            <p class="subtitle">
-                Create your Velqora account.
-            </p>
+            <div class="subtitle">
+                Create your Velqora account and get started with your digital wallet.
+            </div>
 
-            <label for="fullName">Full Name</label>
+            <div class="input-group">
+                <label for="fullName">Full Name</label>
 
-            <input
-                type="text"
-                id="fullName"
-                placeholder="Enter your full name"
-            >
+                <input
+                    type="text"
+                    id="fullName"
+                    placeholder="Enter your full name"
+                    autocomplete="name"
+                >
+            </div>
 
-            <label for="phone">Phone Number</label>
+            <div class="input-group">
+                <label for="phone">Phone Number</label>
 
-            <input
-                type="tel"
-                id="phone"
-                placeholder="Enter your phone number"
-            >
+                <input
+                    type="tel"
+                    id="phone"
+                    placeholder="Enter your phone number"
+                    autocomplete="tel"
+                >
+            </div>
 
-            <label for="email">Email</label>
+            <div class="input-group">
+                <label for="email">Email Address</label>
 
-            <input
-                type="email"
-                id="email"
-                placeholder="Enter your email"
-            >
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    autocomplete="email"
+                >
+            </div>
 
-            <label for="password">Password</label>
+            <div class="input-group">
+                <label for="password">Password</label>
 
-            <input
-                type="password"
-                id="password"
-                placeholder="Create a password"
-            >
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Create a password"
+                    autocomplete="new-password"
+                >
+            </div>
 
-            <button onclick="signup()">
-                Create Account
+            <button id="signupButton" onclick="signup()">
+                Create Velqora Account
             </button>
 
             <div id="message"></div>
@@ -139,6 +281,14 @@
             <div class="login">
                 Already have an account?
                 <a href="login.html">Login</a>
+            </div>
+
+            <div class="back">
+                <a href="index.html">← Back to Velqora</a>
+            </div>
+
+            <div class="security">
+                🔒 Your account information is securely handled by Supabase.
             </div>
 
         </div>
@@ -172,74 +322,153 @@
             const message =
                 document.getElementById("message");
 
+            const button =
+                document.getElementById("signupButton");
+
             if (!fullName || !phone || !email || !password) {
+
+                message.style.display = "block";
+                message.style.background =
+                    "rgba(255, 80, 80, 0.12)";
+                message.style.color = "#ff9b9b";
+
                 message.textContent =
                     "Please fill in all fields.";
+
                 return;
             }
 
             if (password.length < 6) {
+
+                message.style.display = "block";
+                message.style.background =
+                    "rgba(255, 80, 80, 0.12)";
+                message.style.color = "#ff9b9b";
+
                 message.textContent =
                     "Password must be at least 6 characters.";
+
                 return;
             }
+
+            button.disabled = true;
+            button.textContent = "Creating Account...";
+
+            message.style.display = "block";
+            message.style.background =
+                "rgba(255,255,255,0.06)";
+            message.style.color = "#c9d8d3";
 
             message.textContent =
                 "Creating your account...";
 
-            const { data, error } =
-                await supabaseClient.auth.signUp({
-                    email: email,
-                    password: password,
+            try {
 
-                    options: {
-                        emailRedirectTo:
-                            "https://tct8930-web.github.io/Idris-Data-App/"
-                    }
-                });
+                const { data, error } =
+                    await supabaseClient.auth.signUp({
 
-            if (error) {
-                message.textContent = error.message;
-                return;
-            }
+                        email: email,
 
-            if (!data.user) {
-                message.textContent =
-                    "Account could not be created.";
-                return;
-            }
+                        password: password,
 
-            if (data.session) {
-
-                const { error: profileError } =
-                    await supabaseClient
-                    .from("Idris-Data-App")
-                    .insert({
-                        id: data.user.id,
-                        full_name: fullName,
-                        phone: phone
+                        options: {
+                            emailRedirectTo:
+                                "https://tct8930-web.github.io/Idris-Data-App/"
+                        }
                     });
 
-                if (profileError) {
+                if (error) {
+
+                    message.style.background =
+                        "rgba(255, 80, 80, 0.12)";
+
+                    message.style.color = "#ff9b9b";
+
                     message.textContent =
-                        "Account created, but profile setup failed: " +
-                        profileError.message;
+                        error.message;
+
                     return;
                 }
 
-                message.textContent =
-                    "Account created successfully!";
+                if (!data.user) {
 
-            } else {
+                    message.style.background =
+                        "rgba(255, 80, 80, 0.12)";
+
+                    message.style.color = "#ff9b9b";
+
+                    message.textContent =
+                        "Account could not be created.";
+
+                    return;
+                }
+
+                if (data.session) {
+
+                    const { error: profileError } =
+                        await supabaseClient
+                        .from("Idris-Data-App")
+                        .insert({
+                            id: data.user.id,
+                            full_name: fullName,
+                            phone: phone
+                        });
+
+                    if (profileError) {
+
+                        message.style.background =
+                            "rgba(255, 80, 80, 0.12)";
+
+                        message.style.color = "#ff9b9b";
+
+                        message.textContent =
+                            "Account created, but profile setup failed: " +
+                            profileError.message;
+
+                        return;
+                    }
+
+                    message.style.background =
+                        "rgba(37, 211, 102, 0.12)";
+
+                    message.style.color = "#65e993";
+
+                    message.textContent =
+                        "Account created successfully!";
+
+                } else {
+
+                    message.style.background =
+                        "rgba(37, 211, 102, 0.12)";
+
+                    message.style.color = "#65e993";
+
+                    message.textContent =
+                        "Account created! Please check your email to confirm your account, then log in.";
+                }
+
+                setTimeout(function() {
+                    window.location.href = "login.html";
+                }, 2000);
+
+            } catch (error) {
+
+                console.error(error);
+
+                message.style.background =
+                    "rgba(255, 80, 80, 0.12)";
+
+                message.style.color = "#ff9b9b";
 
                 message.textContent =
-                    "Account created! Please check your email to confirm your account, then log in.";
+                    "Something went wrong. Please try again.";
+
+            } finally {
+
+                button.disabled = false;
+                button.textContent = "Create Velqora Account";
 
             }
-
-            setTimeout(function() {
-                window.location.href = "login.html";
-            }, 2000);
         }
 
     </script>
