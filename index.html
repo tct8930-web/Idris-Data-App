@@ -41,6 +41,57 @@
             background: #f5f8f7;
         }
 
+        /* PAYMENT LOADING SCREEN */
+        #paymentLoading {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(245, 248, 247, 0.97);
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 25px;
+        }
+
+        .payment-loading-box {
+            width: 100%;
+            max-width: 360px;
+            background: white;
+            padding: 32px 25px;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(8, 35, 27, 0.14);
+            border: 1px solid #e2ebe7;
+        }
+
+        .payment-spinner {
+            width: 52px;
+            height: 52px;
+            margin: 0 auto 20px;
+            border: 5px solid #e3f3ec;
+            border-top-color: #0f9f6e;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .payment-loading-box h3 {
+            margin: 0 0 8px;
+            font-size: 20px;
+        }
+
+        .payment-loading-box p {
+            margin: 0;
+            color: #668078;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
         .welcome-page {
             min-height: 100vh;
             display: flex;
@@ -48,16 +99,8 @@
             justify-content: center;
             padding: 24px;
             background:
-                radial-gradient(
-                    circle at 10% 5%,
-                    rgba(37, 211, 102, 0.12),
-                    transparent 32%
-                ),
-                radial-gradient(
-                    circle at 90% 90%,
-                    rgba(15, 159, 110, 0.10),
-                    transparent 32%
-                ),
+                radial-gradient(circle at 10% 5%, rgba(37, 211, 102, 0.12), transparent 32%),
+                radial-gradient(circle at 90% 90%, rgba(15, 159, 110, 0.10), transparent 32%),
                 #f5f8f7;
         }
 
@@ -230,18 +273,9 @@
 
         .balance-card {
             background:
-                radial-gradient(
-                    circle at 90% 10%,
-                    rgba(255,255,255,0.18),
-                    transparent 27%
-                ),
-                radial-gradient(
-                    circle at 10% 100%,
-                    rgba(0,0,0,0.08),
-                    transparent 35%
-                ),
+                radial-gradient(circle at 90% 10%, rgba(255,255,255,0.18), transparent 27%),
+                radial-gradient(circle at 10% 100%, rgba(0,0,0,0.08), transparent 35%),
                 linear-gradient(135deg, #0b7654, #064d3c);
-
             color: white;
             border-radius: 27px;
             padding: 25px;
@@ -323,6 +357,13 @@
             cursor: pointer;
             position: relative;
             z-index: 2;
+        }
+
+        .fund-button:disabled,
+        .action:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
         }
 
         .section-heading {
@@ -531,6 +572,18 @@
         Checking your Velqora account...
     </div>
 
+    <div id="paymentLoading">
+        <div class="payment-loading-box">
+            <div class="payment-spinner"></div>
+
+            <h3>Opening secure payment</h3>
+
+            <p>
+                Please wait while we connect you to Flutterwave.
+            </p>
+        </div>
+    </div>
+
     <div
         id="welcomeScreen"
         class="welcome-page"
@@ -662,6 +715,7 @@
 
                 <button
                     class="fund-button"
+                    id="fundWalletButton"
                     onclick="startFunding()"
                 >
                     + Fund Wallet
@@ -685,6 +739,7 @@
 
                 <button
                     class="action"
+                    id="fundActionButton"
                     onclick="startFunding()"
                 >
                     <div class="action-icon">
@@ -852,6 +907,7 @@
         let actualBalance = null;
         let balanceHidden = false;
         let currentUser = null;
+        let fundingInProgress = false;
 
 
         function updateGreeting() {
@@ -1079,7 +1135,60 @@
         }
 
 
+        function setFundingLoading(isLoading) {
+
+            const loadingScreen =
+                document.getElementById(
+                    "paymentLoading"
+                );
+
+            const mainFundButton =
+                document.getElementById(
+                    "fundWalletButton"
+                );
+
+            const quickFundButton =
+                document.getElementById(
+                    "fundActionButton"
+                );
+
+            fundingInProgress =
+                isLoading;
+
+            if (isLoading) {
+
+                loadingScreen.style.display =
+                    "flex";
+
+                if (mainFundButton) {
+                    mainFundButton.disabled = true;
+                }
+
+                if (quickFundButton) {
+                    quickFundButton.disabled = true;
+                }
+
+            } else {
+
+                loadingScreen.style.display =
+                    "none";
+
+                if (mainFundButton) {
+                    mainFundButton.disabled = false;
+                }
+
+                if (quickFundButton) {
+                    quickFundButton.disabled = false;
+                }
+            }
+        }
+
+
         async function startFunding() {
+
+            if (fundingInProgress) {
+                return;
+            }
 
             const amountInput =
                 prompt(
@@ -1130,17 +1239,12 @@
 
             try {
 
-                alert(
-                    "Creating your secure payment..."
-                );
+                setFundingLoading(true);
 
-                /*
-                 * The Supabase Edge Function endpoint
-                 * previously shown for this function uses
-                 * the slug "rapid-api".
-                 *
-                 * We are testing that endpoint here.
-                 */
+                console.log(
+                    "Starting secure wallet funding:",
+                    amount
+                );
 
                 const {
                     data,
@@ -1169,6 +1273,8 @@
                         error
                     );
 
+                    setFundingLoading(false);
+
                     alert(
                         "Unable to start payment: " +
                         error.message
@@ -1187,6 +1293,8 @@
                         data
                     );
 
+                    setFundingLoading(false);
+
                     alert(
                         data?.error ||
                         "Unable to create payment."
@@ -1202,6 +1310,8 @@
                         data
                     );
 
+                    setFundingLoading(false);
+
                     alert(
                         "Payment link was not returned."
                     );
@@ -1209,8 +1319,16 @@
                     return;
                 }
 
-                window.location.href =
-                    data.payment_link;
+                /*
+                 * Flutterwave payment link received.
+                 *
+                 * The browser is redirected immediately
+                 * to the secure Flutterwave checkout.
+                 */
+
+                window.location.replace(
+                    data.payment_link
+                );
 
             } catch (error) {
 
@@ -1218,6 +1336,8 @@
                     "Funding error:",
                     error
                 );
+
+                setFundingLoading(false);
 
                 alert(
                     "Something went wrong while starting the payment."
