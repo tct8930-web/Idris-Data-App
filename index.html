@@ -6,43 +6,812 @@
 
     <title>Velqora</title>
 
-    <link rel="stylesheet" href="style.css">
-
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="config.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f8f7;
+            color: #10201b;
+        }
+
+        button,
+        input {
+            font-family: inherit;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        #loading {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #668078;
+            padding: 20px;
+            background: #f5f8f7;
+        }
+
+        /* PAYMENT LOADING SCREEN */
+
+        #paymentLoading {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(245, 248, 247, 0.97);
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 25px;
+        }
+
+        .payment-loading-box {
+            width: 100%;
+            max-width: 360px;
+            background: white;
+            padding: 32px 25px;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(8, 35, 27, 0.14);
+            border: 1px solid #e2ebe7;
+        }
+
+        .payment-spinner {
+            width: 52px;
+            height: 52px;
+            margin: 0 auto 20px;
+            border: 5px solid #e3f3ec;
+            border-top-color: #0f9f6e;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .payment-loading-box h3 {
+            margin: 0 0 8px;
+            font-size: 20px;
+        }
+
+        .payment-loading-box p {
+            margin: 0;
+            color: #668078;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* FUND WALLET MODAL */
+
+        #fundModal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 5000;
+            background: rgba(8, 35, 27, 0.48);
+            align-items: flex-end;
+            justify-content: center;
+            padding: 18px;
+        }
+
+        #fundModal.active {
+            display: flex;
+        }
+
+        .fund-modal-box {
+            width: 100%;
+            max-width: 460px;
+            background: white;
+            border-radius: 28px;
+            padding: 25px 22px 22px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.20);
+            animation: modalUp 0.22s ease-out;
+        }
+
+        @keyframes modalUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fund-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .fund-modal-header h3 {
+            margin: 0;
+            font-size: 22px;
+            color: #10201b;
+        }
+
+        .fund-close {
+            width: 38px;
+            height: 38px;
+            border: none;
+            border-radius: 50%;
+            background: #f1f5f3;
+            color: #536861;
+            font-size: 23px;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .fund-modal-description {
+            margin: 0 0 20px;
+            color: #72847e;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .amount-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #40554d;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .amount-input-wrap {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 58px;
+            border: 2px solid #dce9e3;
+            border-radius: 16px;
+            background: #fbfdfc;
+            padding: 0 16px;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .amount-input-wrap:focus-within {
+            border-color: #0f9f6e;
+            box-shadow: 0 0 0 4px rgba(15, 159, 110, 0.09);
+        }
+
+        .currency-symbol {
+            color: #087f55;
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        #fundAmountInput {
+            width: 100%;
+            height: 100%;
+            border: none;
+            outline: none;
+            background: transparent;
+            font-size: 23px;
+            font-weight: bold;
+            color: #10201b;
+        }
+
+        #fundAmountInput::placeholder {
+            color: #aab8b3;
+            font-weight: normal;
+        }
+
+        .quick-amount-title {
+            margin: 18px 0 10px;
+            color: #72847e;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .quick-amounts {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .quick-amount {
+            border: 1px solid #dce9e3;
+            background: #f5faf7;
+            color: #087f55;
+            padding: 11px 5px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .quick-amount:hover {
+            background: #eaf8f1;
+        }
+
+        .fund-error {
+            display: none;
+            margin-top: 10px;
+            padding: 10px 12px;
+            border-radius: 11px;
+            background: #fff2f2;
+            color: #c53636;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .fund-error.show {
+            display: block;
+        }
+
+        .continue-funding {
+            width: 100%;
+            margin-top: 18px;
+            border: none;
+            border-radius: 15px;
+            padding: 16px;
+            background: linear-gradient(135deg, #25d366, #0f9f6e);
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 10px 24px rgba(37, 211, 102, 0.20);
+        }
+
+        .continue-funding:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .cancel-funding {
+            width: 100%;
+            margin-top: 9px;
+            border: none;
+            background: transparent;
+            color: #72847e;
+            padding: 12px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        @media (min-width: 600px) {
+            #fundModal {
+                align-items: center;
+            }
+        }
+
+        .welcome-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background:
+                radial-gradient(circle at 10% 5%, rgba(37, 211, 102, 0.12), transparent 32%),
+                radial-gradient(circle at 90% 90%, rgba(15, 159, 110, 0.10), transparent 32%),
+                #f5f8f7;
+        }
+
+        .welcome {
+            width: 100%;
+            max-width: 450px;
+            background: white;
+            padding: 40px 27px 30px;
+            border-radius: 28px;
+            box-shadow: 0 25px 70px rgba(8, 35, 27, 0.12);
+            text-align: center;
+            border: 1px solid #e2ebe7;
+        }
+
+        .logo {
+            width: 86px;
+            height: 86px;
+            margin: 0 auto 18px;
+            border-radius: 23px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 14px 30px rgba(37, 211, 102, 0.18);
+            border: 1px solid #e2ebe7;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .welcome h1 {
+            margin: 0;
+            font-size: 32px;
+            letter-spacing: -0.7px;
+        }
+
+        .welcome h2 {
+            margin: 10px 0;
+            font-size: 21px;
+        }
+
+        .welcome p {
+            color: #668078;
+            line-height: 1.65;
+            margin: 0 auto 25px;
+            max-width: 350px;
+            font-size: 15px;
+        }
+
+        .welcome button {
+            width: 100%;
+            padding: 16px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .login-button {
+            background: linear-gradient(135deg, #25d366, #0f9f6e);
+            color: white;
+            box-shadow: 0 10px 24px rgba(37, 211, 102, 0.20);
+        }
+
+        .signup-button {
+            background: #eaf8f1;
+            color: #087f55;
+        }
+
+        .welcome-note {
+            margin-top: 22px;
+            color: #8ba099;
+            font-size: 12px;
+        }
+
+        .dashboard {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .dashboard.active {
+            display: block;
+        }
+
+        .topbar {
+            background: rgba(255, 255, 255, 0.96);
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e2ebe7;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(15px);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-logo {
+            width: 43px;
+            height: 43px;
+            border-radius: 14px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 7px 18px rgba(37, 211, 102, 0.15);
+            border: 1px solid #dcebe4;
+        }
+
+        .brand-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .brand-name {
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: -0.3px;
+        }
+
+        .profile-button {
+            width: 43px;
+            height: 43px;
+            border: 1px solid #dcebe4;
+            border-radius: 50%;
+            background: #effaf4;
+            color: #0f9f6e;
+            font-size: 19px;
+            cursor: pointer;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1050px;
+            margin: 0 auto;
+            padding: 25px 18px 100px;
+        }
+
+        .greeting {
+            margin-bottom: 20px;
+        }
+
+        .greeting p {
+            margin: 0 0 6px;
+            color: #668078;
+            font-size: 14px;
+        }
+
+        .greeting h2 {
+            margin: 0;
+            font-size: 25px;
+            letter-spacing: -0.5px;
+        }
+
+        .balance-card {
+            background:
+                radial-gradient(circle at 90% 10%, rgba(255,255,255,0.18), transparent 27%),
+                radial-gradient(circle at 10% 100%, rgba(0,0,0,0.08), transparent 35%),
+                linear-gradient(135deg, #0b7654, #064d3c);
+            color: white;
+            border-radius: 27px;
+            padding: 25px;
+            box-shadow: 0 20px 45px rgba(6, 77, 60, 0.23);
+            margin-bottom: 28px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .balance-card::after {
+            content: "";
+            position: absolute;
+            width: 210px;
+            height: 210px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.07);
+            right: -85px;
+            top: -85px;
+        }
+
+        .balance-card::before {
+            content: "";
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: rgba(37, 211, 102, 0.08);
+            left: -50px;
+            bottom: -50px;
+        }
+
+        .balance-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .balance-label {
+            font-size: 13px;
+            opacity: 0.78;
+        }
+
+        .balance-controls {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .eye-button,
+        .refresh-button {
+            width: 34px;
+            height: 34px;
+            border: 1px solid rgba(255,255,255,0.20);
+            border-radius: 10px;
+            background: rgba(255,255,255,0.10);
+            color: white;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .balance-amount {
+            font-size: 37px;
+            font-weight: bold;
+            margin: 11px 0 23px;
+            letter-spacing: -1px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .fund-button {
+            border: none;
+            background: white;
+            color: #087f55;
+            padding: 13px 20px;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            position: relative;
+            z-index: 2;
+        }
+
+        .fund-button:disabled,
+        .action:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 28px 0 15px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .section-subtitle {
+            color: #8ba099;
+            font-size: 12px;
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .action {
+            border: 1px solid #e5eee9;
+            background: white;
+            border-radius: 18px;
+            padding: 17px 8px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 7px 22px rgba(15, 50, 39, 0.055);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 11px 25px rgba(15, 50, 39, 0.08);
+        }
+
+        .action:active {
+            transform: scale(0.96);
+        }
+
+        .action-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 10px;
+            border-radius: 15px;
+            background: #effaf4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
+        }
+
+        .action-title {
+            font-size: 12px;
+            font-weight: bold;
+            color: #263a33;
+        }
+
+        .transactions {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 7px 22px rgba(15, 50, 39, 0.055);
+            overflow: hidden;
+            border: 1px solid #e5eee9;
+        }
+
+        .transaction-empty {
+            padding: 34px 20px;
+            text-align: center;
+            color: #8ba099;
+        }
+
+        .transaction-empty-icon {
+            width: 58px;
+            height: 58px;
+            margin: 0 auto 12px;
+            border-radius: 18px;
+            background: #eff6f3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 27px;
+        }
+
+        .transaction-empty strong {
+            display: block;
+            color: #40554d;
+            margin-bottom: 5px;
+        }
+
+        .view-all {
+            width: 100%;
+            border: none;
+            border-top: 1px solid #edf2ef;
+            background: white;
+            color: #087f55;
+            padding: 14px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .logout {
+            width: 100%;
+            margin-top: 25px;
+            padding: 15px;
+            border: 1px solid #f2d4d4;
+            border-radius: 14px;
+            background: #fff3f3;
+            color: #d33b3b;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255,255,255,0.97);
+            border-top: 1px solid #e2ebe7;
+            height: 70px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 20;
+            backdrop-filter: blur(15px);
+        }
+
+        .nav-button {
+            background: none;
+            border: none;
+            color: #94a59e;
+            font-size: 11px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            min-width: 70px;
+        }
+
+        .nav-button span {
+            font-size: 21px;
+        }
+
+        .nav-button.active {
+            color: #0f9f6e;
+            font-weight: bold;
+        }
+
+        @media (min-width: 700px) {
+            .bottom-nav {
+                position: static;
+                max-width: 1050px;
+                margin: 0 auto 20px;
+                border: 1px solid #e2ebe7;
+                border-radius: 18px;
+                box-shadow: 0 7px 22px rgba(15, 50, 39, 0.055);
+            }
+
+            .container {
+                padding-bottom: 25px;
+            }
+
+            .actions {
+                grid-template-columns: repeat(6, 1fr);
+            }
+        }
+
+        @media (max-width: 420px) {
+            .welcome {
+                padding: 32px 21px 27px;
+            }
+
+            .actions {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .action {
+                padding: 14px 5px;
+            }
+
+            .action-icon {
+                width: 43px;
+                height: 43px;
+            }
+
+            .balance-amount {
+                font-size: 31px;
+            }
+
+            .quick-amounts {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <!-- LOADING -->
     <div id="loading">
         Checking your Velqora account...
     </div>
 
-    <!-- PAYMENT LOADING -->
+    <!-- PAYMENT LOADING SCREEN -->
+
     <div id="paymentLoading">
         <div class="payment-loading-box">
+
             <div class="payment-spinner"></div>
 
-            <h3>Opening secure payment</h3>
+            <h3>
+                Opening secure payment
+            </h3>
 
             <p>
                 Please wait while we connect you to Flutterwave.
             </p>
+
         </div>
     </div>
 
     <!-- FUND WALLET MODAL -->
+
     <div
         id="fundModal"
         onclick="handleFundModalBackground(event)"
     >
+
         <div
             class="fund-modal-box"
             onclick="event.stopPropagation()"
         >
+
             <div class="fund-modal-header">
-                <h3>Fund Wallet</h3>
+
+                <h3>
+                    Fund Wallet
+                </h3>
 
                 <button
                     class="fund-close"
@@ -51,6 +820,7 @@
                 >
                     ×
                 </button>
+
             </div>
 
             <p class="fund-modal-description">
@@ -65,7 +835,10 @@
             </label>
 
             <div class="amount-input-wrap">
-                <span class="currency-symbol">₦</span>
+
+                <span class="currency-symbol">
+                    ₦
+                </span>
 
                 <input
                     id="fundAmountInput"
@@ -76,6 +849,7 @@
                     placeholder="100"
                     autocomplete="off"
                 >
+
             </div>
 
             <div class="quick-amount-title">
@@ -83,6 +857,7 @@
             </div>
 
             <div class="quick-amounts">
+
                 <button
                     class="quick-amount"
                     onclick="setFundAmount(100)"
@@ -110,6 +885,7 @@
                 >
                     ₦5,000
                 </button>
+
             </div>
 
             <div
@@ -131,27 +907,37 @@
             >
                 Cancel
             </button>
+
         </div>
+
     </div>
 
     <!-- WELCOME SCREEN -->
+
     <div
         id="welcomeScreen"
         class="welcome-page"
         style="display: none;"
     >
+
         <div class="welcome">
 
             <div class="logo">
+
                 <img
                     src="velqora.png.PNG"
                     alt="Velqora Logo"
                 >
+
             </div>
 
-            <h1>Velqora</h1>
+            <h1>
+                Velqora
+            </h1>
 
-            <h2>Welcome to Velqora</h2>
+            <h2>
+                Welcome to Velqora
+            </h2>
 
             <p>
                 A simple place to manage your wallet,
@@ -177,24 +963,27 @@
             </div>
 
         </div>
+
     </div>
 
     <!-- DASHBOARD -->
+
     <div
         id="dashboard"
         class="dashboard"
     >
 
-        <!-- TOP BAR -->
         <header class="topbar">
 
             <div class="brand">
 
                 <div class="brand-logo">
+
                     <img
                         src="velqora.png.PNG"
                         alt="Velqora Logo"
                     >
+
                 </div>
 
                 <div class="brand-name">
@@ -213,10 +1002,8 @@
 
         </header>
 
-        <!-- MAIN -->
         <main class="container">
 
-            <!-- GREETING -->
             <div class="greeting">
 
                 <p id="greetingText">
@@ -229,7 +1016,6 @@
 
             </div>
 
-            <!-- WALLET -->
             <div class="balance-card">
 
                 <div class="balance-top">
@@ -279,7 +1065,6 @@
 
             </div>
 
-            <!-- SERVICES -->
             <div class="section-heading">
 
                 <div class="section-title">
@@ -375,7 +1160,6 @@
 
             </div>
 
-            <!-- ACTIVITY -->
             <div class="section-heading">
 
                 <div class="section-title">
@@ -415,7 +1199,6 @@
 
             </div>
 
-            <!-- LOGOUT -->
             <button
                 class="logout"
                 onclick="logout()"
@@ -425,7 +1208,6 @@
 
         </main>
 
-        <!-- BOTTOM NAV -->
         <nav class="bottom-nav">
 
             <button
@@ -456,7 +1238,6 @@
 
     </div>
 
-    <!-- JAVASCRIPT -->
     <script>
 
         const supabaseClient =
@@ -469,7 +1250,6 @@
         let balanceHidden = false;
         let currentUser = null;
         let fundingInProgress = false;
-
 
         function updateGreeting() {
 
@@ -496,7 +1276,6 @@
                 name +
                 " 👋";
         }
-
 
         async function loadWallet(userId) {
 
@@ -550,7 +1329,6 @@
             displayBalance();
         }
 
-
         function displayBalance() {
 
             const balanceElement =
@@ -602,7 +1380,6 @@
             );
         }
 
-
         function toggleBalance() {
 
             balanceHidden =
@@ -610,7 +1387,6 @@
 
             displayBalance();
         }
-
 
         async function refreshWallet() {
 
@@ -633,7 +1409,6 @@
             button.disabled = false;
             button.textContent = "↻";
         }
-
 
         async function checkUser() {
 
@@ -695,8 +1470,7 @@
             }
         }
 
-
-        /* FUND WALLET */
+        /* FUND WALLET MODAL */
 
         function startFunding() {
 
@@ -739,7 +1513,6 @@
             }, 100);
         }
 
-
         function closeFundModal() {
 
             if (fundingInProgress) {
@@ -751,7 +1524,6 @@
                 .classList.remove("active");
         }
 
-
         function handleFundModalBackground(event) {
 
             if (
@@ -760,7 +1532,6 @@
                 closeFundModal();
             }
         }
-
 
         function setFundAmount(amount) {
 
@@ -782,7 +1553,6 @@
             input.focus();
         }
 
-
         function showFundError(message) {
 
             const errorBox =
@@ -797,7 +1567,6 @@
                 "show"
             );
         }
-
 
         async function continueFunding() {
 
@@ -868,13 +1637,17 @@
                 fundingInProgress = true;
 
                 continueButton.disabled = true;
-
                 continueButton.textContent =
                     "Connecting to Payment...";
 
                 closeFundModal();
 
                 setFundingLoading(true);
+
+                console.log(
+                    "Starting secure wallet funding:",
+                    amount
+                );
 
                 const {
                     data,
@@ -891,6 +1664,11 @@
                             }
                         );
 
+                console.log(
+                    "Payment response:",
+                    data
+                );
+
                 if (error) {
 
                     console.error(
@@ -903,7 +1681,6 @@
                     fundingInProgress = false;
 
                     continueButton.disabled = false;
-
                     continueButton.textContent =
                         "Continue to Payment";
 
@@ -920,12 +1697,16 @@
                     !data.success
                 ) {
 
+                    console.error(
+                        "Payment creation failed:",
+                        data
+                    );
+
                     setFundingLoading(false);
 
                     fundingInProgress = false;
 
                     continueButton.disabled = false;
-
                     continueButton.textContent =
                         "Continue to Payment";
 
@@ -939,12 +1720,16 @@
 
                 if (!data.payment_link) {
 
+                    console.error(
+                        "No payment link returned:",
+                        data
+                    );
+
                     setFundingLoading(false);
 
                     fundingInProgress = false;
 
                     continueButton.disabled = false;
-
                     continueButton.textContent =
                         "Continue to Payment";
 
@@ -954,6 +1739,13 @@
 
                     return;
                 }
+
+                /*
+                 * Flutterwave payment link received.
+                 *
+                 * The browser is redirected immediately
+                 * to the secure Flutterwave checkout.
+                 */
 
                 window.location.replace(
                     data.payment_link
@@ -971,7 +1763,6 @@
                 fundingInProgress = false;
 
                 continueButton.disabled = false;
-
                 continueButton.textContent =
                     "Continue to Payment";
 
@@ -980,7 +1771,6 @@
                 );
             }
         }
-
 
         function setFundingLoading(isLoading) {
 
@@ -1027,36 +1817,25 @@
             }
         }
 
-
         function buyData() {
-            window.location.href =
-                "data.html";
+            window.location.href = "data.html";
         }
-
 
         function buyAirtime() {
-            window.location.href =
-                "airtime.html";
+            window.location.href = "airtime.html";
         }
-
 
         function makeTransfer() {
-            window.location.href =
-                "transfer.html";
+            window.location.href = "transfer.html";
         }
-
 
         function viewTransactions() {
-            window.location.href =
-                "transactions.html";
+            window.location.href = "transactions.html";
         }
-
 
         function goToProfile() {
-            window.location.href =
-                "profile.html";
+            window.location.href = "profile.html";
         }
-
 
         function goHome() {
 
@@ -1065,7 +1844,6 @@
                 behavior: "smooth"
             });
         }
-
 
         async function logout() {
 
@@ -1076,7 +1854,6 @@
             window.location.href =
                 "index.html";
         }
-
 
         document.addEventListener(
             "keydown",
@@ -1094,7 +1871,6 @@
 
             }
         );
-
 
         checkUser();
 
