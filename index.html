@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Velqora</title>
 
@@ -10,6 +15,7 @@
     <script src="config.js"></script>
 
     <style>
+
         * {
             box-sizing: border-box;
         }
@@ -29,6 +35,10 @@
             font-family: inherit;
             -webkit-tap-highlight-color: transparent;
         }
+
+        /* =========================
+           LOADING
+        ========================== */
 
         #loading {
             min-height: 100vh;
@@ -51,6 +61,7 @@
             align-items: center;
             justify-content: center;
             padding: 24px;
+
             background:
                 radial-gradient(
                     circle at 10% 5%,
@@ -128,9 +139,17 @@
         }
 
         .login-button {
-            background: linear-gradient(135deg, #25d366, #0f9f6e);
+            background: linear-gradient(
+                135deg,
+                #25d366,
+                #0f9f6e
+            );
+
             color: white;
-            box-shadow: 0 10px 24px rgba(37, 211, 102, 0.20);
+
+            box-shadow:
+                0 10px 24px
+                rgba(37, 211, 102, 0.20);
         }
 
         .signup-button {
@@ -156,6 +175,10 @@
         .dashboard.active {
             display: block;
         }
+
+        /* =========================
+           TOP BAR
+        ========================== */
 
         .topbar {
             background: rgba(255, 255, 255, 0.96);
@@ -185,7 +208,10 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            box-shadow: 0 7px 18px rgba(37, 211, 102, 0.15);
+            box-shadow:
+                0 7px 18px
+                rgba(37, 211, 102, 0.15);
+
             border: 1px solid #dcebe4;
         }
 
@@ -213,12 +239,20 @@
             cursor: pointer;
         }
 
+        /* =========================
+           MAIN CONTAINER
+        ========================== */
+
         .container {
             width: 100%;
             max-width: 1050px;
             margin: 0 auto;
             padding: 25px 18px 100px;
         }
+
+        /* =========================
+           GREETING
+        ========================== */
 
         .greeting {
             margin-bottom: 20px;
@@ -252,11 +286,19 @@
                     rgba(0,0,0,0.08),
                     transparent 35%
                 ),
-                linear-gradient(135deg, #0b7654, #064d3c);
+                linear-gradient(
+                    135deg,
+                    #0b7654,
+                    #064d3c
+                );
+
             color: white;
             border-radius: 27px;
             padding: 25px;
-            box-shadow: 0 20px 45px rgba(6, 77, 60, 0.23);
+            box-shadow:
+                0 20px 45px
+                rgba(6, 77, 60, 0.23);
+
             margin-bottom: 28px;
             position: relative;
             overflow: hidden;
@@ -297,7 +339,14 @@
             opacity: 0.78;
         }
 
-        .eye-button {
+        .balance-controls {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .eye-button,
+        .refresh-button {
             width: 34px;
             height: 34px;
             border: 1px solid rgba(255,255,255,0.20);
@@ -330,7 +379,7 @@
         }
 
         /* =========================
-           QUICK SERVICES
+           SECTION HEADINGS
         ========================== */
 
         .section-heading {
@@ -351,6 +400,10 @@
             font-size: 12px;
         }
 
+        /* =========================
+           QUICK SERVICES
+        ========================== */
+
         .actions {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -364,13 +417,21 @@
             padding: 17px 8px;
             text-align: center;
             cursor: pointer;
-            box-shadow: 0 7px 22px rgba(15, 50, 39, 0.055);
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            box-shadow:
+                0 7px 22px
+                rgba(15, 50, 39, 0.055);
+
+            transition:
+                transform 0.15s ease,
+                box-shadow 0.15s ease;
         }
 
         .action:hover {
             transform: translateY(-2px);
-            box-shadow: 0 11px 25px rgba(15, 50, 39, 0.08);
+
+            box-shadow:
+                0 11px 25px
+                rgba(15, 50, 39, 0.08);
         }
 
         .action:active {
@@ -402,7 +463,11 @@
         .transactions {
             background: white;
             border-radius: 20px;
-            box-shadow: 0 7px 22px rgba(15, 50, 39, 0.055);
+
+            box-shadow:
+                0 7px 22px
+                rgba(15, 50, 39, 0.055);
+
             overflow: hidden;
             border: 1px solid #e5eee9;
         }
@@ -513,7 +578,10 @@
                 margin: 0 auto 20px;
                 border: 1px solid #e2ebe7;
                 border-radius: 18px;
-                box-shadow: 0 7px 22px rgba(15, 50, 39, 0.055);
+
+                box-shadow:
+                    0 7px 22px
+                    rgba(15, 50, 39, 0.055);
             }
 
             .container {
@@ -548,14 +616,21 @@
                 font-size: 31px;
             }
         }
+
     </style>
+
 </head>
 
 <body>
 
+    <!-- =========================
+         LOADING
+    ========================== -->
+
     <div id="loading">
         Checking your Velqora account...
     </div>
+
 
     <!-- =========================
          WELCOME SCREEN
@@ -570,15 +645,21 @@
         <div class="welcome">
 
             <div class="logo">
+
                 <img
                     src="velqora.png.PNG"
                     alt="Velqora Logo"
                 >
+
             </div>
 
-            <h1>Velqora</h1>
+            <h1>
+                Velqora
+            </h1>
 
-            <h2>Welcome to Velqora</h2>
+            <h2>
+                Welcome to Velqora
+            </h2>
 
             <p>
                 A simple place to manage your wallet,
@@ -607,21 +688,29 @@
 
     </div>
 
+
     <!-- =========================
          LOGGED-IN DASHBOARD
     ========================== -->
 
-    <div id="dashboard" class="dashboard">
+    <div
+        id="dashboard"
+        class="dashboard"
+    >
+
+        <!-- TOP BAR -->
 
         <header class="topbar">
 
             <div class="brand">
 
                 <div class="brand-logo">
+
                     <img
                         src="velqora.png.PNG"
                         alt="Velqora Logo"
                     >
+
                 </div>
 
                 <div class="brand-name">
@@ -640,15 +729,25 @@
 
         </header>
 
+
+        <!-- MAIN -->
+
         <main class="container">
+
+            <!-- GREETING -->
 
             <div class="greeting">
 
-                <p id="greetingText">Welcome back 👋</p>
+                <p id="greetingText">
+                    Welcome back 👋
+                </p>
 
-                <h2>Your finances, simplified.</h2>
+                <h2>
+                    Your finances, simplified.
+                </h2>
 
             </div>
+
 
             <!-- WALLET -->
 
@@ -660,16 +759,30 @@
                         Available Wallet Balance
                     </div>
 
-                    <button
-                        class="eye-button"
-                        id="balanceEye"
-                        onclick="toggleBalance()"
-                        aria-label="Hide balance"
-                    >
-                        👁
-                    </button>
+                    <div class="balance-controls">
+
+                        <button
+                            class="refresh-button"
+                            id="refreshButton"
+                            onclick="refreshWallet()"
+                            aria-label="Refresh balance"
+                        >
+                            ↻
+                        </button>
+
+                        <button
+                            class="eye-button"
+                            id="balanceEye"
+                            onclick="toggleBalance()"
+                            aria-label="Hide balance"
+                        >
+                            👁
+                        </button>
+
+                    </div>
 
                 </div>
+
 
                 <div
                     class="balance-amount"
@@ -677,6 +790,7 @@
                 >
                     Checking...
                 </div>
+
 
                 <button
                     class="fund-button"
@@ -686,6 +800,7 @@
                 </button>
 
             </div>
+
 
             <!-- SERVICES -->
 
@@ -701,12 +816,14 @@
 
             </div>
 
+
             <div class="actions">
 
                 <button
                     class="action"
                     onclick="startFunding()"
                 >
+
                     <div class="action-icon">
                         💰
                     </div>
@@ -714,12 +831,15 @@
                     <div class="action-title">
                         Fund Wallet
                     </div>
+
                 </button>
+
 
                 <button
                     class="action"
                     onclick="buyData()"
                 >
+
                     <div class="action-icon">
                         📱
                     </div>
@@ -727,12 +847,15 @@
                     <div class="action-title">
                         Buy Data
                     </div>
+
                 </button>
+
 
                 <button
                     class="action"
                     onclick="buyAirtime()"
                 >
+
                     <div class="action-icon">
                         ☎️
                     </div>
@@ -740,12 +863,15 @@
                     <div class="action-title">
                         Airtime
                     </div>
+
                 </button>
+
 
                 <button
                     class="action"
                     onclick="makeTransfer()"
                 >
+
                     <div class="action-icon">
                         💸
                     </div>
@@ -753,12 +879,15 @@
                     <div class="action-title">
                         Transfer
                     </div>
+
                 </button>
+
 
                 <button
                     class="action"
                     onclick="viewTransactions()"
                 >
+
                     <div class="action-icon">
                         📋
                     </div>
@@ -766,12 +895,15 @@
                     <div class="action-title">
                         Transactions
                     </div>
+
                 </button>
+
 
                 <button
                     class="action"
                     onclick="goToProfile()"
                 >
+
                     <div class="action-icon">
                         👤
                     </div>
@@ -779,9 +911,11 @@
                     <div class="action-title">
                         Profile
                     </div>
+
                 </button>
 
             </div>
+
 
             <!-- RECENT ACTIVITY -->
 
@@ -796,6 +930,7 @@
                 </div>
 
             </div>
+
 
             <div class="transactions">
 
@@ -815,6 +950,7 @@
 
                 </div>
 
+
                 <button
                     class="view-all"
                     onclick="viewTransactions()"
@@ -823,6 +959,9 @@
                 </button>
 
             </div>
+
+
+            <!-- LOGOUT -->
 
             <button
                 class="logout"
@@ -833,6 +972,7 @@
 
         </main>
 
+
         <!-- BOTTOM NAV -->
 
         <nav class="bottom-nav">
@@ -841,29 +981,51 @@
                 class="nav-button active"
                 onclick="goHome()"
             >
-                <span>⌂</span>
+
+                <span>
+                    ⌂
+                </span>
+
                 Home
+
             </button>
+
 
             <button
                 class="nav-button"
                 onclick="viewTransactions()"
             >
-                <span>▣</span>
+
+                <span>
+                    ▣
+                </span>
+
                 Activity
+
             </button>
+
 
             <button
                 class="nav-button"
                 onclick="goToProfile()"
             >
-                <span>♙</span>
+
+                <span>
+                    ♙
+                </span>
+
                 Profile
+
             </button>
 
         </nav>
 
     </div>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
 
     <script>
 
@@ -873,56 +1035,86 @@
                 SUPABASE_KEY
             );
 
+
         let actualBalance = null;
+
         let balanceHidden = false;
 
+        let currentUser = null;
+
+
         /* =========================
-           PERSONAL GREETING
+           GREETING
         ========================== */
 
         function updateGreeting() {
 
-            const hour = new Date().getHours();
+            const hour =
+                new Date().getHours();
 
             let greeting;
 
             if (hour < 12) {
 
-                greeting = "Good morning";
+                greeting =
+                    "Good morning";
 
             } else if (hour < 18) {
 
-                greeting = "Good afternoon";
+                greeting =
+                    "Good afternoon";
 
             } else {
 
-                greeting = "Good evening";
-
+                greeting =
+                    "Good evening";
             }
+
+
+            /*
+                David is being displayed for this account.
+            */
+
+            const name =
+                "David";
+
 
             document.getElementById(
                 "greetingText"
             ).textContent =
-                greeting + ", Idris 👋";
+                greeting +
+                ", " +
+                name +
+                " 👋";
         }
 
-        updateGreeting();
+
+        /* =========================
+           LOAD WALLET
+        ========================== */
 
         async function loadWallet(userId) {
-
-            const {
-                data,
-                error
-            } = await supabaseClient
-                .from("wallets")
-                .select("balance")
-                .eq("user_id", userId)
-                .maybeSingle();
 
             const balanceElement =
                 document.getElementById(
                     "walletBalance"
                 );
+
+
+            balanceElement.textContent =
+                "Checking...";
+
+
+            const {
+                data,
+                error
+            } =
+                await supabaseClient
+                    .from("wallets")
+                    .select("balance")
+                    .eq("user_id", userId)
+                    .maybeSingle();
+
 
             if (error) {
 
@@ -931,11 +1123,13 @@
                     error
                 );
 
+
                 balanceElement.textContent =
                     "Unable to load";
 
                 return;
             }
+
 
             if (!data) {
 
@@ -945,11 +1139,18 @@
                 return;
             }
 
+
             actualBalance =
                 Number(data.balance);
 
+
             displayBalance();
         }
+
+
+        /* =========================
+           DISPLAY BALANCE
+        ========================== */
 
         function displayBalance() {
 
@@ -958,21 +1159,26 @@
                     "walletBalance"
                 );
 
+
             const eye =
                 document.getElementById(
                     "balanceEye"
                 );
 
+
             if (actualBalance === null) {
+
                 return;
             }
+
 
             if (balanceHidden) {
 
                 balanceElement.textContent =
                     "₦••••••";
 
-                eye.textContent = "🙈";
+                eye.textContent =
+                    "🙈";
 
                 eye.setAttribute(
                     "aria-label",
@@ -981,6 +1187,7 @@
 
                 return;
             }
+
 
             balanceElement.textContent =
                 "₦" +
@@ -992,13 +1199,21 @@
                     }
                 );
 
-            eye.textContent = "👁";
+
+            eye.textContent =
+                "👁";
+
 
             eye.setAttribute(
                 "aria-label",
                 "Hide balance"
             );
         }
+
+
+        /* =========================
+           TOGGLE BALANCE
+        ========================== */
 
         function toggleBalance() {
 
@@ -1008,32 +1223,136 @@
             displayBalance();
         }
 
+
+        /* =========================
+           REFRESH WALLET
+        ========================== */
+
+        async function refreshWallet() {
+
+            if (!currentUser) {
+
+                return;
+            }
+
+
+            const button =
+                document.getElementById(
+                    "refreshButton"
+                );
+
+
+            button.disabled =
+                true;
+
+            button.textContent =
+                "⟳";
+
+
+            await loadWallet(
+                currentUser.id
+            );
+
+
+            button.disabled =
+                false;
+
+            button.textContent =
+                "↻";
+        }
+
+
+        /* =========================
+           CHECK LOGGED-IN USER
+        ========================== */
+
         async function checkUser() {
 
-            const {
-                data: { user }
-            } =
-                await supabaseClient.auth.getUser();
+            try {
 
-            document.getElementById(
-                "loading"
-            ).style.display = "none";
+                const {
+                    data,
+                    error
+                } =
+                    await supabaseClient
+                        .auth
+                        .getUser();
 
-            if (user) {
+
+                document.getElementById(
+                    "loading"
+                ).style.display =
+                    "none";
+
+
+                if (error || !data.user) {
+
+                    document.getElementById(
+                        "welcomeScreen"
+                    ).style.display =
+                        "flex";
+
+                    return;
+                }
+
+
+                currentUser =
+                    data.user;
+
+
+                /*
+                    Show dashboard
+                */
 
                 document.getElementById(
                     "dashboard"
-                ).classList.add("active");
+                ).classList.add(
+                    "active"
+                );
 
-                await loadWallet(user.id);
 
-            } else {
+                /*
+                    Show David greeting
+                */
+
+                updateGreeting();
+
+
+                /*
+                    Load the wallet belonging
+                    to the logged-in user
+                */
+
+                await loadWallet(
+                    currentUser.id
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "Account check error:",
+                    error
+                );
+
+
+                document.getElementById(
+                    "loading"
+                ).style.display =
+                    "none";
+
 
                 document.getElementById(
                     "welcomeScreen"
-                ).style.display = "flex";
+                ).style.display =
+                    "flex";
             }
         }
+
+
+        /* =========================
+           FUND WALLET
+        ========================== */
 
         async function startFunding() {
 
@@ -1042,14 +1361,21 @@
                     "Enter the amount you want to fund your wallet in Naira:"
                 );
 
+
             if (amountInput === null) {
+
                 return;
             }
 
+
             const amount =
                 Number(
-                    amountInput.replace(/,/g, "")
+                    amountInput.replace(
+                        /,/g,
+                        ""
+                    )
                 );
+
 
             if (
                 !Number.isFinite(amount) ||
@@ -1063,6 +1389,7 @@
                 return;
             }
 
+
             if (amount < 100) {
 
                 alert(
@@ -1072,11 +1399,13 @@
                 return;
             }
 
+
             try {
 
                 alert(
                     "Creating your secure payment..."
                 );
+
 
                 const {
                     data,
@@ -1093,12 +1422,14 @@
                             }
                         );
 
+
                 if (error) {
 
                     console.error(
                         "Payment function error:",
                         error
                     );
+
 
                     alert(
                         "Unable to start payment: " +
@@ -1107,6 +1438,7 @@
 
                     return;
                 }
+
 
                 if (
                     !data ||
@@ -1121,6 +1453,7 @@
                     return;
                 }
 
+
                 if (!data.payment_link) {
 
                     alert(
@@ -1130,8 +1463,10 @@
                     return;
                 }
 
+
                 window.location.href =
                     data.payment_link;
+
 
             } catch (error) {
 
@@ -1140,15 +1475,28 @@
                     error
                 );
 
+
                 alert(
                     "Something went wrong while starting the payment."
                 );
             }
         }
 
+
+        /* =========================
+           DATA
+        ========================== */
+
         function buyData() {
-            window.location.href = "data.html";
+
+            window.location.href =
+                "data.html";
         }
+
+
+        /* =========================
+           AIRTIME
+        ========================== */
 
         function buyAirtime() {
 
@@ -1157,6 +1505,11 @@
             );
         }
 
+
+        /* =========================
+           TRANSFER
+        ========================== */
+
         function makeTransfer() {
 
             alert(
@@ -1164,17 +1517,32 @@
             );
         }
 
+
+        /* =========================
+           TRANSACTIONS
+        ========================== */
+
         function viewTransactions() {
 
             window.location.href =
                 "transactions.html";
         }
 
+
+        /* =========================
+           PROFILE
+        ========================== */
+
         function goToProfile() {
 
             window.location.href =
                 "profile.html";
         }
+
+
+        /* =========================
+           HOME
+        ========================== */
 
         function goHome() {
 
@@ -1184,13 +1552,26 @@
             });
         }
 
+
+        /* =========================
+           LOGOUT
+        ========================== */
+
         async function logout() {
 
-            await supabaseClient.auth.signOut();
+            await supabaseClient
+                .auth
+                .signOut();
+
 
             window.location.href =
                 "index.html";
         }
+
+
+        /* =========================
+           START APP
+        ========================== */
 
         checkUser();
 
