@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Velqora - Airtime</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7f5;
+            color: #111;
+            min-height: 100vh;
+        }
+
+        .topbar {
+            background: #25d366;
+            color: white;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .back-btn {
+            border: none;
+            background: rgba(255, 255, 255, 0.18);
+            color: white;
+            width: 42px;
+            height: 42px;
+            border-radius: 13px;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .brand-logo {
+            width: 42px;
+            height: 42px;
+            border-radius: 13px;
+            overflow: hidden;
+            background: white;
+            flex-shrink: 0;
+        }
+
+        .brand-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .brand {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            opacity: 0.9;
+            margin-top: 3px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 520px;
+            margin: 0 auto;
+            padding: 24px 18px 40px;
+        }
+
+        .balance-card {
+            background: #25d366;
+            color: white;
+            border-radius: 22px;
+            padding: 22px;
+            margin-bottom: 20px;
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.2);
+        }
+
+        .balance-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .balance {
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: 7px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 22px;
+            padding: 22px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+        }
+
+        h1 {
+            margin: 0 0 8px;
+            font-size: 24px;
+        }
+
+        .description {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .field {
+            margin-bottom: 18px;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 13px;
+            font-size: 16px;
+            outline: none;
+            background: white;
+        }
+
+        select:focus,
+        input:focus {
+            border-color: #25d366;
+        }
+
+        .network-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .network-btn {
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 12px;
+            padding: 12px 5px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .network-btn.active {
+            border-color: #25d366;
+            background: #eafff1;
+            color: #16833b;
+            font-weight: bold;
+        }
+
+        .amount-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 9px;
+            margin-top: 8px;
+        }
+
+        .amount-btn {
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 12px;
+            padding: 12px 5px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .amount-btn.active {
+            border-color: #25d366;
+            background: #eafff1;
+            color: #16833b;
+            font-weight: bold;
+        }
+
+        .info {
+            background: #f4f7f5;
+            border-radius: 14px;
+            padding: 14px;
+            margin: 20px 0;
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .buy-btn {
+            width: 100%;
+            border: none;
+            background: #25d366;
+            color: white;
+            padding: 16px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .buy-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        #message {
+            margin-top: 16px;
+            text-align: center;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .success {
+            color: #16833b;
+        }
+
+        .error {
+            color: #c62828;
+        }
+
+        .loading {
+            color: #666;
+        }
+
+        @media (max-width: 380px) {
+            .network-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .amount-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="topbar">
+
+        <button
+            class="back-btn"
+            onclick="goBack()"
+        >
+            ←
+        </button>
+
+        <div class="brand-logo">
+            <img
+                src="velqora.png.PNG"
+                alt="Velqora Logo"
+            >
+        </div>
+
+        <div>
+            <div class="brand">Velqora</div>
+            <div class="subtitle">Buy Airtime</div>
+        </div>
+
+    </div>
+
+    <main class="container">
+
+        <div class="balance-card">
+
+            <div class="balance-label">
+                Available Wallet Balance
+            </div>
+
+            <div
+                class="balance"
+                id="walletBalance"
+            >
+                Loading...
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <h1>Buy Airtime</h1>
+
+            <div class="description">
+                Buy airtime directly from your Velqora wallet.
+            </div>
+
+            <div class="field">
+
+                <label>
+                    Network
+                </label>
+
+                <div class="network-grid">
+
+                    <button
+                        type="button"
+                        class="network-btn active"
+                        data-network="mtn"
+                        onclick="selectNetwork(this)"
+                    >
+                        MTN
+                    </button>
+
+                    <button
+                        type="button"
+                        class="network-btn"
+                        data-network="airtel"
+                        onclick="selectNetwork(this)"
+                    >
+                        Airtel
+                    </button>
+
+                    <button
+                        type="button"
+                        class="network-btn"
+                        data-network="glo"
+                        onclick="selectNetwork(this)"
+                    >
+                        Glo
+                    </button>
+
+                    <button
+                        type="button"
+                        class="network-btn"
+                        data-network="9mobile"
+                        onclick="selectNetwork(this)"
+                    >
+                        9mobile
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="field">
+
+                <label for="phone">
+                    Phone Number
+                </label>
+
+                <input
+                    id="phone"
+                    type="tel"
+                    inputmode="numeric"
+                    placeholder="08012345678"
+                    maxlength="11"
+                >
+
+            </div>
+
+            <div class="field">
+
+                <label>
+                    Airtime Amount
+                </label>
+
+                <div class="amount-grid">
+
+                    <button
+                        type="button"
+                        class="amount-btn"
+                        onclick="selectAmount(100, this)"
+                    >
+                        ₦100
+                    </button>
+
+                    <button
+                        type="button"
+                        class="amount-btn"
+                        onclick="selectAmount(200, this)"
+                    >
+                        ₦200
+                    </button>
+
+                    <button
+                        type="button"
+                        class="amount-btn"
+                        onclick="selectAmount(500, this)"
+                    >
+                        ₦500
+                    </button>
+
+                    <button
+                        type="button"
+                        class="amount-btn"
+                        onclick="selectAmount(1000, this)"
+                    >
+                        ₦1,000
+                    </button>
+
+                    <button
+                        type="button"
+                        class="amount-btn"
+                        onclick="selectAmount(2000, this)"
+                    >
+                        ₦2,000
+                    </button>
+
+                    <button
+                        type="button"
+                        class="amount-btn"
+                        onclick="selectAmount(5000, this)"
+                    >
+                        ₦5,000
+                    </button>
+
+                </div>
+
+                <input
+                    id="amount"
+                    type="number"
+                    min="50"
+                    placeholder="Or enter amount"
+                    style="margin-top: 10px;"
+                >
+
+            </div>
+
+            <div class="info">
+                Your wallet will only be charged when the airtime
+                purchase is successfully processed. VTpass Live API
+                access is required before a real airtime purchase can
+                be completed.
+            </div>
+
+            <button
+                class="buy-btn"
+                id="buyButton"
+                onclick="buyAirtime()"
+            >
+                Buy Airtime
+            </button>
+
+            <div id="message"></div>
+
+        </div>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="config.js"></script>
+
+    <script>
+        const supabaseClient =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_KEY
+            );
+
+        let selectedNetwork = "mtn";
+        let selectedAmount = null;
+
+        function selectNetwork(button) {
+
+            document
+                .querySelectorAll(".network-btn")
+                .forEach(btn => {
+                    btn.classList.remove("active");
+                });
+
+            button.classList.add("active");
+
+            selectedNetwork =
+                button.dataset.network;
+        }
+
+        function selectAmount(amount, button) {
+
+            document
+                .querySelectorAll(".amount-btn")
+                .forEach(btn => {
+                    btn.classList.remove("active");
+                });
+
+            button.classList.add("active");
+
+            selectedAmount = amount;
+
+            document.getElementById(
+                "amount"
+            ).value = amount;
+        }
+
+        async function loadWallet() {
+
+            const {
+                data: {
+                    session
+                },
+                error: sessionError
+            } =
+                await supabaseClient.auth.getSession();
+
+            if (
+                sessionError ||
+                !session
+            ) {
+                window.location.href =
+                    "login.html";
+                return;
+            }
+
+            const {
+                data,
+                error
+            } =
+                await supabaseClient
+                    .from("wallets")
+                    .select("balance")
+                    .eq(
+                        "user_id",
+                        session.user.id
+                    )
+                    .maybeSingle();
+
+            if (error) {
+
+                document.getElementById(
+                    "walletBalance"
+                ).textContent =
+                    "Unable to load";
+
+                return;
+            }
+
+            const balance =
+                Number(data?.balance || 0);
+
+            document.getElementById(
+                "walletBalance"
+            ).textContent =
+                "₦" +
+                balance.toLocaleString(
+                    "en-NG",
+                    {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    }
+                );
+        }
+
+        async function buyAirtime() {
+
+            const message =
+                document.getElementById(
+                    "message"
+                );
+
+            const button =
+                document.getElementById(
+                    "buyButton"
+                );
+
+            const phone =
+                document.getElementById(
+                    "phone"
+                ).value.trim();
+
+            const amount =
+                Number(
+                    document.getElementById(
+                        "amount"
+                    ).value
+                );
+
+            message.className = "";
+            message.textContent = "";
+
+            if (!/^0[0-9]{10}$/.test(phone)) {
+
+                message.className =
+                    "error";
+
+                message.textContent =
+                    "Enter a valid 11-digit Nigerian phone number.";
+
+                return;
+            }
+
+            if (
+                !Number.isFinite(amount) ||
+                amount < 50
+            ) {
+
+                message.className =
+                    "error";
+
+                message.textContent =
+                    "Enter an airtime amount of at least ₦50.";
+
+                return;
+            }
+
+            const {
+                data: {
+                    session
+                },
+                error: sessionError
+            } =
+                await supabaseClient.auth.getSession();
+
+            if (
+                sessionError ||
+                !session
+            ) {
+
+                window.location.href =
+                    "login.html";
+
+                return;
+            }
+
+            button.disabled = true;
+
+            button.textContent =
+                "Checking...";
+
+            message.className =
+                "loading";
+
+            message.textContent =
+                "Preparing your airtime purchase...";
+
+            /*
+             * IMPORTANT:
+             * This page does NOT fake a successful airtime purchase.
+             *
+             * Once VTpass Live API access is enabled,
+             * this button will call a secure Supabase
+             * Edge Function that:
+             *
+             * 1. Checks the logged-in user.
+             * 2. Checks the wallet balance.
+             * 3. Creates an airtime transaction.
+             * 4. Calls VTpass securely from the server.
+             * 5. Confirms the provider response.
+             * 6. Deducts the wallet only after success.
+             * 7. Records the transaction.
+             */
+
+            setTimeout(() => {
+
+                button.disabled = false;
+
+                button.textContent =
+                    "Buy Airtime";
+
+                message.className =
+                    "error";
+
+                message.textContent =
+                    "Airtime service is being connected. Real airtime purchases will be available after VTpass Live API access is enabled.";
+
+            }, 900);
+        }
+
+        function goBack() {
+
+            if (
+                document.referrer &&
+                document.referrer.includes(
+                    "tct8930-web.github.io"
+                )
+            ) {
+                history.back();
+            } else {
+                window.location.href =
+                    "index.html";
+            }
+        }
+
+        loadWallet();
+    </script>
+
+</body>
+</html>
