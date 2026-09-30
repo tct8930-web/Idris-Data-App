@@ -234,6 +234,13 @@
             color: #666;
         }
 
+        .version {
+            text-align: center;
+            color: #999;
+            font-size: 11px;
+            margin-top: 18px;
+        }
+
         @media (max-width: 380px) {
             .network-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -444,6 +451,10 @@
 
             <div id="message"></div>
 
+            <div class="version">
+                Velqora Airtime • Connected version
+            </div>
+
         </div>
 
     </main>
@@ -621,13 +632,9 @@
             }
 
             button.disabled = true;
+            button.textContent = "Processing...";
 
-            button.textContent =
-                "Processing...";
-
-            message.className =
-                "loading";
-
+            message.className = "loading";
             message.textContent =
                 "Processing your airtime purchase...";
 
@@ -647,6 +654,11 @@
                             }
                         }
                     );
+
+                console.log(
+                    "Airtime response:",
+                    data
+                );
 
                 if (error) {
 
@@ -681,7 +693,7 @@
                     } catch (parseError) {
 
                         console.error(
-                            "Could not read error response:",
+                            "Error reading response:",
                             parseError
                         );
                     }
@@ -760,9 +772,7 @@
             }
 
             button.disabled = false;
-
-            button.textContent =
-                "Buy Airtime";
+            button.textContent = "Buy Airtime";
 
             await loadWallet();
         }
