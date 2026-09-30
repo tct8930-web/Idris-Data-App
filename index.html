@@ -1135,13 +1135,11 @@
                 );
 
                 /*
-                 * IMPORTANT:
-                 * The actual Supabase Edge Function name
-                 * is create-payment.
+                 * The Supabase Edge Function endpoint
+                 * previously shown for this function uses
+                 * the slug "rapid-api".
                  *
-                 * JWT verification is disabled in Supabase
-                 * because the function performs its own
-                 * authenticated-user check.
+                 * We are testing that endpoint here.
                  */
 
                 const {
@@ -1151,7 +1149,7 @@
                     await supabaseClient
                         .functions
                         .invoke(
-                            "create-payment",
+                            "rapid-api",
                             {
                                 body: {
                                     amount: amount
