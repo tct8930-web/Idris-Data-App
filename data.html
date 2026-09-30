@@ -563,27 +563,20 @@
         async function buyData() {
 
             const message =
-                document.getElementById(
-                    "message"
-                );
+                document.getElementById("message");
 
             const button =
-                document.getElementById(
-                    "buyButton"
-                );
+                document.getElementById("buyButton");
 
             const phone =
-                document.getElementById(
-                    "phone"
-                ).value.trim();
+                document.getElementById("phone").value.trim();
 
             message.className = "";
             message.textContent = "";
 
             if (!/^0[0-9]{10}$/.test(phone)) {
 
-                message.className =
-                    "error";
+                message.className = "error";
 
                 message.textContent =
                     "Enter a valid 11-digit Nigerian phone number.";
@@ -591,10 +584,9 @@
                 return;
             }
 
-            if (!selectedPlan) {
+            if (!selectedPlan || !selectedPrice) {
 
-                message.className =
-                    "error";
+                message.className = "error";
 
                 message.textContent =
                     "Please select a data plan.";
@@ -610,42 +602,67 @@
             } =
                 await supabaseClient.auth.getSession();
 
-            if (
-                sessionError ||
-                !session
-            ) {
+            if (sessionError || !session) {
 
-                window.location.href =
-                    "login.html";
+                window.location.href = "login.html";
 
                 return;
             }
 
             button.disabled = true;
+            button.textContent = "Preparing...";
 
-            button.textContent =
-                "Checking...";
-
-            message.className =
-                "loading";
-
+            message.className = "loading";
             message.textContent =
-                "Preparing your data purchase...";
+                "Preparing your data transaction...";
 
-            setTimeout(() => {
+            const txRef =
+                "DATA-" +
+                Date.now() +
+                "-" +
+                crypto.randomUUID();
+
+            const {
+                data,
+                error
+            } =
+                await supabaseClient.rpc(
+                    "create_pending_data_transaction",
+                    {
+                        p_phone: phone,
+                        p_network: selectedNetwork.toUpperCase(),
+                        p_plan_name: selectedPlan,
+                        p_amount: selectedPrice,
+                        p_tx_ref: txRef
+                    }
+                );
+
+            if (error) {
+
+                console.error(error);
 
                 button.disabled = false;
+                button.textContent = "Buy Data";
 
-                button.textContent =
-                    "Buy Data";
-
-                message.className =
-                    "error";
-
+                message.className = "error";
                 message.textContent =
-                    "Data service is being connected. Real data purchases will be available after VTpass Live API access is enabled.";
+                    error.message ||
+                    "Unable to prepare the data transaction.";
 
-            }, 900);
+                return;
+            }
+
+            console.log(
+                "Pending data transaction created:",
+                data
+            );
+
+            button.disabled = false;
+            button.textContent = "Buy Data";
+
+            message.className = "loading";
+            message.textContent =
+                "Transaction prepared successfully. Real data purchase will be connected when VTpass Live API access is enabled.";
         }
 
         function goBack() {
