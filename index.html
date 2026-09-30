@@ -25,7 +25,8 @@
             color: #10201b;
         }
 
-        button {
+        button,
+        input {
             font-family: inherit;
             -webkit-tap-highlight-color: transparent;
         }
@@ -42,6 +43,7 @@
         }
 
         /* PAYMENT LOADING SCREEN */
+
         #paymentLoading {
             display: none;
             position: fixed;
@@ -90,6 +92,205 @@
             color: #668078;
             font-size: 14px;
             line-height: 1.5;
+        }
+
+        /* FUND WALLET MODAL */
+
+        #fundModal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 5000;
+            background: rgba(8, 35, 27, 0.48);
+            align-items: flex-end;
+            justify-content: center;
+            padding: 18px;
+        }
+
+        #fundModal.active {
+            display: flex;
+        }
+
+        .fund-modal-box {
+            width: 100%;
+            max-width: 460px;
+            background: white;
+            border-radius: 28px;
+            padding: 25px 22px 22px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.20);
+            animation: modalUp 0.22s ease-out;
+        }
+
+        @keyframes modalUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fund-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .fund-modal-header h3 {
+            margin: 0;
+            font-size: 22px;
+            color: #10201b;
+        }
+
+        .fund-close {
+            width: 38px;
+            height: 38px;
+            border: none;
+            border-radius: 50%;
+            background: #f1f5f3;
+            color: #536861;
+            font-size: 23px;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .fund-modal-description {
+            margin: 0 0 20px;
+            color: #72847e;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .amount-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #40554d;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .amount-input-wrap {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 58px;
+            border: 2px solid #dce9e3;
+            border-radius: 16px;
+            background: #fbfdfc;
+            padding: 0 16px;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .amount-input-wrap:focus-within {
+            border-color: #0f9f6e;
+            box-shadow: 0 0 0 4px rgba(15, 159, 110, 0.09);
+        }
+
+        .currency-symbol {
+            color: #087f55;
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        #fundAmountInput {
+            width: 100%;
+            height: 100%;
+            border: none;
+            outline: none;
+            background: transparent;
+            font-size: 23px;
+            font-weight: bold;
+            color: #10201b;
+        }
+
+        #fundAmountInput::placeholder {
+            color: #aab8b3;
+            font-weight: normal;
+        }
+
+        .quick-amount-title {
+            margin: 18px 0 10px;
+            color: #72847e;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .quick-amounts {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .quick-amount {
+            border: 1px solid #dce9e3;
+            background: #f5faf7;
+            color: #087f55;
+            padding: 11px 5px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .quick-amount:hover {
+            background: #eaf8f1;
+        }
+
+        .fund-error {
+            display: none;
+            margin-top: 10px;
+            padding: 10px 12px;
+            border-radius: 11px;
+            background: #fff2f2;
+            color: #c53636;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        .fund-error.show {
+            display: block;
+        }
+
+        .continue-funding {
+            width: 100%;
+            margin-top: 18px;
+            border: none;
+            border-radius: 15px;
+            padding: 16px;
+            background: linear-gradient(135deg, #25d366, #0f9f6e);
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 10px 24px rgba(37, 211, 102, 0.20);
+        }
+
+        .continue-funding:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .cancel-funding {
+            width: 100%;
+            margin-top: 9px;
+            border: none;
+            background: transparent;
+            color: #72847e;
+            padding: 12px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        @media (min-width: 600px) {
+            #fundModal {
+                align-items: center;
+            }
         }
 
         .welcome-page {
@@ -562,6 +763,10 @@
             .balance-amount {
                 font-size: 31px;
             }
+
+            .quick-amounts {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     </style>
 </head>
@@ -572,35 +777,167 @@
         Checking your Velqora account...
     </div>
 
+    <!-- PAYMENT LOADING SCREEN -->
+
     <div id="paymentLoading">
         <div class="payment-loading-box">
+
             <div class="payment-spinner"></div>
 
-            <h3>Opening secure payment</h3>
+            <h3>
+                Opening secure payment
+            </h3>
 
             <p>
                 Please wait while we connect you to Flutterwave.
             </p>
+
         </div>
     </div>
+
+    <!-- FUND WALLET MODAL -->
+
+    <div
+        id="fundModal"
+        onclick="handleFundModalBackground(event)"
+    >
+
+        <div
+            class="fund-modal-box"
+            onclick="event.stopPropagation()"
+        >
+
+            <div class="fund-modal-header">
+
+                <h3>
+                    Fund Wallet
+                </h3>
+
+                <button
+                    class="fund-close"
+                    onclick="closeFundModal()"
+                    aria-label="Close"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <p class="fund-modal-description">
+                Add money to your Velqora wallet securely.
+            </p>
+
+            <label
+                class="amount-label"
+                for="fundAmountInput"
+            >
+                Amount
+            </label>
+
+            <div class="amount-input-wrap">
+
+                <span class="currency-symbol">
+                    ₦
+                </span>
+
+                <input
+                    id="fundAmountInput"
+                    type="number"
+                    min="100"
+                    step="1"
+                    inputmode="decimal"
+                    placeholder="100"
+                    autocomplete="off"
+                >
+
+            </div>
+
+            <div class="quick-amount-title">
+                Quick amount
+            </div>
+
+            <div class="quick-amounts">
+
+                <button
+                    class="quick-amount"
+                    onclick="setFundAmount(100)"
+                >
+                    ₦100
+                </button>
+
+                <button
+                    class="quick-amount"
+                    onclick="setFundAmount(500)"
+                >
+                    ₦500
+                </button>
+
+                <button
+                    class="quick-amount"
+                    onclick="setFundAmount(1000)"
+                >
+                    ₦1,000
+                </button>
+
+                <button
+                    class="quick-amount"
+                    onclick="setFundAmount(5000)"
+                >
+                    ₦5,000
+                </button>
+
+            </div>
+
+            <div
+                id="fundError"
+                class="fund-error"
+            ></div>
+
+            <button
+                id="continueFundingButton"
+                class="continue-funding"
+                onclick="continueFunding()"
+            >
+                Continue to Payment
+            </button>
+
+            <button
+                class="cancel-funding"
+                onclick="closeFundModal()"
+            >
+                Cancel
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- WELCOME SCREEN -->
 
     <div
         id="welcomeScreen"
         class="welcome-page"
         style="display: none;"
     >
+
         <div class="welcome">
 
             <div class="logo">
+
                 <img
                     src="velqora.png.PNG"
                     alt="Velqora Logo"
                 >
+
             </div>
 
-            <h1>Velqora</h1>
+            <h1>
+                Velqora
+            </h1>
 
-            <h2>Welcome to Velqora</h2>
+            <h2>
+                Welcome to Velqora
+            </h2>
 
             <p>
                 A simple place to manage your wallet,
@@ -626,7 +963,10 @@
             </div>
 
         </div>
+
     </div>
+
+    <!-- DASHBOARD -->
 
     <div
         id="dashboard"
@@ -638,10 +978,12 @@
             <div class="brand">
 
                 <div class="brand-logo">
+
                     <img
                         src="velqora.png.PNG"
                         alt="Velqora Logo"
                     >
+
                 </div>
 
                 <div class="brand-name">
@@ -1135,96 +1477,11 @@
         }
 
 
-        function setFundingLoading(isLoading) {
+        /* FUND WALLET MODAL */
 
-            const loadingScreen =
-                document.getElementById(
-                    "paymentLoading"
-                );
-
-            const mainFundButton =
-                document.getElementById(
-                    "fundWalletButton"
-                );
-
-            const quickFundButton =
-                document.getElementById(
-                    "fundActionButton"
-                );
-
-            fundingInProgress =
-                isLoading;
-
-            if (isLoading) {
-
-                loadingScreen.style.display =
-                    "flex";
-
-                if (mainFundButton) {
-                    mainFundButton.disabled = true;
-                }
-
-                if (quickFundButton) {
-                    quickFundButton.disabled = true;
-                }
-
-            } else {
-
-                loadingScreen.style.display =
-                    "none";
-
-                if (mainFundButton) {
-                    mainFundButton.disabled = false;
-                }
-
-                if (quickFundButton) {
-                    quickFundButton.disabled = false;
-                }
-            }
-        }
-
-
-        async function startFunding() {
+        function startFunding() {
 
             if (fundingInProgress) {
-                return;
-            }
-
-            const amountInput =
-                prompt(
-                    "Enter the amount you want to fund your wallet in Naira:"
-                );
-
-            if (amountInput === null) {
-                return;
-            }
-
-            const amount =
-                Number(
-                    amountInput.replace(
-                        /,/g,
-                        ""
-                    )
-                );
-
-            if (
-                !Number.isFinite(amount) ||
-                amount <= 0
-            ) {
-
-                alert(
-                    "Please enter a valid amount."
-                );
-
-                return;
-            }
-
-            if (amount < 100) {
-
-                alert(
-                    "The minimum wallet funding amount is ₦100."
-                );
-
                 return;
             }
 
@@ -1237,7 +1494,165 @@
                 return;
             }
 
+            const modal =
+                document.getElementById(
+                    "fundModal"
+                );
+
+            const input =
+                document.getElementById(
+                    "fundAmountInput"
+                );
+
+            const errorBox =
+                document.getElementById(
+                    "fundError"
+                );
+
+            input.value = "";
+            errorBox.textContent = "";
+            errorBox.classList.remove("show");
+
+            modal.classList.add("active");
+
+            setTimeout(() => {
+                input.focus();
+            }, 100);
+        }
+
+
+        function closeFundModal() {
+
+            if (fundingInProgress) {
+                return;
+            }
+
+            document
+                .getElementById("fundModal")
+                .classList.remove("active");
+        }
+
+
+        function handleFundModalBackground(event) {
+
+            if (
+                event.target.id === "fundModal"
+            ) {
+                closeFundModal();
+            }
+        }
+
+
+        function setFundAmount(amount) {
+
+            const input =
+                document.getElementById(
+                    "fundAmountInput"
+                );
+
+            const errorBox =
+                document.getElementById(
+                    "fundError"
+                );
+
+            input.value = amount;
+
+            errorBox.textContent = "";
+            errorBox.classList.remove("show");
+
+            input.focus();
+        }
+
+
+        function showFundError(message) {
+
+            const errorBox =
+                document.getElementById(
+                    "fundError"
+                );
+
+            errorBox.textContent =
+                message;
+
+            errorBox.classList.add(
+                "show"
+            );
+        }
+
+
+        async function continueFunding() {
+
+            if (fundingInProgress) {
+                return;
+            }
+
+            const input =
+                document.getElementById(
+                    "fundAmountInput"
+                );
+
+            const continueButton =
+                document.getElementById(
+                    "continueFundingButton"
+                );
+
+            const rawAmount =
+                input.value.trim();
+
+            const amount =
+                Number(
+                    rawAmount.replace(
+                        /,/g,
+                        ""
+                    )
+                );
+
+            if (
+                !rawAmount ||
+                !Number.isFinite(amount) ||
+                amount <= 0
+            ) {
+
+                showFundError(
+                    "Please enter a valid amount."
+                );
+
+                input.focus();
+
+                return;
+            }
+
+            if (amount < 100) {
+
+                showFundError(
+                    "The minimum wallet funding amount is ₦100."
+                );
+
+                input.focus();
+
+                return;
+            }
+
+            if (!currentUser) {
+
+                closeFundModal();
+
+                alert(
+                    "Please log in before funding your wallet."
+                );
+
+                return;
+            }
+
             try {
+
+                fundingInProgress = true;
+
+                continueButton.disabled = true;
+                continueButton.textContent =
+                    "Connecting to Payment...";
+
+                closeFundModal();
 
                 setFundingLoading(true);
 
@@ -1275,6 +1690,12 @@
 
                     setFundingLoading(false);
 
+                    fundingInProgress = false;
+
+                    continueButton.disabled = false;
+                    continueButton.textContent =
+                        "Continue to Payment";
+
                     alert(
                         "Unable to start payment: " +
                         error.message
@@ -1295,6 +1716,12 @@
 
                     setFundingLoading(false);
 
+                    fundingInProgress = false;
+
+                    continueButton.disabled = false;
+                    continueButton.textContent =
+                        "Continue to Payment";
+
                     alert(
                         data?.error ||
                         "Unable to create payment."
@@ -1311,6 +1738,12 @@
                     );
 
                     setFundingLoading(false);
+
+                    fundingInProgress = false;
+
+                    continueButton.disabled = false;
+                    continueButton.textContent =
+                        "Continue to Payment";
 
                     alert(
                         "Payment link was not returned."
@@ -1339,9 +1772,61 @@
 
                 setFundingLoading(false);
 
+                fundingInProgress = false;
+
+                continueButton.disabled = false;
+                continueButton.textContent =
+                    "Continue to Payment";
+
                 alert(
                     "Something went wrong while starting the payment."
                 );
+            }
+        }
+
+
+        function setFundingLoading(isLoading) {
+
+            const loadingScreen =
+                document.getElementById(
+                    "paymentLoading"
+                );
+
+            const mainFundButton =
+                document.getElementById(
+                    "fundWalletButton"
+                );
+
+            const quickFundButton =
+                document.getElementById(
+                    "fundActionButton"
+                );
+
+            if (isLoading) {
+
+                loadingScreen.style.display =
+                    "flex";
+
+                if (mainFundButton) {
+                    mainFundButton.disabled = true;
+                }
+
+                if (quickFundButton) {
+                    quickFundButton.disabled = true;
+                }
+
+            } else {
+
+                loadingScreen.style.display =
+                    "none";
+
+                if (mainFundButton) {
+                    mainFundButton.disabled = false;
+                }
+
+                if (quickFundButton) {
+                    quickFundButton.disabled = false;
+                }
             }
         }
 
@@ -1372,6 +1857,7 @@
 
 
         function goHome() {
+
             window.scrollTo({
                 top: 0,
                 behavior: "smooth"
@@ -1388,6 +1874,24 @@
             window.location.href =
                 "index.html";
         }
+
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key === "Escape" &&
+                    document
+                        .getElementById("fundModal")
+                        .classList
+                        .contains("active")
+                ) {
+                    closeFundModal();
+                }
+
+            }
+        );
 
 
         checkUser();
