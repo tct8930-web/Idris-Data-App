@@ -157,6 +157,39 @@
             color: #17372b;
         }
 
+        .account-row {
+            background: linear-gradient(135deg, #f0faf5, #f8fcfa);
+        }
+
+        .account-number-line {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .account-number {
+            font-size: 21px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            color: #087f5b;
+        }
+
+        .copy-btn {
+            width: auto;
+            padding: 9px 13px;
+            border-radius: 10px;
+            background: #087f5b;
+            color: white;
+            font-size: 12px;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .copy-btn:hover {
+            background: #066b4d;
+        }
+
         .buttons {
             margin-top: 24px;
             display: grid;
@@ -261,6 +294,22 @@
                 padding: 30px;
             }
         }
+
+        @media (max-width: 400px) {
+
+            .account-number-line {
+                align-items: flex-start;
+            }
+
+            .account-number {
+                font-size: 18px;
+                letter-spacing: 1px;
+            }
+
+            .copy-btn {
+                padding: 8px 10px;
+            }
+        }
     </style>
 </head>
 
@@ -314,6 +363,42 @@
 
                     <div class="email" id="email">
                         -
+                    </div>
+
+                </div>
+
+
+                <div class="section-title">
+                    Your Velqora Account
+                </div>
+
+
+                <div class="info">
+
+                    <div class="row account-row">
+
+                        <div class="label">
+                            Velqora Account Number
+                        </div>
+
+                        <div class="account-number-line">
+
+                            <div
+                                class="account-number"
+                                id="accountNumber"
+                            >
+                                -
+                            </div>
+
+                            <button
+                                class="copy-btn"
+                                onclick="copyAccountNumber()"
+                            >
+                                Copy
+                            </button>
+
+                        </div>
+
                     </div>
 
                 </div>
@@ -432,6 +517,9 @@
         );
 
 
+        let currentAccountNumber = "";
+
+
         function goBack() {
             window.location.href = "index.html";
         }
@@ -472,7 +560,7 @@
 
                 .from("Idris-Data-App")
 
-                .select("full_name, phone")
+                .select("full_name, phone, account_number")
 
                 .eq("id", user.id)
 
@@ -505,6 +593,15 @@
                 "Not provided";
 
 
+            const accountNumber =
+                profile?.account_number ||
+                "Not assigned";
+
+
+            currentAccountNumber =
+                profile?.account_number || "";
+
+
             document.getElementById("fullName").textContent =
                 fullName;
 
@@ -515,6 +612,10 @@
 
             document.getElementById("phone").textContent =
                 phone;
+
+
+            document.getElementById("accountNumber").textContent =
+                accountNumber;
 
 
             const firstLetter =
@@ -531,6 +632,33 @@
 
             document.getElementById("profileContent").style.display =
                 "block";
+        }
+
+
+        async function copyAccountNumber() {
+
+            if (!currentAccountNumber) {
+
+                alert("Your account number is not available yet.");
+
+                return;
+            }
+
+
+            try {
+
+                await navigator.clipboard.writeText(
+                    currentAccountNumber
+                );
+
+                alert("Account number copied!");
+
+            } catch (error) {
+
+                alert(
+                    "Unable to copy. Please copy the number manually."
+                );
+            }
         }
 
 
