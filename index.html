@@ -644,7 +644,7 @@
 
             <div class="greeting">
 
-                <p>Welcome back 👋</p>
+                <p id="greetingText">Welcome back 👋</p>
 
                 <h2>Your finances, simplified.</h2>
 
@@ -875,6 +875,38 @@
 
         let actualBalance = null;
         let balanceHidden = false;
+
+        /* =========================
+           PERSONAL GREETING
+        ========================== */
+
+        function updateGreeting() {
+
+            const hour = new Date().getHours();
+
+            let greeting;
+
+            if (hour < 12) {
+
+                greeting = "Good morning";
+
+            } else if (hour < 18) {
+
+                greeting = "Good afternoon";
+
+            } else {
+
+                greeting = "Good evening";
+
+            }
+
+            document.getElementById(
+                "greetingText"
+            ).textContent =
+                greeting + ", Idris 👋";
+        }
+
+        updateGreeting();
 
         async function loadWallet(userId) {
 
