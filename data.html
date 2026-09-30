@@ -198,6 +198,16 @@
             font-weight: bold;
         }
 
+        .plan-loading {
+            grid-column: 1 / -1;
+            padding: 15px;
+            text-align: center;
+            color: #777;
+            background: #f4f7f5;
+            border-radius: 14px;
+            font-size: 14px;
+        }
+
         .info {
             background: #f4f7f5;
             border-radius: 14px;
@@ -234,6 +244,10 @@
 
         .error {
             color: #c62828;
+        }
+
+        .success {
+            color: #16833b;
         }
 
         .loading {
@@ -372,78 +386,29 @@
                     Select Data Plan
                 </label>
 
-                <div class="plan-grid">
-
-                    <button
-                        type="button"
-                        class="plan-btn"
-                        onclick="selectPlan('500MB', 150, this)"
-                    >
-                        <div class="plan-name">
-                            500MB
-                        </div>
-
-                        <div class="plan-price">
-                            ₦150
-                        </div>
-                    </button>
-
-                    <button
-                        type="button"
-                        class="plan-btn"
-                        onclick="selectPlan('1GB', 300, this)"
-                    >
-                        <div class="plan-name">
-                            1GB
-                        </div>
-
-                        <div class="plan-price">
-                            ₦300
-                        </div>
-                    </button>
-
-                    <button
-                        type="button"
-                        class="plan-btn"
-                        onclick="selectPlan('2GB', 600, this)"
-                    >
-                        <div class="plan-name">
-                            2GB
-                        </div>
-
-                        <div class="plan-price">
-                            ₦600
-                        </div>
-                    </button>
-
-                    <button
-                        type="button"
-                        class="plan-btn"
-                        onclick="selectPlan('5GB', 1500, this)"
-                    >
-                        <div class="plan-name">
-                            5GB
-                        </div>
-
-                        <div class="plan-price">
-                            ₦1,500
-                        </div>
-                    </button>
-
+                <div
+                    class="plan-grid"
+                    id="planGrid"
+                >
+                    <div class="plan-loading">
+                        Loading available plans...
+                    </div>
                 </div>
 
             </div>
 
             <div class="info">
-                Real data purchases will be connected to the VTpass
-                Live API after your Live API access is approved.
-                This page does not process fake purchases.
+                Available plans are loaded from the
+                VTpass Sandbox for testing. No wallet
+                money will be deducted while we are
+                preparing the secure purchase connection.
             </div>
 
             <button
                 class="buy-btn"
                 id="buyButton"
                 onclick="buyData()"
+                disabled
             >
                 Buy Data
             </button>
@@ -468,6 +433,7 @@
         let selectedNetwork = "mtn";
         let selectedPlan = null;
         let selectedPrice = null;
+        let selectedVariationCode = null;
 
         function selectNetwork(button) {
 
@@ -481,11 +447,20 @@
 
             selectedNetwork =
                 button.dataset.network;
+
+            selectedPlan = null;
+            selectedPrice = null;
+            selectedVariationCode = null;
+
+            document.getElementById("buyButton").disabled = true;
+
+            loadPlans(selectedNetwork);
         }
 
         function selectPlan(
             plan,
             price,
+            variationCode,
             button
         ) {
 
@@ -499,6 +474,9 @@
 
             selectedPlan = plan;
             selectedPrice = price;
+            selectedVariationCode = variationCode;
+
+            document.getElementById("buyButton").disabled = false;
         }
 
         async function loadWallet() {
@@ -560,31 +538,187 @@
                 );
         }
 
+        async function loadPlans(network) {
+
+            const planGrid =
+                document.getElementById("planGrid");
+
+            const buyButton =
+                document.getElementById("buyButton");
+
+            const message =
+                document.getElementById("message");
+
+            selectedPlan = null;
+            selectedPrice = null;
+            selectedVariationCode = null;
+
+            buyButton.disabled = true;
+
+            planGrid.innerHTML = `
+                <div class="plan-loading">
+                    Loading available ${network.toUpperCase()} plans...
+                </div>
+            `;
+
+            message.className = "";
+            message.textContent = "";
+
+            try {
+
+                const {
+                    data: {
+                        session
+                    },
+                    error: sessionError
+                } =
+                    await supabaseClient.auth.getSession();
+
+                if (
+                    sessionError ||
+                    !session
+                ) {
+                    window.location.href =
+                        "login.html";
+
+                    return;
+                }
+
+                const {
+                    data,
+                    error
+                } =
+                    await supabaseClient.functions.invoke(
+                        "data-purchase",
+                        {
+                            body: {
+                                action: "list-plans",
+                                network: network
+                            }
+                        }
+                    );
+
+                if (error) {
+                    throw error;
+                }
+
+                if (
+                    !data ||
+                    !data.success ||
+                    !Array.isArray(data.plans)
+                ) {
+                    throw new Error(
+                        data?.message ||
+                        "Unable to load data plans."
+                    );
+                }
+
+                const plans =
+                    data.plans.filter(
+                        plan =>
+                            Number(plan.amount) > 0 &&
+                            plan.variation_code
+                    );
+
+                if (!plans.length) {
+
+                    planGrid.innerHTML = `
+                        <div class="plan-loading">
+                            No data plans are currently available.
+                        </div>
+                    `;
+
+                    return;
+                }
+
+                planGrid.innerHTML = "";
+
+                plans.forEach(plan => {
+
+                    const button =
+                        document.createElement("button");
+
+                    button.type = "button";
+                    button.className = "plan-btn";
+
+                    const name =
+                        plan.name ||
+                        "Data Plan";
+
+                    const price =
+                        Number(plan.amount);
+
+                    button.innerHTML = `
+                        <div class="plan-name">
+                            ${escapeHtml(name)}
+                        </div>
+
+                        <div class="plan-price">
+                            ₦${price.toLocaleString(
+                                "en-NG",
+                                {
+                                    minimumFractionDigits: 0,
+                                    maximumFractionDigits: 2
+                                }
+                            )}
+                        </div>
+                    `;
+
+                    button.onclick = function() {
+
+                        selectPlan(
+                            name,
+                            price,
+                            plan.variation_code,
+                            button
+                        );
+
+                    };
+
+                    planGrid.appendChild(button);
+
+                });
+
+            } catch (error) {
+
+                console.error(
+                    "LOAD PLANS ERROR:",
+                    error
+                );
+
+                planGrid.innerHTML = `
+                    <div class="plan-loading">
+                        Unable to load plans.
+                    </div>
+                `;
+
+                message.className = "error";
+
+                message.textContent =
+                    error.message ||
+                    "Unable to connect to VTpass Sandbox.";
+            }
+        }
+
+        function escapeHtml(value) {
+
+            return String(value)
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll('"', "&quot;")
+                .replaceAll("'", "&#039;");
+        }
+
         async function buyData() {
 
             const message =
                 document.getElementById("message");
 
-            const button =
-                document.getElementById("buyButton");
-
-            const phone =
-                document.getElementById("phone").value.trim();
-
             message.className = "";
             message.textContent = "";
 
-            if (!/^0[0-9]{10}$/.test(phone)) {
-
-                message.className = "error";
-
-                message.textContent =
-                    "Enter a valid 11-digit Nigerian phone number.";
-
-                return;
-            }
-
-            if (!selectedPlan || !selectedPrice) {
+            if (!selectedVariationCode) {
 
                 message.className = "error";
 
@@ -594,75 +728,21 @@
                 return;
             }
 
-            const {
-                data: {
-                    session
-                },
-                error: sessionError
-            } =
-                await supabaseClient.auth.getSession();
-
-            if (sessionError || !session) {
-
-                window.location.href = "login.html";
-
-                return;
-            }
-
-            button.disabled = true;
-            button.textContent = "Preparing...";
+            /*
+             * We intentionally do not send the purchase
+             * request yet.
+             *
+             * The next step is to connect this button
+             * to the secure wallet-debit transaction
+             * flow so a user cannot receive data without
+             * the correct wallet deduction.
+             */
 
             message.className = "loading";
+
             message.textContent =
-                "Preparing your data transaction...";
+                "Your data plan is ready. Secure wallet purchase connection is being completed.";
 
-            const txRef =
-                "DATA-" +
-                Date.now() +
-                "-" +
-                crypto.randomUUID();
-
-            const {
-                data,
-                error
-            } =
-                await supabaseClient.rpc(
-                    "create_pending_data_transaction",
-                    {
-                        p_phone: phone,
-                        p_network: selectedNetwork.toUpperCase(),
-                        p_plan_name: selectedPlan,
-                        p_amount: selectedPrice,
-                        p_tx_ref: txRef
-                    }
-                );
-
-            if (error) {
-
-                console.error(error);
-
-                button.disabled = false;
-                button.textContent = "Buy Data";
-
-                message.className = "error";
-                message.textContent =
-                    error.message ||
-                    "Unable to prepare the data transaction.";
-
-                return;
-            }
-
-            console.log(
-                "Pending data transaction created:",
-                data
-            );
-
-            button.disabled = false;
-            button.textContent = "Buy Data";
-
-            message.className = "loading";
-            message.textContent =
-                "Transaction prepared successfully. Real data purchase will be connected when VTpass Live API access is enabled.";
         }
 
         function goBack() {
@@ -681,6 +761,7 @@
         }
 
         loadWallet();
+        loadPlans("mtn");
     </script>
 
 </body>
