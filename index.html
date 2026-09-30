@@ -930,11 +930,13 @@
                 SUPABASE_KEY
             );
 
+
         let actualBalance = null;
 
         let balanceHidden = false;
 
         let currentUser = null;
+
 
         function updateGreeting() {
 
@@ -959,8 +961,10 @@
                     "Good evening";
             }
 
+
             const name =
                 "David";
+
 
             document.getElementById(
                 "greetingText"
@@ -971,6 +975,7 @@
                 " 👋";
         }
 
+
         async function loadWallet(userId) {
 
             const balanceElement =
@@ -978,8 +983,10 @@
                     "walletBalance"
                 );
 
+
             balanceElement.textContent =
                 "Checking...";
+
 
             const {
                 data,
@@ -988,8 +995,12 @@
                 await supabaseClient
                     .from("wallets")
                     .select("balance")
-                    .eq("user_id", userId)
+                    .eq(
+                        "user_id",
+                        userId
+                    )
                     .maybeSingle();
+
 
             if (error) {
 
@@ -1004,6 +1015,7 @@
                 return;
             }
 
+
             if (!data) {
 
                 balanceElement.textContent =
@@ -1012,11 +1024,16 @@
                 return;
             }
 
+
             actualBalance =
-                Number(data.balance);
+                Number(
+                    data.balance
+                );
+
 
             displayBalance();
         }
+
 
         function displayBalance() {
 
@@ -1025,15 +1042,18 @@
                     "walletBalance"
                 );
 
+
             const eye =
                 document.getElementById(
                     "balanceEye"
                 );
 
+
             if (actualBalance === null) {
 
                 return;
             }
+
 
             if (balanceHidden) {
 
@@ -1051,6 +1071,7 @@
                 return;
             }
 
+
             balanceElement.textContent =
                 "₦" +
                 actualBalance.toLocaleString(
@@ -1061,6 +1082,7 @@
                     }
                 );
 
+
             eye.textContent =
                 "👁️";
 
@@ -1070,6 +1092,7 @@
             );
         }
 
+
         function toggleBalance() {
 
             balanceHidden =
@@ -1078,6 +1101,7 @@
             displayBalance();
         }
 
+
         async function refreshWallet() {
 
             if (!currentUser) {
@@ -1085,10 +1109,12 @@
                 return;
             }
 
+
             const button =
                 document.getElementById(
                     "refreshButton"
                 );
+
 
             button.disabled =
                 true;
@@ -1096,9 +1122,11 @@
             button.textContent =
                 "⟳";
 
+
             await loadWallet(
                 currentUser.id
             );
+
 
             button.disabled =
                 false;
@@ -1106,6 +1134,7 @@
             button.textContent =
                 "↻";
         }
+
 
         async function checkUser() {
 
@@ -1119,12 +1148,17 @@
                         .auth
                         .getUser();
 
+
                 document.getElementById(
                     "loading"
                 ).style.display =
                     "none";
 
-                if (error || !data.user) {
+
+                if (
+                    error ||
+                    !data.user
+                ) {
 
                     document.getElementById(
                         "welcomeScreen"
@@ -1134,8 +1168,10 @@
                     return;
                 }
 
+
                 currentUser =
                     data.user;
+
 
                 document.getElementById(
                     "dashboard"
@@ -1143,11 +1179,14 @@
                     "active"
                 );
 
+
                 updateGreeting();
+
 
                 await loadWallet(
                     currentUser.id
                 );
+
 
             } catch (error) {
 
@@ -1156,10 +1195,12 @@
                     error
                 );
 
+
                 document.getElementById(
                     "loading"
                 ).style.display =
                     "none";
+
 
                 document.getElementById(
                     "welcomeScreen"
@@ -1168,6 +1209,7 @@
             }
         }
 
+
         async function startFunding() {
 
             const amountInput =
@@ -1175,10 +1217,12 @@
                     "Enter the amount you want to fund your wallet in Naira:"
                 );
 
+
             if (amountInput === null) {
 
                 return;
             }
+
 
             const amount =
                 Number(
@@ -1187,6 +1231,7 @@
                         ""
                     )
                 );
+
 
             if (
                 !Number.isFinite(amount) ||
@@ -1200,6 +1245,7 @@
                 return;
             }
 
+
             if (amount < 100) {
 
                 alert(
@@ -1209,11 +1255,33 @@
                 return;
             }
 
+
+            if (!currentUser) {
+
+                alert(
+                    "Please log in before funding your wallet."
+                );
+
+                return;
+            }
+
+
             try {
 
                 alert(
                     "Creating your secure payment..."
                 );
+
+
+                /*
+                 * IMPORTANT:
+                 *
+                 * The correct Supabase Edge Function
+                 * is create-payment.
+                 *
+                 * Do NOT use rapid-api here.
+                 */
+
 
                 const {
                     data,
@@ -1222,7 +1290,7 @@
                     await supabaseClient
                         .functions
                         .invoke(
-                            "rapid-api",
+                            "create-payment",
                             {
                                 body: {
                                     amount: amount
@@ -1230,12 +1298,20 @@
                             }
                         );
 
+
+                console.log(
+                    "Create payment response:",
+                    data
+                );
+
+
                 if (error) {
 
                     console.error(
                         "Payment function error:",
                         error
                     );
+
 
                     alert(
                         "Unable to start payment: " +
@@ -1245,10 +1321,17 @@
                     return;
                 }
 
+
                 if (
                     !data ||
                     !data.success
                 ) {
+
+                    console.error(
+                        "Payment creation failed:",
+                        data
+                    );
+
 
                     alert(
                         data?.error ||
@@ -1258,7 +1341,14 @@
                     return;
                 }
 
+
                 if (!data.payment_link) {
+
+                    console.error(
+                        "No payment link returned:",
+                        data
+                    );
+
 
                     alert(
                         "Payment link was not returned."
@@ -1267,8 +1357,16 @@
                     return;
                 }
 
+
+                /*
+                 * Redirect the user to the
+                 * Flutterwave checkout page.
+                 */
+
+
                 window.location.href =
                     data.payment_link;
+
 
             } catch (error) {
 
@@ -1277,11 +1375,13 @@
                     error
                 );
 
+
                 alert(
                     "Something went wrong while starting the payment."
                 );
             }
         }
+
 
         function buyData() {
 
@@ -1289,15 +1389,13 @@
                 "data.html";
         }
 
+
         function buyAirtime() {
 
             window.location.href =
                 "airtime.html";
         }
 
-        /* =========================
-           TRANSFER
-        ========================== */
 
         function makeTransfer() {
 
@@ -1305,17 +1403,20 @@
                 "transfer.html";
         }
 
+
         function viewTransactions() {
 
             window.location.href =
                 "transactions.html";
         }
 
+
         function goToProfile() {
 
             window.location.href =
                 "profile.html";
         }
+
 
         function goHome() {
 
@@ -1325,15 +1426,18 @@
             });
         }
 
+
         async function logout() {
 
             await supabaseClient
                 .auth
                 .signOut();
 
+
             window.location.href =
                 "index.html";
         }
+
 
         checkUser();
 
@@ -1341,3 +1445,4 @@
 
 </body>
 </html>
+`
