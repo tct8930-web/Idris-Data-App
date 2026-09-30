@@ -1274,12 +1274,11 @@
 
 
                 /*
-                 * IMPORTANT:
+                 * The deployed payment endpoint shown
+                 * by Supabase ends with /rapid-api.
                  *
-                 * The correct Supabase Edge Function
-                 * is create-payment.
-                 *
-                 * Do NOT use rapid-api here.
+                 * Therefore the frontend calls
+                 * the deployed function as rapid-api.
                  */
 
 
@@ -1290,7 +1289,7 @@
                     await supabaseClient
                         .functions
                         .invoke(
-                            "create-payment",
+                            "rapid-api",
                             {
                                 body: {
                                     amount: amount
@@ -1300,7 +1299,7 @@
 
 
                 console.log(
-                    "Create payment response:",
+                    "Payment response:",
                     data
                 );
 
@@ -1356,12 +1355,6 @@
 
                     return;
                 }
-
-
-                /*
-                 * Redirect the user to the
-                 * Flutterwave checkout page.
-                 */
 
 
                 window.location.href =
