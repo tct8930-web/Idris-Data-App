@@ -21,7 +21,7 @@
         body {
             margin: 0;
             font-family: Arial, Helvetica, sans-serif;
-            background: #f5f8f7;
+            background: #f4f8f6;
             color: #10201b;
         }
 
@@ -29,6 +29,10 @@
         input {
             font-family: inherit;
             -webkit-tap-highlight-color: transparent;
+        }
+
+        button {
+            cursor: pointer;
         }
 
         #loading {
@@ -39,38 +43,38 @@
             text-align: center;
             color: #668078;
             padding: 20px;
-            background: #f5f8f7;
         }
 
-        /* PAYMENT LOADING SCREEN */
+        /* =========================
+           PAYMENT LOADING
+        ========================= */
 
         #paymentLoading {
             display: none;
             position: fixed;
             inset: 0;
             z-index: 9999;
-            background: rgba(245, 248, 247, 0.97);
+            background: rgba(244, 248, 246, 0.97);
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 25px;
+            padding: 20px;
         }
 
         .payment-loading-box {
             width: 100%;
             max-width: 360px;
             background: white;
-            padding: 32px 25px;
-            border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(8, 35, 27, 0.14);
-            border: 1px solid #e2ebe7;
+            padding: 32px 24px;
+            border-radius: 25px;
+            box-shadow: 0 25px 70px rgba(8, 35, 27, 0.15);
         }
 
         .payment-spinner {
             width: 52px;
             height: 52px;
             margin: 0 auto 20px;
-            border: 5px solid #e3f3ec;
+            border: 5px solid #dff2e9;
             border-top-color: #0f9f6e;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
@@ -84,27 +88,28 @@
 
         .payment-loading-box h3 {
             margin: 0 0 8px;
-            font-size: 20px;
         }
 
         .payment-loading-box p {
             margin: 0;
-            color: #668078;
+            color: #71837d;
             font-size: 14px;
             line-height: 1.5;
         }
 
-        /* FUND WALLET MODAL */
+        /* =========================
+           FUND MODAL
+        ========================= */
 
         #fundModal {
             display: none;
             position: fixed;
             inset: 0;
             z-index: 5000;
-            background: rgba(8, 35, 27, 0.48);
+            background: rgba(8, 35, 27, 0.52);
             align-items: flex-end;
             justify-content: center;
-            padding: 18px;
+            padding: 16px;
         }
 
         #fundModal.active {
@@ -116,8 +121,8 @@
             max-width: 460px;
             background: white;
             border-radius: 28px;
-            padding: 25px 22px 22px;
-            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.20);
+            padding: 24px 21px 20px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.2);
             animation: modalUp 0.22s ease-out;
         }
 
@@ -143,7 +148,6 @@
         .fund-modal-header h3 {
             margin: 0;
             font-size: 22px;
-            color: #10201b;
         }
 
         .fund-close {
@@ -154,8 +158,6 @@
             background: #f1f5f3;
             color: #536861;
             font-size: 23px;
-            cursor: pointer;
-            line-height: 1;
         }
 
         .fund-modal-description {
@@ -176,18 +178,16 @@
         .amount-input-wrap {
             display: flex;
             align-items: center;
-            width: 100%;
             height: 58px;
             border: 2px solid #dce9e3;
             border-radius: 16px;
             background: #fbfdfc;
-            padding: 0 16px;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            padding: 0 15px;
         }
 
         .amount-input-wrap:focus-within {
             border-color: #0f9f6e;
-            box-shadow: 0 0 0 4px rgba(15, 159, 110, 0.09);
+            box-shadow: 0 0 0 4px rgba(15, 159, 110, 0.08);
         }
 
         .currency-symbol {
@@ -205,12 +205,6 @@
             background: transparent;
             font-size: 23px;
             font-weight: bold;
-            color: #10201b;
-        }
-
-        #fundAmountInput::placeholder {
-            color: #aab8b3;
-            font-weight: normal;
         }
 
         .quick-amount-title {
@@ -234,11 +228,6 @@
             border-radius: 12px;
             font-size: 12px;
             font-weight: bold;
-            cursor: pointer;
-        }
-
-        .quick-amount:hover {
-            background: #eaf8f1;
         }
 
         .fund-error {
@@ -249,7 +238,6 @@
             background: #fff2f2;
             color: #c53636;
             font-size: 12px;
-            line-height: 1.4;
         }
 
         .fund-error.show {
@@ -266,53 +254,46 @@
             color: white;
             font-size: 15px;
             font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 10px 24px rgba(37, 211, 102, 0.20);
         }
 
         .continue-funding:disabled {
             opacity: 0.6;
-            cursor: not-allowed;
         }
 
         .cancel-funding {
             width: 100%;
-            margin-top: 9px;
+            margin-top: 8px;
             border: none;
             background: transparent;
             color: #72847e;
             padding: 12px;
-            font-size: 14px;
             font-weight: bold;
-            cursor: pointer;
         }
 
-        @media (min-width: 600px) {
-            #fundModal {
-                align-items: center;
-            }
-        }
+        /* =========================
+           WELCOME
+        ========================= */
 
         .welcome-page {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 24px;
+            padding: 22px;
             background:
-                radial-gradient(circle at 10% 5%, rgba(37, 211, 102, 0.12), transparent 32%),
-                radial-gradient(circle at 90% 90%, rgba(15, 159, 110, 0.10), transparent 32%),
-                #f5f8f7;
+                radial-gradient(circle at 10% 5%, rgba(37,211,102,.12), transparent 32%),
+                radial-gradient(circle at 90% 90%, rgba(15,159,110,.10), transparent 32%),
+                #f4f8f6;
         }
 
         .welcome {
             width: 100%;
-            max-width: 450px;
+            max-width: 440px;
             background: white;
-            padding: 40px 27px 30px;
-            border-radius: 28px;
-            box-shadow: 0 25px 70px rgba(8, 35, 27, 0.12);
+            padding: 40px 25px 30px;
+            border-radius: 30px;
             text-align: center;
+            box-shadow: 0 25px 70px rgba(8,35,27,.12);
             border: 1px solid #e2ebe7;
         }
 
@@ -321,31 +302,27 @@
             height: 86px;
             margin: 0 auto 18px;
             border-radius: 23px;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             overflow: hidden;
-            box-shadow: 0 14px 30px rgba(37, 211, 102, 0.18);
+            background: white;
             border: 1px solid #e2ebe7;
+            box-shadow: 0 14px 30px rgba(37,211,102,.16);
         }
 
-        .logo img {
+        .logo img,
+        .brand-logo img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            display: block;
         }
 
         .welcome h1 {
             margin: 0;
             font-size: 32px;
-            letter-spacing: -0.7px;
         }
 
         .welcome h2 {
             margin: 10px 0;
-            font-size: 21px;
+            font-size: 20px;
         }
 
         .welcome p {
@@ -364,13 +341,11 @@
             border-radius: 14px;
             font-size: 16px;
             font-weight: bold;
-            cursor: pointer;
         }
 
         .login-button {
-            background: linear-gradient(135deg, #25d366, #0f9f6e);
+            background: linear-gradient(135deg,#25d366,#0f9f6e);
             color: white;
-            box-shadow: 0 10px 24px rgba(37, 211, 102, 0.20);
         }
 
         .signup-button {
@@ -384,6 +359,10 @@
             font-size: 12px;
         }
 
+        /* =========================
+           DASHBOARD
+        ========================= */
+
         .dashboard {
             display: none;
             min-height: 100vh;
@@ -394,15 +373,15 @@
         }
 
         .topbar {
-            background: rgba(255, 255, 255, 0.96);
-            padding: 14px 18px;
+            background: rgba(255,255,255,.96);
+            padding: 13px 18px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             border-bottom: 1px solid #e2ebe7;
             position: sticky;
             top: 0;
-            z-index: 10;
+            z-index: 50;
             backdrop-filter: blur(15px);
         }
 
@@ -416,26 +395,14 @@
             width: 43px;
             height: 43px;
             border-radius: 14px;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             overflow: hidden;
-            box-shadow: 0 7px 18px rgba(37, 211, 102, 0.15);
+            background: white;
             border: 1px solid #dcebe4;
-        }
-
-        .brand-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            display: block;
         }
 
         .brand-name {
             font-size: 20px;
             font-weight: bold;
-            letter-spacing: -0.3px;
         }
 
         .profile-button {
@@ -445,14 +412,13 @@
             border-radius: 50%;
             background: #effaf4;
             color: #0f9f6e;
-            font-size: 19px;
-            cursor: pointer;
+            font-size: 18px;
         }
 
         .container {
             width: 100%;
             max-width: 1050px;
-            margin: 0 auto;
+            margin: auto;
             padding: 25px 18px 100px;
         }
 
@@ -469,43 +435,60 @@
         .greeting h2 {
             margin: 0;
             font-size: 25px;
-            letter-spacing: -0.5px;
+            letter-spacing: -.5px;
         }
+
+        /* ACCOUNT NUMBER */
+
+        .account-strip {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            background: white;
+            border: 1px solid #e3ece8;
+            border-radius: 18px;
+            padding: 15px 16px;
+            margin-bottom: 18px;
+            box-shadow: 0 7px 22px rgba(15,50,39,.04);
+        }
+
+        .account-info small {
+            display: block;
+            color: #8ba099;
+            font-size: 11px;
+            margin-bottom: 5px;
+        }
+
+        .account-info strong {
+            font-size: 16px;
+            letter-spacing: 1.3px;
+        }
+
+        .copy-account {
+            border: none;
+            background: #eaf8f1;
+            color: #087f55;
+            border-radius: 11px;
+            padding: 10px 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        /* BALANCE */
 
         .balance-card {
             background:
-                radial-gradient(circle at 90% 10%, rgba(255,255,255,0.18), transparent 27%),
-                radial-gradient(circle at 10% 100%, rgba(0,0,0,0.08), transparent 35%),
-                linear-gradient(135deg, #0b7654, #064d3c);
+                radial-gradient(circle at 90% 10%,rgba(255,255,255,.18),transparent 27%),
+                radial-gradient(circle at 10% 100%,rgba(0,0,0,.08),transparent 35%),
+                linear-gradient(135deg,#0b7654,#064d3c);
             color: white;
             border-radius: 27px;
             padding: 25px;
-            box-shadow: 0 20px 45px rgba(6, 77, 60, 0.23);
+            box-shadow: 0 20px 45px rgba(6,77,60,.23);
             margin-bottom: 28px;
             position: relative;
             overflow: hidden;
-        }
-
-        .balance-card::after {
-            content: "";
-            position: absolute;
-            width: 210px;
-            height: 210px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.07);
-            right: -85px;
-            top: -85px;
-        }
-
-        .balance-card::before {
-            content: "";
-            position: absolute;
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            background: rgba(37, 211, 102, 0.08);
-            left: -50px;
-            bottom: -50px;
         }
 
         .balance-top {
@@ -518,12 +501,11 @@
 
         .balance-label {
             font-size: 13px;
-            opacity: 0.78;
+            opacity: .78;
         }
 
         .balance-controls {
             display: flex;
-            align-items: center;
             gap: 7px;
         }
 
@@ -531,11 +513,10 @@
         .refresh-button {
             width: 34px;
             height: 34px;
-            border: 1px solid rgba(255,255,255,0.20);
+            border: 1px solid rgba(255,255,255,.2);
             border-radius: 10px;
-            background: rgba(255,255,255,0.10);
+            background: rgba(255,255,255,.1);
             color: white;
-            cursor: pointer;
             font-size: 15px;
         }
 
@@ -543,7 +524,6 @@
             font-size: 37px;
             font-weight: bold;
             margin: 11px 0 23px;
-            letter-spacing: -1px;
             position: relative;
             z-index: 2;
         }
@@ -555,17 +535,11 @@
             padding: 13px 20px;
             border-radius: 12px;
             font-weight: bold;
-            cursor: pointer;
             position: relative;
             z-index: 2;
         }
 
-        .fund-button:disabled,
-        .action:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
+        /* SERVICES */
 
         .section-heading {
             display: flex;
@@ -577,7 +551,6 @@
         .section-title {
             font-size: 18px;
             font-weight: bold;
-            margin: 0;
         }
 
         .section-subtitle {
@@ -587,7 +560,7 @@
 
         .actions {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(3,1fr);
             gap: 12px;
         }
 
@@ -597,18 +570,12 @@
             border-radius: 18px;
             padding: 17px 8px;
             text-align: center;
-            cursor: pointer;
-            box-shadow: 0 7px 22px rgba(15, 50, 39, 0.055);
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
-        }
-
-        .action:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 11px 25px rgba(15, 50, 39, 0.08);
+            box-shadow: 0 7px 22px rgba(15,50,39,.055);
+            transition: .15s ease;
         }
 
         .action:active {
-            transform: scale(0.96);
+            transform: scale(.96);
         }
 
         .action-icon {
@@ -629,10 +596,12 @@
             color: #263a33;
         }
 
+        /* ACTIVITY */
+
         .transactions {
             background: white;
             border-radius: 20px;
-            box-shadow: 0 7px 22px rgba(15, 50, 39, 0.055);
+            box-shadow: 0 7px 22px rgba(15,50,39,.055);
             overflow: hidden;
             border: 1px solid #e5eee9;
         }
@@ -670,7 +639,6 @@
             padding: 14px;
             font-size: 13px;
             font-weight: bold;
-            cursor: pointer;
         }
 
         .logout {
@@ -683,21 +651,22 @@
             color: #d33b3b;
             font-size: 15px;
             font-weight: bold;
-            cursor: pointer;
         }
+
+        /* BOTTOM NAV */
 
         .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(255,255,255,0.97);
+            background: rgba(255,255,255,.97);
             border-top: 1px solid #e2ebe7;
             height: 70px;
             display: flex;
             justify-content: space-around;
             align-items: center;
-            z-index: 20;
+            z-index: 100;
             backdrop-filter: blur(15px);
         }
 
@@ -706,7 +675,6 @@
             border: none;
             color: #94a59e;
             font-size: 11px;
-            cursor: pointer;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -723,14 +691,19 @@
             font-weight: bold;
         }
 
-        @media (min-width: 700px) {
+        @media (min-width:600px) {
+            #fundModal {
+                align-items: center;
+            }
+        }
+
+        @media (min-width:700px) {
             .bottom-nav {
                 position: static;
                 max-width: 1050px;
                 margin: 0 auto 20px;
                 border: 1px solid #e2ebe7;
                 border-radius: 18px;
-                box-shadow: 0 7px 22px rgba(15, 50, 39, 0.055);
             }
 
             .container {
@@ -738,34 +711,21 @@
             }
 
             .actions {
-                grid-template-columns: repeat(6, 1fr);
+                grid-template-columns: repeat(6,1fr);
             }
         }
 
-        @media (max-width: 420px) {
-            .welcome {
-                padding: 32px 21px 27px;
-            }
-
-            .actions {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .action {
-                padding: 14px 5px;
-            }
-
-            .action-icon {
-                width: 43px;
-                height: 43px;
-            }
-
+        @media (max-width:420px) {
             .balance-amount {
                 font-size: 31px;
             }
 
+            .account-info strong {
+                font-size: 14px;
+            }
+
             .quick-amounts {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(2,1fr);
             }
         }
     </style>
@@ -773,1108 +733,1091 @@
 
 <body>
 
-    <div id="loading">
-        Checking your Velqora account...
+<div id="loading">
+    Checking your Velqora account...
+</div>
+
+<div id="paymentLoading">
+    <div class="payment-loading-box">
+        <div class="payment-spinner"></div>
+        <h3>Opening secure payment</h3>
+        <p>Please wait while we connect you to Flutterwave.</p>
     </div>
+</div>
 
-    <!-- PAYMENT LOADING SCREEN -->
+<!-- FUND WALLET -->
 
-    <div id="paymentLoading">
-        <div class="payment-loading-box">
+<div id="fundModal" onclick="handleFundModalBackground(event)">
 
-            <div class="payment-spinner"></div>
+    <div class="fund-modal-box" onclick="event.stopPropagation()">
 
-            <h3>
-                Opening secure payment
-            </h3>
+        <div class="fund-modal-header">
+            <h3>Fund Wallet</h3>
 
-            <p>
-                Please wait while we connect you to Flutterwave.
-            </p>
+            <button
+                class="fund-close"
+                onclick="closeFundModal()"
+            >
+                ×
+            </button>
+        </div>
+
+        <p class="fund-modal-description">
+            Add money to your Velqora wallet securely.
+        </p>
+
+        <label class="amount-label">
+            Amount
+        </label>
+
+        <div class="amount-input-wrap">
+
+            <span class="currency-symbol">₦</span>
+
+            <input
+                id="fundAmountInput"
+                type="number"
+                min="100"
+                step="1"
+                inputmode="decimal"
+                placeholder="100"
+                autocomplete="off"
+            >
 
         </div>
-    </div>
 
-    <!-- FUND WALLET MODAL -->
+        <div class="quick-amount-title">
+            Quick amount
+        </div>
 
-    <div
-        id="fundModal"
-        onclick="handleFundModalBackground(event)"
-    >
+        <div class="quick-amounts">
 
-        <div
-            class="fund-modal-box"
-            onclick="event.stopPropagation()"
+            <button
+                class="quick-amount"
+                onclick="setFundAmount(100)"
+            >
+                ₦100
+            </button>
+
+            <button
+                class="quick-amount"
+                onclick="setFundAmount(500)"
+            >
+                ₦500
+            </button>
+
+            <button
+                class="quick-amount"
+                onclick="setFundAmount(1000)"
+            >
+                ₦1,000
+            </button>
+
+            <button
+                class="quick-amount"
+                onclick="setFundAmount(5000)"
+            >
+                ₦5,000
+            </button>
+
+        </div>
+
+        <div id="fundError" class="fund-error"></div>
+
+        <button
+            id="continueFundingButton"
+            class="continue-funding"
+            onclick="continueFunding()"
         >
+            Continue to Payment
+        </button>
 
-            <div class="fund-modal-header">
+        <button
+            class="cancel-funding"
+            onclick="closeFundModal()"
+        >
+            Cancel
+        </button>
 
-                <h3>
-                    Fund Wallet
-                </h3>
+    </div>
+</div>
 
-                <button
-                    class="fund-close"
-                    onclick="closeFundModal()"
-                    aria-label="Close"
+<!-- WELCOME -->
+
+<div
+    id="welcomeScreen"
+    class="welcome-page"
+    style="display:none;"
+>
+
+    <div class="welcome">
+
+        <div class="logo">
+            <img
+                src="velqora.png.PNG"
+                alt="Velqora Logo"
+            >
+        </div>
+
+        <h1>Velqora</h1>
+
+        <h2>Welcome to Velqora</h2>
+
+        <p>
+            A simple place to manage your wallet,
+            data, airtime, payments and transfers.
+        </p>
+
+        <button
+            class="login-button"
+            onclick="window.location.href='login.html'"
+        >
+            🔐 Log In
+        </button>
+
+        <button
+            class="signup-button"
+            onclick="window.location.href='signup.html'"
+        >
+            👤 Create Account
+        </button>
+
+        <div class="welcome-note">
+            Secure account access powered by Velqora.
+        </div>
+
+    </div>
+</div>
+
+<!-- DASHBOARD -->
+
+<div id="dashboard" class="dashboard">
+
+    <header class="topbar">
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                <img
+                    src="velqora.png.PNG"
+                    alt="Velqora"
                 >
-                    ×
-                </button>
-
             </div>
 
-            <p class="fund-modal-description">
-                Add money to your Velqora wallet securely.
+            <div class="brand-name">
+                Velqora
+            </div>
+
+        </div>
+
+        <button
+            class="profile-button"
+            onclick="goToProfile()"
+        >
+            👤
+        </button>
+
+    </header>
+
+    <main class="container">
+
+        <div class="greeting">
+
+            <p id="greetingText">
+                Welcome back 👋
             </p>
 
-            <label
-                class="amount-label"
-                for="fundAmountInput"
+            <h2>
+                Your finances, simplified.
+            </h2>
+
+        </div>
+
+        <!-- ACCOUNT NUMBER -->
+
+        <div class="account-strip">
+
+            <div class="account-info">
+
+                <small>
+                    Velqora Account Number
+                </small>
+
+                <strong id="accountNumber">
+                    Loading...
+                </strong>
+
+            </div>
+
+            <button
+                class="copy-account"
+                onclick="copyAccountNumber()"
             >
-                Amount
-            </label>
+                Copy
+            </button>
 
-            <div class="amount-input-wrap">
+        </div>
 
-                <span class="currency-symbol">
-                    ₦
-                </span>
+        <!-- BALANCE -->
 
-                <input
-                    id="fundAmountInput"
-                    type="number"
-                    min="100"
-                    step="1"
-                    inputmode="decimal"
-                    placeholder="100"
-                    autocomplete="off"
-                >
+        <div class="balance-card">
 
-            </div>
+            <div class="balance-top">
 
-            <div class="quick-amount-title">
-                Quick amount
-            </div>
+                <div class="balance-label">
+                    Available Wallet Balance
+                </div>
 
-            <div class="quick-amounts">
+                <div class="balance-controls">
 
-                <button
-                    class="quick-amount"
-                    onclick="setFundAmount(100)"
-                >
-                    ₦100
-                </button>
+                    <button
+                        class="refresh-button"
+                        id="refreshButton"
+                        onclick="refreshWallet()"
+                    >
+                        ↻
+                    </button>
 
-                <button
-                    class="quick-amount"
-                    onclick="setFundAmount(500)"
-                >
-                    ₦500
-                </button>
+                    <button
+                        class="eye-button"
+                        id="balanceEye"
+                        onclick="toggleBalance()"
+                    >
+                        👁️
+                    </button>
 
-                <button
-                    class="quick-amount"
-                    onclick="setFundAmount(1000)"
-                >
-                    ₦1,000
-                </button>
-
-                <button
-                    class="quick-amount"
-                    onclick="setFundAmount(5000)"
-                >
-                    ₦5,000
-                </button>
+                </div>
 
             </div>
 
             <div
-                id="fundError"
-                class="fund-error"
-            ></div>
+                class="balance-amount"
+                id="walletBalance"
+            >
+                Checking...
+            </div>
 
             <button
-                id="continueFundingButton"
-                class="continue-funding"
-                onclick="continueFunding()"
+                class="fund-button"
+                id="fundWalletButton"
+                onclick="startFunding()"
             >
-                Continue to Payment
-            </button>
-
-            <button
-                class="cancel-funding"
-                onclick="closeFundModal()"
-            >
-                Cancel
+                + Add Money
             </button>
 
         </div>
 
-    </div>
+        <!-- SERVICES -->
 
-    <!-- WELCOME SCREEN -->
+        <div class="section-heading">
 
-    <div
-        id="welcomeScreen"
-        class="welcome-page"
-        style="display: none;"
-    >
-
-        <div class="welcome">
-
-            <div class="logo">
-
-                <img
-                    src="velqora.png.PNG"
-                    alt="Velqora Logo"
-                >
-
+            <div class="section-title">
+                Quick Services
             </div>
 
-            <h1>
-                Velqora
-            </h1>
-
-            <h2>
-                Welcome to Velqora
-            </h2>
-
-            <p>
-                A simple place to manage your wallet,
-                data, airtime, payments and transfers.
-            </p>
-
-            <button
-                class="login-button"
-                onclick="window.location.href='login.html'"
-            >
-                🔐 Log In
-            </button>
-
-            <button
-                class="signup-button"
-                onclick="window.location.href='signup.html'"
-            >
-                👤 Create Account
-            </button>
-
-            <div class="welcome-note">
-                Secure account access powered by Velqora.
+            <div class="section-subtitle">
+                Available
             </div>
 
         </div>
 
-    </div>
-
-    <!-- DASHBOARD -->
-
-    <div
-        id="dashboard"
-        class="dashboard"
-    >
-
-        <header class="topbar">
-
-            <div class="brand">
-
-                <div class="brand-logo">
-
-                    <img
-                        src="velqora.png.PNG"
-                        alt="Velqora Logo"
-                    >
-
-                </div>
-
-                <div class="brand-name">
-                    Velqora
-                </div>
-
-            </div>
+        <div class="actions">
 
             <button
-                class="profile-button"
-                onclick="goToProfile()"
-                aria-label="Open profile"
+                class="action"
+                id="fundActionButton"
+                onclick="startFunding()"
             >
-                👤
-            </button>
-
-        </header>
-
-        <main class="container">
-
-            <div class="greeting">
-
-                <p id="greetingText">
-                    Welcome back 👋
-                </p>
-
-                <h2>
-                    Your finances, simplified.
-                </h2>
-
-            </div>
-
-            <div class="balance-card">
-
-                <div class="balance-top">
-
-                    <div class="balance-label">
-                        Available Wallet Balance
-                    </div>
-
-                    <div class="balance-controls">
-
-                        <button
-                            class="refresh-button"
-                            id="refreshButton"
-                            onclick="refreshWallet()"
-                            aria-label="Refresh balance"
-                        >
-                            ↻
-                        </button>
-
-                        <button
-                            class="eye-button"
-                            id="balanceEye"
-                            onclick="toggleBalance()"
-                            aria-label="Hide balance"
-                        >
-                            👁️
-                        </button>
-
-                    </div>
-
-                </div>
-
-                <div
-                    class="balance-amount"
-                    id="walletBalance"
-                >
-                    Checking...
-                </div>
-
-                <button
-                    class="fund-button"
-                    id="fundWalletButton"
-                    onclick="startFunding()"
-                >
-                    + Fund Wallet
-                </button>
-
-            </div>
-
-            <div class="section-heading">
-
-                <div class="section-title">
-                    Quick Services
-                </div>
-
-                <div class="section-subtitle">
-                    Available
-                </div>
-
-            </div>
-
-            <div class="actions">
-
-                <button
-                    class="action"
-                    id="fundActionButton"
-                    onclick="startFunding()"
-                >
-                    <div class="action-icon">
-                        💰
-                    </div>
-
-                    <div class="action-title">
-                        Fund Wallet
-                    </div>
-                </button>
-
-                <button
-                    class="action"
-                    onclick="buyData()"
-                >
-                    <div class="action-icon">
-                        📱
-                    </div>
-
-                    <div class="action-title">
-                        Buy Data
-                    </div>
-                </button>
-
-                <button
-                    class="action"
-                    onclick="buyAirtime()"
-                >
-                    <div class="action-icon">
-                        ☎️
-                    </div>
-
-                    <div class="action-title">
-                        Airtime
-                    </div>
-                </button>
-
-                <button
-                    class="action"
-                    onclick="makeTransfer()"
-                >
-                    <div class="action-icon">
-                        💸
-                    </div>
-
-                    <div class="action-title">
-                        Transfer
-                    </div>
-                </button>
-
-                <button
-                    class="action"
-                    onclick="viewTransactions()"
-                >
-                    <div class="action-icon">
-                        📋
-                    </div>
-
-                    <div class="action-title">
-                        Transactions
-                    </div>
-                </button>
-
-                <button
-                    class="action"
-                    onclick="goToProfile()"
-                >
-                    <div class="action-icon">
-                        👤
-                    </div>
-
-                    <div class="action-title">
-                        Profile
-                    </div>
-                </button>
-
-            </div>
-
-            <div class="section-heading">
-
-                <div class="section-title">
-                    Recent Activity
-                </div>
-
-                <div class="section-subtitle">
-                    Wallet
-                </div>
-
-            </div>
-
-            <div class="transactions">
-
-                <div class="transaction-empty">
-
-                    <div class="transaction-empty-icon">
-                        🧾
-                    </div>
-
-                    <strong>
-                        No recent activity
-                    </strong>
-
-                    <small>
-                        Your wallet activity will appear here.
-                    </small>
-
-                </div>
-
-                <button
-                    class="view-all"
-                    onclick="viewTransactions()"
-                >
-                    View All Activity →
-                </button>
-
-            </div>
-
-            <button
-                class="logout"
-                onclick="logout()"
-            >
-                🚪 Log Out
-            </button>
-
-        </main>
-
-        <nav class="bottom-nav">
-
-            <button
-                class="nav-button active"
-                onclick="goHome()"
-            >
-                <span>⌂</span>
-                Home
+                <div class="action-icon">💰</div>
+                <div class="action-title">Add Money</div>
             </button>
 
             <button
-                class="nav-button"
+                class="action"
+                onclick="buyData()"
+            >
+                <div class="action-icon">📶</div>
+                <div class="action-title">Data</div>
+            </button>
+
+            <button
+                class="action"
+                onclick="buyAirtime()"
+            >
+                <div class="action-icon">☎️</div>
+                <div class="action-title">Airtime</div>
+            </button>
+
+            <button
+                class="action"
+                onclick="makeTransfer()"
+            >
+                <div class="action-icon">💸</div>
+                <div class="action-title">Send Money</div>
+            </button>
+
+            <button
+                class="action"
                 onclick="viewTransactions()"
             >
-                <span>▣</span>
-                Activity
+                <div class="action-icon">📊</div>
+                <div class="action-title">Activity</div>
             </button>
 
             <button
-                class="nav-button"
+                class="action"
                 onclick="goToProfile()"
             >
-                <span>♙</span>
-                Profile
+                <div class="action-icon">👤</div>
+                <div class="action-title">Profile</div>
             </button>
 
-        </nav>
+        </div>
 
-    </div>
+        <!-- ACTIVITY -->
 
-    <script>
+        <div class="section-heading">
 
-        const supabaseClient =
-            window.supabase.createClient(
-                SUPABASE_URL,
-                SUPABASE_KEY
+            <div class="section-title">
+                Recent Activity
+            </div>
+
+            <div class="section-subtitle">
+                Wallet
+            </div>
+
+        </div>
+
+        <div class="transactions">
+
+            <div class="transaction-empty">
+
+                <div class="transaction-empty-icon">
+                    🧾
+                </div>
+
+                <strong>
+                    Your activity will appear here
+                </strong>
+
+                <small>
+                    View your full wallet history anytime.
+                </small>
+
+            </div>
+
+            <button
+                class="view-all"
+                onclick="viewTransactions()"
+            >
+                View All Activity →
+            </button>
+
+        </div>
+
+        <button
+            class="logout"
+            onclick="logout()"
+        >
+            🚪 Log Out
+        </button>
+
+    </main>
+
+    <nav class="bottom-nav">
+
+        <button
+            class="nav-button active"
+            onclick="goHome()"
+        >
+            <span>⌂</span>
+            Home
+        </button>
+
+        <button
+            class="nav-button"
+            onclick="viewTransactions()"
+        >
+            <span>▣</span>
+            Activity
+        </button>
+
+        <button
+            class="nav-button"
+            onclick="goToProfile()"
+        >
+            <span>♙</span>
+            Profile
+        </button>
+
+    </nav>
+
+</div>
+
+<script>
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+let actualBalance = null;
+let balanceHidden = false;
+let currentUser = null;
+let fundingInProgress = false;
+
+/* =========================
+   GREETING
+========================= */
+
+function updateGreeting() {
+
+    const hour = new Date().getHours();
+
+    let greeting;
+
+    if (hour < 12) {
+        greeting = "Good morning 👋";
+    } else if (hour < 18) {
+        greeting = "Good afternoon 👋";
+    } else {
+        greeting = "Good evening 👋";
+    }
+
+    document.getElementById(
+        "greetingText"
+    ).textContent = greeting;
+}
+
+/* =========================
+   ACCOUNT NUMBER
+========================= */
+
+async function loadAccountNumber(userId) {
+
+    const element =
+        document.getElementById("accountNumber");
+
+    const { data, error } =
+        await supabaseClient
+            .from("Idris-Data-App")
+            .select("account_number")
+            .eq("id", userId)
+            .maybeSingle();
+
+    if (error) {
+
+        console.error(
+            "Account number error:",
+            error
+        );
+
+        element.textContent = "Unavailable";
+        return;
+    }
+
+    if (!data || !data.account_number) {
+
+        element.textContent = "Unavailable";
+        return;
+    }
+
+    element.textContent =
+        data.account_number;
+}
+
+async function copyAccountNumber() {
+
+    const element =
+        document.getElementById("accountNumber");
+
+    const accountNumber =
+        element.textContent.trim();
+
+    if (
+        !accountNumber ||
+        accountNumber === "Loading..." ||
+        accountNumber === "Unavailable"
+    ) {
+        return;
+    }
+
+    try {
+
+        await navigator.clipboard.writeText(
+            accountNumber
+        );
+
+        const button =
+            document.querySelector(
+                ".copy-account"
             );
 
-        let actualBalance = null;
-        let balanceHidden = false;
-        let currentUser = null;
-        let fundingInProgress = false;
+        button.textContent = "Copied";
 
-        function updateGreeting() {
+        setTimeout(() => {
+            button.textContent = "Copy";
+        }, 1500);
 
-            const hour =
-                new Date().getHours();
+    } catch (error) {
 
-            let greeting;
+        alert(
+            "Unable to copy account number."
+        );
+    }
+}
 
-            if (hour < 12) {
-                greeting = "Good morning";
-            } else if (hour < 18) {
-                greeting = "Good afternoon";
-            } else {
-                greeting = "Good evening";
-            }
+/* =========================
+   WALLET
+========================= */
 
-            const name = "David";
+async function loadWallet(userId) {
 
-            document.getElementById(
-                "greetingText"
-            ).textContent =
-                greeting +
-                ", " +
-                name +
-                " 👋";
-        }
+    const balanceElement =
+        document.getElementById(
+            "walletBalance"
+        );
 
-        async function loadWallet(userId) {
+    balanceElement.textContent =
+        "Checking...";
 
-            const balanceElement =
-                document.getElementById(
-                    "walletBalance"
-                );
+    const { data, error } =
+        await supabaseClient
+            .from("wallets")
+            .select("balance")
+            .eq("user_id", userId)
+            .maybeSingle();
 
-            balanceElement.textContent =
-                "Checking...";
+    if (error) {
 
-            const {
-                data,
-                error
-            } =
-                await supabaseClient
-                    .from("wallets")
-                    .select("balance")
-                    .eq(
-                        "user_id",
-                        userId
-                    )
-                    .maybeSingle();
+        console.error(
+            "Wallet error:",
+            error
+        );
 
-            if (error) {
+        balanceElement.textContent =
+            "Unable to load";
 
-                console.error(
-                    "Wallet error:",
-                    error
-                );
+        return;
+    }
 
-                balanceElement.textContent =
-                    "Unable to load";
+    if (!data) {
 
-                return;
-            }
+        balanceElement.textContent =
+            "Wallet not found";
 
-            if (!data) {
+        return;
+    }
 
-                balanceElement.textContent =
-                    "Wallet not found";
+    actualBalance =
+        Number(data.balance);
 
-                return;
-            }
+    displayBalance();
+}
 
-            actualBalance =
-                Number(
-                    data.balance
-                );
+function displayBalance() {
 
-            displayBalance();
-        }
+    const balanceElement =
+        document.getElementById(
+            "walletBalance"
+        );
 
-        function displayBalance() {
+    const eye =
+        document.getElementById(
+            "balanceEye"
+        );
 
-            const balanceElement =
-                document.getElementById(
-                    "walletBalance"
-                );
+    if (actualBalance === null) {
+        return;
+    }
 
-            const eye =
-                document.getElementById(
-                    "balanceEye"
-                );
+    if (balanceHidden) {
 
-            if (actualBalance === null) {
-                return;
-            }
+        balanceElement.textContent =
+            "₦••••••";
 
-            if (balanceHidden) {
+        eye.textContent =
+            "🙈";
 
-                balanceElement.textContent =
-                    "₦••••••";
+        return;
+    }
 
-                eye.textContent =
-                    "🙈";
-
-                eye.setAttribute(
-                    "aria-label",
-                    "Show balance"
-                );
-
-                return;
-            }
-
-            balanceElement.textContent =
-                "₦" +
-                actualBalance.toLocaleString(
-                    "en-NG",
-                    {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2
-                    }
-                );
-
-            eye.textContent =
-                "👁️";
-
-            eye.setAttribute(
-                "aria-label",
-                "Hide balance"
-            );
-        }
-
-        function toggleBalance() {
-
-            balanceHidden =
-                !balanceHidden;
-
-            displayBalance();
-        }
-
-        async function refreshWallet() {
-
-            if (!currentUser) {
-                return;
-            }
-
-            const button =
-                document.getElementById(
-                    "refreshButton"
-                );
-
-            button.disabled = true;
-            button.textContent = "⟳";
-
-            await loadWallet(
-                currentUser.id
-            );
-
-            button.disabled = false;
-            button.textContent = "↻";
-        }
-
-        async function checkUser() {
-
-            try {
-
-                const {
-                    data,
-                    error
-                } =
-                    await supabaseClient
-                        .auth
-                        .getUser();
-
-                document.getElementById(
-                    "loading"
-                ).style.display = "none";
-
-                if (
-                    error ||
-                    !data.user
-                ) {
-
-                    document.getElementById(
-                        "welcomeScreen"
-                    ).style.display = "flex";
-
-                    return;
-                }
-
-                currentUser =
-                    data.user;
-
-                document.getElementById(
-                    "dashboard"
-                ).classList.add(
-                    "active"
-                );
-
-                updateGreeting();
-
-                await loadWallet(
-                    currentUser.id
-                );
-
-            } catch (error) {
-
-                console.error(
-                    "Account check error:",
-                    error
-                );
-
-                document.getElementById(
-                    "loading"
-                ).style.display = "none";
-
-                document.getElementById(
-                    "welcomeScreen"
-                ).style.display = "flex";
-            }
-        }
-
-        /* FUND WALLET MODAL */
-
-        function startFunding() {
-
-            if (fundingInProgress) {
-                return;
-            }
-
-            if (!currentUser) {
-
-                alert(
-                    "Please log in before funding your wallet."
-                );
-
-                return;
-            }
-
-            const modal =
-                document.getElementById(
-                    "fundModal"
-                );
-
-            const input =
-                document.getElementById(
-                    "fundAmountInput"
-                );
-
-            const errorBox =
-                document.getElementById(
-                    "fundError"
-                );
-
-            input.value = "";
-            errorBox.textContent = "";
-            errorBox.classList.remove("show");
-
-            modal.classList.add("active");
-
-            setTimeout(() => {
-                input.focus();
-            }, 100);
-        }
-
-        function closeFundModal() {
-
-            if (fundingInProgress) {
-                return;
-            }
-
-            document
-                .getElementById("fundModal")
-                .classList.remove("active");
-        }
-
-        function handleFundModalBackground(event) {
-
-            if (
-                event.target.id === "fundModal"
-            ) {
-                closeFundModal();
-            }
-        }
-
-        function setFundAmount(amount) {
-
-            const input =
-                document.getElementById(
-                    "fundAmountInput"
-                );
-
-            const errorBox =
-                document.getElementById(
-                    "fundError"
-                );
-
-            input.value = amount;
-
-            errorBox.textContent = "";
-            errorBox.classList.remove("show");
-
-            input.focus();
-        }
-
-        function showFundError(message) {
-
-            const errorBox =
-                document.getElementById(
-                    "fundError"
-                );
-
-            errorBox.textContent =
-                message;
-
-            errorBox.classList.add(
-                "show"
-            );
-        }
-
-        async function continueFunding() {
-
-            if (fundingInProgress) {
-                return;
-            }
-
-            const input =
-                document.getElementById(
-                    "fundAmountInput"
-                );
-
-            const continueButton =
-                document.getElementById(
-                    "continueFundingButton"
-                );
-
-            const rawAmount =
-                input.value.trim();
-
-            const amount =
-                Number(
-                    rawAmount.replace(
-                        /,/g,
-                        ""
-                    )
-                );
-
-            if (
-                !rawAmount ||
-                !Number.isFinite(amount) ||
-                amount <= 0
-            ) {
-
-                showFundError(
-                    "Please enter a valid amount."
-                );
-
-                input.focus();
-
-                return;
-            }
-
-            if (amount < 100) {
-
-                showFundError(
-                    "The minimum wallet funding amount is ₦100."
-                );
-
-                input.focus();
-
-                return;
-            }
-
-            if (!currentUser) {
-
-                closeFundModal();
-
-                alert(
-                    "Please log in before funding your wallet."
-                );
-
-                return;
-            }
-
-            try {
-
-                fundingInProgress = true;
-
-                continueButton.disabled = true;
-                continueButton.textContent =
-                    "Connecting to Payment...";
-
-                closeFundModal();
-
-                setFundingLoading(true);
-
-                console.log(
-                    "Starting secure wallet funding:",
-                    amount
-                );
-
-                const {
-                    data,
-                    error
-                } =
-                    await supabaseClient
-                        .functions
-                        .invoke(
-                            "rapid-api",
-                            {
-                                body: {
-                                    amount: amount
-                                }
-                            }
-                        );
-
-                console.log(
-                    "Payment response:",
-                    data
-                );
-
-                if (error) {
-
-                    console.error(
-                        "Payment function error:",
-                        error
-                    );
-
-                    setFundingLoading(false);
-
-                    fundingInProgress = false;
-
-                    continueButton.disabled = false;
-                    continueButton.textContent =
-                        "Continue to Payment";
-
-                    alert(
-                        "Unable to start payment: " +
-                        error.message
-                    );
-
-                    return;
-                }
-
-                if (
-                    !data ||
-                    !data.success
-                ) {
-
-                    console.error(
-                        "Payment creation failed:",
-                        data
-                    );
-
-                    setFundingLoading(false);
-
-                    fundingInProgress = false;
-
-                    continueButton.disabled = false;
-                    continueButton.textContent =
-                        "Continue to Payment";
-
-                    alert(
-                        data?.error ||
-                        "Unable to create payment."
-                    );
-
-                    return;
-                }
-
-                if (!data.payment_link) {
-
-                    console.error(
-                        "No payment link returned:",
-                        data
-                    );
-
-                    setFundingLoading(false);
-
-                    fundingInProgress = false;
-
-                    continueButton.disabled = false;
-                    continueButton.textContent =
-                        "Continue to Payment";
-
-                    alert(
-                        "Payment link was not returned."
-                    );
-
-                    return;
-                }
-
-                /*
-                 * Flutterwave payment link received.
-                 *
-                 * The browser is redirected immediately
-                 * to the secure Flutterwave checkout.
-                 */
-
-                window.location.replace(
-                    data.payment_link
-                );
-
-            } catch (error) {
-
-                console.error(
-                    "Funding error:",
-                    error
-                );
-
-                setFundingLoading(false);
-
-                fundingInProgress = false;
-
-                continueButton.disabled = false;
-                continueButton.textContent =
-                    "Continue to Payment";
-
-                alert(
-                    "Something went wrong while starting the payment."
-                );
-            }
-        }
-
-        function setFundingLoading(isLoading) {
-
-            const loadingScreen =
-                document.getElementById(
-                    "paymentLoading"
-                );
-
-            const mainFundButton =
-                document.getElementById(
-                    "fundWalletButton"
-                );
-
-            const quickFundButton =
-                document.getElementById(
-                    "fundActionButton"
-                );
-
-            if (isLoading) {
-
-                loadingScreen.style.display =
-                    "flex";
-
-                if (mainFundButton) {
-                    mainFundButton.disabled = true;
-                }
-
-                if (quickFundButton) {
-                    quickFundButton.disabled = true;
-                }
-
-            } else {
-
-                loadingScreen.style.display =
-                    "none";
-
-                if (mainFundButton) {
-                    mainFundButton.disabled = false;
-                }
-
-                if (quickFundButton) {
-                    quickFundButton.disabled = false;
-                }
-            }
-        }
-
-        function buyData() {
-            window.location.href = "data.html";
-        }
-
-        function buyAirtime() {
-            window.location.href = "airtime.html";
-        }
-
-        function makeTransfer() {
-            window.location.href = "transfer.html";
-        }
-
-        function viewTransactions() {
-            window.location.href = "transactions.html";
-        }
-
-        function goToProfile() {
-            window.location.href = "profile.html";
-        }
-
-        function goHome() {
-
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
-        }
-
-        async function logout() {
-
-            await supabaseClient
-                .auth
-                .signOut();
-
-            window.location.href =
-                "index.html";
-        }
-
-        document.addEventListener(
-            "keydown",
-            function(event) {
-
-                if (
-                    event.key === "Escape" &&
-                    document
-                        .getElementById("fundModal")
-                        .classList
-                        .contains("active")
-                ) {
-                    closeFundModal();
-                }
-
+    balanceElement.textContent =
+        "₦" +
+        actualBalance.toLocaleString(
+            "en-NG",
+            {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
             }
         );
 
-        checkUser();
+    eye.textContent =
+        "👁️";
+}
 
-    </script>
+function toggleBalance() {
+
+    balanceHidden =
+        !balanceHidden;
+
+    displayBalance();
+}
+
+async function refreshWallet() {
+
+    if (!currentUser) {
+        return;
+    }
+
+    const button =
+        document.getElementById(
+            "refreshButton"
+        );
+
+    button.disabled = true;
+    button.textContent = "⟳";
+
+    await loadWallet(
+        currentUser.id
+    );
+
+    button.disabled = false;
+    button.textContent = "↻";
+}
+
+/* =========================
+   CHECK USER
+========================= */
+
+async function checkUser() {
+
+    try {
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .auth
+                .getUser();
+
+        document.getElementById(
+            "loading"
+        ).style.display = "none";
+
+        if (
+            error ||
+            !data.user
+        ) {
+
+            document.getElementById(
+                "welcomeScreen"
+            ).style.display = "flex";
+
+            return;
+        }
+
+        currentUser =
+            data.user;
+
+        document.getElementById(
+            "dashboard"
+        ).classList.add("active");
+
+        updateGreeting();
+
+        await Promise.all([
+            loadWallet(currentUser.id),
+            loadAccountNumber(currentUser.id)
+        ]);
+
+    } catch (error) {
+
+        console.error(
+            "Account check error:",
+            error
+        );
+
+        document.getElementById(
+            "loading"
+        ).style.display = "none";
+
+        document.getElementById(
+            "welcomeScreen"
+        ).style.display = "flex";
+    }
+}
+
+/* =========================
+   FUND WALLET
+========================= */
+
+function startFunding() {
+
+    if (fundingInProgress) {
+        return;
+    }
+
+    if (!currentUser) {
+
+        alert(
+            "Please log in before funding your wallet."
+        );
+
+        return;
+    }
+
+    const modal =
+        document.getElementById(
+            "fundModal"
+        );
+
+    const input =
+        document.getElementById(
+            "fundAmountInput"
+        );
+
+    const errorBox =
+        document.getElementById(
+            "fundError"
+        );
+
+    input.value = "";
+    errorBox.textContent = "";
+    errorBox.classList.remove("show");
+
+    modal.classList.add("active");
+
+    setTimeout(() => {
+        input.focus();
+    }, 100);
+}
+
+function closeFundModal() {
+
+    if (fundingInProgress) {
+        return;
+    }
+
+    document
+        .getElementById("fundModal")
+        .classList.remove("active");
+}
+
+function handleFundModalBackground(event) {
+
+    if (event.target.id === "fundModal") {
+        closeFundModal();
+    }
+}
+
+function setFundAmount(amount) {
+
+    const input =
+        document.getElementById(
+            "fundAmountInput"
+        );
+
+    input.value = amount;
+
+    document
+        .getElementById("fundError")
+        .classList.remove("show");
+
+    input.focus();
+}
+
+function showFundError(message) {
+
+    const errorBox =
+        document.getElementById(
+            "fundError"
+        );
+
+    errorBox.textContent =
+        message;
+
+    errorBox.classList.add("show");
+}
+
+async function continueFunding() {
+
+    if (fundingInProgress) {
+        return;
+    }
+
+    const input =
+        document.getElementById(
+            "fundAmountInput"
+        );
+
+    const continueButton =
+        document.getElementById(
+            "continueFundingButton"
+        );
+
+    const rawAmount =
+        input.value.trim();
+
+    const amount =
+        Number(
+            rawAmount.replace(/,/g, "")
+        );
+
+    if (
+        !rawAmount ||
+        !Number.isFinite(amount) ||
+        amount <= 0
+    ) {
+
+        showFundError(
+            "Please enter a valid amount."
+        );
+
+        input.focus();
+        return;
+    }
+
+    if (amount < 100) {
+
+        showFundError(
+            "The minimum wallet funding amount is ₦100."
+        );
+
+        input.focus();
+        return;
+    }
+
+    if (!currentUser) {
+
+        closeFundModal();
+
+        alert(
+            "Please log in before funding your wallet."
+        );
+
+        return;
+    }
+
+    try {
+
+        fundingInProgress = true;
+
+        continueButton.disabled = true;
+
+        continueButton.textContent =
+            "Connecting to Payment...";
+
+        closeFundModal();
+
+        setFundingLoading(true);
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .functions
+                .invoke(
+                    "rapid-api",
+                    {
+                        body: {
+                            amount: amount
+                        }
+                    }
+                );
+
+        if (error) {
+
+            console.error(
+                "Payment function error:",
+                error
+            );
+
+            setFundingLoading(false);
+
+            fundingInProgress = false;
+
+            continueButton.disabled = false;
+
+            continueButton.textContent =
+                "Continue to Payment";
+
+            alert(
+                "Unable to start payment: " +
+                error.message
+            );
+
+            return;
+        }
+
+        if (
+            !data ||
+            !data.success
+        ) {
+
+            setFundingLoading(false);
+
+            fundingInProgress = false;
+
+            continueButton.disabled = false;
+
+            continueButton.textContent =
+                "Continue to Payment";
+
+            alert(
+                data?.error ||
+                "Unable to create payment."
+            );
+
+            return;
+        }
+
+        if (!data.payment_link) {
+
+            setFundingLoading(false);
+
+            fundingInProgress = false;
+
+            continueButton.disabled = false;
+
+            continueButton.textContent =
+                "Continue to Payment";
+
+            alert(
+                "Payment link was not returned."
+            );
+
+            return;
+        }
+
+        window.location.replace(
+            data.payment_link
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Funding error:",
+            error
+        );
+
+        setFundingLoading(false);
+
+        fundingInProgress = false;
+
+        continueButton.disabled = false;
+
+        continueButton.textContent =
+            "Continue to Payment";
+
+        alert(
+            "Something went wrong while starting the payment."
+        );
+    }
+}
+
+function setFundingLoading(isLoading) {
+
+    const loadingScreen =
+        document.getElementById(
+            "paymentLoading"
+        );
+
+    const mainFundButton =
+        document.getElementById(
+            "fundWalletButton"
+        );
+
+    const quickFundButton =
+        document.getElementById(
+            "fundActionButton"
+        );
+
+    loadingScreen.style.display =
+        isLoading ? "flex" : "none";
+
+    if (mainFundButton) {
+        mainFundButton.disabled = isLoading;
+    }
+
+    if (quickFundButton) {
+        quickFundButton.disabled = isLoading;
+    }
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function buyData() {
+    window.location.href = "data.html";
+}
+
+function buyAirtime() {
+    window.location.href = "airtime.html";
+}
+
+function makeTransfer() {
+    window.location.href = "transfer.html";
+}
+
+function viewTransactions() {
+    window.location.href = "transactions.html";
+}
+
+function goToProfile() {
+    window.location.href = "profile.html";
+}
+
+function goHome() {
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+/* =========================
+   LOGOUT
+========================= */
+
+async function logout() {
+
+    await supabaseClient
+        .auth
+        .signOut();
+
+    window.location.href =
+        "index.html";
+}
+
+/* =========================
+   ESCAPE KEY
+========================= */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape" &&
+            document
+                .getElementById("fundModal")
+                .classList
+                .contains("active")
+        ) {
+            closeFundModal();
+        }
+
+    }
+);
+
+checkUser();
+
+</script>
 
 </body>
 </html>
