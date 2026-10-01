@@ -699,29 +699,115 @@
                 </label>
 
                 <select id="bankName">
-                    <option value="">Choose a bank</option>
-                    <option>Access Bank</option>
-                    <option>Ecobank</option>
-                    <option>FCMB</option>
-                    <option>Fidelity Bank</option>
-                    <option>First Bank</option>
-                    <option>Globus Bank</option>
-                    <option>GTBank</option>
-                    <option>Heritage Bank</option>
-                    <option>Keystone Bank</option>
-                    <option>Kuda Bank</option>
-                    <option>Moniepoint</option>
-                    <option>OPay</option>
-                    <option>Palmpay</option>
-                    <option>Polaris Bank</option>
-                    <option>Stanbic IBTC</option>
-                    <option>Standard Chartered</option>
-                    <option>Sterling Bank</option>
-                    <option>UBA</option>
-                    <option>Union Bank</option>
-                    <option>Unity Bank</option>
-                    <option>Wema Bank</option>
-                    <option>Zenith Bank</option>
+
+                    <option value="">
+                        Choose a bank
+                    </option>
+
+                    <!-- POPULAR FINTECH / DIGITAL BANKS -->
+
+                    <option value="opay">
+                        OPay
+                    </option>
+
+                    <option value="palmpay">
+                        PalmPay
+                    </option>
+
+                    <option value="kuda">
+                        Kuda Bank
+                    </option>
+
+                    <option value="moniepoint">
+                        Moniepoint
+                    </option>
+
+                    <!-- COMMERCIAL / OTHER BANKS -->
+
+                    <option value="access">
+                        Access Bank
+                    </option>
+
+                    <option value="ecobank">
+                        Ecobank
+                    </option>
+
+                    <option value="fcmb">
+                        FCMB
+                    </option>
+
+                    <option value="fidelity">
+                        Fidelity Bank
+                    </option>
+
+                    <option value="firstbank">
+                        First Bank
+                    </option>
+
+                    <option value="globus">
+                        Globus Bank
+                    </option>
+
+                    <option value="gtbank">
+                        GTBank
+                    </option>
+
+                    <option value="keystone">
+                        Keystone Bank
+                    </option>
+
+                    <option value="polaris">
+                        Polaris Bank
+                    </option>
+
+                    <option value="stanbic">
+                        Stanbic IBTC
+                    </option>
+
+                    <option value="standardchartered">
+                        Standard Chartered
+                    </option>
+
+                    <option value="sterling">
+                        Sterling Bank
+                    </option>
+
+                    <option value="uba">
+                        UBA
+                    </option>
+
+                    <option value="union">
+                        Union Bank
+                    </option>
+
+                    <option value="unity">
+                        Unity Bank
+                    </option>
+
+                    <option value="wema">
+                        Wema Bank
+                    </option>
+
+                    <option value="zenith">
+                        Zenith Bank
+                    </option>
+
+                    <option value="providus">
+                        Providus Bank
+                    </option>
+
+                    <option value="titan">
+                        Titan Trust Bank
+                    </option>
+
+                    <option value="premiumtrust">
+                        PremiumTrust Bank
+                    </option>
+
+                    <option value="jaiz">
+                        Jaiz Bank
+                    </option>
+
                 </select>
             </div>
 
@@ -1376,11 +1462,15 @@
 
             /*
                 IMPORTANT:
-                This is only the interface stage.
 
-                Do NOT pretend this verifies a real bank account.
-                The real verification will be connected through
-                a secure server-side payment provider later.
+                This is still only the interface stage.
+
+                It does NOT pretend to verify a real bank
+                account and it does NOT move real money.
+
+                The real account-resolution API will be
+                connected through a secure Supabase Edge
+                Function in the next backend stage.
             */
 
             setTimeout(function () {
