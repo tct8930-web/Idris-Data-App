@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Send Money - Velqora</title>
+    <title>Transfers - Velqora</title>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -99,6 +99,33 @@
             font-weight: 800;
         }
 
+        .transfer-tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            background: #e8f0ec;
+            padding: 6px;
+            border-radius: 16px;
+            margin-bottom: 18px;
+        }
+
+        .tab-button {
+            border: none;
+            padding: 13px 10px;
+            border-radius: 12px;
+            background: transparent;
+            color: #61736b;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .tab-button.active {
+            background: white;
+            color: #087f5b;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+        }
+
         .card {
             background: white;
             border-radius: 22px;
@@ -118,24 +145,22 @@
             margin-bottom: 8px;
         }
 
-        input {
+        input,
+        select {
             width: 100%;
             padding: 15px;
             border: 1px solid #dce8e2;
             border-radius: 14px;
-            font-size: 17px;
+            font-size: 16px;
             outline: none;
             background: #fbfdfc;
             color: #10231c;
         }
 
-        input:focus {
+        input:focus,
+        select:focus {
             border-color: #087f5b;
             box-shadow: 0 0 0 3px rgba(8, 127, 91, 0.08);
-        }
-
-        .account-input-wrap {
-            position: relative;
         }
 
         .account-input {
@@ -155,7 +180,8 @@
             cursor: pointer;
         }
 
-        .find-button:disabled {
+        .find-button:disabled,
+        .send-button:disabled {
             opacity: 0.6;
             cursor: not-allowed;
         }
@@ -268,9 +294,69 @@
             box-shadow: 0 8px 18px rgba(8, 127, 91, 0.18);
         }
 
-        .send-button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
+        .bank-info {
+            margin-bottom: 18px;
+            padding: 14px;
+            border-radius: 14px;
+            background: #f4f8f6;
+            color: #61736b;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .bank-note {
+            padding: 14px;
+            border-radius: 14px;
+            background: #fff8e8;
+            border: 1px solid #f5dfaa;
+            color: #785b13;
+            font-size: 12px;
+            line-height: 1.5;
+            margin-top: 16px;
+        }
+
+        .bank-preview {
+            display: none;
+            margin-top: 16px;
+            padding: 16px;
+            border-radius: 16px;
+            background: #effaf5;
+            border: 1px solid #ccefe0;
+        }
+
+        .bank-preview-title {
+            font-size: 11px;
+            font-weight: 800;
+            color: #5e776d;
+            margin-bottom: 5px;
+        }
+
+        .bank-preview-name {
+            font-size: 17px;
+            font-weight: 800;
+            color: #075c43;
+        }
+
+        .coming-soon {
+            text-align: center;
+            padding: 30px 12px;
+        }
+
+        .coming-icon {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        .coming-title {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .coming-text {
+            color: #718078;
+            font-size: 14px;
+            line-height: 1.5;
         }
 
         #message {
@@ -360,6 +446,10 @@
             text-align: center;
         }
 
+        .hidden {
+            display: none !important;
+        }
+
         @media (max-width: 480px) {
             .container {
                 padding: 20px 15px 35px;
@@ -387,7 +477,7 @@
 
         <div>
             <div class="brand">Velqora</div>
-            <div class="brand-subtitle">Send money instantly</div>
+            <div class="brand-subtitle">Simple, secure transfers</div>
         </div>
     </div>
 
@@ -398,11 +488,11 @@
         </a>
 
         <h1 class="page-title">
-            Send Money
+            Transfers
         </h1>
 
         <p class="subtitle">
-            Send money securely to another Velqora account.
+            Send money securely from your Velqora wallet.
         </p>
 
         <div class="wallet-card">
@@ -415,7 +505,27 @@
             </div>
         </div>
 
-        <div class="card">
+        <div class="transfer-tabs">
+            <button
+                class="tab-button active"
+                id="velqoraTab"
+                onclick="showVelqoraTransfer()"
+            >
+                💸 Velqora
+            </button>
+
+            <button
+                class="tab-button"
+                id="bankTab"
+                onclick="showBankTransfer()"
+            >
+                🏦 Bank Transfer
+            </button>
+        </div>
+
+        <!-- VELQORA TRANSFER -->
+
+        <div class="card" id="velqoraCard">
 
             <div id="transferForm">
 
@@ -511,9 +621,7 @@
 
                         <div class="summary-row">
                             <span>Transfer fee</span>
-                            <span>
-                                ₦0.00
-                            </span>
+                            <span>₦0.00</span>
                         </div>
 
                         <div class="summary-row total">
@@ -571,6 +679,152 @@
                 >
                     Send Another Transfer
                 </button>
+            </div>
+
+        </div>
+
+        <!-- BANK TRANSFER -->
+
+        <div class="card hidden" id="bankCard">
+
+            <div class="bank-info">
+                🏦 Send money from your Velqora wallet to a Nigerian bank
+                account. Account-name verification and live bank processing
+                will be connected securely in the next stage.
+            </div>
+
+            <div class="field">
+                <label for="bankName">
+                    Select Bank
+                </label>
+
+                <select id="bankName">
+                    <option value="">Choose a bank</option>
+                    <option>Access Bank</option>
+                    <option>Ecobank</option>
+                    <option>FCMB</option>
+                    <option>Fidelity Bank</option>
+                    <option>First Bank</option>
+                    <option>Globus Bank</option>
+                    <option>GTBank</option>
+                    <option>Heritage Bank</option>
+                    <option>Keystone Bank</option>
+                    <option>Kuda Bank</option>
+                    <option>Moniepoint</option>
+                    <option>OPay</option>
+                    <option>Palmpay</option>
+                    <option>Polaris Bank</option>
+                    <option>Stanbic IBTC</option>
+                    <option>Standard Chartered</option>
+                    <option>Sterling Bank</option>
+                    <option>UBA</option>
+                    <option>Union Bank</option>
+                    <option>Unity Bank</option>
+                    <option>Wema Bank</option>
+                    <option>Zenith Bank</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="bankAccountNumber">
+                    Account Number
+                </label>
+
+                <input
+                    type="text"
+                    id="bankAccountNumber"
+                    inputmode="numeric"
+                    maxlength="10"
+                    placeholder="Enter 10-digit account number"
+                    oninput="checkBankForm()"
+                >
+            </div>
+
+            <button
+                type="button"
+                class="find-button"
+                id="verifyBankButton"
+                onclick="verifyBankAccount()"
+            >
+                Verify Account
+            </button>
+
+            <div
+                class="bank-preview"
+                id="bankPreview"
+            >
+                <div class="bank-preview-title">
+                    ACCOUNT NAME
+                </div>
+
+                <div
+                    class="bank-preview-name"
+                    id="bankAccountName"
+                >
+                    -
+                </div>
+            </div>
+
+            <div
+                class="amount-section"
+                id="bankAmountSection"
+            >
+
+                <div class="field">
+                    <label for="bankAmount">
+                        Amount to Send
+                    </label>
+
+                    <input
+                        type="number"
+                        id="bankAmount"
+                        class="amount-input"
+                        min="1"
+                        step="1"
+                        placeholder="₦0"
+                        oninput="updateBankSummary()"
+                    >
+                </div>
+
+                <div class="summary">
+
+                    <div class="summary-row">
+                        <span>Send amount</span>
+                        <span id="bankSummaryAmount">
+                            ₦0.00
+                        </span>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>Transfer fee</span>
+                        <span id="bankFee">
+                            To be confirmed
+                        </span>
+                    </div>
+
+                    <div class="summary-row total">
+                        <span>Total</span>
+                        <span id="bankSummaryTotal">
+                            ₦0.00
+                        </span>
+                    </div>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="send-button"
+                    onclick="startBankTransfer()"
+                >
+                    Continue
+                </button>
+
+            </div>
+
+            <div class="bank-note">
+                🔐 Bank transfers are not connected to live bank processing yet.
+                This screen is being prepared before the secure provider
+                connection is added.
             </div>
 
         </div>
@@ -663,26 +917,20 @@
                 formatNaira(data.balance);
         }
 
-        function showMessage(
-            text,
-            type
-        ) {
+        function showMessage(text, type) {
 
             const message =
-                document.getElementById(
-                    "message"
-                );
+                document.getElementById("message");
 
             message.className = type;
             message.textContent = text;
+            message.style.display = "block";
         }
 
         function hideMessage() {
 
             const message =
-                document.getElementById(
-                    "message"
-                );
+                document.getElementById("message");
 
             message.style.display = "none";
             message.textContent = "";
@@ -702,6 +950,48 @@
             ).style.display = "none";
 
             hideMessage();
+        }
+
+        function showVelqoraTransfer() {
+
+            document.getElementById(
+                "velqoraCard"
+            ).classList.remove("hidden");
+
+            document.getElementById(
+                "bankCard"
+            ).classList.add("hidden");
+
+            document.getElementById(
+                "velqoraTab"
+            ).classList.add("active");
+
+            document.getElementById(
+                "bankTab"
+            ).classList.remove("active");
+
+            loadWallet();
+        }
+
+        function showBankTransfer() {
+
+            document.getElementById(
+                "velqoraCard"
+            ).classList.add("hidden");
+
+            document.getElementById(
+                "bankCard"
+            ).classList.remove("hidden");
+
+            document.getElementById(
+                "velqoraTab"
+            ).classList.remove("active");
+
+            document.getElementById(
+                "bankTab"
+            ).classList.add("active");
+
+            loadWallet();
         }
 
         async function findRecipient() {
@@ -766,11 +1056,6 @@
                     );
 
                 if (error) {
-
-                    console.error(
-                        "Recipient lookup error:",
-                        error
-                    );
 
                     throw new Error(
                         error.message ||
@@ -940,11 +1225,6 @@
 
                 if (error) {
 
-                    console.error(
-                        "Transfer error:",
-                        error
-                    );
-
                     throw new Error(
                         error.message ||
                         "Unable to complete transfer."
@@ -1027,6 +1307,150 @@
             hideMessage();
 
             loadWallet();
+        }
+
+        function checkBankForm() {
+
+            const input =
+                document.getElementById(
+                    "bankAccountNumber"
+                );
+
+            input.value =
+                input.value.replace(
+                    /\D/g,
+                    ""
+                );
+
+            document.getElementById(
+                "bankPreview"
+            ).style.display = "none";
+
+            document.getElementById(
+                "bankAmountSection"
+            ).style.display = "none";
+        }
+
+        async function verifyBankAccount() {
+
+            const bank =
+                document.getElementById(
+                    "bankName"
+                ).value;
+
+            const accountNumber =
+                document.getElementById(
+                    "bankAccountNumber"
+                ).value.trim();
+
+            const button =
+                document.getElementById(
+                    "verifyBankButton"
+                );
+
+            if (!bank) {
+
+                alert(
+                    "Please select a bank."
+                );
+
+                return;
+            }
+
+            if (
+                !/^[0-9]{10}$/.test(
+                    accountNumber
+                )
+            ) {
+
+                alert(
+                    "Enter a valid 10-digit bank account number."
+                );
+
+                return;
+            }
+
+            button.disabled = true;
+            button.textContent =
+                "Verifying...";
+
+            /*
+                IMPORTANT:
+                This is only the interface stage.
+
+                Do NOT pretend this verifies a real bank account.
+                The real verification will be connected through
+                a secure server-side payment provider later.
+            */
+
+            setTimeout(function () {
+
+                document.getElementById(
+                    "bankAccountName"
+                ).textContent =
+                    "Account verification will be connected next";
+
+                document.getElementById(
+                    "bankPreview"
+                ).style.display =
+                    "block";
+
+                document.getElementById(
+                    "bankAmountSection"
+                ).style.display =
+                    "block";
+
+                button.disabled = false;
+                button.textContent =
+                    "Verify Account";
+
+            }, 600);
+        }
+
+        function updateBankSummary() {
+
+            const amount =
+                Number(
+                    document.getElementById(
+                        "bankAmount"
+                    ).value || 0
+                );
+
+            document.getElementById(
+                "bankSummaryAmount"
+            ).textContent =
+                formatNaira(amount);
+
+            document.getElementById(
+                "bankSummaryTotal"
+            ).textContent =
+                formatNaira(amount);
+        }
+
+        function startBankTransfer() {
+
+            const amount =
+                Number(
+                    document.getElementById(
+                        "bankAmount"
+                    ).value || 0
+                );
+
+            if (
+                !amount ||
+                amount <= 0
+            ) {
+
+                alert(
+                    "Enter a valid amount."
+                );
+
+                return;
+            }
+
+            alert(
+                "Bank transfer processing will be connected securely in the next stage."
+            );
         }
 
         document
