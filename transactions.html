@@ -1002,12 +1002,6 @@ async function loadTransactions() {
 
                     type: "data",
 
-                    /*
-                     * Normalize the capital-S
-                     * database column into
-                     * the normal status property.
-                     */
-
                     status:
                         transaction.Status ||
                         transaction.status ||
@@ -1291,10 +1285,30 @@ function goProfile() {
 }
 
 
-loadTransactions();
+/*
+ * Start loading the activity page.
+ *
+ * If something unexpected goes wrong,
+ * show an error instead of staying forever
+ * on "Loading your activity..."
+ */
+
+loadTransactions().catch(error => {
+
+    console.error(
+        "Activity page error:",
+        error
+    );
+
+    document.getElementById("content").innerHTML = `
+        <div class="error">
+            Unable to load your activity right now.<br><br>
+            Please refresh the page and try again.
+        </div>
+    `;
+});
 
 </script>
 
 </body>
 </html>
-``
