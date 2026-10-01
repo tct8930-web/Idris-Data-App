@@ -685,7 +685,7 @@ function getIcon(
 
         return isIncoming
             ? "↓"
-            : "↗";
+            : "↗️";
     }
 
     if (type === "funding") {
@@ -843,13 +843,17 @@ async function loadTransactions() {
 
     /*
      * Load data.
+     *
+     * IMPORTANT:
+     * The database column is named "Status"
+     * with a capital S.
      */
 
     const dataPromise =
         supabaseClient
             .from("data_transactions")
             .select(
-                "id, created_at, phone, network, amount, tx_ref, status, provider_reference"
+                'id, created_at, phone, network, amount, tx_ref, "Status", provider_reference'
             )
             .eq(
                 "user_id",
@@ -859,10 +863,6 @@ async function loadTransactions() {
 
     /*
      * Load Velqora transfers.
-     *
-     * IMPORTANT:
-     * The user can now see transfers where
-     * they are either the sender OR recipient.
      */
 
     const transferPromise =
@@ -872,7 +872,7 @@ async function loadTransactions() {
                 "id, created_at, user_id, recipient_user_id, bank_code, bank_name, account_number, account_name, amount, fee, tx_ref, status, provider_reference"
             )
             .or(
-                `user_id.eq.${user.id},recipient_user_id.eq.${user.id}`
+                user_id.eq.${user.id},recipient_user_id.eq.${user.id}
             );
 
 
@@ -911,7 +911,9 @@ async function loadTransactions() {
     );
 
 
-    if (walletResult.error) {
+    if (
+        walletResult.error
+    ) {
 
         console.error(
             "Wallet transaction error:",
@@ -999,6 +1001,17 @@ async function loadTransactions() {
                     ...transaction,
 
                     type: "data",
+
+                    /*
+                     * Normalize the capital-S
+                     * database column into
+                     * the normal status property.
+                     */
+
+                    status:
+                        transaction.Status ||
+                        transaction.status ||
+                        "pending",
 
                     isIncoming: false
 
@@ -1093,6 +1106,7 @@ async function loadTransactions() {
             const status =
                 String(
                     transaction.status ||
+                    transaction.Status ||
                     "pending"
                 );
 
@@ -1283,3 +1297,4 @@ loadTransactions();
 
 </body>
 </html>
+``
