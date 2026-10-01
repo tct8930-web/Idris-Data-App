@@ -398,10 +398,10 @@
             </div>
 
             <div class="info">
-                Available plans are loaded from the
-                VTpass Sandbox for testing. No wallet
-                money will be deducted while we are
-                preparing the secure purchase connection.
+                Data plans are loaded from VTpass Sandbox.
+                Your Velqora wallet will only be charged
+                when the purchase request is accepted by
+                the secure purchase system.
             </div>
 
             <button
@@ -424,6 +424,7 @@
     <script src="config.js"></script>
 
     <script>
+
         const supabaseClient =
             window.supabase.createClient(
                 SUPABASE_URL,
@@ -452,7 +453,9 @@
             selectedPrice = null;
             selectedVariationCode = null;
 
-            document.getElementById("buyButton").disabled = true;
+            document.getElementById(
+                "buyButton"
+            ).disabled = true;
 
             loadPlans(selectedNetwork);
         }
@@ -476,7 +479,9 @@
             selectedPrice = price;
             selectedVariationCode = variationCode;
 
-            document.getElementById("buyButton").disabled = false;
+            document.getElementById(
+                "buyButton"
+            ).disabled = false;
         }
 
         async function loadWallet() {
@@ -493,6 +498,7 @@
                 sessionError ||
                 !session
             ) {
+
                 window.location.href =
                     "login.html";
 
@@ -523,7 +529,9 @@
             }
 
             const balance =
-                Number(data?.balance || 0);
+                Number(
+                    data?.balance || 0
+                );
 
             document.getElementById(
                 "walletBalance"
@@ -541,13 +549,19 @@
         async function loadPlans(network) {
 
             const planGrid =
-                document.getElementById("planGrid");
+                document.getElementById(
+                    "planGrid"
+                );
 
             const buyButton =
-                document.getElementById("buyButton");
+                document.getElementById(
+                    "buyButton"
+                );
 
             const message =
-                document.getElementById("message");
+                document.getElementById(
+                    "message"
+                );
 
             selectedPlan = null;
             selectedPrice = null;
@@ -578,6 +592,7 @@
                     sessionError ||
                     !session
                 ) {
+
                     window.location.href =
                         "login.html";
 
@@ -607,6 +622,7 @@
                     !data.success ||
                     !Array.isArray(data.plans)
                 ) {
+
                     throw new Error(
                         data?.message ||
                         "Unable to load data plans."
@@ -636,17 +652,23 @@
                 plans.forEach(plan => {
 
                     const button =
-                        document.createElement("button");
+                        document.createElement(
+                            "button"
+                        );
 
                     button.type = "button";
-                    button.className = "plan-btn";
+
+                    button.className =
+                        "plan-btn";
 
                     const name =
                         plan.name ||
                         "Data Plan";
 
                     const price =
-                        Number(plan.amount);
+                        Number(
+                            plan.amount
+                        );
 
                     button.innerHTML = `
                         <div class="plan-name">
@@ -664,18 +686,21 @@
                         </div>
                     `;
 
-                    button.onclick = function() {
+                    button.onclick =
+                        function() {
 
-                        selectPlan(
-                            name,
-                            price,
-                            plan.variation_code,
-                            button
-                        );
+                            selectPlan(
+                                name,
+                                price,
+                                plan.variation_code,
+                                button
+                            );
 
-                    };
+                        };
 
-                    planGrid.appendChild(button);
+                    planGrid.appendChild(
+                        button
+                    );
 
                 });
 
@@ -692,7 +717,8 @@
                     </div>
                 `;
 
-                message.className = "error";
+                message.className =
+                    "error";
 
                 message.textContent =
                     error.message ||
@@ -703,24 +729,81 @@
         function escapeHtml(value) {
 
             return String(value)
-                .replaceAll("&", "&amp;")
-                .replaceAll("<", "&lt;")
-                .replaceAll(">", "&gt;")
-                .replaceAll('"', "&quot;")
-                .replaceAll("'", "&#039;");
+                .replaceAll(
+                    "&",
+                    "&amp;"
+                )
+                .replaceAll(
+                    "<",
+                    "&lt;"
+                )
+                .replaceAll(
+                    ">",
+                    "&gt;"
+                )
+                .replaceAll(
+                    '"',
+                    "&quot;"
+                )
+                .replaceAll(
+                    "'",
+                    "&#039;"
+                );
         }
 
         async function buyData() {
 
             const message =
-                document.getElementById("message");
+                document.getElementById(
+                    "message"
+                );
+
+            const buyButton =
+                document.getElementById(
+                    "buyButton"
+                );
+
+            const phoneInput =
+                document.getElementById(
+                    "phone"
+                );
 
             message.className = "";
             message.textContent = "";
 
+            const phone =
+                phoneInput.value.trim();
+
+            if (!phone) {
+
+                message.className =
+                    "error";
+
+                message.textContent =
+                    "Please enter the phone number.";
+
+                phoneInput.focus();
+
+                return;
+            }
+
+            if (!/^0\d{10}$/.test(phone)) {
+
+                message.className =
+                    "error";
+
+                message.textContent =
+                    "Please enter a valid 11-digit Nigerian phone number.";
+
+                phoneInput.focus();
+
+                return;
+            }
+
             if (!selectedVariationCode) {
 
-                message.className = "error";
+                message.className =
+                    "error";
 
                 message.textContent =
                     "Please select a data plan.";
@@ -728,21 +811,146 @@
                 return;
             }
 
-            /*
-             * We intentionally do not send the purchase
-             * request yet.
-             *
-             * The next step is to connect this button
-             * to the secure wallet-debit transaction
-             * flow so a user cannot receive data without
-             * the correct wallet deduction.
-             */
+            if (!selectedPrice || selectedPrice <= 0) {
 
-            message.className = "loading";
+                message.className =
+                    "error";
+
+                message.textContent =
+                    "Invalid data plan amount.";
+
+                return;
+            }
+
+            const {
+                data: {
+                    session
+                },
+                error: sessionError
+            } =
+                await supabaseClient.auth.getSession();
+
+            if (
+                sessionError ||
+                !session
+            ) {
+
+                window.location.href =
+                    "login.html";
+
+                return;
+            }
+
+            buyButton.disabled = true;
+
+            const originalText =
+                buyButton.textContent;
+
+            buyButton.textContent =
+                "Processing...";
+
+            message.className =
+                "loading";
 
             message.textContent =
-                "Your data plan is ready. Secure wallet purchase connection is being completed.";
+                "Processing your data purchase securely...";
 
+            try {
+
+                const {
+                    data,
+                    error
+                } =
+                    await supabaseClient.functions.invoke(
+                        "data-purchase",
+                        {
+                            body: {
+                                action: "purchase",
+                                network: selectedNetwork,
+                                phone: phone,
+                                variation_code:
+                                    selectedVariationCode
+                            }
+                        }
+                    );
+
+                if (error) {
+                    throw error;
+                }
+
+                if (
+                    !data ||
+                    !data.success
+                ) {
+
+                    throw new Error(
+                        data?.message ||
+                        data?.error ||
+                        "Data purchase could not be completed."
+                    );
+                }
+
+                const status =
+                    String(
+                        data.status ||
+                        "pending"
+                    ).toLowerCase();
+
+                if (
+                    status === "successful" ||
+                    status === "success" ||
+                    status === "completed"
+                ) {
+
+                    message.className =
+                        "success";
+
+                    message.textContent =
+                        "Data purchase successful. Your data should be delivered shortly.";
+
+                } else if (
+                    status === "pending"
+                ) {
+
+                    message.className =
+                        "loading";
+
+                    message.textContent =
+                        "Your data purchase is being processed. Please check Activity for the transaction status.";
+
+                } else {
+
+                    message.className =
+                        "success";
+
+                    message.textContent =
+                        data.message ||
+                        "Your data purchase has been submitted successfully.";
+                }
+
+                await loadWallet();
+
+            } catch (error) {
+
+                console.error(
+                    "DATA PURCHASE ERROR:",
+                    error
+                );
+
+                message.className =
+                    "error";
+
+                message.textContent =
+                    error.message ||
+                    "Unable to complete the data purchase.";
+
+            } finally {
+
+                buyButton.disabled = false;
+
+                buyButton.textContent =
+                    originalText;
+            }
         }
 
         function goBack() {
@@ -753,15 +961,20 @@
                     "tct8930-web.github.io"
                 )
             ) {
+
                 history.back();
+
             } else {
+
                 window.location.href =
                     "index.html";
             }
         }
 
         loadWallet();
+
         loadPlans("mtn");
+
     </script>
 
 </body>
