@@ -292,6 +292,205 @@
         }
 
         /* =========================
+           NOTIFICATION PANEL
+        ========================= */
+
+        #notificationOverlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 6000;
+            background: rgba(8, 35, 27, .45);
+            backdrop-filter: blur(3px);
+        }
+
+        #notificationOverlay.active {
+            display: block;
+        }
+
+        .notification-panel {
+            position: absolute;
+            top: 72px;
+            right: 16px;
+            width: min(390px, calc(100vw - 28px));
+            background: white;
+            border: 1px solid #e1ebe6;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(8, 35, 27, .2);
+            animation: notificationOpen .2s ease-out;
+        }
+
+        @keyframes notificationOpen {
+            from {
+                opacity: 0;
+                transform: translateY(-8px) scale(.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .notification-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 18px 15px;
+            border-bottom: 1px solid #edf2ef;
+        }
+
+        .notification-heading {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .notification-heading-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 13px;
+            background: #eaf8f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 19px;
+        }
+
+        .notification-heading h3 {
+            font-size: 18px;
+            margin-bottom: 2px;
+        }
+
+        .notification-heading p {
+            color: #91a19b;
+            font-size: 11px;
+        }
+
+        .notification-close {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #f1f5f3;
+            color: #52645d;
+            font-size: 20px;
+        }
+
+        .notification-actions {
+            padding: 10px 16px;
+            border-bottom: 1px solid #edf2ef;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .mark-read {
+            background: transparent;
+            color: #087f55;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .notification-list {
+            max-height: 420px;
+            overflow-y: auto;
+        }
+
+        .notification-item {
+            display: flex;
+            gap: 12px;
+            padding: 15px 17px;
+            border-bottom: 1px solid #edf2ef;
+            transition: background .2s ease;
+        }
+
+        .notification-item:hover {
+            background: #fbfdfc;
+        }
+
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+
+        .notification-item.unread {
+            background: #f5fcf8;
+        }
+
+        .notification-item-icon {
+            width: 43px;
+            height: 43px;
+            flex: 0 0 43px;
+            border-radius: 14px;
+            background: #eaf8f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 19px;
+        }
+
+        .notification-item-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .notification-item-title {
+            color: #243830;
+            font-size: 13px;
+            font-weight: 850;
+            margin-bottom: 4px;
+        }
+
+        .notification-item-message {
+            color: #72857d;
+            font-size: 12px;
+            line-height: 1.45;
+        }
+
+        .notification-item-time {
+            color: #a0aea9;
+            font-size: 10px;
+            margin-top: 6px;
+        }
+
+        .notification-new-dot {
+            width: 7px;
+            height: 7px;
+            flex: 0 0 7px;
+            border-radius: 50%;
+            background: #0f9f6e;
+            margin-top: 6px;
+        }
+
+        .notification-empty {
+            padding: 45px 20px;
+            text-align: center;
+            color: #8ba099;
+        }
+
+        .notification-empty-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 12px;
+            border-radius: 19px;
+            background: #eff6f3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 27px;
+        }
+
+        .notification-empty strong {
+            display: block;
+            color: #40554d;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .notification-empty small {
+            font-size: 12px;
+        }
+
+        /* =========================
            WELCOME SCREEN
         ========================= */
 
@@ -458,6 +657,10 @@
             right: 8px;
             top: 7px;
             border: 2px solid white;
+        }
+
+        .notification-dot.hidden {
+            display: none;
         }
 
         /* =========================
@@ -944,6 +1147,11 @@
                 border: 1px solid #e2ebe7;
                 border-radius: 18px;
             }
+
+            .notification-panel {
+                top: 68px;
+                right: 18px;
+            }
         }
 
         @media (max-width: 420px) {
@@ -975,6 +1183,11 @@
 
             .recent-item {
                 padding: 14px 13px;
+            }
+
+            .notification-panel {
+                top: 67px;
+                right: 10px;
             }
         }
     </style>
@@ -1115,6 +1328,67 @@
     </div>
 </div>
 
+<!-- NOTIFICATION OVERLAY -->
+
+<div
+    id="notificationOverlay"
+    onclick="handleNotificationBackground(event)"
+>
+
+    <div
+        class="notification-panel"
+        onclick="event.stopPropagation()"
+    >
+
+        <div class="notification-header">
+
+            <div class="notification-heading">
+
+                <div class="notification-heading-icon">
+                    🔔
+                </div>
+
+                <div>
+                    <h3>
+                        Notifications
+                    </h3>
+
+                    <p>
+                        Updates from Velqora
+                    </p>
+                </div>
+
+            </div>
+
+            <button
+                class="notification-close"
+                onclick="closeNotifications()"
+            >
+                ×
+            </button>
+
+        </div>
+
+        <div class="notification-actions">
+
+            <button
+                class="mark-read"
+                onclick="markNotificationsRead()"
+            >
+                Mark all as read
+            </button>
+
+        </div>
+
+        <div
+            id="notificationList"
+            class="notification-list"
+        ></div>
+
+    </div>
+
+</div>
+
 <!-- WELCOME SCREEN -->
 
 <div
@@ -1198,14 +1472,19 @@
             <button
                 class="notification-button"
                 onclick="showNotifications()"
+                aria-label="Notifications"
             >
                 🔔
-                <span class="notification-dot"></span>
+                <span
+                    id="notificationDot"
+                    class="notification-dot"
+                ></span>
             </button>
 
             <button
                 class="profile-button"
                 onclick="goToProfile()"
+                aria-label="Profile"
             >
                 👤
             </button>
@@ -1550,11 +1829,171 @@ function updateGreeting() {
    NOTIFICATIONS
 ========================= */
 
+const velqoraNotifications = [
+    {
+        icon: "👋",
+        title: "Welcome to Velqora",
+        message: "Your Velqora account is ready. Explore your wallet and services.",
+        time: "Just now",
+        unread: true
+    },
+    {
+        icon: "🔐",
+        title: "Your account is secure",
+        message: "Keep your login details private and never share your password.",
+        time: "Today",
+        unread: true
+    },
+    {
+        icon: "💰",
+        title: "Wallet funding",
+        message: "You can add money to your Velqora wallet using the Add Money button.",
+        time: "Today",
+        unread: true
+    },
+    {
+        icon: "📶",
+        title: "Data and airtime",
+        message: "Buy mobile data and airtime directly from your Velqora account.",
+        time: "Today",
+        unread: false
+    }
+];
+
 function showNotifications() {
 
-    alert(
-        "Notifications will appear here."
+    const overlay =
+        document.getElementById(
+            "notificationOverlay"
+        );
+
+    renderNotifications();
+
+    overlay.classList.add(
+        "active"
     );
+
+    document.body.style.overflow =
+        "hidden";
+}
+
+function closeNotifications() {
+
+    document
+        .getElementById(
+            "notificationOverlay"
+        )
+        .classList.remove(
+            "active"
+        );
+
+    document.body.style.overflow =
+        "";
+}
+
+function handleNotificationBackground(event) {
+
+    if (
+        event.target.id ===
+        "notificationOverlay"
+    ) {
+        closeNotifications();
+    }
+}
+
+function renderNotifications() {
+
+    const list =
+        document.getElementById(
+            "notificationList"
+        );
+
+    if (
+        !velqoraNotifications.length
+    ) {
+
+        list.innerHTML = `
+            <div class="notification-empty">
+
+                <div class="notification-empty-icon">
+                    🔔
+                </div>
+
+                <strong>
+                    You're all caught up
+                </strong>
+
+                <small>
+                    New Velqora updates will appear here.
+                </small>
+
+            </div>
+        `;
+
+        return;
+    }
+
+    list.innerHTML =
+        velqoraNotifications
+            .map(notification => `
+
+                <div class="
+                    notification-item
+                    ${notification.unread ? "unread" : ""}
+                ">
+
+                    <div class="notification-item-icon">
+                        ${notification.icon}
+                    </div>
+
+                    <div class="notification-item-info">
+
+                        <div class="notification-item-title">
+                            ${notification.title}
+                        </div>
+
+                        <div class="notification-item-message">
+                            ${notification.message}
+                        </div>
+
+                        <div class="notification-item-time">
+                            ${notification.time}
+                        </div>
+
+                    </div>
+
+                    ${
+                        notification.unread
+                            ? `<span class="notification-new-dot"></span>`
+                            : ""
+                    }
+
+                </div>
+
+            `)
+            .join("");
+}
+
+function markNotificationsRead() {
+
+    velqoraNotifications.forEach(
+        notification => {
+            notification.unread = false;
+        }
+    );
+
+    const dot =
+        document.getElementById(
+            "notificationDot"
+        );
+
+    if (dot) {
+        dot.classList.add(
+            "hidden"
+        );
+    }
+
+    renderNotifications();
 }
 
 /* =========================
@@ -2640,15 +3079,33 @@ document.addEventListener(
     "keydown",
     function(event) {
 
-        if (
-            event.key === "Escape" &&
-            document
-                .getElementById("fundModal")
-                .classList
-                .contains("active")
-        ) {
+        if (event.key === "Escape") {
 
-            closeFundModal();
+            const fundModal =
+                document.getElementById(
+                    "fundModal"
+                );
+
+            const notificationOverlay =
+                document.getElementById(
+                    "notificationOverlay"
+                );
+
+            if (
+                fundModal.classList.contains(
+                    "active"
+                )
+            ) {
+                closeFundModal();
+            }
+
+            if (
+                notificationOverlay.classList.contains(
+                    "active"
+                )
+            ) {
+                closeNotifications();
+            }
         }
 
     }
