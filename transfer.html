@@ -2,9 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Transfers - Velqora</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Velqora - Transfers</title>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -15,183 +19,422 @@
             padding: 0;
         }
 
+        :root {
+            --green: #0b6b43;
+            --green-dark: #075333;
+            --green-light: #eaf7f0;
+            --text: #10231b;
+            --muted: #718078;
+            --background: #f5f8f6;
+            --border: #e4ebe7;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background: #f4f8f6;
-            color: #10231c;
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            background: var(--background);
+            color: var(--text);
             min-height: 100vh;
-            padding-bottom: 40px;
+            padding-bottom: 30px;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
         }
 
         .topbar {
-            background: linear-gradient(135deg, #063d2b, #087f5b);
+            background:
+                linear-gradient(
+                    135deg,
+                    #075333 0%,
+                    #0b6b43 55%,
+                    #118457 100%
+                );
+
             color: white;
-            padding: 18px 20px;
+            padding: 18px 20px 22px;
+
             display: flex;
             align-items: center;
             gap: 12px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+
+            box-shadow:
+                0 10px 28px rgba(7, 83, 51, 0.16);
+        }
+
+        .back-btn {
+            width: 44px;
+            height: 44px;
+
+            border: 1px solid rgba(255,255,255,0.16);
+            border-radius: 14px;
+
+            background: rgba(255,255,255,0.12);
+            color: white;
+
+            font-size: 22px;
+            cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateX(-2px);
         }
 
         .logo {
             width: 44px;
             height: 44px;
+
             object-fit: cover;
-            border-radius: 13px;
+            border-radius: 14px;
             background: white;
+
+            flex-shrink: 0;
+
+            box-shadow:
+                0 5px 15px rgba(0,0,0,0.12);
         }
 
         .brand {
-            font-size: 22px;
+            font-size: 18px;
             font-weight: 800;
+            letter-spacing: -0.3px;
         }
 
         .brand-subtitle {
             font-size: 12px;
-            opacity: 0.8;
+            opacity: 0.78;
             margin-top: 3px;
         }
 
         .container {
             width: 100%;
-            max-width: 520px;
+            max-width: 560px;
             margin: 0 auto;
-            padding: 22px 16px 40px;
+            padding: 25px 18px 20px;
         }
 
-        .back {
-            display: inline-block;
-            text-decoration: none;
-            color: #087f5b;
-            font-weight: 700;
-            margin-bottom: 22px;
+        .page-heading {
+            margin-bottom: 18px;
+        }
+
+        .eyebrow {
+            color: var(--green);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
         }
 
         .page-title {
-            font-size: 28px;
-            font-weight: 800;
-            margin-bottom: 7px;
+            font-size: 27px;
+            font-weight: 850;
+            letter-spacing: -0.8px;
         }
 
         .subtitle {
-            color: #708078;
+            color: var(--muted);
+            font-size: 14px;
             line-height: 1.5;
-            margin-bottom: 22px;
+            margin-top: 7px;
         }
 
         .wallet-card {
-            background: linear-gradient(135deg, #063d2b, #087f5b);
+            position: relative;
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #075333 0%,
+                    #0b6b43 55%,
+                    #159263 100%
+                );
+
             color: white;
-            border-radius: 22px;
-            padding: 22px;
-            margin-bottom: 20px;
-            box-shadow: 0 12px 28px rgba(8, 127, 91, 0.18);
+            border-radius: 24px;
+
+            padding: 24px;
+            margin-bottom: 18px;
+
+            box-shadow:
+                0 16px 35px rgba(7,83,51,0.18);
+        }
+
+        .wallet-card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 160px;
+            height: 160px;
+
+            border-radius: 50%;
+
+            right: -65px;
+            top: -75px;
+
+            background: rgba(255,255,255,0.07);
+        }
+
+        .wallet-card::after {
+            content: "";
+
+            position: absolute;
+
+            width: 95px;
+            height: 95px;
+
+            border-radius: 50%;
+
+            right: 35px;
+            bottom: -60px;
+
+            background: rgba(255,255,255,0.05);
         }
 
         .wallet-label {
-            font-size: 13px;
-            opacity: 0.82;
-            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+
+            font-size: 12px;
+            opacity: 0.78;
+
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 700;
         }
 
         .wallet-balance {
-            font-size: 30px;
-            font-weight: 800;
+            position: relative;
+            z-index: 1;
+
+            font-size: 32px;
+            font-weight: 850;
+
+            letter-spacing: -1px;
+            margin-top: 8px;
+        }
+
+        .wallet-caption {
+            position: relative;
+            z-index: 1;
+
+            margin-top: 8px;
+
+            font-size: 12px;
+            opacity: 0.72;
         }
 
         .transfer-tabs {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            background: #e8f0ec;
+
+            gap: 6px;
+
+            background: #e7efeb;
+
             padding: 6px;
-            border-radius: 16px;
+            border-radius: 17px;
+
             margin-bottom: 18px;
         }
 
         .tab-button {
             border: none;
+
             padding: 13px 10px;
-            border-radius: 12px;
+
+            border-radius: 13px;
+
             background: transparent;
-            color: #61736b;
-            font-size: 14px;
+
+            color: #66776f;
+
+            font-size: 13px;
             font-weight: 800;
+
             cursor: pointer;
+
+            transition: 0.2s ease;
         }
 
         .tab-button.active {
             background: white;
-            color: #087f5b;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+            color: var(--green);
+
+            box-shadow:
+                0 4px 12px rgba(16,35,27,0.06);
         }
 
         .card {
             background: white;
-            border-radius: 22px;
-            padding: 20px;
-            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
+
+            border: 1px solid rgba(16,35,27,0.04);
+
+            border-radius: 24px;
+
+            padding: 22px;
+
+            box-shadow:
+                0 10px 28px rgba(16,35,27,0.055);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+
+            gap: 13px;
+
+            margin-bottom: 23px;
+        }
+
+        .service-icon {
+            width: 47px;
+            height: 47px;
+
+            border-radius: 15px;
+
+            background: var(--green-light);
+            color: var(--green);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 21px;
+
+            flex-shrink: 0;
+        }
+
+        .card-header h2 {
+            font-size: 20px;
+            font-weight: 800;
+
+            letter-spacing: -0.4px;
+        }
+
+        .card-header p {
+            color: var(--muted);
+
+            font-size: 13px;
+            margin-top: 4px;
         }
 
         .field {
-            margin-bottom: 18px;
+            margin-bottom: 19px;
         }
 
         label {
             display: block;
-            font-size: 14px;
-            font-weight: 800;
-            color: #31483f;
-            margin-bottom: 8px;
+
+            color: #293c33;
+
+            font-size: 13px;
+            font-weight: 750;
+
+            margin-bottom: 9px;
         }
 
         input,
         select {
             width: 100%;
+
             padding: 15px;
-            border: 1px solid #dce8e2;
+
+            border: 1px solid var(--border);
+
             border-radius: 14px;
+
+            background: #fbfcfb;
+            color: var(--text);
+
             font-size: 16px;
+
             outline: none;
-            background: #fbfdfc;
-            color: #10231c;
+
+            transition: 0.2s ease;
+        }
+
+        input::placeholder {
+            color: #a1aaa5;
         }
 
         input:focus,
         select:focus {
-            border-color: #087f5b;
-            box-shadow: 0 0 0 3px rgba(8, 127, 91, 0.08);
+            border-color: var(--green);
+
+            background: white;
+
+            box-shadow:
+                0 0 0 4px rgba(11,107,67,0.08);
         }
 
         .account-input {
             letter-spacing: 2px;
-            font-weight: 700;
+            font-weight: 750;
         }
 
         .find-button {
             width: 100%;
+
             padding: 15px;
+
             border: none;
             border-radius: 14px;
-            background: #10231c;
+
+            background: #10231b;
             color: white;
-            font-size: 16px;
+
+            font-size: 15px;
             font-weight: 800;
+
             cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+        .find-button:hover:not(:disabled) {
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 8px 18px rgba(16,35,27,0.12);
         }
 
         .find-button:disabled,
         .send-button:disabled {
             opacity: 0.6;
             cursor: not-allowed;
+            transform: none;
         }
 
         .recipient-card {
             display: none;
+
             margin-top: 18px;
+
             padding: 17px;
+
             border-radius: 17px;
-            background: linear-gradient(135deg, #effaf5, #f8fcfa);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #effaf5,
+                    #f8fcfa
+                );
+
             border: 1px solid #ccefe0;
         }
 
@@ -202,247 +445,341 @@
         }
 
         .recipient-avatar {
-            width: 46px;
-            height: 46px;
+            width: 48px;
+            height: 48px;
+
             border-radius: 50%;
-            background: #087f5b;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0b6b43,
+                    #159263
+                );
+
             color: white;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
             font-size: 18px;
             font-weight: 800;
+
             flex-shrink: 0;
         }
 
         .recipient-label {
-            font-size: 11px;
             color: #5e776d;
+
+            font-size: 10px;
             font-weight: 800;
+
+            letter-spacing: 0.7px;
+
             margin-bottom: 3px;
         }
 
         .recipient-name {
+            color: #075c43;
+
             font-size: 18px;
             font-weight: 800;
-            color: #075c43;
         }
 
         .recipient-number {
-            font-size: 12px;
             color: #718078;
+
+            font-size: 12px;
+
             margin-top: 3px;
         }
 
         .amount-section {
             display: none;
+
             margin-top: 22px;
         }
 
         .amount-input {
-            font-size: 22px;
+            font-size: 23px;
             font-weight: 800;
         }
 
         .summary {
             background: #f7faf8;
-            border-radius: 16px;
-            padding: 16px;
-            margin-top: 18px;
+
             border: 1px solid #e6eee9;
+
+            border-radius: 17px;
+
+            padding: 15px 16px;
+
+            margin-top: 17px;
         }
 
         .summary-row {
             display: flex;
+
             justify-content: space-between;
+
             gap: 15px;
+
             padding: 8px 0;
-            color: #61736b;
-            font-size: 14px;
+
+            color: #697970;
+
+            font-size: 13px;
         }
 
         .summary-row span:last-child {
-            font-weight: 700;
             color: #30473e;
+            font-weight: 700;
         }
 
         .summary-row.total {
             border-top: 1px solid #dfe9e4;
-            margin-top: 7px;
-            padding-top: 14px;
-            font-size: 16px;
-            font-weight: 800;
+
+            margin-top: 6px;
+            padding-top: 13px;
+
             color: #10231c;
+
+            font-size: 15px;
+            font-weight: 800;
         }
 
         .summary-row.total span:last-child {
-            color: #087f5b;
+            color: var(--green);
+
             font-size: 18px;
         }
 
         .send-button {
             width: 100%;
-            margin-top: 20px;
+
+            margin-top: 19px;
+
             padding: 16px;
+
             border: none;
             border-radius: 15px;
-            background: linear-gradient(135deg, #087f5b, #0aa66f);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #075333,
+                    #0b6b43
+                );
+
             color: white;
-            font-size: 17px;
+
+            font-size: 15px;
             font-weight: 800;
+
             cursor: pointer;
-            box-shadow: 0 8px 18px rgba(8, 127, 91, 0.18);
+
+            box-shadow:
+                0 10px 22px rgba(7,83,51,0.17);
+
+            transition: 0.2s ease;
+        }
+
+        .send-button:hover:not(:disabled) {
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 13px 26px rgba(7,83,51,0.22);
         }
 
         .bank-info {
             margin-bottom: 18px;
-            padding: 14px;
-            border-radius: 14px;
-            background: #f4f8f6;
-            color: #61736b;
-            font-size: 12px;
-            line-height: 1.5;
-        }
 
-        .bank-note {
-            padding: 14px;
-            border-radius: 14px;
-            background: #fff8e8;
-            border: 1px solid #f5dfaa;
-            color: #785b13;
+            padding: 15px;
+
+            border-radius: 15px;
+
+            background: #f5f8f6;
+
+            color: #61736b;
+
             font-size: 12px;
-            line-height: 1.5;
-            margin-top: 16px;
+
+            line-height: 1.55;
+
+            border: 1px solid #e8eeea;
         }
 
         .bank-preview {
             display: none;
+
             margin-top: 16px;
+
             padding: 16px;
+
             border-radius: 16px;
+
             background: #effaf5;
+
             border: 1px solid #ccefe0;
         }
 
         .bank-preview-title {
-            font-size: 11px;
-            font-weight: 800;
             color: #5e776d;
+
+            font-size: 10px;
+            font-weight: 800;
+
+            letter-spacing: 0.7px;
+
             margin-bottom: 5px;
         }
 
         .bank-preview-name {
-            font-size: 17px;
-            font-weight: 800;
             color: #075c43;
-        }
 
-        .coming-soon {
-            text-align: center;
-            padding: 30px 12px;
-        }
-
-        .coming-icon {
-            font-size: 42px;
-            margin-bottom: 12px;
-        }
-
-        .coming-title {
-            font-size: 20px;
+            font-size: 16px;
             font-weight: 800;
-            margin-bottom: 8px;
         }
 
-        .coming-text {
-            color: #718078;
-            font-size: 14px;
-            line-height: 1.5;
+        .bank-note {
+            padding: 14px;
+
+            border-radius: 14px;
+
+            background: #fff8e8;
+
+            border: 1px solid #f5dfaa;
+
+            color: #785b13;
+
+            font-size: 12px;
+
+            line-height: 1.55;
+
+            margin-top: 17px;
         }
 
         #message {
             display: none;
+
             margin-top: 16px;
+
             padding: 13px 14px;
+
             border-radius: 13px;
-            font-size: 14px;
+
+            font-size: 13px;
+
             line-height: 1.5;
+
             font-weight: 600;
         }
 
         #message.error {
             display: block;
+
             background: #fff1f1;
             color: #b42318;
+
             border: 1px solid #ffd4d4;
         }
 
         #message.success {
             display: block;
+
             background: #effaf5;
             color: #087f5b;
+
             border: 1px solid #ccefe0;
         }
 
         #message.loading {
             display: block;
+
             background: #eff6ff;
             color: #1d4ed8;
+
             border: 1px solid #dbeafe;
         }
 
         .success-box {
             display: none;
+
             text-align: center;
-            padding: 25px 15px 10px;
+
+            padding: 26px 15px 10px;
         }
 
         .success-icon {
-            width: 70px;
-            height: 70px;
-            margin: 0 auto 14px;
+            width: 72px;
+            height: 72px;
+
+            margin: 0 auto 15px;
+
             border-radius: 50%;
+
             background: #eafaf3;
-            color: #087f5b;
+            color: var(--green);
+
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 34px;
+
+            font-size: 35px;
             font-weight: 800;
         }
 
         .success-title {
             font-size: 22px;
             font-weight: 800;
+
             margin-bottom: 7px;
         }
 
         .success-text {
-            color: #718078;
-            line-height: 1.5;
+            color: var(--muted);
+
             font-size: 14px;
+
+            line-height: 1.55;
         }
 
         .new-transfer-button {
             width: 100%;
+
             margin-top: 20px;
+
             padding: 15px;
+
             border: none;
             border-radius: 14px;
-            background: #087f5b;
+
+            background: var(--green);
+
             color: white;
-            font-size: 16px;
+
+            font-size: 15px;
             font-weight: 800;
+
             cursor: pointer;
         }
 
         .note {
             margin-top: 18px;
+
             padding: 13px;
+
             border-radius: 13px;
-            background: #f4f8f6;
+
+            background: #f5f8f6;
+
             color: #718078;
+
             font-size: 12px;
+
             line-height: 1.5;
+
             text-align: center;
         }
 
@@ -450,17 +787,93 @@
             display: none !important;
         }
 
-        @media (max-width: 480px) {
+        .bottom-nav {
+            width: 100%;
+            max-width: 560px;
+
+            margin: 18px auto 0;
+
+            padding: 0 18px;
+        }
+
+        .nav-inner {
+            background: white;
+
+            border: 1px solid #e7eeea;
+
+            border-radius: 19px;
+
+            padding: 8px;
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 5px;
+
+            box-shadow:
+                0 8px 25px rgba(16,35,27,0.06);
+        }
+
+        .nav-item {
+            text-decoration: none;
+
+            text-align: center;
+
+            color: #7c8882;
+
+            padding: 9px 4px;
+
+            border-radius: 13px;
+
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .nav-item.active {
+            background: var(--green-light);
+            color: var(--green);
+        }
+
+        .nav-icon {
+            display: block;
+
+            font-size: 17px;
+
+            margin-bottom: 3px;
+        }
+
+        @media (max-width: 380px) {
+
             .container {
-                padding: 20px 15px 35px;
+                padding-left: 14px;
+                padding-right: 14px;
+            }
+
+            .topbar {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+            .card {
+                padding: 18px;
+            }
+
+            .wallet-card {
+                padding: 20px;
+            }
+
+            .wallet-balance {
+                font-size: 28px;
             }
 
             .page-title {
                 font-size: 25px;
             }
 
-            .wallet-balance {
-                font-size: 27px;
+            .bottom-nav {
+                padding-left: 14px;
+                padding-right: 14px;
             }
         }
     </style>
@@ -468,7 +881,16 @@
 
 <body>
 
-    <div class="topbar">
+    <header class="topbar">
+
+        <button
+            class="back-btn"
+            onclick="goBack()"
+            aria-label="Go back"
+        >
+            ←
+        </button>
+
         <img
             src="velqora.png.PNG"
             alt="Velqora"
@@ -476,36 +898,56 @@
         >
 
         <div>
-            <div class="brand">Velqora</div>
-            <div class="brand-subtitle">Simple, secure transfers</div>
-        </div>
-    </div>
-
-    <div class="container">
-
-        <a href="index.html" class="back">
-            ← Back to Dashboard
-        </a>
-
-        <h1 class="page-title">
-            Transfers
-        </h1>
-
-        <p class="subtitle">
-            Send money securely from your Velqora wallet.
-        </p>
-
-        <div class="wallet-card">
-            <div class="wallet-label">
-                Available Balance
+            <div class="brand">
+                Velqora
             </div>
 
-            <div class="wallet-balance" id="walletBalance">
+            <div class="brand-subtitle">
+                Secure money transfers
+            </div>
+        </div>
+
+    </header>
+
+    <main class="container">
+
+        <section class="page-heading">
+
+            <div class="eyebrow">
+                Wallet service
+            </div>
+
+            <h1 class="page-title">
+                Transfers
+            </h1>
+
+            <p class="subtitle">
+                Send money securely from your Velqora wallet.
+            </p>
+
+        </section>
+
+        <section class="wallet-card">
+
+            <div class="wallet-label">
+                Available Wallet Balance
+            </div>
+
+            <div
+                class="wallet-balance"
+                id="walletBalance"
+            >
                 ₦0.00
             </div>
-        </div>
+
+            <div class="wallet-caption">
+                Your available balance for transfers.
+            </div>
+
+        </section>
 
         <div class="transfer-tabs">
+
             <button
                 class="tab-button active"
                 id="velqoraTab"
@@ -521,17 +963,42 @@
             >
                 🏦 Bank Transfer
             </button>
+
         </div>
 
         <!-- VELQORA TRANSFER -->
 
-        <div class="card" id="velqoraCard">
+        <section
+            class="card"
+            id="velqoraCard"
+        >
 
             <div id="transferForm">
 
+                <div class="card-header">
+
+                    <div class="service-icon">
+                        💸
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Send money
+                        </h2>
+
+                        <p>
+                            Transfer money to another Velqora user.
+                        </p>
+
+                    </div>
+
+                </div>
+
                 <div class="field">
+
                     <label for="accountNumber">
-                        Recipient Velqora Account Number
+                        Recipient Account Number
                     </label>
 
                     <input
@@ -541,7 +1008,9 @@
                         inputmode="numeric"
                         maxlength="10"
                         placeholder="Enter 10-digit account number"
+                        autocomplete="off"
                     >
+
                 </div>
 
                 <button
@@ -557,6 +1026,7 @@
                     class="recipient-card"
                     id="recipientCard"
                 >
+
                     <div class="recipient-top">
 
                         <div
@@ -567,8 +1037,9 @@
                         </div>
 
                         <div>
+
                             <div class="recipient-label">
-                                RECIPIENT
+                                VERIFIED RECIPIENT
                             </div>
 
                             <div
@@ -584,9 +1055,11 @@
                             >
                                 -
                             </div>
+
                         </div>
 
                     </div>
+
                 </div>
 
                 <div
@@ -595,6 +1068,7 @@
                 >
 
                     <div class="field">
+
                         <label for="amount">
                             Amount to Send
                         </label>
@@ -608,27 +1082,45 @@
                             placeholder="₦0"
                             oninput="updateSummary()"
                         >
+
                     </div>
 
                     <div class="summary">
 
                         <div class="summary-row">
-                            <span>Send amount</span>
+
+                            <span>
+                                Send amount
+                            </span>
+
                             <span id="summaryAmount">
                                 ₦0.00
                             </span>
+
                         </div>
 
                         <div class="summary-row">
-                            <span>Transfer fee</span>
-                            <span>₦0.00</span>
+
+                            <span>
+                                Transfer fee
+                            </span>
+
+                            <span>
+                                ₦0.00
+                            </span>
+
                         </div>
 
                         <div class="summary-row total">
-                            <span>Total</span>
+
+                            <span>
+                                Total
+                            </span>
+
                             <span id="summaryTotal">
                                 ₦0.00
                             </span>
+
                         </div>
 
                     </div>
@@ -647,8 +1139,8 @@
                 <div id="message"></div>
 
                 <div class="note">
-                    🔒 Velqora-to-Velqora transfers are processed securely
-                    through your Velqora wallet.
+                    🔒 Velqora-to-Velqora transfers are processed
+                    securely through your wallet.
                 </div>
 
             </div>
@@ -657,6 +1149,7 @@
                 class="success-box"
                 id="successBox"
             >
+
                 <div class="success-icon">
                     ✓
                 </div>
@@ -679,21 +1172,49 @@
                 >
                     Send Another Transfer
                 </button>
+
             </div>
 
-        </div>
+        </section>
 
         <!-- BANK TRANSFER -->
 
-        <div class="card hidden" id="bankCard">
+        <section
+            class="card hidden"
+            id="bankCard"
+        >
+
+            <div class="card-header">
+
+                <div class="service-icon">
+                    🏦
+                </div>
+
+                <div>
+
+                    <h2>
+                        Bank transfer
+                    </h2>
+
+                    <p>
+                        Transfer from Velqora to a Nigerian bank.
+                    </p>
+
+                </div>
+
+            </div>
 
             <div class="bank-info">
-                🏦 Send money from your Velqora wallet to a Nigerian bank
-                account. Account-name verification and live bank processing
-                will be connected securely in the next stage.
+
+                🏦 Bank transfers are being prepared for secure
+                provider integration. Account-name verification
+                and live bank processing will be connected through
+                the secure backend stage.
+
             </div>
 
             <div class="field">
+
                 <label for="bankName">
                     Select Bank
                 </label>
@@ -703,8 +1224,6 @@
                     <option value="">
                         Choose a bank
                     </option>
-
-                    <!-- POPULAR FINTECH / DIGITAL BANKS -->
 
                     <option value="opay">
                         OPay
@@ -721,8 +1240,6 @@
                     <option value="moniepoint">
                         Moniepoint
                     </option>
-
-                    <!-- COMMERCIAL / OTHER BANKS -->
 
                     <option value="access">
                         Access Bank
@@ -809,9 +1326,11 @@
                     </option>
 
                 </select>
+
             </div>
 
             <div class="field">
+
                 <label for="bankAccountNumber">
                     Account Number
                 </label>
@@ -824,6 +1343,7 @@
                     placeholder="Enter 10-digit account number"
                     oninput="checkBankForm()"
                 >
+
             </div>
 
             <button
@@ -839,6 +1359,7 @@
                 class="bank-preview"
                 id="bankPreview"
             >
+
                 <div class="bank-preview-title">
                     ACCOUNT NAME
                 </div>
@@ -849,6 +1370,7 @@
                 >
                     -
                 </div>
+
             </div>
 
             <div
@@ -857,6 +1379,7 @@
             >
 
                 <div class="field">
+
                     <label for="bankAmount">
                         Amount to Send
                     </label>
@@ -870,29 +1393,45 @@
                         placeholder="₦0"
                         oninput="updateBankSummary()"
                     >
+
                 </div>
 
                 <div class="summary">
 
                     <div class="summary-row">
-                        <span>Send amount</span>
+
+                        <span>
+                            Send amount
+                        </span>
+
                         <span id="bankSummaryAmount">
                             ₦0.00
                         </span>
+
                     </div>
 
                     <div class="summary-row">
-                        <span>Transfer fee</span>
+
+                        <span>
+                            Transfer fee
+                        </span>
+
                         <span id="bankFee">
                             To be confirmed
                         </span>
+
                     </div>
 
                     <div class="summary-row total">
-                        <span>Total</span>
+
+                        <span>
+                            Total
+                        </span>
+
                         <span id="bankSummaryTotal">
                             ₦0.00
                         </span>
+
                     </div>
 
                 </div>
@@ -908,14 +1447,58 @@
             </div>
 
             <div class="bank-note">
-                🔐 Bank transfers are not connected to live bank processing yet.
-                This screen is being prepared before the secure provider
-                connection is added.
+
+                🔐 Live bank verification and bank transfers
+                are not connected yet. This section will be
+                connected to a secure provider before real bank
+                transfers are enabled.
+
             </div>
 
-        </div>
+        </section>
 
-    </div>
+        <nav class="bottom-nav">
+
+            <div class="nav-inner">
+
+                <a
+                    href="index.html"
+                    class="nav-item"
+                >
+                    <span class="nav-icon">
+                        ⌂
+                    </span>
+
+                    Home
+                </a>
+
+                <a
+                    href="transactions.html"
+                    class="nav-item"
+                >
+                    <span class="nav-icon">
+                        ↕
+                    </span>
+
+                    Activity
+                </a>
+
+                <a
+                    href="profile.html"
+                    class="nav-item"
+                >
+                    <span class="nav-icon">
+                        ◎
+                    </span>
+
+                    Profile
+                </a>
+
+            </div>
+
+        </nav>
+
+    </main>
 
     <script src="config.js"></script>
 
@@ -992,7 +1575,8 @@
 
                 document.getElementById(
                     "walletBalance"
-                ).textContent = "₦0.00";
+                ).textContent =
+                    "₦0.00";
 
                 return;
             }
@@ -1006,7 +1590,9 @@
         function showMessage(text, type) {
 
             const message =
-                document.getElementById("message");
+                document.getElementById(
+                    "message"
+                );
 
             message.className = type;
             message.textContent = text;
@@ -1016,7 +1602,9 @@
         function hideMessage() {
 
             const message =
-                document.getElementById("message");
+                document.getElementById(
+                    "message"
+                );
 
             message.style.display = "none";
             message.textContent = "";
@@ -1161,11 +1749,13 @@
                 }
 
                 recipient = {
+
                     accountNumber:
                         data.account_number,
 
                     accountName:
                         data.account_name
+
                 };
 
                 document.getElementById(
@@ -1203,7 +1793,9 @@
 
             } catch (error) {
 
-                console.error(error);
+                console.error(
+                    error
+                );
 
                 showMessage(
                     error.message ||
@@ -1214,6 +1806,7 @@
             } finally {
 
                 button.disabled = false;
+
                 button.textContent =
                     "Find Account";
             }
@@ -1284,6 +1877,7 @@
             }
 
             sendButton.disabled = true;
+
             sendButton.textContent =
                 "Sending...";
 
@@ -1330,11 +1924,13 @@
 
                 document.getElementById(
                     "transferForm"
-                ).style.display = "none";
+                ).style.display =
+                    "none";
 
                 document.getElementById(
                     "successBox"
-                ).style.display = "block";
+                ).style.display =
+                    "block";
 
                 document.getElementById(
                     "successText"
@@ -1348,7 +1944,9 @@
 
             } catch (error) {
 
-                console.error(error);
+                console.error(
+                    error
+                );
 
                 showMessage(
                     error.message ||
@@ -1357,6 +1955,7 @@
                 );
 
                 sendButton.disabled = false;
+
                 sendButton.textContent =
                     "Send Money";
             }
@@ -1376,19 +1975,33 @@
 
             document.getElementById(
                 "recipientCard"
-            ).style.display = "none";
+            ).style.display =
+                "none";
 
             document.getElementById(
                 "amountSection"
-            ).style.display = "none";
+            ).style.display =
+                "none";
 
             document.getElementById(
                 "successBox"
-            ).style.display = "none";
+            ).style.display =
+                "none";
 
             document.getElementById(
                 "transferForm"
-            ).style.display = "block";
+            ).style.display =
+                "block";
+
+            const sendButton =
+                document.getElementById(
+                    "sendButton"
+                );
+
+            sendButton.disabled = false;
+
+            sendButton.textContent =
+                "Send Money";
 
             hideMessage();
 
@@ -1410,11 +2023,13 @@
 
             document.getElementById(
                 "bankPreview"
-            ).style.display = "none";
+            ).style.display =
+                "none";
 
             document.getElementById(
                 "bankAmountSection"
-            ).style.display = "none";
+            ).style.display =
+                "none";
         }
 
         async function verifyBankAccount() {
@@ -1457,6 +2072,7 @@
             }
 
             button.disabled = true;
+
             button.textContent =
                 "Verifying...";
 
@@ -1468,9 +2084,9 @@
                 It does NOT pretend to verify a real bank
                 account and it does NOT move real money.
 
-                The real account-resolution API will be
-                connected through a secure Supabase Edge
-                Function in the next backend stage.
+                Real bank account resolution will be connected
+                through a secure Supabase Edge Function in the
+                backend stage.
             */
 
             setTimeout(function () {
@@ -1491,6 +2107,7 @@
                     "block";
 
                 button.disabled = false;
+
                 button.textContent =
                     "Verify Account";
 
@@ -1544,7 +2161,9 @@
         }
 
         document
-            .getElementById("accountNumber")
+            .getElementById(
+                "accountNumber"
+            )
             .addEventListener(
                 "input",
                 function () {
@@ -1558,6 +2177,24 @@
                     clearRecipient();
                 }
             );
+
+        function goBack() {
+
+            if (
+                document.referrer &&
+                document.referrer.includes(
+                    "tct8930-web.github.io"
+                )
+            ) {
+
+                history.back();
+
+            } else {
+
+                window.location.href =
+                    "index.html";
+            }
+        }
 
         loadWallet();
 
