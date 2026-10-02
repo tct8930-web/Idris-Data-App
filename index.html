@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -100,7 +99,7 @@
             line-height: 1.5;
         }
 
-        /* FUND MODAL /
+        /* FUND MODAL */
 
         #fundModal {
             display: none;
@@ -271,7 +270,7 @@
             font-weight: 700;
         }
 
-        / WELCOME /
+        /* WELCOME */
 
         .welcome-page {
             min-height: 100vh;
@@ -360,7 +359,7 @@
             font-size: 12px;
         }
 
-        / DASHBOARD /
+        /* DASHBOARD */
 
         .dashboard {
             display: none;
@@ -438,7 +437,7 @@
             letter-spacing: -.8px;
         }
 
-        / ACCOUNT /
+        /* ACCOUNT */
 
         .account-strip {
             display: flex;
@@ -475,7 +474,7 @@
             font-weight: 800;
         }
 
-        / BALANCE /
+        /* BALANCE */
 
         .balance-card {
             background:
@@ -551,7 +550,7 @@
             z-index: 2;
         }
 
-        / SERVICES /
+        /* SERVICES */
 
         .section-heading {
             display: flex;
@@ -608,7 +607,7 @@
             color: #263a33;
         }
 
-        / RECENT ACTIVITY /
+        /* RECENT ACTIVITY */
 
         .transactions {
             background: white;
@@ -720,7 +719,7 @@
             font-weight: 800;
         }
 
-        / LOGOUT /
+        /* LOGOUT */
 
         .logout {
             width: 100%;
@@ -734,7 +733,7 @@
             font-weight: 800;
         }
 
-        / BOTTOM NAV /
+        /* BOTTOM NAV */
 
         .bottom-nav {
             position: fixed;
@@ -1245,9 +1244,9 @@ let balanceHidden = false;
 let currentUser = null;
 let fundingInProgress = false;
 
-/ =========================
+/* =========================
    GREETING
-========================= /
+========================= */
 
 function updateGreeting() {
 
@@ -1268,9 +1267,9 @@ function updateGreeting() {
     ).textContent = greeting;
 }
 
-/ =========================
+/* =========================
    ACCOUNT NUMBER
-========================= /
+========================= */
 
 async function loadAccountNumber(userId) {
 
@@ -1358,9 +1357,9 @@ async function copyAccountNumber() {
     }
 }
 
-/ =========================
+/* =========================
    WALLET
-========================= /
+========================= */
 
 async function loadWallet(userId) {
 
@@ -1478,9 +1477,9 @@ async function refreshWallet() {
     button.textContent = "↻";
 }
 
-/ =========================
+/* =========================
    RECENT ACTIVITY
-========================= /
+========================= */
 
 function formatRecentDate(dateValue) {
 
@@ -1535,7 +1534,7 @@ async function loadRecentActivity() {
 
         const results = [];
 
-        / TRANSFERS /
+        /* TRANSFERS */
 
         const {
             data: transfers,
@@ -1547,7 +1546,7 @@ async function loadRecentActivity() {
                     "id, created_at, amount, account_name, tx_ref, status, user_id, recipient_user_id"
                 )
                 .or(
-                    user_id.eq.${currentUser.id},recipient_user_id.eq.${currentUser.id}
+                    `user_id.eq.${currentUser.id},recipient_user_id.eq.${currentUser.id}`
                 )
                 .order(
                     "created_at",
@@ -1606,7 +1605,7 @@ async function loadRecentActivity() {
             }
         );
 
-        / DATA /
+        /* DATA */
 
         const {
             data: dataTransactions,
@@ -1668,7 +1667,7 @@ async function loadRecentActivity() {
             }
         );
 
-        / AIRTIME /
+        /* AIRTIME */
 
         const {
             data: airtimeTransactions,
@@ -1730,7 +1729,7 @@ async function loadRecentActivity() {
             }
         );
 
-        / SORT EVERYTHING TOGETHER /
+        /* SORT EVERYTHING TOGETHER */
 
         results.sort(
             (a, b) =>
@@ -1839,9 +1838,9 @@ async function loadRecentActivity() {
     }
 }
 
-/ =========================
+/* =========================
    CHECK USER
-========================= /
+========================= */
 
 async function checkUser() {
 
@@ -1903,9 +1902,9 @@ async function checkUser() {
     }
 }
 
-/ =========================
+/* =========================
    FUND WALLET
-========================= /
+========================= */
 
 function startFunding() {
 
@@ -2229,9 +2228,9 @@ function setFundingLoading(isLoading) {
     }
 }
 
-/ =========================
+/* =========================
    NAVIGATION
-========================= /
+========================= */
 
 function buyData() {
     window.location.href =
@@ -2266,9 +2265,9 @@ function goHome() {
     });
 }
 
-/ =========================
+/* =========================
    LOGOUT
-========================= /
+========================= */
 
 async function logout() {
 
@@ -2280,7 +2279,7 @@ async function logout() {
         "index.html";
 }
 
-/ =========================
+/* =========================
    ESCAPE KEY
 ========================= */
 
