@@ -2,55 +2,79 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Velqora - Data</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
         * {
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #f4f7f5;
-            color: #111;
+            background: #f4f8f6;
+            color: #10231c;
             min-height: 100vh;
+            padding-bottom: 35px;
         }
 
+        /* =========================
+           HEADER
+        ========================= */
+
         .topbar {
-            background: #25d366;
+            background: linear-gradient(135deg, #063d2b, #087f5b);
             color: white;
-            padding: 18px 20px;
+            padding: 18px 18px 58px;
             display: flex;
             align-items: center;
             gap: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 8px 25px rgba(6, 61, 43, 0.14);
+            border-radius: 0 0 30px 30px;
+        }
+
+        .top-inner {
+            width: 100%;
+            max-width: 650px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
         .back-btn {
-            border: none;
-            background: rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.13);
             color: white;
-            width: 42px;
-            height: 42px;
-            border-radius: 13px;
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
             font-size: 22px;
             cursor: pointer;
+            flex-shrink: 0;
+            transition: 0.2s ease;
+        }
+
+        .back-btn:active {
+            transform: scale(0.95);
         }
 
         .brand-logo {
-            width: 42px;
-            height: 42px;
-            border-radius: 13px;
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
             overflow: hidden;
             background: white;
             flex-shrink: 0;
+            box-shadow: 0 7px 18px rgba(0,0,0,0.14);
         }
 
         .brand-logo img {
@@ -61,88 +85,141 @@
         }
 
         .brand {
-            font-size: 18px;
-            font-weight: bold;
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -0.3px;
         }
 
         .subtitle {
             font-size: 13px;
-            opacity: 0.9;
+            opacity: 0.78;
             margin-top: 3px;
         }
 
+        /* =========================
+           CONTAINER
+        ========================= */
+
         .container {
             width: 100%;
-            max-width: 520px;
-            margin: 0 auto;
-            padding: 24px 18px 40px;
+            max-width: 650px;
+            margin: -32px auto 0;
+            padding: 0 16px 35px;
         }
 
+        /* =========================
+           WALLET CARD
+        ========================= */
+
         .balance-card {
-            background: #25d366;
+            background: linear-gradient(135deg, #087f5b, #0aa66f);
             color: white;
-            border-radius: 22px;
+            border-radius: 24px;
             padding: 22px;
-            margin-bottom: 20px;
-            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.2);
+            margin-bottom: 16px;
+            box-shadow: 0 13px 30px rgba(8,127,91,0.22);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .balance-card::after {
+            content: "";
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            right: -55px;
+            top: -65px;
+            background: rgba(255,255,255,0.08);
         }
 
         .balance-label {
-            font-size: 14px;
-            opacity: 0.9;
+            font-size: 12px;
+            opacity: 0.78;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .balance {
             font-size: 30px;
-            font-weight: bold;
+            font-weight: 800;
             margin-top: 7px;
+            letter-spacing: -0.5px;
         }
+
+        .balance-caption {
+            margin-top: 8px;
+            font-size: 12px;
+            opacity: 0.76;
+        }
+
+        /* =========================
+           MAIN CARD
+        ========================= */
 
         .card {
             background: white;
-            border-radius: 22px;
-            padding: 22px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+            border-radius: 25px;
+            padding: 22px 18px;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.07);
         }
 
         h1 {
-            margin: 0 0 8px;
-            font-size: 24px;
+            margin: 0 0 7px;
+            font-size: 25px;
+            letter-spacing: -0.5px;
         }
 
         .description {
-            color: #666;
+            color: #718078;
             font-size: 14px;
-            line-height: 1.5;
-            margin-bottom: 22px;
+            line-height: 1.55;
+            margin-bottom: 25px;
         }
 
+        /* =========================
+           FORM
+        ========================= */
+
         .field {
-            margin-bottom: 20px;
+            margin-bottom: 21px;
         }
 
         label {
             display: block;
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 8px;
+            font-size: 13px;
+            font-weight: 800;
+            margin-bottom: 9px;
+            color: #243c32;
         }
 
         input,
         select {
             width: 100%;
             padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 13px;
+            border: 1px solid #dfe9e4;
+            border-radius: 14px;
             font-size: 16px;
             outline: none;
             background: white;
+            color: #17372b;
+            transition: 0.2s ease;
+        }
+
+        input::placeholder {
+            color: #a1aca7;
         }
 
         input:focus,
         select:focus {
-            border-color: #25d366;
+            border-color: #087f5b;
+            box-shadow: 0 0 0 3px rgba(8,127,91,0.08);
         }
+
+        /* =========================
+           NETWORKS
+        ========================= */
 
         .network-grid {
             display: grid;
@@ -151,20 +228,31 @@
         }
 
         .network-btn {
-            border: 1px solid #ddd;
+            border: 1px solid #dfe8e3;
             background: white;
-            border-radius: 12px;
-            padding: 12px 5px;
+            color: #465850;
+            border-radius: 13px;
+            padding: 13px 5px;
             font-size: 12px;
+            font-weight: 800;
             cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .network-btn:active {
+            transform: scale(0.97);
         }
 
         .network-btn.active {
-            border-color: #25d366;
-            background: #eafff1;
-            color: #16833b;
-            font-weight: bold;
+            border-color: #087f5b;
+            background: #effaf5;
+            color: #087f5b;
+            box-shadow: inset 0 0 0 1px rgba(8,127,91,0.08);
         }
+
+        /* =========================
+           PLANS
+        ========================= */
 
         .plan-grid {
             display: grid;
@@ -173,73 +261,103 @@
         }
 
         .plan-btn {
-            border: 1px solid #ddd;
+            border: 1px solid #dfe8e3;
             background: white;
-            border-radius: 14px;
-            padding: 15px 10px;
+            border-radius: 16px;
+            padding: 16px 13px;
             text-align: left;
             cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .plan-btn:active {
+            transform: scale(0.98);
         }
 
         .plan-btn.active {
-            border-color: #25d366;
-            background: #eafff1;
+            border-color: #087f5b;
+            background: #effaf5;
+            box-shadow: 0 5px 15px rgba(8,127,91,0.08);
         }
 
         .plan-name {
             font-size: 15px;
-            font-weight: bold;
-            margin-bottom: 5px;
+            font-weight: 800;
+            color: #17372b;
+            margin-bottom: 7px;
+            line-height: 1.3;
         }
 
         .plan-price {
             font-size: 14px;
-            color: #16833b;
-            font-weight: bold;
+            color: #087f5b;
+            font-weight: 800;
         }
 
         .plan-loading {
             grid-column: 1 / -1;
-            padding: 15px;
+            padding: 18px 12px;
             text-align: center;
-            color: #777;
-            background: #f4f7f5;
-            border-radius: 14px;
-            font-size: 14px;
-        }
-
-        .info {
-            background: #f4f7f5;
-            border-radius: 14px;
-            padding: 14px;
-            margin: 20px 0;
+            color: #78847f;
+            background: #f5f8f6;
+            border-radius: 15px;
             font-size: 13px;
-            color: #666;
             line-height: 1.5;
         }
+
+        /* =========================
+           INFO
+        ========================= */
+
+        .info {
+            background: #f2f8f5;
+            border: 1px solid #e3eee8;
+            border-radius: 16px;
+            padding: 14px;
+            margin: 21px 0;
+            font-size: 12px;
+            color: #62736b;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           BUY BUTTON
+        ========================= */
 
         .buy-btn {
             width: 100%;
             border: none;
-            background: #25d366;
+            background: linear-gradient(135deg, #087f5b, #0aa66f);
             color: white;
             padding: 16px;
-            border-radius: 14px;
+            border-radius: 15px;
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 800;
             cursor: pointer;
+            box-shadow: 0 9px 20px rgba(8,127,91,0.17);
+            transition: 0.2s ease;
+        }
+
+        .buy-btn:active {
+            transform: scale(0.98);
         }
 
         .buy-btn:disabled {
-            opacity: 0.6;
+            opacity: 0.55;
             cursor: not-allowed;
+            box-shadow: none;
         }
+
+        /* =========================
+           MESSAGE
+        ========================= */
 
         #message {
             margin-top: 16px;
             text-align: center;
-            font-size: 14px;
-            line-height: 1.5;
+            font-size: 13px;
+            line-height: 1.55;
+            min-height: 20px;
         }
 
         .error {
@@ -247,14 +365,19 @@
         }
 
         .success {
-            color: #16833b;
+            color: #087f5b;
         }
 
         .loading {
-            color: #666;
+            color: #66766f;
         }
 
-        @media (max-width: 380px) {
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 400px) {
+
             .network-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -262,36 +385,75 @@
             .plan-grid {
                 grid-template-columns: 1fr;
             }
+
+            .container {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            .card {
+                padding: 21px 15px;
+            }
+
+            .balance {
+                font-size: 27px;
+            }
+        }
+
+        @media (min-width: 700px) {
+
+            .topbar {
+                padding-left: 30px;
+                padding-right: 30px;
+            }
+
+            .container {
+                margin-top: -38px;
+            }
+
+            .card {
+                padding: 28px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="topbar">
+    <!-- HEADER -->
 
-        <button
-            class="back-btn"
-            onclick="goBack()"
-        >
-            ←
-        </button>
+    <header class="topbar">
 
-        <div class="brand-logo">
-            <img
-                src="velqora.png.PNG"
-                alt="Velqora Logo"
+        <div class="top-inner">
+
+            <button
+                class="back-btn"
+                onclick="goBack()"
+                aria-label="Go back"
             >
+                ←
+            </button>
+
+            <div class="brand-logo">
+                <img
+                    src="velqora.png.PNG"
+                    alt="Velqora Logo"
+                >
+            </div>
+
+            <div>
+                <div class="brand">Velqora</div>
+                <div class="subtitle">Buy Data</div>
+            </div>
+
         </div>
 
-        <div>
-            <div class="brand">Velqora</div>
-            <div class="subtitle">Buy Data</div>
-        </div>
+    </header>
 
-    </div>
 
     <main class="container">
+
+        <!-- WALLET -->
 
         <div class="balance-card">
 
@@ -306,15 +468,27 @@
                 Loading...
             </div>
 
+            <div class="balance-caption">
+                Your data purchase will be deducted from this wallet.
+            </div>
+
         </div>
+
+
+        <!-- DATA FORM -->
 
         <div class="card">
 
-            <h1>Buy Data</h1>
+            <h1>
+                Buy Data
+            </h1>
 
             <div class="description">
-                Buy mobile data directly from your Velqora wallet.
+                Choose a network, enter the phone number and select a data plan.
             </div>
+
+
+            <!-- NETWORK -->
 
             <div class="field">
 
@@ -364,6 +538,9 @@
 
             </div>
 
+
+            <!-- PHONE -->
+
             <div class="field">
 
                 <label for="phone">
@@ -376,9 +553,13 @@
                     inputmode="numeric"
                     placeholder="08012345678"
                     maxlength="11"
+                    autocomplete="tel"
                 >
 
             </div>
+
+
+            <!-- PLANS -->
 
             <div class="field">
 
@@ -397,12 +578,17 @@
 
             </div>
 
+
+            <!-- INFORMATION -->
+
             <div class="info">
-                Data plans are loaded from VTpass Sandbox.
-                Your Velqora wallet will only be charged
-                when the purchase request is accepted by
-                the secure purchase system.
+                🔒 Data plans are loaded securely through your connected
+                purchase system. Your wallet is charged only when a
+                purchase request is accepted.
             </div>
+
+
+            <!-- BUY -->
 
             <button
                 class="buy-btn"
@@ -413,13 +599,15 @@
                 Buy Data
             </button>
 
+
             <div id="message"></div>
 
         </div>
 
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- SUPABASE -->
 
     <script src="config.js"></script>
 
@@ -431,10 +619,16 @@
                 SUPABASE_KEY
             );
 
+
         let selectedNetwork = "mtn";
         let selectedPlan = null;
         let selectedPrice = null;
         let selectedVariationCode = null;
+
+
+        /* =========================
+           NETWORK
+        ========================= */
 
         function selectNetwork(button) {
 
@@ -444,21 +638,33 @@
                     btn.classList.remove("active");
                 });
 
+
             button.classList.add("active");
+
 
             selectedNetwork =
                 button.dataset.network;
+
 
             selectedPlan = null;
             selectedPrice = null;
             selectedVariationCode = null;
 
+
             document.getElementById(
                 "buyButton"
             ).disabled = true;
 
-            loadPlans(selectedNetwork);
+
+            loadPlans(
+                selectedNetwork
+            );
         }
+
+
+        /* =========================
+           PLAN
+        ========================= */
 
         function selectPlan(
             plan,
@@ -473,16 +679,25 @@
                     btn.classList.remove("active");
                 });
 
+
             button.classList.add("active");
+
 
             selectedPlan = plan;
             selectedPrice = price;
-            selectedVariationCode = variationCode;
+            selectedVariationCode =
+                variationCode;
+
 
             document.getElementById(
                 "buyButton"
             ).disabled = false;
         }
+
+
+        /* =========================
+           WALLET
+        ========================= */
 
         async function loadWallet() {
 
@@ -494,6 +709,7 @@
             } =
                 await supabaseClient.auth.getSession();
 
+
             if (
                 sessionError ||
                 !session
@@ -504,6 +720,7 @@
 
                 return;
             }
+
 
             const {
                 data,
@@ -518,7 +735,13 @@
                     )
                     .maybeSingle();
 
+
             if (error) {
+
+                console.error(
+                    "WALLET ERROR:",
+                    error
+                );
 
                 document.getElementById(
                     "walletBalance"
@@ -528,10 +751,12 @@
                 return;
             }
 
+
             const balance =
                 Number(
                     data?.balance || 0
                 );
+
 
             document.getElementById(
                 "walletBalance"
@@ -546,6 +771,11 @@
                 );
         }
 
+
+        /* =========================
+           LOAD PLANS
+        ========================= */
+
         async function loadPlans(network) {
 
             const planGrid =
@@ -553,21 +783,26 @@
                     "planGrid"
                 );
 
+
             const buyButton =
                 document.getElementById(
                     "buyButton"
                 );
+
 
             const message =
                 document.getElementById(
                     "message"
                 );
 
+
             selectedPlan = null;
             selectedPrice = null;
             selectedVariationCode = null;
 
+
             buyButton.disabled = true;
+
 
             planGrid.innerHTML = `
                 <div class="plan-loading">
@@ -575,8 +810,10 @@
                 </div>
             `;
 
+
             message.className = "";
             message.textContent = "";
+
 
             try {
 
@@ -588,6 +825,7 @@
                 } =
                     await supabaseClient.auth.getSession();
 
+
                 if (
                     sessionError ||
                     !session
@@ -598,6 +836,7 @@
 
                     return;
                 }
+
 
                 const {
                     data,
@@ -613,9 +852,11 @@
                         }
                     );
 
+
                 if (error) {
                     throw error;
                 }
+
 
                 if (
                     !data ||
@@ -629,12 +870,14 @@
                     );
                 }
 
+
                 const plans =
                     data.plans.filter(
                         plan =>
                             Number(plan.amount) > 0 &&
                             plan.variation_code
                     );
+
 
                 if (!plans.length) {
 
@@ -647,7 +890,9 @@
                     return;
                 }
 
+
                 planGrid.innerHTML = "";
+
 
                 plans.forEach(plan => {
 
@@ -656,19 +901,23 @@
                             "button"
                         );
 
+
                     button.type = "button";
 
                     button.className =
                         "plan-btn";
 
+
                     const name =
                         plan.name ||
                         "Data Plan";
+
 
                     const price =
                         Number(
                             plan.amount
                         );
+
 
                     button.innerHTML = `
                         <div class="plan-name">
@@ -686,6 +935,7 @@
                         </div>
                     `;
 
+
                     button.onclick =
                         function() {
 
@@ -698,11 +948,13 @@
 
                         };
 
+
                     planGrid.appendChild(
                         button
                     );
 
                 });
+
 
             } catch (error) {
 
@@ -711,20 +963,28 @@
                     error
                 );
 
+
                 planGrid.innerHTML = `
                     <div class="plan-loading">
                         Unable to load plans.
                     </div>
                 `;
 
+
                 message.className =
                     "error";
 
+
                 message.textContent =
                     error.message ||
-                    "Unable to connect to VTpass Sandbox.";
+                    "Unable to connect to the purchase system.";
             }
         }
+
+
+        /* =========================
+           HTML SAFETY
+        ========================= */
 
         function escapeHtml(value) {
 
@@ -751,6 +1011,11 @@
                 );
         }
 
+
+        /* =========================
+           BUY DATA
+        ========================= */
+
         async function buyData() {
 
             const message =
@@ -758,52 +1023,64 @@
                     "message"
                 );
 
+
             const buyButton =
                 document.getElementById(
                     "buyButton"
                 );
+
 
             const phoneInput =
                 document.getElementById(
                     "phone"
                 );
 
+
             message.className = "";
             message.textContent = "";
 
+
             const phone =
                 phoneInput.value.trim();
+
 
             if (!phone) {
 
                 message.className =
                     "error";
 
+
                 message.textContent =
                     "Please enter the phone number.";
+
 
                 phoneInput.focus();
 
                 return;
             }
+
 
             if (!/^0\d{10}$/.test(phone)) {
 
                 message.className =
                     "error";
 
+
                 message.textContent =
                     "Please enter a valid 11-digit Nigerian phone number.";
+
 
                 phoneInput.focus();
 
                 return;
             }
 
+
             if (!selectedVariationCode) {
 
                 message.className =
                     "error";
+
 
                 message.textContent =
                     "Please select a data plan.";
@@ -811,16 +1088,22 @@
                 return;
             }
 
-            if (!selectedPrice || selectedPrice <= 0) {
+
+            if (
+                !selectedPrice ||
+                selectedPrice <= 0
+            ) {
 
                 message.className =
                     "error";
+
 
                 message.textContent =
                     "Invalid data plan amount.";
 
                 return;
             }
+
 
             const {
                 data: {
@@ -829,6 +1112,7 @@
                 error: sessionError
             } =
                 await supabaseClient.auth.getSession();
+
 
             if (
                 sessionError ||
@@ -841,19 +1125,25 @@
                 return;
             }
 
+
             buyButton.disabled = true;
+
 
             const originalText =
                 buyButton.textContent;
 
+
             buyButton.textContent =
                 "Processing...";
+
 
             message.className =
                 "loading";
 
+
             message.textContent =
                 "Processing your data purchase securely...";
+
 
             try {
 
@@ -866,17 +1156,21 @@
                         {
                             body: {
                                 action: "purchase",
-                                network: selectedNetwork,
-                                phone: phone,
+                                network:
+                                    selectedNetwork,
+                                phone:
+                                    phone,
                                 variation_code:
                                     selectedVariationCode
                             }
                         }
                     );
 
+
                 if (error) {
                     throw error;
                 }
+
 
                 if (
                     !data ||
@@ -890,11 +1184,13 @@
                     );
                 }
 
+
                 const status =
                     String(
                         data.status ||
                         "pending"
                     ).toLowerCase();
+
 
                 if (
                     status === "successful" ||
@@ -904,6 +1200,7 @@
 
                     message.className =
                         "success";
+
 
                     message.textContent =
                         "Data purchase successful. Your data should be delivered shortly.";
@@ -915,20 +1212,24 @@
                     message.className =
                         "loading";
 
+
                     message.textContent =
-                        "Your data purchase is being processed. Please check Activity for the transaction status.";
+                        "Your data purchase is being processed. Check Activity for the transaction status.";
 
                 } else {
 
                     message.className =
                         "success";
 
+
                     message.textContent =
                         data.message ||
                         "Your data purchase has been submitted successfully.";
                 }
 
+
                 await loadWallet();
+
 
             } catch (error) {
 
@@ -937,21 +1238,30 @@
                     error
                 );
 
+
                 message.className =
                     "error";
+
 
                 message.textContent =
                     error.message ||
                     "Unable to complete the data purchase.";
 
+
             } finally {
 
                 buyButton.disabled = false;
+
 
                 buyButton.textContent =
                     originalText;
             }
         }
+
+
+        /* =========================
+           BACK
+        ========================= */
 
         function goBack() {
 
@@ -970,6 +1280,11 @@
                     "index.html";
             }
         }
+
+
+        /* =========================
+           START
+        ========================= */
 
         loadWallet();
 
