@@ -872,7 +872,7 @@ async function loadTransactions() {
                 "id, created_at, user_id, recipient_user_id, bank_code, bank_name, account_number, account_name, amount, fee, tx_ref, status, provider_reference"
             )
             .or(
-                user_id.eq.${user.id},recipient_user_id.eq.${user.id}
+                `user_id.eq.${user.id},recipient_user_id.eq.${user.id}`
             );
 
 
