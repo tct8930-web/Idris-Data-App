@@ -17,16 +17,20 @@
         }
 
         :root {
-            --green: #0b8f61;
-            --green-dark: #066044;
-            --green-bright: #12b879;
+            --green: #0c9565;
+            --green-dark: #075d45;
+            --green-deep: #04382e;
+            --green-bright: #16b978;
             --green-soft: #e9f8f1;
+            --green-pale: #f3fbf7;
             --bg: #f5f8f7;
             --white: #ffffff;
             --text: #10201b;
-            --muted: #7b8c86;
-            --border: #e4ece8;
-            --red: #d34b4b;
+            --muted: #7b8d86;
+            --muted-light: #9aa9a3;
+            --border: #e3ece8;
+            --red: #d64c4c;
+            --shadow: 0 10px 30px rgba(12, 55, 42, .055);
         }
 
         html {
@@ -34,7 +38,6 @@
         }
 
         body {
-            margin: 0;
             font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI",
                 Roboto, Arial, sans-serif;
             background: var(--bg);
@@ -66,9 +69,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 20px;
             text-align: center;
             color: var(--muted);
-            padding: 20px;
+            font-size: 14px;
         }
 
         /* =========================
@@ -80,18 +84,18 @@
             position: fixed;
             inset: 0;
             z-index: 9999;
-            background: rgba(245, 248, 247, .97);
             align-items: center;
             justify-content: center;
-            text-align: center;
+            background: rgba(245, 248, 247, .97);
             padding: 20px;
+            text-align: center;
         }
 
         .payment-loading-box {
             width: 100%;
-            max-width: 360px;
+            max-width: 370px;
+            padding: 35px 25px;
             background: white;
-            padding: 34px 24px;
             border-radius: 28px;
             box-shadow: 0 25px 70px rgba(8, 35, 27, .15);
         }
@@ -114,6 +118,7 @@
 
         .payment-loading-box h3 {
             margin-bottom: 8px;
+            font-size: 18px;
         }
 
         .payment-loading-box p {
@@ -131,10 +136,11 @@
             position: fixed;
             inset: 0;
             z-index: 5000;
-            background: rgba(8, 35, 27, .58);
             align-items: flex-end;
             justify-content: center;
             padding: 14px;
+            background: rgba(5, 31, 24, .6);
+            backdrop-filter: blur(4px);
         }
 
         #fundModal.active {
@@ -144,9 +150,9 @@
         .fund-modal-box {
             width: 100%;
             max-width: 470px;
+            padding: 25px 21px 20px;
             background: white;
             border-radius: 30px;
-            padding: 25px 21px 20px;
             box-shadow: 0 25px 80px rgba(0, 0, 0, .22);
             animation: modalUp .22s ease-out;
         }
@@ -172,6 +178,7 @@
 
         .fund-modal-header h3 {
             font-size: 22px;
+            letter-spacing: -.4px;
         }
 
         .fund-close {
@@ -195,17 +202,17 @@
             margin-bottom: 8px;
             color: #40554d;
             font-size: 13px;
-            font-weight: 700;
+            font-weight: 750;
         }
 
         .amount-input-wrap {
             display: flex;
             align-items: center;
             height: 60px;
+            padding: 0 15px;
+            background: #fbfdfc;
             border: 2px solid #dce9e3;
             border-radius: 17px;
-            background: #fbfdfc;
-            padding: 0 15px;
         }
 
         .amount-input-wrap:focus-within {
@@ -214,10 +221,10 @@
         }
 
         .currency-symbol {
+            margin-right: 8px;
             color: #087f55;
             font-size: 24px;
-            font-weight: 800;
-            margin-right: 8px;
+            font-weight: 850;
         }
 
         #fundAmountInput {
@@ -234,7 +241,7 @@
             margin: 18px 0 10px;
             color: var(--muted);
             font-size: 12px;
-            font-weight: 700;
+            font-weight: 750;
         }
 
         .quick-amounts {
@@ -244,21 +251,21 @@
         }
 
         .quick-amount {
-            border: 1px solid #dce9e3;
-            background: #f5faf7;
-            color: #087f55;
             padding: 11px 5px;
+            background: #f5faf7;
+            border: 1px solid #dce9e3;
             border-radius: 12px;
+            color: #087f55;
             font-size: 12px;
-            font-weight: 700;
+            font-weight: 750;
         }
 
         .fund-error {
             display: none;
             margin-top: 10px;
             padding: 10px 12px;
-            border-radius: 11px;
             background: #fff2f2;
+            border-radius: 11px;
             color: #c53636;
             font-size: 12px;
         }
@@ -270,9 +277,9 @@
         .continue-funding {
             width: 100%;
             margin-top: 18px;
-            border-radius: 15px;
             padding: 16px;
             background: linear-gradient(135deg, #19b879, #087f55);
+            border-radius: 15px;
             color: white;
             font-size: 15px;
             font-weight: 800;
@@ -280,19 +287,20 @@
 
         .continue-funding:disabled {
             opacity: .6;
+            cursor: not-allowed;
         }
 
         .cancel-funding {
             width: 100%;
             margin-top: 8px;
+            padding: 12px;
             background: transparent;
             color: var(--muted);
-            padding: 12px;
             font-weight: 700;
         }
 
         /* =========================
-           NOTIFICATION PANEL
+           NOTIFICATIONS
         ========================= */
 
         #notificationOverlay {
@@ -313,10 +321,10 @@
             top: 72px;
             right: 16px;
             width: min(390px, calc(100vw - 28px));
+            overflow: hidden;
             background: white;
             border: 1px solid #e1ebe6;
             border-radius: 24px;
-            overflow: hidden;
             box-shadow: 0 25px 80px rgba(8, 35, 27, .2);
             animation: notificationOpen .2s ease-out;
         }
@@ -337,7 +345,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 18px 18px 15px;
+            padding: 18px;
             border-bottom: 1px solid #edf2ef;
         }
 
@@ -350,17 +358,17 @@
         .notification-heading-icon {
             width: 40px;
             height: 40px;
-            border-radius: 13px;
-            background: #eaf8f1;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: #eaf8f1;
+            border-radius: 13px;
             font-size: 19px;
         }
 
         .notification-heading h3 {
-            font-size: 18px;
             margin-bottom: 2px;
+            font-size: 18px;
         }
 
         .notification-heading p {
@@ -378,10 +386,10 @@
         }
 
         .notification-actions {
-            padding: 10px 16px;
-            border-bottom: 1px solid #edf2ef;
             display: flex;
             justify-content: flex-end;
+            padding: 10px 16px;
+            border-bottom: 1px solid #edf2ef;
         }
 
         .mark-read {
@@ -401,11 +409,6 @@
             gap: 12px;
             padding: 15px 17px;
             border-bottom: 1px solid #edf2ef;
-            transition: background .2s ease;
-        }
-
-        .notification-item:hover {
-            background: #fbfdfc;
         }
 
         .notification-item:last-child {
@@ -420,11 +423,11 @@
             width: 43px;
             height: 43px;
             flex: 0 0 43px;
-            border-radius: 14px;
-            background: #eaf8f1;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: #eaf8f1;
+            border-radius: 14px;
             font-size: 19px;
         }
 
@@ -434,10 +437,10 @@
         }
 
         .notification-item-title {
+            margin-bottom: 4px;
             color: #243830;
             font-size: 13px;
             font-weight: 850;
-            margin-bottom: 4px;
         }
 
         .notification-item-message {
@@ -447,51 +450,22 @@
         }
 
         .notification-item-time {
+            margin-top: 6px;
             color: #a0aea9;
             font-size: 10px;
-            margin-top: 6px;
         }
 
         .notification-new-dot {
             width: 7px;
             height: 7px;
             flex: 0 0 7px;
-            border-radius: 50%;
-            background: #0f9f6e;
             margin-top: 6px;
-        }
-
-        .notification-empty {
-            padding: 45px 20px;
-            text-align: center;
-            color: #8ba099;
-        }
-
-        .notification-empty-icon {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 12px;
-            border-radius: 19px;
-            background: #eff6f3;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 27px;
-        }
-
-        .notification-empty strong {
-            display: block;
-            color: #40554d;
-            margin-bottom: 5px;
-            font-size: 14px;
-        }
-
-        .notification-empty small {
-            font-size: 12px;
+            background: #0f9f6e;
+            border-radius: 50%;
         }
 
         /* =========================
-           WELCOME SCREEN
+           WELCOME
         ========================= */
 
         .welcome-page {
@@ -509,22 +483,22 @@
         .welcome {
             width: 100%;
             max-width: 440px;
-            background: rgba(255,255,255,.98);
             padding: 42px 25px 30px;
+            background: rgba(255,255,255,.98);
+            border: 1px solid var(--border);
             border-radius: 32px;
             text-align: center;
             box-shadow: 0 30px 80px rgba(8,35,27,.13);
-            border: 1px solid var(--border);
         }
 
         .logo {
             width: 88px;
             height: 88px;
             margin: 0 auto 18px;
-            border-radius: 24px;
             overflow: hidden;
             background: white;
             border: 1px solid var(--border);
+            border-radius: 24px;
             box-shadow: 0 15px 35px rgba(37,211,102,.18);
         }
 
@@ -546,17 +520,17 @@
         }
 
         .welcome p {
-            color: #668078;
-            line-height: 1.65;
-            margin: 0 auto 25px;
             max-width: 350px;
+            margin: 0 auto 25px;
+            color: #668078;
             font-size: 15px;
+            line-height: 1.65;
         }
 
         .welcome button {
             width: 100%;
-            padding: 16px;
             margin-top: 10px;
+            padding: 16px;
             border-radius: 15px;
             font-size: 16px;
             font-weight: 800;
@@ -593,19 +567,19 @@
         }
 
         /* =========================
-           TOP BAR
+           TOPBAR
         ========================= */
 
         .topbar {
-            background: rgba(255,255,255,.94);
-            padding: 13px 18px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
             z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 13px 18px;
+            background: rgba(255,255,255,.94);
+            border-bottom: 1px solid var(--border);
             backdrop-filter: blur(18px);
         }
 
@@ -618,10 +592,10 @@
         .brand-logo {
             width: 43px;
             height: 43px;
-            border-radius: 14px;
             overflow: hidden;
             background: white;
             border: 1px solid #dcebe4;
+            border-radius: 14px;
         }
 
         .brand-name {
@@ -638,25 +612,25 @@
 
         .notification-button,
         .profile-button {
+            position: relative;
             width: 43px;
             height: 43px;
+            background: #effaf4;
             border: 1px solid #dcebe4;
             border-radius: 50%;
-            background: #effaf4;
             color: #0f9f6e;
             font-size: 18px;
-            position: relative;
         }
 
         .notification-dot {
             position: absolute;
+            top: 7px;
+            right: 8px;
             width: 8px;
             height: 8px;
-            border-radius: 50%;
             background: #ef4444;
-            right: 8px;
-            top: 7px;
             border: 2px solid white;
+            border-radius: 50%;
         }
 
         .notification-dot.hidden {
@@ -664,14 +638,14 @@
         }
 
         /* =========================
-           MAIN CONTAINER
+           MAIN
         ========================= */
 
         .container {
             width: 100%;
             max-width: 1050px;
             margin: auto;
-            padding: 24px 18px 105px;
+            padding: 25px 18px 105px;
         }
 
         /* =========================
@@ -686,17 +660,30 @@
             margin-bottom: 5px;
             color: var(--muted);
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 650;
         }
 
         .greeting h2 {
-            font-size: 27px;
-            letter-spacing: -.9px;
-            line-height: 1.2;
+            font-size: 28px;
+            line-height: 1.18;
+            letter-spacing: -1px;
+        }
+
+        .greeting-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 9px;
+            padding: 7px 10px;
+            background: #edf9f3;
+            border-radius: 10px;
+            color: #087f55;
+            font-size: 11px;
+            font-weight: 750;
         }
 
         /* =========================
-           ACCOUNT CARD
+           ACCOUNT STRIP
         ========================= */
 
         .account-strip {
@@ -704,12 +691,12 @@
             align-items: center;
             justify-content: space-between;
             gap: 12px;
+            margin-bottom: 15px;
+            padding: 15px 16px;
             background: white;
             border: 1px solid var(--border);
             border-radius: 20px;
-            padding: 15px 16px;
-            margin-bottom: 15px;
-            box-shadow: 0 8px 25px rgba(15,50,39,.045);
+            box-shadow: var(--shadow);
         }
 
         .account-info {
@@ -718,9 +705,9 @@
 
         .account-info small {
             display: block;
+            margin-bottom: 5px;
             color: #8ba099;
             font-size: 11px;
-            margin-bottom: 5px;
         }
 
         .account-info strong {
@@ -730,21 +717,24 @@
 
         .copy-account {
             flex-shrink: 0;
-            background: #eaf8f1;
-            color: #087f55;
-            border-radius: 11px;
             padding: 10px 14px;
+            background: #eaf8f1;
+            border-radius: 11px;
+            color: #087f55;
             font-size: 12px;
             font-weight: 800;
         }
 
         /* =========================
-           BALANCE CARD
+           BALANCE
         ========================= */
 
         .balance-card {
             position: relative;
+            min-height: 205px;
             overflow: hidden;
+            margin-bottom: 27px;
+            padding: 25px;
             background:
                 radial-gradient(
                     circle at 90% 5%,
@@ -753,57 +743,54 @@
                 ),
                 radial-gradient(
                     circle at 0% 100%,
-                    rgba(0,0,0,.12),
+                    rgba(0,0,0,.13),
                     transparent 38%
                 ),
                 linear-gradient(
                     135deg,
-                    #0c9365 0%,
-                    #076b4d 52%,
-                    #043f32 100%
+                    #0d9868 0%,
+                    #076c4d 52%,
+                    #043d31 100%
                 );
-            color: white;
             border-radius: 30px;
-            padding: 25px;
+            color: white;
             box-shadow: 0 23px 50px rgba(6,77,60,.25);
-            margin-bottom: 26px;
-            min-height: 190px;
         }
 
         .balance-card::before {
             content: "";
             position: absolute;
+            top: -120px;
+            right: -105px;
             width: 230px;
             height: 230px;
             border: 1px solid rgba(255,255,255,.07);
             border-radius: 50%;
-            right: -105px;
-            top: -120px;
         }
 
         .balance-card::after {
             content: "";
             position: absolute;
+            bottom: -100px;
+            left: -100px;
             width: 170px;
             height: 170px;
             border: 1px solid rgba(255,255,255,.06);
             border-radius: 50%;
-            left: -100px;
-            bottom: -100px;
         }
 
         .balance-top {
             position: relative;
             z-index: 2;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
         }
 
         .balance-label {
+            color: rgba(255,255,255,.76);
             font-size: 13px;
-            font-weight: 600;
-            opacity: .78;
+            font-weight: 650;
         }
 
         .balance-controls {
@@ -815,9 +802,9 @@
         .refresh-button {
             width: 35px;
             height: 35px;
+            background: rgba(255,255,255,.1);
             border: 1px solid rgba(255,255,255,.2);
             border-radius: 10px;
-            background: rgba(255,255,255,.1);
             color: white;
             font-size: 15px;
             backdrop-filter: blur(8px);
@@ -826,35 +813,36 @@
         .balance-amount {
             position: relative;
             z-index: 2;
-            font-size: 39px;
+            margin: 13px 0 22px;
+            font-size: 40px;
             font-weight: 850;
-            letter-spacing: -1.6px;
-            margin: 13px 0 23px;
+            letter-spacing: -1.8px;
         }
 
         .balance-footer {
             position: relative;
             z-index: 2;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
         }
 
         .wallet-caption {
+            color: rgba(255,255,255,.63);
             font-size: 11px;
-            opacity: .65;
         }
 
         .fund-button {
-            background: white;
-            color: #087f55;
             padding: 13px 19px;
+            background: white;
             border-radius: 13px;
+            color: #087f55;
             font-weight: 850;
+            box-shadow: 0 7px 20px rgba(0,0,0,.08);
         }
 
         /* =========================
-           SERVICES
+           QUICK SERVICES
         ========================= */
 
         .section-heading {
@@ -867,12 +855,13 @@
         .section-title {
             font-size: 18px;
             font-weight: 850;
+            letter-spacing: -.3px;
         }
 
         .section-subtitle {
             color: #8ba099;
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 650;
         }
 
         .actions {
@@ -882,36 +871,37 @@
         }
 
         .action {
-            min-height: 118px;
-            border: 1px solid #e5eee9;
-            background: white;
-            border-radius: 20px;
+            min-height: 120px;
             padding: 16px 7px;
+            background: white;
+            border: 1px solid #e5eee9;
+            border-radius: 20px;
             text-align: center;
-            box-shadow: 0 8px 24px rgba(15,50,39,.055);
+            box-shadow: var(--shadow);
             transition: transform .15s ease, box-shadow .15s ease;
         }
 
         .action:hover {
-            box-shadow: 0 14px 32px rgba(15,50,39,.09);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(15,50,39,.09);
         }
 
         .action-icon {
-            width: 50px;
-            height: 50px;
-            margin: 0 auto 10px;
-            border-radius: 16px;
-            background: var(--green-soft);
+            width: 51px;
+            height: 51px;
             display: flex;
             align-items: center;
             justify-content: center;
+            margin: 0 auto 10px;
+            background: var(--green-soft);
+            border-radius: 16px;
             font-size: 21px;
         }
 
         .action-title {
+            color: #263a33;
             font-size: 12px;
             font-weight: 800;
-            color: #263a33;
         }
 
         /* =========================
@@ -919,11 +909,11 @@
         ========================= */
 
         .transactions {
-            background: white;
-            border-radius: 21px;
-            box-shadow: 0 8px 24px rgba(15,50,39,.055);
             overflow: hidden;
+            background: white;
             border: 1px solid #e5eee9;
+            border-radius: 21px;
+            box-shadow: var(--shadow);
         }
 
         .recent-list {
@@ -937,11 +927,6 @@
             gap: 12px;
             padding: 15px 16px;
             border-bottom: 1px solid #edf2ef;
-            transition: background .2s ease;
-        }
-
-        .recent-item:hover {
-            background: #fbfdfc;
         }
 
         .recent-item:last-child {
@@ -952,24 +937,24 @@
             width: 44px;
             height: 44px;
             flex: 0 0 44px;
-            border-radius: 14px;
-            background: #effaf4;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: #effaf4;
+            border-radius: 14px;
             font-size: 20px;
         }
 
         .recent-info {
-            min-width: 0;
             flex: 1;
+            min-width: 0;
         }
 
         .recent-title {
+            margin-bottom: 4px;
+            color: #263a33;
             font-size: 13px;
             font-weight: 800;
-            color: #263a33;
-            margin-bottom: 4px;
         }
 
         .recent-date {
@@ -979,9 +964,9 @@
 
         .recent-amount {
             text-align: right;
+            white-space: nowrap;
             font-size: 13px;
             font-weight: 850;
-            white-space: nowrap;
         }
 
         .recent-amount.debit {
@@ -994,47 +979,47 @@
 
         .recent-status {
             margin-top: 4px;
+            color: #91a19b;
             text-align: right;
             font-size: 10px;
-            color: #91a19b;
+        }
+
+        .view-all {
+            width: 100%;
+            padding: 15px;
+            background: white;
+            border-top: 1px solid #edf2ef;
+            color: #087f55;
+            font-size: 13px;
+            font-weight: 850;
         }
 
         .transaction-empty {
             padding: 35px 20px;
-            text-align: center;
             color: #8ba099;
+            text-align: center;
         }
 
         .transaction-empty-icon {
             width: 60px;
             height: 60px;
-            margin: 0 auto 12px;
-            border-radius: 19px;
-            background: #eff6f3;
             display: flex;
             align-items: center;
             justify-content: center;
+            margin: 0 auto 12px;
+            background: #eff6f3;
+            border-radius: 19px;
             font-size: 27px;
         }
 
         .transaction-empty strong {
             display: block;
-            color: #40554d;
             margin-bottom: 5px;
+            color: #40554d;
         }
 
         .transaction-empty small {
             font-size: 12px;
-        }
-
-        .view-all {
-            width: 100%;
-            border-top: 1px solid #edf2ef;
-            background: white;
-            color: #087f55;
-            padding: 15px;
-            font-size: 13px;
-            font-weight: 850;
         }
 
         /* =========================
@@ -1045,44 +1030,44 @@
             width: 100%;
             margin-top: 25px;
             padding: 15px;
+            background: #fff3f3;
             border: 1px solid #f2d4d4;
             border-radius: 15px;
-            background: #fff3f3;
             color: #d33b3b;
             font-size: 14px;
             font-weight: 800;
         }
 
         /* =========================
-           BOTTOM NAVIGATION
+           BOTTOM NAV
         ========================= */
 
         .bottom-nav {
             position: fixed;
+            right: 0;
             bottom: 0;
             left: 0;
-            right: 0;
-            background: rgba(255,255,255,.97);
-            border-top: 1px solid #e2ebe7;
+            z-index: 100;
             height: 75px;
             display: flex;
-            justify-content: space-around;
             align-items: center;
-            z-index: 100;
-            backdrop-filter: blur(18px);
+            justify-content: space-around;
             padding-bottom: env(safe-area-inset-bottom);
+            background: rgba(255,255,255,.97);
+            border-top: 1px solid #e2ebe7;
+            backdrop-filter: blur(18px);
         }
 
         .nav-button {
-            background: none;
-            color: #94a59e;
-            font-size: 10px;
             display: flex;
+            min-width: 70px;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             gap: 4px;
-            min-width: 70px;
+            background: none;
+            color: #94a59e;
+            font-size: 10px;
             font-weight: 650;
         }
 
@@ -1124,16 +1109,11 @@
                 max-width: 1050px;
                 margin: 0 auto;
                 background: var(--bg);
-                min-height: 100vh;
                 box-shadow: 0 0 50px rgba(0,0,0,.07);
             }
 
-            .topbar {
-                border-radius: 0;
-            }
-
             .container {
-                padding-bottom: 30px;
+                padding-bottom: 35px;
             }
 
             .actions {
@@ -1156,8 +1136,8 @@
 
         @media (max-width: 420px) {
             .container {
-                padding-left: 14px;
                 padding-right: 14px;
+                padding-left: 14px;
             }
 
             .balance-card {
@@ -1204,7 +1184,9 @@
 <!-- PAYMENT LOADING -->
 
 <div id="paymentLoading">
+
     <div class="payment-loading-box">
+
         <div class="payment-spinner"></div>
 
         <h3>
@@ -1214,7 +1196,9 @@
         <p>
             Please wait while we connect you to Flutterwave.
         </p>
+
     </div>
+
 </div>
 
 <!-- FUND WALLET MODAL -->
@@ -1223,6 +1207,7 @@
     id="fundModal"
     onclick="handleFundModalBackground(event)"
 >
+
     <div
         class="fund-modal-box"
         onclick="event.stopPropagation()"
@@ -1326,9 +1311,10 @@
         </button>
 
     </div>
+
 </div>
 
-<!-- NOTIFICATION OVERLAY -->
+<!-- NOTIFICATIONS -->
 
 <div
     id="notificationOverlay"
@@ -1349,6 +1335,7 @@
                 </div>
 
                 <div>
+
                     <h3>
                         Notifications
                     </h3>
@@ -1356,6 +1343,7 @@
                     <p>
                         Updates from Velqora
                     </p>
+
                 </div>
 
             </div>
@@ -1389,7 +1377,7 @@
 
 </div>
 
-<!-- WELCOME SCREEN -->
+<!-- WELCOME -->
 
 <div
     id="welcomeScreen"
@@ -1400,10 +1388,12 @@
     <div class="welcome">
 
         <div class="logo">
+
             <img
                 src="velqora.png.PNG"
                 alt="Velqora Logo"
             >
+
         </div>
 
         <h1>
@@ -1448,17 +1438,19 @@
     class="dashboard"
 >
 
-    <!-- TOP BAR -->
+    <!-- TOPBAR -->
 
     <header class="topbar">
 
         <div class="brand">
 
             <div class="brand-logo">
+
                 <img
                     src="velqora.png.PNG"
                     alt="Velqora"
                 >
+
             </div>
 
             <div class="brand-name">
@@ -1475,10 +1467,12 @@
                 aria-label="Notifications"
             >
                 🔔
+
                 <span
                     id="notificationDot"
                     class="notification-dot"
                 ></span>
+
             </button>
 
             <button
@@ -1507,6 +1501,10 @@
                 Your finances, simplified.
             </h2>
 
+            <div class="greeting-tag">
+                🛡️ Your wallet is ready
+            </div>
+
         </div>
 
         <!-- ACCOUNT NUMBER -->
@@ -1534,7 +1532,7 @@
 
         </div>
 
-        <!-- WALLET -->
+        <!-- BALANCE -->
 
         <div class="balance-card">
 
@@ -1550,6 +1548,7 @@
                         class="refresh-button"
                         id="refreshButton"
                         onclick="refreshWallet()"
+                        aria-label="Refresh balance"
                     >
                         ↻
                     </button>
@@ -1558,6 +1557,7 @@
                         class="eye-button"
                         id="balanceEye"
                         onclick="toggleBalance()"
+                        aria-label="Hide balance"
                     >
                         👁️
                     </button>
@@ -1591,7 +1591,7 @@
 
         </div>
 
-        <!-- QUICK SERVICES -->
+        <!-- SERVICES -->
 
         <div class="section-heading">
 
@@ -1612,6 +1612,7 @@
                 id="fundActionButton"
                 onclick="startFunding()"
             >
+
                 <div class="action-icon">
                     💰
                 </div>
@@ -1619,12 +1620,14 @@
                 <div class="action-title">
                     Add Money
                 </div>
+
             </button>
 
             <button
                 class="action"
                 onclick="buyData()"
             >
+
                 <div class="action-icon">
                     📶
                 </div>
@@ -1632,12 +1635,14 @@
                 <div class="action-title">
                     Data
                 </div>
+
             </button>
 
             <button
                 class="action"
                 onclick="buyAirtime()"
             >
+
                 <div class="action-icon">
                     ☎️
                 </div>
@@ -1645,12 +1650,14 @@
                 <div class="action-title">
                     Airtime
                 </div>
+
             </button>
 
             <button
                 class="action"
                 onclick="makeTransfer()"
             >
+
                 <div class="action-icon">
                     💸
                 </div>
@@ -1658,12 +1665,14 @@
                 <div class="action-title">
                     Send Money
                 </div>
+
             </button>
 
             <button
                 class="action"
                 onclick="viewTransactions()"
             >
+
                 <div class="action-icon">
                     📊
                 </div>
@@ -1671,12 +1680,14 @@
                 <div class="action-title">
                     Activity
                 </div>
+
             </button>
 
             <button
                 class="action"
                 onclick="goToProfile()"
             >
+
                 <div class="action-icon">
                     👤
                 </div>
@@ -1684,6 +1695,7 @@
                 <div class="action-title">
                     Profile
                 </div>
+
             </button>
 
         </div>
@@ -1755,33 +1767,39 @@
             class="nav-button active"
             onclick="goHome()"
         >
+
             <span>
                 ⌂
             </span>
 
             Home
+
         </button>
 
         <button
             class="nav-button"
             onclick="viewTransactions()"
         >
+
             <span>
                 ▣
             </span>
 
             Activity
+
         </button>
 
         <button
             class="nav-button"
             onclick="goToProfile()"
         >
+
             <span>
                 ♙
             </span>
 
             Profile
+
         </button>
 
     </nav>
@@ -1822,7 +1840,8 @@ function updateGreeting() {
 
     document.getElementById(
         "greetingText"
-    ).textContent = greeting;
+    ).textContent =
+        greeting;
 }
 
 /* =========================
@@ -1830,6 +1849,7 @@ function updateGreeting() {
 ========================= */
 
 const velqoraNotifications = [
+
     {
         icon: "👋",
         title: "Welcome to Velqora",
@@ -1837,6 +1857,7 @@ const velqoraNotifications = [
         time: "Just now",
         unread: true
     },
+
     {
         icon: "🔐",
         title: "Your account is secure",
@@ -1844,6 +1865,7 @@ const velqoraNotifications = [
         time: "Today",
         unread: true
     },
+
     {
         icon: "💰",
         title: "Wallet funding",
@@ -1851,6 +1873,7 @@ const velqoraNotifications = [
         time: "Today",
         unread: true
     },
+
     {
         icon: "📶",
         title: "Data and airtime",
@@ -1858,20 +1881,20 @@ const velqoraNotifications = [
         time: "Today",
         unread: false
     }
+
 ];
 
 function showNotifications() {
 
-    const overlay =
-        document.getElementById(
-            "notificationOverlay"
-        );
-
     renderNotifications();
 
-    overlay.classList.add(
-        "active"
-    );
+    document
+        .getElementById(
+            "notificationOverlay"
+        )
+        .classList.add(
+            "active"
+        );
 
     document.body.style.overflow =
         "hidden";
@@ -1908,69 +1931,46 @@ function renderNotifications() {
             "notificationList"
         );
 
-    if (
-        !velqoraNotifications.length
-    ) {
-
-        list.innerHTML = `
-            <div class="notification-empty">
-
-                <div class="notification-empty-icon">
-                    🔔
-                </div>
-
-                <strong>
-                    You're all caught up
-                </strong>
-
-                <small>
-                    New Velqora updates will appear here.
-                </small>
-
-            </div>
-        `;
-
-        return;
-    }
-
     list.innerHTML =
         velqoraNotifications
-            .map(notification => `
+            .map(
+                notification => `
 
-                <div class="
-                    notification-item
-                    ${notification.unread ? "unread" : ""}
-                ">
+                    <div class="
+                        notification-item
+                        ${notification.unread ? "unread" : ""}
+                    ">
 
-                    <div class="notification-item-icon">
-                        ${notification.icon}
+                        <div class="notification-item-icon">
+                            ${notification.icon}
+                        </div>
+
+                        <div class="notification-item-info">
+
+                            <div class="notification-item-title">
+                                ${notification.title}
+                            </div>
+
+                            <div class="notification-item-message">
+                                ${notification.message}
+                            </div>
+
+                            <div class="notification-item-time">
+                                ${notification.time}
+                            </div>
+
+                        </div>
+
+                        ${
+                            notification.unread
+                                ? `<span class="notification-new-dot"></span>`
+                                : ""
+                        }
+
                     </div>
 
-                    <div class="notification-item-info">
-
-                        <div class="notification-item-title">
-                            ${notification.title}
-                        </div>
-
-                        <div class="notification-item-message">
-                            ${notification.message}
-                        </div>
-
-                        <div class="notification-item-time">
-                            ${notification.time}
-                        </div>
-
-                    </div>
-
-                    ${
-                        notification.unread
-                            ? `<span class="notification-new-dot"></span>`
-                            : ""
-                    }
-
-                </div>
-
-            `)
+                `
+            )
             .join("");
 }
 
@@ -2138,7 +2138,9 @@ async function loadWallet(userId) {
     }
 
     actualBalance =
-        Number(data.balance);
+        Number(
+            data.balance
+        );
 
     displayBalance();
 }
@@ -2203,15 +2205,21 @@ async function refreshWallet() {
             "refreshButton"
         );
 
-    button.disabled = true;
-    button.textContent = "⟳";
+    button.disabled =
+        true;
+
+    button.textContent =
+        "⟳";
 
     await loadWallet(
         currentUser.id
     );
 
-    button.disabled = false;
-    button.textContent = "↻";
+    button.disabled =
+        false;
+
+    button.textContent =
+        "↻";
 }
 
 /* =========================
@@ -2350,6 +2358,7 @@ async function loadRecentActivity() {
                         transaction.status ||
                         "successful"
                 });
+
             }
         );
 
@@ -2414,6 +2423,7 @@ async function loadRecentActivity() {
                         transaction.Status ||
                         "pending"
                 });
+
             }
         );
 
@@ -2478,6 +2488,7 @@ async function loadRecentActivity() {
                         transaction.Status ||
                         "pending"
                 });
+
             }
         );
 
@@ -2495,6 +2506,7 @@ async function loadRecentActivity() {
         if (!latest.length) {
 
             container.innerHTML = `
+
                 <div class="transaction-empty">
 
                     <div class="transaction-empty-icon">
@@ -2510,6 +2522,7 @@ async function loadRecentActivity() {
                     </small>
 
                 </div>
+
             `;
 
             return;
@@ -2570,6 +2583,7 @@ async function loadRecentActivity() {
                             </div>
 
                         </div>
+
                     `;
                 }
             ).join("");
@@ -2649,13 +2663,17 @@ async function checkUser() {
         updateGreeting();
 
         await Promise.all([
+
             loadWallet(
                 currentUser.id
             ),
+
             loadAccountNumber(
                 currentUser.id
             ),
+
             loadRecentActivity()
+
         ]);
 
     } catch (error) {
@@ -2743,9 +2761,7 @@ function closeFundModal() {
         );
 }
 
-function handleFundModalBackground(
-    event
-) {
+function handleFundModalBackground(event) {
 
     if (
         event.target.id ===
@@ -2980,9 +2996,7 @@ async function continueFunding() {
     }
 }
 
-function setFundingLoading(
-    isLoading
-) {
+function setFundingLoading(isLoading) {
 
     const loadingScreen =
         document.getElementById(
@@ -3072,7 +3086,7 @@ async function logout() {
 }
 
 /* =========================
-   ESCAPE KEY
+   ESCAPE
 ========================= */
 
 document.addEventListener(
@@ -3111,7 +3125,9 @@ document.addEventListener(
     }
 );
 
-/* START */
+/* =========================
+   START
+========================= */
 
 checkUser();
 
