@@ -12,6 +12,21 @@
     <style>
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --green: #0b8f61;
+            --green-dark: #066044;
+            --green-bright: #12b879;
+            --green-soft: #e9f8f1;
+            --bg: #f5f8f7;
+            --white: #ffffff;
+            --text: #10201b;
+            --muted: #7b8c86;
+            --border: #e4ece8;
+            --red: #d34b4b;
         }
 
         html {
@@ -22,8 +37,9 @@
             margin: 0;
             font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI",
                 Roboto, Arial, sans-serif;
-            background: #f5f8f7;
-            color: #10201b;
+            background: var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
         }
 
         button,
@@ -34,11 +50,16 @@
 
         button {
             cursor: pointer;
+            border: none;
         }
 
         button:active {
             transform: scale(.97);
         }
+
+        /* =========================
+           LOADING
+        ========================= */
 
         #loading {
             min-height: 100vh;
@@ -46,10 +67,13 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            color: #668078;
+            color: var(--muted);
             padding: 20px;
-            background: #f5f8f7;
         }
+
+        /* =========================
+           PAYMENT LOADING
+        ========================= */
 
         #paymentLoading {
             display: none;
@@ -77,7 +101,7 @@
             height: 54px;
             margin: 0 auto 20px;
             border: 5px solid #dff2e9;
-            border-top-color: #0f9f6e;
+            border-top-color: var(--green);
             border-radius: 50%;
             animation: spin .8s linear infinite;
         }
@@ -89,17 +113,18 @@
         }
 
         .payment-loading-box h3 {
-            margin: 0 0 8px;
+            margin-bottom: 8px;
         }
 
         .payment-loading-box p {
-            margin: 0;
-            color: #71837d;
+            color: var(--muted);
             font-size: 14px;
             line-height: 1.5;
         }
 
-        /* FUND MODAL */
+        /* =========================
+           FUND MODAL
+        ========================= */
 
         #fundModal {
             display: none;
@@ -146,14 +171,12 @@
         }
 
         .fund-modal-header h3 {
-            margin: 0;
             font-size: 22px;
         }
 
         .fund-close {
             width: 38px;
             height: 38px;
-            border: none;
             border-radius: 50%;
             background: #f1f5f3;
             color: #536861;
@@ -161,8 +184,8 @@
         }
 
         .fund-modal-description {
-            margin: 0 0 20px;
-            color: #72847e;
+            margin-bottom: 20px;
+            color: var(--muted);
             font-size: 14px;
             line-height: 1.5;
         }
@@ -186,7 +209,7 @@
         }
 
         .amount-input-wrap:focus-within {
-            border-color: #0f9f6e;
+            border-color: var(--green);
             box-shadow: 0 0 0 4px rgba(15, 159, 110, .08);
         }
 
@@ -209,7 +232,7 @@
 
         .quick-amount-title {
             margin: 18px 0 10px;
-            color: #72847e;
+            color: var(--muted);
             font-size: 12px;
             font-weight: 700;
         }
@@ -247,7 +270,6 @@
         .continue-funding {
             width: 100%;
             margin-top: 18px;
-            border: none;
             border-radius: 15px;
             padding: 16px;
             background: linear-gradient(135deg, #19b879, #087f55);
@@ -263,14 +285,15 @@
         .cancel-funding {
             width: 100%;
             margin-top: 8px;
-            border: none;
             background: transparent;
-            color: #72847e;
+            color: var(--muted);
             padding: 12px;
             font-weight: 700;
         }
 
-        /* WELCOME */
+        /* =========================
+           WELCOME SCREEN
+        ========================= */
 
         .welcome-page {
             min-height: 100vh;
@@ -292,7 +315,7 @@
             border-radius: 32px;
             text-align: center;
             box-shadow: 0 30px 80px rgba(8,35,27,.13);
-            border: 1px solid #e2ebe7;
+            border: 1px solid var(--border);
         }
 
         .logo {
@@ -302,7 +325,7 @@
             border-radius: 24px;
             overflow: hidden;
             background: white;
-            border: 1px solid #e2ebe7;
+            border: 1px solid var(--border);
             box-shadow: 0 15px 35px rgba(37,211,102,.18);
         }
 
@@ -314,7 +337,6 @@
         }
 
         .welcome h1 {
-            margin: 0;
             font-size: 34px;
             letter-spacing: -1px;
         }
@@ -336,7 +358,6 @@
             width: 100%;
             padding: 16px;
             margin-top: 10px;
-            border: none;
             border-radius: 15px;
             font-size: 16px;
             font-weight: 800;
@@ -359,7 +380,9 @@
             font-size: 12px;
         }
 
-        /* DASHBOARD */
+        /* =========================
+           DASHBOARD
+        ========================= */
 
         .dashboard {
             display: none;
@@ -370,13 +393,17 @@
             display: block;
         }
 
+        /* =========================
+           TOP BAR
+        ========================= */
+
         .topbar {
             background: rgba(255,255,255,.94);
-            padding: 12px 18px;
+            padding: 13px 18px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid #e2ebe7;
+            border-bottom: 1px solid var(--border);
             position: sticky;
             top: 0;
             z-index: 50;
@@ -400,10 +427,17 @@
 
         .brand-name {
             font-size: 20px;
-            font-weight: 800;
-            letter-spacing: -.4px;
+            font-weight: 850;
+            letter-spacing: -.5px;
         }
 
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .notification-button,
         .profile-button {
             width: 43px;
             height: 43px;
@@ -412,32 +446,55 @@
             background: #effaf4;
             color: #0f9f6e;
             font-size: 18px;
+            position: relative;
         }
+
+        .notification-dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ef4444;
+            right: 8px;
+            top: 7px;
+            border: 2px solid white;
+        }
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
 
         .container {
             width: 100%;
             max-width: 1050px;
             margin: auto;
-            padding: 25px 18px 100px;
+            padding: 24px 18px 105px;
         }
 
+        /* =========================
+           GREETING
+        ========================= */
+
         .greeting {
-            margin-bottom: 19px;
+            margin-bottom: 18px;
         }
 
         .greeting p {
-            margin: 0 0 6px;
-            color: #668078;
+            margin-bottom: 5px;
+            color: var(--muted);
             font-size: 14px;
+            font-weight: 600;
         }
 
         .greeting h2 {
-            margin: 0;
-            font-size: 26px;
-            letter-spacing: -.8px;
+            font-size: 27px;
+            letter-spacing: -.9px;
+            line-height: 1.2;
         }
 
-        /* ACCOUNT */
+        /* =========================
+           ACCOUNT CARD
+        ========================= */
 
         .account-strip {
             display: flex;
@@ -445,11 +502,15 @@
             justify-content: space-between;
             gap: 12px;
             background: white;
-            border: 1px solid #e3ece8;
-            border-radius: 19px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
             padding: 15px 16px;
-            margin-bottom: 16px;
+            margin-bottom: 15px;
             box-shadow: 0 8px 25px rgba(15,50,39,.045);
+        }
+
+        .account-info {
+            min-width: 0;
         }
 
         .account-info small {
@@ -460,57 +521,85 @@
         }
 
         .account-info strong {
-            font-size: 16px;
-            letter-spacing: 1.5px;
+            font-size: 17px;
+            letter-spacing: 1.8px;
         }
 
         .copy-account {
-            border: none;
+            flex-shrink: 0;
             background: #eaf8f1;
             color: #087f55;
             border-radius: 11px;
-            padding: 10px 13px;
+            padding: 10px 14px;
             font-size: 12px;
             font-weight: 800;
         }
 
-        /* BALANCE */
+        /* =========================
+           BALANCE CARD
+        ========================= */
 
         .balance-card {
-            background:
-                radial-gradient(circle at 90% 5%, rgba(255,255,255,.18), transparent 28%),
-                radial-gradient(circle at 0% 100%, rgba(0,0,0,.09), transparent 37%),
-                linear-gradient(135deg,#0d805b,#064d3c);
-            color: white;
-            border-radius: 29px;
-            padding: 25px;
-            box-shadow: 0 22px 48px rgba(6,77,60,.24);
-            margin-bottom: 27px;
             position: relative;
             overflow: hidden;
+            background:
+                radial-gradient(
+                    circle at 90% 5%,
+                    rgba(255,255,255,.18),
+                    transparent 27%
+                ),
+                radial-gradient(
+                    circle at 0% 100%,
+                    rgba(0,0,0,.12),
+                    transparent 38%
+                ),
+                linear-gradient(
+                    135deg,
+                    #0c9365 0%,
+                    #076b4d 52%,
+                    #043f32 100%
+                );
+            color: white;
+            border-radius: 30px;
+            padding: 25px;
+            box-shadow: 0 23px 50px rgba(6,77,60,.25);
+            margin-bottom: 26px;
+            min-height: 190px;
+        }
+
+        .balance-card::before {
+            content: "";
+            position: absolute;
+            width: 230px;
+            height: 230px;
+            border: 1px solid rgba(255,255,255,.07);
+            border-radius: 50%;
+            right: -105px;
+            top: -120px;
         }
 
         .balance-card::after {
             content: "";
             position: absolute;
-            width: 180px;
-            height: 180px;
-            border: 1px solid rgba(255,255,255,.08);
+            width: 170px;
+            height: 170px;
+            border: 1px solid rgba(255,255,255,.06);
             border-radius: 50%;
-            right: -70px;
-            bottom: -75px;
+            left: -100px;
+            bottom: -100px;
         }
 
         .balance-top {
+            position: relative;
+            z-index: 2;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
-            z-index: 2;
         }
 
         .balance-label {
             font-size: 13px;
+            font-weight: 600;
             opacity: .78;
         }
 
@@ -528,29 +617,42 @@
             background: rgba(255,255,255,.1);
             color: white;
             font-size: 15px;
+            backdrop-filter: blur(8px);
         }
 
         .balance-amount {
-            font-size: 38px;
-            font-weight: 800;
-            letter-spacing: -1.2px;
-            margin: 11px 0 23px;
             position: relative;
             z-index: 2;
+            font-size: 39px;
+            font-weight: 850;
+            letter-spacing: -1.6px;
+            margin: 13px 0 23px;
+        }
+
+        .balance-footer {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .wallet-caption {
+            font-size: 11px;
+            opacity: .65;
         }
 
         .fund-button {
-            border: none;
             background: white;
             color: #087f55;
-            padding: 13px 20px;
+            padding: 13px 19px;
             border-radius: 13px;
-            font-weight: 800;
-            position: relative;
-            z-index: 2;
+            font-weight: 850;
         }
 
-        /* SERVICES */
+        /* =========================
+           SERVICES
+        ========================= */
 
         .section-heading {
             display: flex;
@@ -561,40 +663,42 @@
 
         .section-title {
             font-size: 18px;
-            font-weight: 800;
+            font-weight: 850;
         }
 
         .section-subtitle {
             color: #8ba099;
             font-size: 12px;
+            font-weight: 600;
         }
 
         .actions {
             display: grid;
-            grid-template-columns: repeat(3,1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 11px;
         }
 
         .action {
+            min-height: 118px;
             border: 1px solid #e5eee9;
             background: white;
-            border-radius: 19px;
-            padding: 17px 8px;
+            border-radius: 20px;
+            padding: 16px 7px;
             text-align: center;
             box-shadow: 0 8px 24px rgba(15,50,39,.055);
             transition: transform .15s ease, box-shadow .15s ease;
         }
 
         .action:hover {
-            box-shadow: 0 12px 30px rgba(15,50,39,.09);
+            box-shadow: 0 14px 32px rgba(15,50,39,.09);
         }
 
         .action-icon {
-            width: 49px;
-            height: 49px;
+            width: 50px;
+            height: 50px;
             margin: 0 auto 10px;
             border-radius: 16px;
-            background: #effaf4;
+            background: var(--green-soft);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -607,7 +711,9 @@
             color: #263a33;
         }
 
-        /* RECENT ACTIVITY */
+        /* =========================
+           ACTIVITY
+        ========================= */
 
         .transactions {
             background: white;
@@ -628,6 +734,11 @@
             gap: 12px;
             padding: 15px 16px;
             border-bottom: 1px solid #edf2ef;
+            transition: background .2s ease;
+        }
+
+        .recent-item:hover {
+            background: #fbfdfc;
         }
 
         .recent-item:last-child {
@@ -635,9 +746,9 @@
         }
 
         .recent-icon {
-            width: 43px;
-            height: 43px;
-            flex: 0 0 43px;
+            width: 44px;
+            height: 44px;
+            flex: 0 0 44px;
             border-radius: 14px;
             background: #effaf4;
             display: flex;
@@ -666,12 +777,12 @@
         .recent-amount {
             text-align: right;
             font-size: 13px;
-            font-weight: 800;
+            font-weight: 850;
             white-space: nowrap;
         }
 
         .recent-amount.debit {
-            color: #d34b4b;
+            color: var(--red);
         }
 
         .recent-amount.credit {
@@ -679,13 +790,14 @@
         }
 
         .recent-status {
-            margin-top: 3px;
+            margin-top: 4px;
+            text-align: right;
             font-size: 10px;
             color: #91a19b;
         }
 
         .transaction-empty {
-            padding: 34px 20px;
+            padding: 35px 20px;
             text-align: center;
             color: #8ba099;
         }
@@ -708,18 +820,23 @@
             margin-bottom: 5px;
         }
 
+        .transaction-empty small {
+            font-size: 12px;
+        }
+
         .view-all {
             width: 100%;
-            border: none;
             border-top: 1px solid #edf2ef;
             background: white;
             color: #087f55;
             padding: 15px;
             font-size: 13px;
-            font-weight: 800;
+            font-weight: 850;
         }
 
-        /* LOGOUT */
+        /* =========================
+           LOGOUT
+        ========================= */
 
         .logout {
             width: 100%;
@@ -729,11 +846,13 @@
             border-radius: 15px;
             background: #fff3f3;
             color: #d33b3b;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 800;
         }
 
-        /* BOTTOM NAV */
+        /* =========================
+           BOTTOM NAVIGATION
+        ========================= */
 
         .bottom-nav {
             position: fixed;
@@ -742,42 +861,82 @@
             right: 0;
             background: rgba(255,255,255,.97);
             border-top: 1px solid #e2ebe7;
-            height: 72px;
+            height: 75px;
             display: flex;
             justify-content: space-around;
             align-items: center;
             z-index: 100;
             backdrop-filter: blur(18px);
+            padding-bottom: env(safe-area-inset-bottom);
         }
 
         .nav-button {
             background: none;
-            border: none;
             color: #94a59e;
-            font-size: 11px;
+            font-size: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             gap: 4px;
             min-width: 70px;
+            font-weight: 650;
         }
 
         .nav-button span {
-            font-size: 21px;
+            width: 38px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 20px;
         }
 
         .nav-button.active {
             color: #0f9f6e;
-            font-weight: 800;
+            font-weight: 850;
         }
 
-        @media (min-width:600px) {
+        .nav-button.active span {
+            background: #eaf8f1;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (min-width: 600px) {
             #fundModal {
                 align-items: center;
             }
         }
 
-        @media (min-width:700px) {
+        @media (min-width: 700px) {
+            body {
+                background: #eaf0ed;
+            }
+
+            .dashboard {
+                max-width: 1050px;
+                margin: 0 auto;
+                background: var(--bg);
+                min-height: 100vh;
+                box-shadow: 0 0 50px rgba(0,0,0,.07);
+            }
+
+            .topbar {
+                border-radius: 0;
+            }
+
+            .container {
+                padding-bottom: 30px;
+            }
+
+            .actions {
+                grid-template-columns: repeat(6, 1fr);
+            }
+
             .bottom-nav {
                 position: static;
                 max-width: 1050px;
@@ -785,17 +944,19 @@
                 border: 1px solid #e2ebe7;
                 border-radius: 18px;
             }
-
-            .container {
-                padding-bottom: 25px;
-            }
-
-            .actions {
-                grid-template-columns: repeat(6,1fr);
-            }
         }
 
-        @media (max-width:420px) {
+        @media (max-width: 420px) {
+            .container {
+                padding-left: 14px;
+                padding-right: 14px;
+            }
+
+            .balance-card {
+                padding: 22px 19px;
+                border-radius: 26px;
+            }
+
             .balance-amount {
                 font-size: 32px;
             }
@@ -804,12 +965,16 @@
                 font-size: 14px;
             }
 
-            .quick-amounts {
-                grid-template-columns: repeat(2,1fr);
-            }
-
             .greeting h2 {
                 font-size: 24px;
+            }
+
+            .action {
+                min-height: 112px;
+            }
+
+            .recent-item {
+                padding: 14px 13px;
             }
         }
     </style>
@@ -817,26 +982,44 @@
 
 <body>
 
+<!-- LOADING -->
+
 <div id="loading">
     Checking your Velqora account...
 </div>
 
+<!-- PAYMENT LOADING -->
+
 <div id="paymentLoading">
     <div class="payment-loading-box">
         <div class="payment-spinner"></div>
-        <h3>Opening secure payment</h3>
-        <p>Please wait while we connect you to Flutterwave.</p>
+
+        <h3>
+            Opening secure payment
+        </h3>
+
+        <p>
+            Please wait while we connect you to Flutterwave.
+        </p>
     </div>
 </div>
 
-<!-- FUND WALLET -->
+<!-- FUND WALLET MODAL -->
 
-<div id="fundModal" onclick="handleFundModalBackground(event)">
-
-    <div class="fund-modal-box" onclick="event.stopPropagation()">
+<div
+    id="fundModal"
+    onclick="handleFundModalBackground(event)"
+>
+    <div
+        class="fund-modal-box"
+        onclick="event.stopPropagation()"
+    >
 
         <div class="fund-modal-header">
-            <h3>Fund Wallet</h3>
+
+            <h3>
+                Fund Wallet
+            </h3>
 
             <button
                 class="fund-close"
@@ -844,6 +1027,7 @@
             >
                 ×
             </button>
+
         </div>
 
         <p class="fund-modal-description">
@@ -878,25 +1062,40 @@
 
         <div class="quick-amounts">
 
-            <button class="quick-amount" onclick="setFundAmount(100)">
+            <button
+                class="quick-amount"
+                onclick="setFundAmount(100)"
+            >
                 ₦100
             </button>
 
-            <button class="quick-amount" onclick="setFundAmount(500)">
+            <button
+                class="quick-amount"
+                onclick="setFundAmount(500)"
+            >
                 ₦500
             </button>
 
-            <button class="quick-amount" onclick="setFundAmount(1000)">
+            <button
+                class="quick-amount"
+                onclick="setFundAmount(1000)"
+            >
                 ₦1,000
             </button>
 
-            <button class="quick-amount" onclick="setFundAmount(5000)">
+            <button
+                class="quick-amount"
+                onclick="setFundAmount(5000)"
+            >
                 ₦5,000
             </button>
 
         </div>
 
-        <div id="fundError" class="fund-error"></div>
+        <div
+            id="fundError"
+            class="fund-error"
+        ></div>
 
         <button
             id="continueFundingButton"
@@ -916,7 +1115,7 @@
     </div>
 </div>
 
-<!-- WELCOME -->
+<!-- WELCOME SCREEN -->
 
 <div
     id="welcomeScreen"
@@ -933,9 +1132,13 @@
             >
         </div>
 
-        <h1>Velqora</h1>
+        <h1>
+            Velqora
+        </h1>
 
-        <h2>Welcome to Velqora</h2>
+        <h2>
+            Welcome to Velqora
+        </h2>
 
         <p>
             A simple place to manage your wallet,
@@ -961,11 +1164,17 @@
         </div>
 
     </div>
+
 </div>
 
 <!-- DASHBOARD -->
 
-<div id="dashboard" class="dashboard">
+<div
+    id="dashboard"
+    class="dashboard"
+>
+
+    <!-- TOP BAR -->
 
     <header class="topbar">
 
@@ -984,16 +1193,30 @@
 
         </div>
 
-        <button
-            class="profile-button"
-            onclick="goToProfile()"
-        >
-            👤
-        </button>
+        <div class="header-actions">
+
+            <button
+                class="notification-button"
+                onclick="showNotifications()"
+            >
+                🔔
+                <span class="notification-dot"></span>
+            </button>
+
+            <button
+                class="profile-button"
+                onclick="goToProfile()"
+            >
+                👤
+            </button>
+
+        </div>
 
     </header>
 
     <main class="container">
+
+        <!-- GREETING -->
 
         <div class="greeting">
 
@@ -1032,7 +1255,7 @@
 
         </div>
 
-        <!-- BALANCE -->
+        <!-- WALLET -->
 
         <div class="balance-card">
 
@@ -1071,17 +1294,25 @@
                 Checking...
             </div>
 
-            <button
-                class="fund-button"
-                id="fundWalletButton"
-                onclick="startFunding()"
-            >
-                + Add Money
-            </button>
+            <div class="balance-footer">
+
+                <div class="wallet-caption">
+                    Your Velqora wallet
+                </div>
+
+                <button
+                    class="fund-button"
+                    id="fundWalletButton"
+                    onclick="startFunding()"
+                >
+                    + Add Money
+                </button>
+
+            </div>
 
         </div>
 
-        <!-- SERVICES -->
+        <!-- QUICK SERVICES -->
 
         <div class="section-heading">
 
@@ -1102,48 +1333,78 @@
                 id="fundActionButton"
                 onclick="startFunding()"
             >
-                <div class="action-icon">💰</div>
-                <div class="action-title">Add Money</div>
+                <div class="action-icon">
+                    💰
+                </div>
+
+                <div class="action-title">
+                    Add Money
+                </div>
             </button>
 
             <button
                 class="action"
                 onclick="buyData()"
             >
-                <div class="action-icon">📶</div>
-                <div class="action-title">Data</div>
+                <div class="action-icon">
+                    📶
+                </div>
+
+                <div class="action-title">
+                    Data
+                </div>
             </button>
 
             <button
                 class="action"
                 onclick="buyAirtime()"
             >
-                <div class="action-icon">☎️</div>
-                <div class="action-title">Airtime</div>
+                <div class="action-icon">
+                    ☎️
+                </div>
+
+                <div class="action-title">
+                    Airtime
+                </div>
             </button>
 
             <button
                 class="action"
                 onclick="makeTransfer()"
             >
-                <div class="action-icon">💸</div>
-                <div class="action-title">Send Money</div>
+                <div class="action-icon">
+                    💸
+                </div>
+
+                <div class="action-title">
+                    Send Money
+                </div>
             </button>
 
             <button
                 class="action"
                 onclick="viewTransactions()"
             >
-                <div class="action-icon">📊</div>
-                <div class="action-title">Activity</div>
+                <div class="action-icon">
+                    📊
+                </div>
+
+                <div class="action-title">
+                    Activity
+                </div>
             </button>
 
             <button
                 class="action"
                 onclick="goToProfile()"
             >
-                <div class="action-icon">👤</div>
-                <div class="action-title">Profile</div>
+                <div class="action-icon">
+                    👤
+                </div>
+
+                <div class="action-title">
+                    Profile
+                </div>
             </button>
 
         </div>
@@ -1168,7 +1429,9 @@
                 id="recentActivity"
                 class="recent-list"
             >
+
                 <div class="transaction-empty">
+
                     <div class="transaction-empty-icon">
                         🧾
                     </div>
@@ -1180,7 +1443,9 @@
                     <small>
                         Getting your latest transactions.
                     </small>
+
                 </div>
+
             </div>
 
             <button
@@ -1192,6 +1457,8 @@
 
         </div>
 
+        <!-- LOGOUT -->
+
         <button
             class="logout"
             onclick="logout()"
@@ -1201,13 +1468,18 @@
 
     </main>
 
+    <!-- BOTTOM NAV -->
+
     <nav class="bottom-nav">
 
         <button
             class="nav-button active"
             onclick="goHome()"
         >
-            <span>⌂</span>
+            <span>
+                ⌂
+            </span>
+
             Home
         </button>
 
@@ -1215,7 +1487,10 @@
             class="nav-button"
             onclick="viewTransactions()"
         >
-            <span>▣</span>
+            <span>
+                ▣
+            </span>
+
             Activity
         </button>
 
@@ -1223,7 +1498,10 @@
             class="nav-button"
             onclick="goToProfile()"
         >
-            <span>♙</span>
+            <span>
+                ♙
+            </span>
+
             Profile
         </button>
 
@@ -1250,7 +1528,8 @@ let fundingInProgress = false;
 
 function updateGreeting() {
 
-    const hour = new Date().getHours();
+    const hour =
+        new Date().getHours();
 
     let greeting;
 
@@ -1265,6 +1544,17 @@ function updateGreeting() {
     document.getElementById(
         "greetingText"
     ).textContent = greeting;
+}
+
+/* =========================
+   NOTIFICATIONS
+========================= */
+
+function showNotifications() {
+
+    alert(
+        "Notifications will appear here."
+    );
 }
 
 /* =========================
@@ -1295,7 +1585,8 @@ async function loadAccountNumber(userId) {
             error
         );
 
-        element.textContent = "Unavailable";
+        element.textContent =
+            "Unavailable";
 
         return;
     }
@@ -1305,7 +1596,8 @@ async function loadAccountNumber(userId) {
         !data.account_number
     ) {
 
-        element.textContent = "Unavailable";
+        element.textContent =
+            "Unavailable";
 
         return;
     }
@@ -1343,10 +1635,14 @@ async function copyAccountNumber() {
                 ".copy-account"
             );
 
-        button.textContent = "Copied";
+        button.textContent =
+            "Copied";
 
         setTimeout(() => {
-            button.textContent = "Copy";
+
+            button.textContent =
+                "Copy";
+
         }, 1500);
 
     } catch (error) {
@@ -1429,7 +1725,8 @@ function displayBalance() {
         balanceElement.textContent =
             "₦••••••";
 
-        eye.textContent = "🙈";
+        eye.textContent =
+            "🙈";
 
         return;
     }
@@ -1444,7 +1741,8 @@ function displayBalance() {
             }
         );
 
-    eye.textContent = "👁️";
+    eye.textContent =
+        "👁️";
 }
 
 function toggleBalance() {
@@ -1487,9 +1785,14 @@ function formatRecentDate(dateValue) {
         return "";
     }
 
-    const date = new Date(dateValue);
+    const date =
+        new Date(dateValue);
 
-    if (Number.isNaN(date.getTime())) {
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
         return "";
     }
 
@@ -1504,19 +1807,23 @@ function formatRecentDate(dateValue) {
 
 function formatRecentAmount(amount) {
 
-    const number = Number(amount);
+    const number =
+        Number(amount);
 
-    if (!Number.isFinite(number)) {
+    if (
+        !Number.isFinite(number)
+    ) {
         return "₦0.00";
     }
 
-    return "₦" + number.toLocaleString(
-        "en-NG",
-        {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-        }
-    );
+    return "₦" +
+        number.toLocaleString(
+            "en-NG",
+            {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }
+        );
 }
 
 async function loadRecentActivity() {
@@ -1557,6 +1864,7 @@ async function loadRecentActivity() {
                 .limit(5);
 
         if (transferError) {
+
             console.error(
                 "Recent transfer error:",
                 transferError
@@ -1571,6 +1879,7 @@ async function loadRecentActivity() {
                     currentUser.id;
 
                 results.push({
+
                     id:
                         "transfer-" +
                         transaction.id,
@@ -1629,6 +1938,7 @@ async function loadRecentActivity() {
                 .limit(5);
 
         if (dataError) {
+
             console.error(
                 "Recent data error:",
                 dataError
@@ -1639,6 +1949,7 @@ async function loadRecentActivity() {
             transaction => {
 
                 results.push({
+
                     id:
                         "data-" +
                         transaction.id,
@@ -1691,6 +2002,7 @@ async function loadRecentActivity() {
                 .limit(5);
 
         if (airtimeError) {
+
             console.error(
                 "Recent airtime error:",
                 airtimeError
@@ -1701,6 +2013,7 @@ async function loadRecentActivity() {
             transaction => {
 
                 results.push({
+
                     id:
                         "airtime-" +
                         transaction.id,
@@ -1729,7 +2042,7 @@ async function loadRecentActivity() {
             }
         );
 
-        /* SORT EVERYTHING TOGETHER */
+        /* SORT */
 
         results.sort(
             (a, b) =>
@@ -1744,6 +2057,7 @@ async function loadRecentActivity() {
 
             container.innerHTML = `
                 <div class="transaction-empty">
+
                     <div class="transaction-empty-icon">
                         🧾
                     </div>
@@ -1755,6 +2069,7 @@ async function loadRecentActivity() {
                     <small>
                         Your wallet activity will appear here.
                     </small>
+
                 </div>
             `;
 
@@ -1776,6 +2091,7 @@ async function loadRecentActivity() {
                         status.slice(1);
 
                     return `
+
                         <div class="recent-item">
 
                             <div class="recent-icon">
@@ -1789,7 +2105,9 @@ async function loadRecentActivity() {
                                 </div>
 
                                 <div class="recent-date">
-                                    ${formatRecentDate(transaction.created_at)}
+                                    ${formatRecentDate(
+                                        transaction.created_at
+                                    )}
                                 </div>
 
                             </div>
@@ -1797,7 +2115,13 @@ async function loadRecentActivity() {
                             <div>
 
                                 <div class="recent-amount ${transaction.type}">
-                                    ${transaction.type === "credit" ? "+" : "-"}${formatRecentAmount(transaction.amount)}
+                                    ${
+                                        transaction.type === "credit"
+                                            ? "+"
+                                            : "-"
+                                    }${formatRecentAmount(
+                                        transaction.amount
+                                    )}
                                 </div>
 
                                 <div class="recent-status">
@@ -1819,6 +2143,7 @@ async function loadRecentActivity() {
         );
 
         container.innerHTML = `
+
             <div class="transaction-empty">
 
                 <div class="transaction-empty-icon">
@@ -1834,6 +2159,7 @@ async function loadRecentActivity() {
                 </small>
 
             </div>
+
         `;
     }
 }
@@ -1856,7 +2182,8 @@ async function checkUser() {
 
         document.getElementById(
             "loading"
-        ).style.display = "none";
+        ).style.display =
+            "none";
 
         if (
             error ||
@@ -1865,7 +2192,8 @@ async function checkUser() {
 
             document.getElementById(
                 "welcomeScreen"
-            ).style.display = "flex";
+            ).style.display =
+                "flex";
 
             return;
         }
@@ -1875,13 +2203,19 @@ async function checkUser() {
 
         document.getElementById(
             "dashboard"
-        ).classList.add("active");
+        ).classList.add(
+            "active"
+        );
 
         updateGreeting();
 
         await Promise.all([
-            loadWallet(currentUser.id),
-            loadAccountNumber(currentUser.id),
+            loadWallet(
+                currentUser.id
+            ),
+            loadAccountNumber(
+                currentUser.id
+            ),
             loadRecentActivity()
         ]);
 
@@ -1894,11 +2228,13 @@ async function checkUser() {
 
         document.getElementById(
             "loading"
-        ).style.display = "none";
+        ).style.display =
+            "none";
 
         document.getElementById(
             "welcomeScreen"
-        ).style.display = "flex";
+        ).style.display =
+            "flex";
     }
 }
 
@@ -1960,11 +2296,17 @@ function closeFundModal() {
     }
 
     document
-        .getElementById("fundModal")
-        .classList.remove("active");
+        .getElementById(
+            "fundModal"
+        )
+        .classList.remove(
+            "active"
+        );
 }
 
-function handleFundModalBackground(event) {
+function handleFundModalBackground(
+    event
+) {
 
     if (
         event.target.id ===
@@ -1985,8 +2327,12 @@ function setFundAmount(amount) {
         amount;
 
     document
-        .getElementById("fundError")
-        .classList.remove("show");
+        .getElementById(
+            "fundError"
+        )
+        .classList.remove(
+            "show"
+        );
 
     input.focus();
 }
@@ -2195,7 +2541,9 @@ async function continueFunding() {
     }
 }
 
-function setFundingLoading(isLoading) {
+function setFundingLoading(
+    isLoading
+) {
 
     const loadingScreen =
         document.getElementById(
@@ -2233,26 +2581,31 @@ function setFundingLoading(isLoading) {
 ========================= */
 
 function buyData() {
+
     window.location.href =
         "data.html";
 }
 
 function buyAirtime() {
+
     window.location.href =
         "airtime.html";
 }
 
 function makeTransfer() {
+
     window.location.href =
         "transfer.html";
 }
 
 function viewTransactions() {
+
     window.location.href =
         "transactions.html";
 }
 
 function goToProfile() {
+
     window.location.href =
         "profile.html";
 }
@@ -2294,11 +2647,14 @@ document.addEventListener(
                 .classList
                 .contains("active")
         ) {
+
             closeFundModal();
         }
 
     }
 );
+
+/* START */
 
 checkUser();
 
