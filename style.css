@@ -312,6 +312,152 @@ a {
     font-size: 13px;
 }
 
+/* ================================
+   VELQORA — RECENT ACTIVITY
+   ================================ */
+
+.transactions {
+    overflow: hidden;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+}
+
+.recent-list {
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+}
+
+.recent-item {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 16px;
+    border-bottom: 1px solid #eef2f0;
+    transition: background 0.2s ease;
+}
+
+.recent-item:last-child {
+    border-bottom: none;
+}
+
+.recent-item:hover {
+    background: #f8fbf9;
+}
+
+.recent-icon {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eaf7f1;
+    font-size: 20px;
+}
+
+.recent-info {
+    min-width: 0;
+    flex: 1;
+}
+
+.recent-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #17221d;
+    margin-bottom: 4px;
+}
+
+.recent-date {
+    font-size: 12px;
+    color: #89958f;
+}
+
+.recent-amount {
+    text-align: right;
+    font-size: 14px;
+    font-weight: 800;
+    white-space: nowrap;
+    color: #087f55;
+}
+
+.recent-amount.debit {
+    color: #d34b4b;
+}
+
+.recent-status {
+    display: inline-block;
+    margin-top: 5px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 700;
+    background: #fff4d8;
+    color: #9a6b00;
+}
+
+.recent-status.successful {
+    background: #e7f7ef;
+    color: #087f55;
+}
+
+.recent-status.failed {
+    background: #fdeaea;
+    color: #c43d3d;
+}
+
+/* Empty / loading activity */
+
+.transaction-empty {
+    padding: 28px 18px;
+    text-align: center;
+    color: #7c8882;
+}
+
+.transaction-empty-icon {
+    width: 52px;
+    height: 52px;
+    margin: 0 auto 10px;
+    border-radius: 16px;
+    background: #f1f6f3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+}
+
+.transaction-empty strong {
+    display: block;
+    color: #26332d;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.transaction-empty small {
+    font-size: 12px;
+    color: #8b9690;
+}
+
+/* View all button */
+
+.view-all {
+    width: 100%;
+    padding: 14px 16px;
+    background: #ffffff;
+    color: var(--green-dark);
+    border-top: 1px solid #eef2f0;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    transition: background 0.2s ease;
+}
+
+.view-all:hover {
+    background: #f8fbf9;
+}
+
 /* Bottom navigation */
 
 .bottom-nav {
@@ -483,6 +629,31 @@ a {
     to {
         transform: translateY(0);
         opacity: 1;
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 480px) {
+    .recent-item {
+        padding: 14px 13px;
+        gap: 10px;
+    }
+
+    .recent-icon {
+        width: 41px;
+        height: 41px;
+        min-width: 41px;
+        border-radius: 12px;
+        font-size: 18px;
+    }
+
+    .recent-title {
+        font-size: 13px;
+    }
+
+    .recent-amount {
+        font-size: 13px;
     }
 }
 
