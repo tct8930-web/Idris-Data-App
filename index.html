@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,10 +41,6 @@
             transform: scale(.97);
         }
 
-        /* =========================
-           LOADING
-        ========================= */
-
         #loading {
             min-height: 100vh;
             display: flex;
@@ -54,10 +51,6 @@
             padding: 20px;
             background: #f5f8f7;
         }
-
-        /* =========================
-           PAYMENT LOADING
-        ========================= */
 
         #paymentLoading {
             display: none;
@@ -107,9 +100,7 @@
             line-height: 1.5;
         }
 
-        /* =========================
-           FUND MODAL
-        ========================= */
+        /* FUND MODAL /
 
         #fundModal {
             display: none;
@@ -280,9 +271,7 @@
             font-weight: 700;
         }
 
-        /* =========================
-           WELCOME
-        ========================= */
+        / WELCOME /
 
         .welcome-page {
             min-height: 100vh;
@@ -371,9 +360,7 @@
             font-size: 12px;
         }
 
-        /* =========================
-           DASHBOARD
-        ========================= */
+        / DASHBOARD /
 
         .dashboard {
             display: none;
@@ -451,9 +438,7 @@
             letter-spacing: -.8px;
         }
 
-        /* =========================
-           ACCOUNT NUMBER
-        ========================= */
+        / ACCOUNT /
 
         .account-strip {
             display: flex;
@@ -490,9 +475,7 @@
             font-weight: 800;
         }
 
-        /* =========================
-           BALANCE CARD
-        ========================= */
+        / BALANCE /
 
         .balance-card {
             background:
@@ -568,9 +551,7 @@
             z-index: 2;
         }
 
-        /* =========================
-           SERVICES
-        ========================= */
+        / SERVICES /
 
         .section-heading {
             display: flex;
@@ -627,9 +608,7 @@
             color: #263a33;
         }
 
-        /* =========================
-           RECENT ACTIVITY
-        ========================= */
+        / RECENT ACTIVITY /
 
         .transactions {
             background: white;
@@ -637,6 +616,73 @@
             box-shadow: 0 8px 24px rgba(15,50,39,.055);
             overflow: hidden;
             border: 1px solid #e5eee9;
+        }
+
+        .recent-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .recent-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 16px;
+            border-bottom: 1px solid #edf2ef;
+        }
+
+        .recent-item:last-child {
+            border-bottom: none;
+        }
+
+        .recent-icon {
+            width: 43px;
+            height: 43px;
+            flex: 0 0 43px;
+            border-radius: 14px;
+            background: #effaf4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .recent-info {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .recent-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: #263a33;
+            margin-bottom: 4px;
+        }
+
+        .recent-date {
+            color: #91a19b;
+            font-size: 11px;
+        }
+
+        .recent-amount {
+            text-align: right;
+            font-size: 13px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .recent-amount.debit {
+            color: #d34b4b;
+        }
+
+        .recent-amount.credit {
+            color: #087f55;
+        }
+
+        .recent-status {
+            margin-top: 3px;
+            font-size: 10px;
+            color: #91a19b;
         }
 
         .transaction-empty {
@@ -674,9 +720,7 @@
             font-weight: 800;
         }
 
-        /* =========================
-           LOGOUT
-        ========================= */
+        / LOGOUT /
 
         .logout {
             width: 100%;
@@ -690,9 +734,7 @@
             font-weight: 800;
         }
 
-        /* =========================
-           BOTTOM NAV
-        ========================= */
+        / BOTTOM NAV /
 
         .bottom-nav {
             position: fixed;
@@ -783,34 +825,19 @@
 <div id="paymentLoading">
     <div class="payment-loading-box">
         <div class="payment-spinner"></div>
-
-        <h3>
-            Opening secure payment
-        </h3>
-
-        <p>
-            Please wait while we connect you to Flutterwave.
-        </p>
+        <h3>Opening secure payment</h3>
+        <p>Please wait while we connect you to Flutterwave.</p>
     </div>
 </div>
 
 <!-- FUND WALLET -->
 
-<div
-    id="fundModal"
-    onclick="handleFundModalBackground(event)"
->
+<div id="fundModal" onclick="handleFundModalBackground(event)">
 
-    <div
-        class="fund-modal-box"
-        onclick="event.stopPropagation()"
-    >
+    <div class="fund-modal-box" onclick="event.stopPropagation()">
 
         <div class="fund-modal-header">
-
-            <h3>
-                Fund Wallet
-            </h3>
+            <h3>Fund Wallet</h3>
 
             <button
                 class="fund-close"
@@ -818,7 +845,6 @@
             >
                 ×
             </button>
-
         </div>
 
         <p class="fund-modal-description">
@@ -853,40 +879,25 @@
 
         <div class="quick-amounts">
 
-            <button
-                class="quick-amount"
-                onclick="setFundAmount(100)"
-            >
+            <button class="quick-amount" onclick="setFundAmount(100)">
                 ₦100
             </button>
 
-            <button
-                class="quick-amount"
-                onclick="setFundAmount(500)"
-            >
+            <button class="quick-amount" onclick="setFundAmount(500)">
                 ₦500
             </button>
 
-            <button
-                class="quick-amount"
-                onclick="setFundAmount(1000)"
-            >
+            <button class="quick-amount" onclick="setFundAmount(1000)">
                 ₦1,000
             </button>
 
-            <button
-                class="quick-amount"
-                onclick="setFundAmount(5000)"
-            >
+            <button class="quick-amount" onclick="setFundAmount(5000)">
                 ₦5,000
             </button>
 
         </div>
 
-        <div
-            id="fundError"
-            class="fund-error"
-        ></div>
+        <div id="fundError" class="fund-error"></div>
 
         <button
             id="continueFundingButton"
@@ -917,21 +928,15 @@
     <div class="welcome">
 
         <div class="logo">
-
             <img
                 src="velqora.png.PNG"
                 alt="Velqora Logo"
             >
-
         </div>
 
-        <h1>
-            Velqora
-        </h1>
+        <h1>Velqora</h1>
 
-        <h2>
-            Welcome to Velqora
-        </h2>
+        <h2>Welcome to Velqora</h2>
 
         <p>
             A simple place to manage your wallet,
@@ -961,22 +966,17 @@
 
 <!-- DASHBOARD -->
 
-<div
-    id="dashboard"
-    class="dashboard"
->
+<div id="dashboard" class="dashboard">
 
     <header class="topbar">
 
         <div class="brand">
 
             <div class="brand-logo">
-
                 <img
                     src="velqora.png.PNG"
                     alt="Velqora"
                 >
-
             </div>
 
             <div class="brand-name">
@@ -1103,78 +1103,48 @@
                 id="fundActionButton"
                 onclick="startFunding()"
             >
-                <div class="action-icon">
-                    💰
-                </div>
-
-                <div class="action-title">
-                    Add Money
-                </div>
+                <div class="action-icon">💰</div>
+                <div class="action-title">Add Money</div>
             </button>
 
             <button
                 class="action"
                 onclick="buyData()"
             >
-                <div class="action-icon">
-                    📶
-                </div>
-
-                <div class="action-title">
-                    Data
-                </div>
+                <div class="action-icon">📶</div>
+                <div class="action-title">Data</div>
             </button>
 
             <button
                 class="action"
                 onclick="buyAirtime()"
             >
-                <div class="action-icon">
-                    ☎️
-                </div>
-
-                <div class="action-title">
-                    Airtime
-                </div>
+                <div class="action-icon">☎️</div>
+                <div class="action-title">Airtime</div>
             </button>
 
             <button
                 class="action"
                 onclick="makeTransfer()"
             >
-                <div class="action-icon">
-                    💸
-                </div>
-
-                <div class="action-title">
-                    Send Money
-                </div>
+                <div class="action-icon">💸</div>
+                <div class="action-title">Send Money</div>
             </button>
 
             <button
                 class="action"
                 onclick="viewTransactions()"
             >
-                <div class="action-icon">
-                    📊
-                </div>
-
-                <div class="action-title">
-                    Activity
-                </div>
+                <div class="action-icon">📊</div>
+                <div class="action-title">Activity</div>
             </button>
 
             <button
                 class="action"
                 onclick="goToProfile()"
             >
-                <div class="action-icon">
-                    👤
-                </div>
-
-                <div class="action-title">
-                    Profile
-                </div>
+                <div class="action-icon">👤</div>
+                <div class="action-title">Profile</div>
             </button>
 
         </div>
@@ -1188,27 +1158,30 @@
             </div>
 
             <div class="section-subtitle">
-                Wallet
+                Latest
             </div>
 
         </div>
 
         <div class="transactions">
 
-            <div class="transaction-empty">
+            <div
+                id="recentActivity"
+                class="recent-list"
+            >
+                <div class="transaction-empty">
+                    <div class="transaction-empty-icon">
+                        🧾
+                    </div>
 
-                <div class="transaction-empty-icon">
-                    🧾
+                    <strong>
+                        Loading activity...
+                    </strong>
+
+                    <small>
+                        Getting your latest transactions.
+                    </small>
                 </div>
-
-                <strong>
-                    Your activity will appear here
-                </strong>
-
-                <small>
-                    View your full wallet history anytime.
-                </small>
-
             </div>
 
             <button
@@ -1272,31 +1245,22 @@ let balanceHidden = false;
 let currentUser = null;
 let fundingInProgress = false;
 
-/* =========================
+/ =========================
    GREETING
-========================= */
+========================= /
 
 function updateGreeting() {
 
-    const hour =
-        new Date().getHours();
+    const hour = new Date().getHours();
 
     let greeting;
 
     if (hour < 12) {
-
-        greeting =
-            "Good morning 👋";
-
+        greeting = "Good morning 👋";
     } else if (hour < 18) {
-
-        greeting =
-            "Good afternoon 👋";
-
+        greeting = "Good afternoon 👋";
     } else {
-
-        greeting =
-            "Good evening 👋";
+        greeting = "Good evening 👋";
     }
 
     document.getElementById(
@@ -1304,9 +1268,9 @@ function updateGreeting() {
     ).textContent = greeting;
 }
 
-/* =========================
+/ =========================
    ACCOUNT NUMBER
-========================= */
+========================= /
 
 async function loadAccountNumber(userId) {
 
@@ -1332,8 +1296,7 @@ async function loadAccountNumber(userId) {
             error
         );
 
-        element.textContent =
-            "Unavailable";
+        element.textContent = "Unavailable";
 
         return;
     }
@@ -1343,8 +1306,7 @@ async function loadAccountNumber(userId) {
         !data.account_number
     ) {
 
-        element.textContent =
-            "Unavailable";
+        element.textContent = "Unavailable";
 
         return;
     }
@@ -1382,14 +1344,10 @@ async function copyAccountNumber() {
                 ".copy-account"
             );
 
-        button.textContent =
-            "Copied";
+        button.textContent = "Copied";
 
         setTimeout(() => {
-
-            button.textContent =
-                "Copy";
-
+            button.textContent = "Copy";
         }, 1500);
 
     } catch (error) {
@@ -1400,9 +1358,9 @@ async function copyAccountNumber() {
     }
 }
 
-/* =========================
+/ =========================
    WALLET
-========================= */
+========================= /
 
 async function loadWallet(userId) {
 
@@ -1472,8 +1430,7 @@ function displayBalance() {
         balanceElement.textContent =
             "₦••••••";
 
-        eye.textContent =
-            "🙈";
+        eye.textContent = "🙈";
 
         return;
     }
@@ -1488,8 +1445,7 @@ function displayBalance() {
             }
         );
 
-    eye.textContent =
-        "👁️";
+    eye.textContent = "👁️";
 }
 
 function toggleBalance() {
@@ -1522,9 +1478,370 @@ async function refreshWallet() {
     button.textContent = "↻";
 }
 
-/* =========================
+/ =========================
+   RECENT ACTIVITY
+========================= /
+
+function formatRecentDate(dateValue) {
+
+    if (!dateValue) {
+        return "";
+    }
+
+    const date = new Date(dateValue);
+
+    if (Number.isNaN(date.getTime())) {
+        return "";
+    }
+
+    return date.toLocaleDateString(
+        "en-NG",
+        {
+            day: "numeric",
+            month: "short"
+        }
+    );
+}
+
+function formatRecentAmount(amount) {
+
+    const number = Number(amount);
+
+    if (!Number.isFinite(number)) {
+        return "₦0.00";
+    }
+
+    return "₦" + number.toLocaleString(
+        "en-NG",
+        {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }
+    );
+}
+
+async function loadRecentActivity() {
+
+    const container =
+        document.getElementById(
+            "recentActivity"
+        );
+
+    if (!currentUser) {
+        return;
+    }
+
+    try {
+
+        const results = [];
+
+        / TRANSFERS /
+
+        const {
+            data: transfers,
+            error: transferError
+        } =
+            await supabaseClient
+                .from("transfers")
+                .select(
+                    "id, created_at, amount, account_name, tx_ref, status, user_id, recipient_user_id"
+                )
+                .or(
+                    user_id.eq.${currentUser.id},recipient_user_id.eq.${currentUser.id}
+                )
+                .order(
+                    "created_at",
+                    {
+                        ascending: false
+                    }
+                )
+                .limit(5);
+
+        if (transferError) {
+            console.error(
+                "Recent transfer error:",
+                transferError
+            );
+        }
+
+        (transfers || []).forEach(
+            transaction => {
+
+                const isReceived =
+                    transaction.recipient_user_id ===
+                    currentUser.id;
+
+                results.push({
+                    id:
+                        "transfer-" +
+                        transaction.id,
+
+                    created_at:
+                        transaction.created_at,
+
+                    title:
+                        isReceived
+                            ? "Money received"
+                            : "Money sent",
+
+                    icon:
+                        isReceived
+                            ? "📥"
+                            : "💸",
+
+                    amount:
+                        Number(
+                            transaction.amount
+                        ),
+
+                    type:
+                        isReceived
+                            ? "credit"
+                            : "debit",
+
+                    status:
+                        transaction.status ||
+                        "successful"
+                });
+            }
+        );
+
+        / DATA /
+
+        const {
+            data: dataTransactions,
+            error: dataError
+        } =
+            await supabaseClient
+                .from("data_transactions")
+                .select(
+                    'id, created_at, phone, network, amount, tx_ref, "Status", provider_reference'
+                )
+                .eq(
+                    "user_id",
+                    currentUser.id
+                )
+                .order(
+                    "created_at",
+                    {
+                        ascending: false
+                    }
+                )
+                .limit(5);
+
+        if (dataError) {
+            console.error(
+                "Recent data error:",
+                dataError
+            );
+        }
+
+        (dataTransactions || []).forEach(
+            transaction => {
+
+                results.push({
+                    id:
+                        "data-" +
+                        transaction.id,
+
+                    created_at:
+                        transaction.created_at,
+
+                    title:
+                        "Data purchase",
+
+                    icon:
+                        "📶",
+
+                    amount:
+                        Number(
+                            transaction.amount
+                        ),
+
+                    type:
+                        "debit",
+
+                    status:
+                        transaction.Status ||
+                        "pending"
+                });
+            }
+        );
+
+        / AIRTIME /
+
+        const {
+            data: airtimeTransactions,
+            error: airtimeError
+        } =
+            await supabaseClient
+                .from("airtime_transactions")
+                .select(
+                    'id, created_at, phone, network, amount, tx_ref, "Status", provider_reference'
+                )
+                .eq(
+                    "user_id",
+                    currentUser.id
+                )
+                .order(
+                    "created_at",
+                    {
+                        ascending: false
+                    }
+                )
+                .limit(5);
+
+        if (airtimeError) {
+            console.error(
+                "Recent airtime error:",
+                airtimeError
+            );
+        }
+
+        (airtimeTransactions || []).forEach(
+            transaction => {
+
+                results.push({
+                    id:
+                        "airtime-" +
+                        transaction.id,
+
+                    created_at:
+                        transaction.created_at,
+
+                    title:
+                        "Airtime purchase",
+
+                    icon:
+                        "☎️",
+
+                    amount:
+                        Number(
+                            transaction.amount
+                        ),
+
+                    type:
+                        "debit",
+
+                    status:
+                        transaction.Status ||
+                        "pending"
+                });
+            }
+        );
+
+        / SORT EVERYTHING TOGETHER /
+
+        results.sort(
+            (a, b) =>
+                new Date(b.created_at) -
+                new Date(a.created_at)
+        );
+
+        const latest =
+            results.slice(0, 4);
+
+        if (!latest.length) {
+
+            container.innerHTML = `
+                <div class="transaction-empty">
+                    <div class="transaction-empty-icon">
+                        🧾
+                    </div>
+
+                    <strong>
+                        No recent activity
+                    </strong>
+
+                    <small>
+                        Your wallet activity will appear here.
+                    </small>
+                </div>
+            `;
+
+            return;
+        }
+
+        container.innerHTML =
+            latest.map(
+                transaction => {
+
+                    const status =
+                        String(
+                            transaction.status ||
+                            "pending"
+                        ).toLowerCase();
+
+                    const statusText =
+                        status.charAt(0).toUpperCase() +
+                        status.slice(1);
+
+                    return `
+                        <div class="recent-item">
+
+                            <div class="recent-icon">
+                                ${transaction.icon}
+                            </div>
+
+                            <div class="recent-info">
+
+                                <div class="recent-title">
+                                    ${transaction.title}
+                                </div>
+
+                                <div class="recent-date">
+                                    ${formatRecentDate(transaction.created_at)}
+                                </div>
+
+                            </div>
+
+                            <div>
+
+                                <div class="recent-amount ${transaction.type}">
+                                    ${transaction.type === "credit" ? "+" : "-"}${formatRecentAmount(transaction.amount)}
+                                </div>
+
+                                <div class="recent-status">
+                                    ${statusText}
+                                </div>
+
+                            </div>
+
+                        </div>
+                    `;
+                }
+            ).join("");
+
+    } catch (error) {
+
+        console.error(
+            "Recent activity error:",
+            error
+        );
+
+        container.innerHTML = `
+            <div class="transaction-empty">
+
+                <div class="transaction-empty-icon">
+                    🧾
+                </div>
+
+                <strong>
+                    Activity unavailable
+                </strong>
+
+                <small>
+                    Open Activity to view your full history.
+                </small>
+
+            </div>
+        `;
+    }
+}
+
+/ =========================
    CHECK USER
-========================= */
+========================= /
 
 async function checkUser() {
 
@@ -1565,7 +1882,8 @@ async function checkUser() {
 
         await Promise.all([
             loadWallet(currentUser.id),
-            loadAccountNumber(currentUser.id)
+            loadAccountNumber(currentUser.id),
+            loadRecentActivity()
         ]);
 
     } catch (error) {
@@ -1585,9 +1903,9 @@ async function checkUser() {
     }
 }
 
-/* =========================
+/ =========================
    FUND WALLET
-========================= */
+========================= /
 
 function startFunding() {
 
@@ -1763,9 +2081,7 @@ async function continueFunding() {
 
         closeFundModal();
 
-        setFundingLoading(
-            true
-        );
+        setFundingLoading(true);
 
         const {
             data,
@@ -1789,9 +2105,7 @@ async function continueFunding() {
                 error
             );
 
-            setFundingLoading(
-                false
-            );
+            setFundingLoading(false);
 
             fundingInProgress =
                 false;
@@ -1815,9 +2129,7 @@ async function continueFunding() {
             !data.success
         ) {
 
-            setFundingLoading(
-                false
-            );
+            setFundingLoading(false);
 
             fundingInProgress =
                 false;
@@ -1838,9 +2150,7 @@ async function continueFunding() {
 
         if (!data.payment_link) {
 
-            setFundingLoading(
-                false
-            );
+            setFundingLoading(false);
 
             fundingInProgress =
                 false;
@@ -1869,9 +2179,7 @@ async function continueFunding() {
             error
         );
 
-        setFundingLoading(
-            false
-        );
+        setFundingLoading(false);
 
         fundingInProgress =
             false;
@@ -1888,9 +2196,7 @@ async function continueFunding() {
     }
 }
 
-function setFundingLoading(
-    isLoading
-) {
+function setFundingLoading(isLoading) {
 
     const loadingScreen =
         document.getElementById(
@@ -1923,9 +2229,9 @@ function setFundingLoading(
     }
 }
 
-/* =========================
+/ =========================
    NAVIGATION
-========================= */
+========================= /
 
 function buyData() {
     window.location.href =
@@ -1960,9 +2266,9 @@ function goHome() {
     });
 }
 
-/* =========================
+/ =========================
    LOGOUT
-========================= */
+========================= /
 
 async function logout() {
 
@@ -1974,7 +2280,7 @@ async function logout() {
         "index.html";
 }
 
-/* =========================
+/ =========================
    ESCAPE KEY
 ========================= */
 
