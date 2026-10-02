@@ -13,6 +13,10 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -21,41 +25,52 @@
             padding-bottom: 90px;
         }
 
+        /* =========================
+           TOP HEADER
+        ========================= */
+
         .top {
             background: linear-gradient(135deg, #063d2b, #087f5b);
             color: white;
-            padding: 20px 18px 55px;
-            border-radius: 0 0 28px 28px;
+            padding: 18px 18px 62px;
+            border-radius: 0 0 30px 30px;
         }
 
         .top-bar {
             display: flex;
             align-items: center;
             gap: 12px;
+            max-width: 650px;
+            margin: 0 auto;
         }
 
         .back-btn {
-            width: 42px;
-            height: 42px;
-            border-radius: 13px;
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
             background: rgba(255,255,255,0.14);
             color: white;
-            border: none;
+            border: 1px solid rgba(255,255,255,0.12);
             font-size: 22px;
             cursor: pointer;
             flex-shrink: 0;
+            transition: 0.2s ease;
+        }
+
+        .back-btn:active {
+            transform: scale(0.95);
         }
 
         .brand-logo {
-            width: 42px;
-            height: 42px;
-            border-radius: 13px;
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
             overflow: hidden;
             background: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 6px 16px rgba(37,211,102,0.18);
+            box-shadow: 0 7px 18px rgba(0,0,0,0.15);
             flex-shrink: 0;
         }
 
@@ -67,71 +82,106 @@
         }
 
         .brand {
-            font-size: 23px;
+            font-size: 22px;
             font-weight: 800;
+            letter-spacing: -0.3px;
         }
 
         .subtitle {
             margin: 3px 0 0;
             font-size: 13px;
-            opacity: 0.8;
+            opacity: 0.78;
         }
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
 
         .container {
             max-width: 650px;
-            margin: -30px auto 0;
+            margin: -34px auto 0;
             padding: 0 16px;
         }
 
         .profile-card {
             background: white;
-            border-radius: 24px;
-            padding: 25px 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+            border-radius: 26px;
+            padding: 24px 18px;
+            box-shadow: 0 14px 38px rgba(0,0,0,0.07);
         }
+
+        /* =========================
+           PROFILE HEADER
+        ========================= */
 
         .profile-top {
             text-align: center;
+            padding-top: 3px;
         }
 
         .avatar {
-            width: 88px;
-            height: 88px;
+            width: 92px;
+            height: 92px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #0aa66f, #087f5b);
+            background: linear-gradient(135deg, #0bb77b, #087f5b);
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 34px;
+            font-size: 36px;
             font-weight: 800;
-            margin: 0 auto 14px;
-            box-shadow: 0 8px 20px rgba(8,127,91,0.25);
+            margin: 0 auto 15px;
+            box-shadow:
+                0 0 0 7px #f0faf5,
+                0 10px 25px rgba(8,127,91,0.22);
         }
 
         .name {
-            font-size: 23px;
+            font-size: 24px;
             font-weight: 800;
+            color: #10231c;
             margin-bottom: 5px;
-        }
-
-        .email {
-            color: #708078;
-            font-size: 14px;
             word-break: break-word;
         }
 
-        .section-title {
-            margin: 28px 0 10px;
+        .email {
+            color: #74827c;
             font-size: 14px;
+            line-height: 1.5;
+            word-break: break-word;
+        }
+
+        .verified {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 10px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: #edf9f3;
+            color: #087f5b;
+            font-size: 11px;
             font-weight: 800;
-            color: #52645d;
+        }
+
+        /* =========================
+           SECTIONS
+        ========================= */
+
+        .section-title {
+            margin: 29px 0 11px;
+            font-size: 13px;
+            font-weight: 800;
+            color: #53645d;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
         }
 
         .info {
             border: 1px solid #e5eee9;
-            border-radius: 17px;
+            border-radius: 18px;
             overflow: hidden;
+            background: white;
         }
 
         .row {
@@ -145,9 +195,10 @@
         }
 
         .label {
-            font-size: 12px;
-            color: #7a8983;
+            font-size: 11px;
+            color: #7c8984;
             margin-bottom: 6px;
+            font-weight: 600;
         }
 
         .value {
@@ -155,43 +206,73 @@
             font-weight: 700;
             word-break: break-word;
             color: #17372b;
+            line-height: 1.45;
         }
 
+        /* =========================
+           ACCOUNT NUMBER
+        ========================= */
+
         .account-row {
-            background: linear-gradient(135deg, #f0faf5, #f8fcfa);
+            background: linear-gradient(135deg, #effaf5, #f9fcfa);
+            padding: 18px 16px;
         }
 
         .account-number-line {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 10px;
+            gap: 12px;
         }
 
         .account-number {
-            font-size: 21px;
+            font-size: 22px;
             font-weight: 800;
-            letter-spacing: 1.5px;
+            letter-spacing: 1.7px;
             color: #087f5b;
+            word-break: break-all;
         }
 
         .copy-btn {
             width: auto;
-            padding: 9px 13px;
-            border-radius: 10px;
+            padding: 10px 14px;
+            border-radius: 11px;
             background: #087f5b;
             color: white;
             font-size: 12px;
             font-weight: 800;
             flex-shrink: 0;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s ease;
         }
 
-        .copy-btn:hover {
-            background: #066b4d;
+        .copy-btn:active {
+            transform: scale(0.96);
         }
+
+        /* =========================
+           SECURITY NOTE
+        ========================= */
+
+        .secure-note {
+            margin-top: 18px;
+            padding: 15px;
+            border-radius: 16px;
+            background: #f0faf5;
+            color: #477064;
+            font-size: 12px;
+            text-align: center;
+            line-height: 1.6;
+            border: 1px solid #e0f0e8;
+        }
+
+        /* =========================
+           BUTTONS
+        ========================= */
 
         .buttons {
-            margin-top: 24px;
+            margin-top: 22px;
             display: grid;
             gap: 11px;
         }
@@ -200,84 +281,121 @@
         a {
             width: 100%;
             padding: 15px;
-            border-radius: 14px;
+            border-radius: 15px;
             border: none;
             font-size: 15px;
             font-weight: 800;
             text-align: center;
             text-decoration: none;
             cursor: pointer;
+            transition: 0.2s ease;
         }
 
         .dashboard {
             background: #087f5b;
             color: white;
+            box-shadow: 0 8px 18px rgba(8,127,91,0.16);
         }
 
-        .dashboard:hover {
-            background: #066b4d;
+        .dashboard:active {
+            transform: scale(0.98);
         }
 
         .logout {
-            background: #fff0f0;
+            background: #fff1f1;
             color: #d93030;
+            border: 1px solid #ffe0e0;
         }
+
+        .logout:active {
+            transform: scale(0.98);
+        }
+
+        /* =========================
+           LOADING
+        ========================= */
 
         .loading {
             text-align: center;
-            padding: 45px 15px;
+            padding: 55px 15px;
             color: #718078;
+            font-size: 14px;
         }
+
+        .loading-spinner {
+            width: 30px;
+            height: 30px;
+            border: 3px solid #dcebe5;
+            border-top-color: #087f5b;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* =========================
+           ERROR
+        ========================= */
 
         .error {
             text-align: center;
             color: #d93030;
-            padding: 35px 10px;
-            line-height: 1.5;
+            padding: 38px 10px;
+            line-height: 1.6;
+            font-size: 14px;
         }
 
-        .secure-note {
-            margin-top: 18px;
-            padding: 13px;
-            border-radius: 13px;
-            background: #f0faf5;
-            color: #477064;
-            font-size: 12px;
-            text-align: center;
-            line-height: 1.5;
-        }
+        /* =========================
+           BOTTOM NAV
+        ========================= */
 
         .bottom-nav {
             position: fixed;
             left: 0;
             right: 0;
             bottom: 0;
-            height: 72px;
-            background: white;
+            height: 74px;
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(12px);
             border-top: 1px solid #e5eee9;
             display: flex;
             justify-content: space-around;
             align-items: center;
             z-index: 20;
+            padding-bottom: env(safe-area-inset-bottom);
         }
 
         .nav-item {
+            width: auto;
+            min-width: 70px;
+            padding: 6px 10px;
             text-decoration: none;
             color: #87938e;
             font-size: 11px;
             font-weight: 700;
             text-align: center;
+            border-radius: 13px;
         }
 
         .nav-item span {
             display: block;
             font-size: 21px;
+            line-height: 23px;
             margin-bottom: 3px;
         }
 
         .nav-item.active {
             color: #087f5b;
         }
+
+        /* =========================
+           DESKTOP
+        ========================= */
 
         @media (min-width: 700px) {
 
@@ -287,15 +405,31 @@
             }
 
             .container {
-                margin-top: -35px;
+                margin-top: -38px;
             }
 
             .profile-card {
                 padding: 30px;
             }
+
+            .name {
+                font-size: 26px;
+            }
         }
 
+        /* =========================
+           SMALL PHONES
+        ========================= */
+
         @media (max-width: 400px) {
+
+            .container {
+                padding: 0 12px;
+            }
+
+            .profile-card {
+                padding: 22px 15px;
+            }
 
             .account-number-line {
                 align-items: flex-start;
@@ -307,7 +441,11 @@
             }
 
             .copy-btn {
-                padding: 8px 10px;
+                padding: 9px 11px;
+            }
+
+            .nav-item {
+                min-width: 62px;
             }
         }
     </style>
@@ -315,11 +453,13 @@
 
 <body>
 
+    <!-- TOP HEADER -->
+
     <div class="top">
 
         <div class="top-bar">
 
-            <button class="back-btn" onclick="goBack()">
+            <button class="back-btn" onclick="goBack()" aria-label="Go back">
                 ←
             </button>
 
@@ -340,14 +480,24 @@
     </div>
 
 
+    <!-- MAIN -->
+
     <div class="container">
 
         <div class="profile-card">
 
+            <!-- LOADING -->
+
             <div id="loading" class="loading">
+
+                <div class="loading-spinner"></div>
+
                 Loading your profile...
+
             </div>
 
+
+            <!-- PROFILE CONTENT -->
 
             <div id="profileContent" style="display:none;">
 
@@ -365,13 +515,18 @@
                         -
                     </div>
 
+                    <div class="verified">
+                        ✓ Account connected
+                    </div>
+
                 </div>
 
+
+                <!-- ACCOUNT -->
 
                 <div class="section-title">
                     Your Velqora Account
                 </div>
-
 
                 <div class="info">
 
@@ -404,71 +559,103 @@
                 </div>
 
 
+                <!-- ACCOUNT INFORMATION -->
+
                 <div class="section-title">
                     Account Information
                 </div>
 
-
                 <div class="info">
 
                     <div class="row">
+
                         <div class="label">
                             Full Name
                         </div>
 
-                        <div class="value" id="profileName">
+                        <div
+                            class="value"
+                            id="profileName"
+                        >
                             -
                         </div>
+
                     </div>
 
 
                     <div class="row">
+
                         <div class="label">
                             Phone Number
                         </div>
 
-                        <div class="value" id="phone">
+                        <div
+                            class="value"
+                            id="phone"
+                        >
                             -
                         </div>
+
                     </div>
 
 
                     <div class="row">
+
                         <div class="label">
                             Email Address
                         </div>
 
-                        <div class="value" id="profileEmail">
+                        <div
+                            class="value"
+                            id="profileEmail"
+                        >
                             -
                         </div>
+
                     </div>
 
 
                     <div class="row">
+
                         <div class="label">
                             User ID
                         </div>
 
-                        <div class="value" id="userId">
+                        <div
+                            class="value"
+                            id="userId"
+                        >
                             -
                         </div>
+
                     </div>
 
                 </div>
 
 
+                <!-- SECURITY -->
+
                 <div class="secure-note">
                     🔒 Your account information is securely connected to Velqora.
+                    Keep your login details private and never share your password.
                 </div>
 
 
+                <!-- ACTIONS -->
+
                 <div class="buttons">
 
-                    <a href="index.html" class="dashboard">
+                    <a
+                        href="index.html"
+                        class="dashboard"
+                    >
                         ← Back to Dashboard
                     </a>
 
-                    <button class="logout" onclick="logout()">
+                    <button
+                        class="logout"
+                        onclick="logout()"
+                    >
                         Log Out
                     </button>
 
@@ -477,9 +664,15 @@
             </div>
 
 
-            <div id="errorMessage" class="error" style="display:none;">
+            <!-- ERROR -->
+
+            <div
+                id="errorMessage"
+                class="error"
+                style="display:none;"
+            >
                 Unable to load your profile.<br>
-                Please try again.
+                Please refresh the page and try again.
             </div>
 
         </div>
@@ -487,25 +680,38 @@
     </div>
 
 
+    <!-- BOTTOM NAV -->
+
     <div class="bottom-nav">
 
-        <a href="index.html" class="nav-item">
+        <a
+            href="index.html"
+            class="nav-item"
+        >
             <span>⌂</span>
             Home
         </a>
 
-        <a href="transactions.html" class="nav-item">
+        <a
+            href="transactions.html"
+            class="nav-item"
+        >
             <span>▣</span>
             Activity
         </a>
 
-        <a href="profile.html" class="nav-item active">
+        <a
+            href="profile.html"
+            class="nav-item active"
+        >
             <span>●</span>
             Profile
         </a>
 
     </div>
 
+
+    <!-- SUPABASE CONFIG -->
 
     <script src="config.js"></script>
 
@@ -521,117 +727,166 @@
 
 
         function goBack() {
+
             window.location.href = "index.html";
+
         }
 
 
         async function loadProfile() {
 
-            const {
-                data: { session },
-                error: sessionError
-            } = await supabaseClient.auth.getSession();
+            try {
+
+                const {
+                    data: { session },
+                    error: sessionError
+                } = await supabaseClient.auth.getSession();
 
 
-            if (sessionError || !session) {
+                if (sessionError || !session) {
 
-                window.location.href = "login.html";
+                    window.location.href = "login.html";
 
-                return;
+                    return;
+
+                }
+
+
+                const user = session.user;
+
+
+                document.getElementById("email").textContent =
+                    user.email || "-";
+
+
+                document.getElementById("profileEmail").textContent =
+                    user.email || "-";
+
+
+                document.getElementById("userId").textContent =
+                    user.id;
+
+
+                const {
+                    data: profile,
+                    error
+                } = await supabaseClient
+
+                    .from("Idris-Data-App")
+
+                    .select(
+                        "full_name, phone, account_number"
+                    )
+
+                    .eq("id", user.id)
+
+                    .maybeSingle();
+
+
+                if (error) {
+
+                    console.error(
+                        "Profile error:",
+                        error
+                    );
+
+                    document.getElementById(
+                        "loading"
+                    ).style.display = "none";
+
+
+                    document.getElementById(
+                        "errorMessage"
+                    ).style.display = "block";
+
+
+                    return;
+
+                }
+
+
+                const fullName =
+                    profile?.full_name ||
+                    user.user_metadata?.full_name ||
+                    "Velqora User";
+
+
+                const phone =
+                    profile?.phone ||
+                    user.user_metadata?.phone ||
+                    "Not provided";
+
+
+                const accountNumber =
+                    profile?.account_number ||
+                    "Not assigned";
+
+
+                currentAccountNumber =
+                    profile?.account_number || "";
+
+
+                document.getElementById(
+                    "fullName"
+                ).textContent = fullName;
+
+
+                document.getElementById(
+                    "profileName"
+                ).textContent = fullName;
+
+
+                document.getElementById(
+                    "phone"
+                ).textContent = phone;
+
+
+                document.getElementById(
+                    "accountNumber"
+                ).textContent = accountNumber;
+
+
+                const firstLetter =
+                    fullName
+                        .trim()
+                        .charAt(0)
+                        .toUpperCase();
+
+
+                document.getElementById(
+                    "avatar"
+                ).textContent =
+                    firstLetter || "V";
+
+
+                document.getElementById(
+                    "loading"
+                ).style.display = "none";
+
+
+                document.getElementById(
+                    "profileContent"
+                ).style.display = "block";
+
+            } catch (error) {
+
+                console.error(
+                    "Profile page error:",
+                    error
+                );
+
+
+                document.getElementById(
+                    "loading"
+                ).style.display = "none";
+
+
+                document.getElementById(
+                    "errorMessage"
+                ).style.display = "block";
+
             }
 
-
-            const user = session.user;
-
-
-            document.getElementById("email").textContent =
-                user.email || "-";
-
-
-            document.getElementById("profileEmail").textContent =
-                user.email || "-";
-
-
-            document.getElementById("userId").textContent =
-                user.id;
-
-
-            const { data: profile, error } = await supabaseClient
-
-                .from("Idris-Data-App")
-
-                .select("full_name, phone, account_number")
-
-                .eq("id", user.id)
-
-                .maybeSingle();
-
-
-            if (error) {
-
-                console.error("Profile error:", error);
-
-                document.getElementById("loading").style.display =
-                    "none";
-
-                document.getElementById("errorMessage").style.display =
-                    "block";
-
-                return;
-            }
-
-
-            const fullName =
-                profile?.full_name ||
-                user.user_metadata?.full_name ||
-                "Velqora User";
-
-
-            const phone =
-                profile?.phone ||
-                user.user_metadata?.phone ||
-                "Not provided";
-
-
-            const accountNumber =
-                profile?.account_number ||
-                "Not assigned";
-
-
-            currentAccountNumber =
-                profile?.account_number || "";
-
-
-            document.getElementById("fullName").textContent =
-                fullName;
-
-
-            document.getElementById("profileName").textContent =
-                fullName;
-
-
-            document.getElementById("phone").textContent =
-                phone;
-
-
-            document.getElementById("accountNumber").textContent =
-                accountNumber;
-
-
-            const firstLetter =
-                fullName.charAt(0).toUpperCase();
-
-
-            document.getElementById("avatar").textContent =
-                firstLetter;
-
-
-            document.getElementById("loading").style.display =
-                "none";
-
-
-            document.getElementById("profileContent").style.display =
-                "block";
         }
 
 
@@ -639,9 +894,12 @@
 
             if (!currentAccountNumber) {
 
-                alert("Your account number is not available yet.");
+                alert(
+                    "Your account number is not available yet."
+                );
 
                 return;
+
             }
 
 
@@ -651,21 +909,26 @@
                     currentAccountNumber
                 );
 
-                alert("Account number copied!");
+                alert(
+                    "Account number copied!"
+                );
 
             } catch (error) {
 
                 alert(
                     "Unable to copy. Please copy the number manually."
                 );
+
             }
+
         }
 
 
         async function logout() {
 
-            const { error } =
-                await supabaseClient.auth.signOut();
+            const {
+                error
+            } = await supabaseClient.auth.signOut();
 
 
             if (error) {
@@ -675,10 +938,13 @@
                 );
 
                 return;
+
             }
 
 
-            window.location.href = "login.html";
+            window.location.href =
+                "login.html";
+
         }
 
 
