@@ -20,8 +20,9 @@
 
         body {
             margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f4f8f6;
+            font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                Roboto, Arial, sans-serif;
+            background: #f5f8f7;
             color: #10201b;
         }
 
@@ -35,6 +36,14 @@
             cursor: pointer;
         }
 
+        button:active {
+            transform: scale(.97);
+        }
+
+        /* =========================
+           LOADING
+        ========================= */
+
         #loading {
             min-height: 100vh;
             display: flex;
@@ -43,6 +52,7 @@
             text-align: center;
             color: #668078;
             padding: 20px;
+            background: #f5f8f7;
         }
 
         /* =========================
@@ -54,7 +64,7 @@
             position: fixed;
             inset: 0;
             z-index: 9999;
-            background: rgba(244, 248, 246, 0.97);
+            background: rgba(245, 248, 247, .97);
             align-items: center;
             justify-content: center;
             text-align: center;
@@ -65,19 +75,19 @@
             width: 100%;
             max-width: 360px;
             background: white;
-            padding: 32px 24px;
-            border-radius: 25px;
-            box-shadow: 0 25px 70px rgba(8, 35, 27, 0.15);
+            padding: 34px 24px;
+            border-radius: 28px;
+            box-shadow: 0 25px 70px rgba(8, 35, 27, .15);
         }
 
         .payment-spinner {
-            width: 52px;
-            height: 52px;
+            width: 54px;
+            height: 54px;
             margin: 0 auto 20px;
             border: 5px solid #dff2e9;
             border-top-color: #0f9f6e;
             border-radius: 50%;
-            animation: spin 0.8s linear infinite;
+            animation: spin .8s linear infinite;
         }
 
         @keyframes spin {
@@ -106,10 +116,10 @@
             position: fixed;
             inset: 0;
             z-index: 5000;
-            background: rgba(8, 35, 27, 0.52);
+            background: rgba(8, 35, 27, .58);
             align-items: flex-end;
             justify-content: center;
-            padding: 16px;
+            padding: 14px;
         }
 
         #fundModal.active {
@@ -118,12 +128,12 @@
 
         .fund-modal-box {
             width: 100%;
-            max-width: 460px;
+            max-width: 470px;
             background: white;
-            border-radius: 28px;
-            padding: 24px 21px 20px;
-            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.2);
-            animation: modalUp 0.22s ease-out;
+            border-radius: 30px;
+            padding: 25px 21px 20px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, .22);
+            animation: modalUp .22s ease-out;
         }
 
         @keyframes modalUp {
@@ -172,28 +182,28 @@
             margin-bottom: 8px;
             color: #40554d;
             font-size: 13px;
-            font-weight: bold;
+            font-weight: 700;
         }
 
         .amount-input-wrap {
             display: flex;
             align-items: center;
-            height: 58px;
+            height: 60px;
             border: 2px solid #dce9e3;
-            border-radius: 16px;
+            border-radius: 17px;
             background: #fbfdfc;
             padding: 0 15px;
         }
 
         .amount-input-wrap:focus-within {
             border-color: #0f9f6e;
-            box-shadow: 0 0 0 4px rgba(15, 159, 110, 0.08);
+            box-shadow: 0 0 0 4px rgba(15, 159, 110, .08);
         }
 
         .currency-symbol {
             color: #087f55;
             font-size: 24px;
-            font-weight: bold;
+            font-weight: 800;
             margin-right: 8px;
         }
 
@@ -204,14 +214,14 @@
             outline: none;
             background: transparent;
             font-size: 23px;
-            font-weight: bold;
+            font-weight: 800;
         }
 
         .quick-amount-title {
             margin: 18px 0 10px;
             color: #72847e;
             font-size: 12px;
-            font-weight: bold;
+            font-weight: 700;
         }
 
         .quick-amounts {
@@ -227,7 +237,7 @@
             padding: 11px 5px;
             border-radius: 12px;
             font-size: 12px;
-            font-weight: bold;
+            font-weight: 700;
         }
 
         .fund-error {
@@ -250,14 +260,14 @@
             border: none;
             border-radius: 15px;
             padding: 16px;
-            background: linear-gradient(135deg, #25d366, #0f9f6e);
+            background: linear-gradient(135deg, #19b879, #087f55);
             color: white;
             font-size: 15px;
-            font-weight: bold;
+            font-weight: 800;
         }
 
         .continue-funding:disabled {
-            opacity: 0.6;
+            opacity: .6;
         }
 
         .cancel-funding {
@@ -267,7 +277,7 @@
             background: transparent;
             color: #72847e;
             padding: 12px;
-            font-weight: bold;
+            font-weight: 700;
         }
 
         /* =========================
@@ -281,31 +291,31 @@
             justify-content: center;
             padding: 22px;
             background:
-                radial-gradient(circle at 10% 5%, rgba(37,211,102,.12), transparent 32%),
-                radial-gradient(circle at 90% 90%, rgba(15,159,110,.10), transparent 32%),
-                #f4f8f6;
+                radial-gradient(circle at 10% 5%, rgba(37, 211, 102, .13), transparent 32%),
+                radial-gradient(circle at 90% 90%, rgba(15, 159, 110, .11), transparent 32%),
+                #f5f8f7;
         }
 
         .welcome {
             width: 100%;
             max-width: 440px;
-            background: white;
-            padding: 40px 25px 30px;
-            border-radius: 30px;
+            background: rgba(255,255,255,.98);
+            padding: 42px 25px 30px;
+            border-radius: 32px;
             text-align: center;
-            box-shadow: 0 25px 70px rgba(8,35,27,.12);
+            box-shadow: 0 30px 80px rgba(8,35,27,.13);
             border: 1px solid #e2ebe7;
         }
 
         .logo {
-            width: 86px;
-            height: 86px;
+            width: 88px;
+            height: 88px;
             margin: 0 auto 18px;
-            border-radius: 23px;
+            border-radius: 24px;
             overflow: hidden;
             background: white;
             border: 1px solid #e2ebe7;
-            box-shadow: 0 14px 30px rgba(37,211,102,.16);
+            box-shadow: 0 15px 35px rgba(37,211,102,.18);
         }
 
         .logo img,
@@ -317,11 +327,12 @@
 
         .welcome h1 {
             margin: 0;
-            font-size: 32px;
+            font-size: 34px;
+            letter-spacing: -1px;
         }
 
         .welcome h2 {
-            margin: 10px 0;
+            margin: 9px 0;
             font-size: 20px;
         }
 
@@ -338,14 +349,15 @@
             padding: 16px;
             margin-top: 10px;
             border: none;
-            border-radius: 14px;
+            border-radius: 15px;
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 800;
         }
 
         .login-button {
             background: linear-gradient(135deg,#25d366,#0f9f6e);
             color: white;
+            box-shadow: 0 12px 25px rgba(15,159,110,.18);
         }
 
         .signup-button {
@@ -373,8 +385,8 @@
         }
 
         .topbar {
-            background: rgba(255,255,255,.96);
-            padding: 13px 18px;
+            background: rgba(255,255,255,.94);
+            padding: 12px 18px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -382,7 +394,7 @@
             position: sticky;
             top: 0;
             z-index: 50;
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(18px);
         }
 
         .brand {
@@ -402,7 +414,8 @@
 
         .brand-name {
             font-size: 20px;
-            font-weight: bold;
+            font-weight: 800;
+            letter-spacing: -.4px;
         }
 
         .profile-button {
@@ -423,7 +436,7 @@
         }
 
         .greeting {
-            margin-bottom: 20px;
+            margin-bottom: 19px;
         }
 
         .greeting p {
@@ -434,11 +447,13 @@
 
         .greeting h2 {
             margin: 0;
-            font-size: 25px;
-            letter-spacing: -.5px;
+            font-size: 26px;
+            letter-spacing: -.8px;
         }
 
-        /* ACCOUNT NUMBER */
+        /* =========================
+           ACCOUNT NUMBER
+        ========================= */
 
         .account-strip {
             display: flex;
@@ -447,10 +462,10 @@
             gap: 12px;
             background: white;
             border: 1px solid #e3ece8;
-            border-radius: 18px;
+            border-radius: 19px;
             padding: 15px 16px;
-            margin-bottom: 18px;
-            box-shadow: 0 7px 22px rgba(15,50,39,.04);
+            margin-bottom: 16px;
+            box-shadow: 0 8px 25px rgba(15,50,39,.045);
         }
 
         .account-info small {
@@ -462,7 +477,7 @@
 
         .account-info strong {
             font-size: 16px;
-            letter-spacing: 1.3px;
+            letter-spacing: 1.5px;
         }
 
         .copy-account {
@@ -470,25 +485,38 @@
             background: #eaf8f1;
             color: #087f55;
             border-radius: 11px;
-            padding: 10px 12px;
+            padding: 10px 13px;
             font-size: 12px;
-            font-weight: bold;
+            font-weight: 800;
         }
 
-        /* BALANCE */
+        /* =========================
+           BALANCE CARD
+        ========================= */
 
         .balance-card {
             background:
-                radial-gradient(circle at 90% 10%,rgba(255,255,255,.18),transparent 27%),
-                radial-gradient(circle at 10% 100%,rgba(0,0,0,.08),transparent 35%),
-                linear-gradient(135deg,#0b7654,#064d3c);
+                radial-gradient(circle at 90% 5%, rgba(255,255,255,.18), transparent 28%),
+                radial-gradient(circle at 0% 100%, rgba(0,0,0,.09), transparent 37%),
+                linear-gradient(135deg,#0d805b,#064d3c);
             color: white;
-            border-radius: 27px;
+            border-radius: 29px;
             padding: 25px;
-            box-shadow: 0 20px 45px rgba(6,77,60,.23);
-            margin-bottom: 28px;
+            box-shadow: 0 22px 48px rgba(6,77,60,.24);
+            margin-bottom: 27px;
             position: relative;
             overflow: hidden;
+        }
+
+        .balance-card::after {
+            content: "";
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 50%;
+            right: -70px;
+            bottom: -75px;
         }
 
         .balance-top {
@@ -511,8 +539,8 @@
 
         .eye-button,
         .refresh-button {
-            width: 34px;
-            height: 34px;
+            width: 35px;
+            height: 35px;
             border: 1px solid rgba(255,255,255,.2);
             border-radius: 10px;
             background: rgba(255,255,255,.1);
@@ -521,8 +549,9 @@
         }
 
         .balance-amount {
-            font-size: 37px;
-            font-weight: bold;
+            font-size: 38px;
+            font-weight: 800;
+            letter-spacing: -1.2px;
             margin: 11px 0 23px;
             position: relative;
             z-index: 2;
@@ -533,24 +562,26 @@
             background: white;
             color: #087f55;
             padding: 13px 20px;
-            border-radius: 12px;
-            font-weight: bold;
+            border-radius: 13px;
+            font-weight: 800;
             position: relative;
             z-index: 2;
         }
 
-        /* SERVICES */
+        /* =========================
+           SERVICES
+        ========================= */
 
         .section-heading {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin: 28px 0 15px;
+            margin: 29px 0 15px;
         }
 
         .section-title {
             font-size: 18px;
-            font-weight: bold;
+            font-weight: 800;
         }
 
         .section-subtitle {
@@ -561,28 +592,28 @@
         .actions {
             display: grid;
             grid-template-columns: repeat(3,1fr);
-            gap: 12px;
+            gap: 11px;
         }
 
         .action {
             border: 1px solid #e5eee9;
             background: white;
-            border-radius: 18px;
+            border-radius: 19px;
             padding: 17px 8px;
             text-align: center;
-            box-shadow: 0 7px 22px rgba(15,50,39,.055);
-            transition: .15s ease;
+            box-shadow: 0 8px 24px rgba(15,50,39,.055);
+            transition: transform .15s ease, box-shadow .15s ease;
         }
 
-        .action:active {
-            transform: scale(.96);
+        .action:hover {
+            box-shadow: 0 12px 30px rgba(15,50,39,.09);
         }
 
         .action-icon {
-            width: 48px;
-            height: 48px;
+            width: 49px;
+            height: 49px;
             margin: 0 auto 10px;
-            border-radius: 15px;
+            border-radius: 16px;
             background: #effaf4;
             display: flex;
             align-items: center;
@@ -592,16 +623,18 @@
 
         .action-title {
             font-size: 12px;
-            font-weight: bold;
+            font-weight: 800;
             color: #263a33;
         }
 
-        /* ACTIVITY */
+        /* =========================
+           RECENT ACTIVITY
+        ========================= */
 
         .transactions {
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 7px 22px rgba(15,50,39,.055);
+            border-radius: 21px;
+            box-shadow: 0 8px 24px rgba(15,50,39,.055);
             overflow: hidden;
             border: 1px solid #e5eee9;
         }
@@ -613,10 +646,10 @@
         }
 
         .transaction-empty-icon {
-            width: 58px;
-            height: 58px;
+            width: 60px;
+            height: 60px;
             margin: 0 auto 12px;
-            border-radius: 18px;
+            border-radius: 19px;
             background: #eff6f3;
             display: flex;
             align-items: center;
@@ -636,24 +669,30 @@
             border-top: 1px solid #edf2ef;
             background: white;
             color: #087f55;
-            padding: 14px;
+            padding: 15px;
             font-size: 13px;
-            font-weight: bold;
+            font-weight: 800;
         }
+
+        /* =========================
+           LOGOUT
+        ========================= */
 
         .logout {
             width: 100%;
             margin-top: 25px;
             padding: 15px;
             border: 1px solid #f2d4d4;
-            border-radius: 14px;
+            border-radius: 15px;
             background: #fff3f3;
             color: #d33b3b;
             font-size: 15px;
-            font-weight: bold;
+            font-weight: 800;
         }
 
-        /* BOTTOM NAV */
+        /* =========================
+           BOTTOM NAV
+        ========================= */
 
         .bottom-nav {
             position: fixed;
@@ -662,12 +701,12 @@
             right: 0;
             background: rgba(255,255,255,.97);
             border-top: 1px solid #e2ebe7;
-            height: 70px;
+            height: 72px;
             display: flex;
             justify-content: space-around;
             align-items: center;
             z-index: 100;
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(18px);
         }
 
         .nav-button {
@@ -688,7 +727,7 @@
 
         .nav-button.active {
             color: #0f9f6e;
-            font-weight: bold;
+            font-weight: 800;
         }
 
         @media (min-width:600px) {
@@ -717,7 +756,7 @@
 
         @media (max-width:420px) {
             .balance-amount {
-                font-size: 31px;
+                font-size: 32px;
             }
 
             .account-info strong {
@@ -726,6 +765,10 @@
 
             .quick-amounts {
                 grid-template-columns: repeat(2,1fr);
+            }
+
+            .greeting h2 {
+                font-size: 24px;
             }
         }
     </style>
@@ -740,19 +783,34 @@
 <div id="paymentLoading">
     <div class="payment-loading-box">
         <div class="payment-spinner"></div>
-        <h3>Opening secure payment</h3>
-        <p>Please wait while we connect you to Flutterwave.</p>
+
+        <h3>
+            Opening secure payment
+        </h3>
+
+        <p>
+            Please wait while we connect you to Flutterwave.
+        </p>
     </div>
 </div>
 
 <!-- FUND WALLET -->
 
-<div id="fundModal" onclick="handleFundModalBackground(event)">
+<div
+    id="fundModal"
+    onclick="handleFundModalBackground(event)"
+>
 
-    <div class="fund-modal-box" onclick="event.stopPropagation()">
+    <div
+        class="fund-modal-box"
+        onclick="event.stopPropagation()"
+    >
 
         <div class="fund-modal-header">
-            <h3>Fund Wallet</h3>
+
+            <h3>
+                Fund Wallet
+            </h3>
 
             <button
                 class="fund-close"
@@ -760,6 +818,7 @@
             >
                 ×
             </button>
+
         </div>
 
         <p class="fund-modal-description">
@@ -772,7 +831,9 @@
 
         <div class="amount-input-wrap">
 
-            <span class="currency-symbol">₦</span>
+            <span class="currency-symbol">
+                ₦
+            </span>
 
             <input
                 id="fundAmountInput"
@@ -822,7 +883,10 @@
 
         </div>
 
-        <div id="fundError" class="fund-error"></div>
+        <div
+            id="fundError"
+            class="fund-error"
+        ></div>
 
         <button
             id="continueFundingButton"
@@ -853,15 +917,21 @@
     <div class="welcome">
 
         <div class="logo">
+
             <img
                 src="velqora.png.PNG"
                 alt="Velqora Logo"
             >
+
         </div>
 
-        <h1>Velqora</h1>
+        <h1>
+            Velqora
+        </h1>
 
-        <h2>Welcome to Velqora</h2>
+        <h2>
+            Welcome to Velqora
+        </h2>
 
         <p>
             A simple place to manage your wallet,
@@ -891,17 +961,22 @@
 
 <!-- DASHBOARD -->
 
-<div id="dashboard" class="dashboard">
+<div
+    id="dashboard"
+    class="dashboard"
+>
 
     <header class="topbar">
 
         <div class="brand">
 
             <div class="brand-logo">
+
                 <img
                     src="velqora.png.PNG"
                     alt="Velqora"
                 >
+
             </div>
 
             <div class="brand-name">
@@ -1028,53 +1103,83 @@
                 id="fundActionButton"
                 onclick="startFunding()"
             >
-                <div class="action-icon">💰</div>
-                <div class="action-title">Add Money</div>
+                <div class="action-icon">
+                    💰
+                </div>
+
+                <div class="action-title">
+                    Add Money
+                </div>
             </button>
 
             <button
                 class="action"
                 onclick="buyData()"
             >
-                <div class="action-icon">📶</div>
-                <div class="action-title">Data</div>
+                <div class="action-icon">
+                    📶
+                </div>
+
+                <div class="action-title">
+                    Data
+                </div>
             </button>
 
             <button
                 class="action"
                 onclick="buyAirtime()"
             >
-                <div class="action-icon">☎️</div>
-                <div class="action-title">Airtime</div>
+                <div class="action-icon">
+                    ☎️
+                </div>
+
+                <div class="action-title">
+                    Airtime
+                </div>
             </button>
 
             <button
                 class="action"
                 onclick="makeTransfer()"
             >
-                <div class="action-icon">💸</div>
-                <div class="action-title">Send Money</div>
+                <div class="action-icon">
+                    💸
+                </div>
+
+                <div class="action-title">
+                    Send Money
+                </div>
             </button>
 
             <button
                 class="action"
                 onclick="viewTransactions()"
             >
-                <div class="action-icon">📊</div>
-                <div class="action-title">Activity</div>
+                <div class="action-icon">
+                    📊
+                </div>
+
+                <div class="action-title">
+                    Activity
+                </div>
             </button>
 
             <button
                 class="action"
                 onclick="goToProfile()"
             >
-                <div class="action-icon">👤</div>
-                <div class="action-title">Profile</div>
+                <div class="action-icon">
+                    👤
+                </div>
+
+                <div class="action-title">
+                    Profile
+                </div>
             </button>
 
         </div>
 
-        <!-- ACTIVITY -->
+        <!-- RECENT ACTIVITY -->
 
         <div class="section-heading">
 
@@ -1173,16 +1278,25 @@ let fundingInProgress = false;
 
 function updateGreeting() {
 
-    const hour = new Date().getHours();
+    const hour =
+        new Date().getHours();
 
     let greeting;
 
     if (hour < 12) {
-        greeting = "Good morning 👋";
+
+        greeting =
+            "Good morning 👋";
+
     } else if (hour < 18) {
-        greeting = "Good afternoon 👋";
+
+        greeting =
+            "Good afternoon 👋";
+
     } else {
-        greeting = "Good evening 👋";
+
+        greeting =
+            "Good evening 👋";
     }
 
     document.getElementById(
@@ -1197,9 +1311,14 @@ function updateGreeting() {
 async function loadAccountNumber(userId) {
 
     const element =
-        document.getElementById("accountNumber");
+        document.getElementById(
+            "accountNumber"
+        );
 
-    const { data, error } =
+    const {
+        data,
+        error
+    } =
         await supabaseClient
             .from("Idris-Data-App")
             .select("account_number")
@@ -1213,13 +1332,20 @@ async function loadAccountNumber(userId) {
             error
         );
 
-        element.textContent = "Unavailable";
+        element.textContent =
+            "Unavailable";
+
         return;
     }
 
-    if (!data || !data.account_number) {
+    if (
+        !data ||
+        !data.account_number
+    ) {
 
-        element.textContent = "Unavailable";
+        element.textContent =
+            "Unavailable";
+
         return;
     }
 
@@ -1230,7 +1356,9 @@ async function loadAccountNumber(userId) {
 async function copyAccountNumber() {
 
     const element =
-        document.getElementById("accountNumber");
+        document.getElementById(
+            "accountNumber"
+        );
 
     const accountNumber =
         element.textContent.trim();
@@ -1254,10 +1382,14 @@ async function copyAccountNumber() {
                 ".copy-account"
             );
 
-        button.textContent = "Copied";
+        button.textContent =
+            "Copied";
 
         setTimeout(() => {
-            button.textContent = "Copy";
+
+            button.textContent =
+                "Copy";
+
         }, 1500);
 
     } catch (error) {
@@ -1282,7 +1414,10 @@ async function loadWallet(userId) {
     balanceElement.textContent =
         "Checking...";
 
-    const { data, error } =
+    const {
+        data,
+        error
+    } =
         await supabaseClient
             .from("wallets")
             .select("balance")
@@ -1485,10 +1620,16 @@ function startFunding() {
         );
 
     input.value = "";
-    errorBox.textContent = "";
-    errorBox.classList.remove("show");
 
-    modal.classList.add("active");
+    errorBox.textContent = "";
+
+    errorBox.classList.remove(
+        "show"
+    );
+
+    modal.classList.add(
+        "active"
+    );
 
     setTimeout(() => {
         input.focus();
@@ -1508,7 +1649,10 @@ function closeFundModal() {
 
 function handleFundModalBackground(event) {
 
-    if (event.target.id === "fundModal") {
+    if (
+        event.target.id ===
+        "fundModal"
+    ) {
         closeFundModal();
     }
 }
@@ -1520,7 +1664,8 @@ function setFundAmount(amount) {
             "fundAmountInput"
         );
 
-    input.value = amount;
+    input.value =
+        amount;
 
     document
         .getElementById("fundError")
@@ -1539,7 +1684,9 @@ function showFundError(message) {
     errorBox.textContent =
         message;
 
-    errorBox.classList.add("show");
+    errorBox.classList.add(
+        "show"
+    );
 }
 
 async function continueFunding() {
@@ -1577,6 +1724,7 @@ async function continueFunding() {
         );
 
         input.focus();
+
         return;
     }
 
@@ -1587,6 +1735,7 @@ async function continueFunding() {
         );
 
         input.focus();
+
         return;
     }
 
@@ -1603,16 +1752,20 @@ async function continueFunding() {
 
     try {
 
-        fundingInProgress = true;
+        fundingInProgress =
+            true;
 
-        continueButton.disabled = true;
+        continueButton.disabled =
+            true;
 
         continueButton.textContent =
             "Connecting to Payment...";
 
         closeFundModal();
 
-        setFundingLoading(true);
+        setFundingLoading(
+            true
+        );
 
         const {
             data,
@@ -1636,11 +1789,15 @@ async function continueFunding() {
                 error
             );
 
-            setFundingLoading(false);
+            setFundingLoading(
+                false
+            );
 
-            fundingInProgress = false;
+            fundingInProgress =
+                false;
 
-            continueButton.disabled = false;
+            continueButton.disabled =
+                false;
 
             continueButton.textContent =
                 "Continue to Payment";
@@ -1658,11 +1815,15 @@ async function continueFunding() {
             !data.success
         ) {
 
-            setFundingLoading(false);
+            setFundingLoading(
+                false
+            );
 
-            fundingInProgress = false;
+            fundingInProgress =
+                false;
 
-            continueButton.disabled = false;
+            continueButton.disabled =
+                false;
 
             continueButton.textContent =
                 "Continue to Payment";
@@ -1677,11 +1838,15 @@ async function continueFunding() {
 
         if (!data.payment_link) {
 
-            setFundingLoading(false);
+            setFundingLoading(
+                false
+            );
 
-            fundingInProgress = false;
+            fundingInProgress =
+                false;
 
-            continueButton.disabled = false;
+            continueButton.disabled =
+                false;
 
             continueButton.textContent =
                 "Continue to Payment";
@@ -1704,11 +1869,15 @@ async function continueFunding() {
             error
         );
 
-        setFundingLoading(false);
+        setFundingLoading(
+            false
+        );
 
-        fundingInProgress = false;
+        fundingInProgress =
+            false;
 
-        continueButton.disabled = false;
+        continueButton.disabled =
+            false;
 
         continueButton.textContent =
             "Continue to Payment";
@@ -1719,7 +1888,9 @@ async function continueFunding() {
     }
 }
 
-function setFundingLoading(isLoading) {
+function setFundingLoading(
+    isLoading
+) {
 
     const loadingScreen =
         document.getElementById(
@@ -1737,14 +1908,18 @@ function setFundingLoading(isLoading) {
         );
 
     loadingScreen.style.display =
-        isLoading ? "flex" : "none";
+        isLoading
+            ? "flex"
+            : "none";
 
     if (mainFundButton) {
-        mainFundButton.disabled = isLoading;
+        mainFundButton.disabled =
+            isLoading;
     }
 
     if (quickFundButton) {
-        quickFundButton.disabled = isLoading;
+        quickFundButton.disabled =
+            isLoading;
     }
 }
 
@@ -1753,23 +1928,28 @@ function setFundingLoading(isLoading) {
 ========================= */
 
 function buyData() {
-    window.location.href = "data.html";
+    window.location.href =
+        "data.html";
 }
 
 function buyAirtime() {
-    window.location.href = "airtime.html";
+    window.location.href =
+        "airtime.html";
 }
 
 function makeTransfer() {
-    window.location.href = "transfer.html";
+    window.location.href =
+        "transfer.html";
 }
 
 function viewTransactions() {
-    window.location.href = "transactions.html";
+    window.location.href =
+        "transactions.html";
 }
 
 function goToProfile() {
-    window.location.href = "profile.html";
+    window.location.href =
+        "profile.html";
 }
 
 function goHome() {
@@ -1821,4 +2001,3 @@ checkUser();
 
 </body>
 </html>
-`
