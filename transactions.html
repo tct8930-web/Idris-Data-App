@@ -1027,7 +1027,17 @@ function getReference(
         const phone =
             transaction.phone || "";
 
-        return network + " • " + phone;
+        const plan =
+            transaction.plan_name ||
+            "Data Plan";
+
+        return (
+            network +
+            " • " +
+            phone +
+            " • " +
+            plan
+        );
     }
 
 
@@ -1109,16 +1119,15 @@ async function loadTransactions() {
     /*
      * Data
      *
-     * IMPORTANT:
-     * The database column is named "Status"
-     * with a capital S.
+     * The database column is now named "status"
+     * with a lowercase s.
      */
 
     const dataPromise =
         supabaseClient
             .from("data_transactions")
             .select(
-                'id, created_at, phone, network, amount, tx_ref, "Status", provider_reference'
+                "id, created_at, phone, network, plan_name, amount, tx_ref, status, provider_reference"
             )
             .eq(
                 "user_id",
@@ -1137,7 +1146,7 @@ async function loadTransactions() {
                 "id, created_at, user_id, recipient_user_id, bank_code, bank_name, account_number, account_name, amount, fee, tx_ref, status, provider_reference"
             )
             .or(
-                `user_id.eq.${user.id},recipient_user_id.eq.${user.id}`
+                user_id.eq.${user.id},recipient_user_id.eq.${user.id}
             );
 
 
@@ -1268,7 +1277,6 @@ async function loadTransactions() {
                     type: "data",
 
                     status:
-                        transaction.Status ||
                         transaction.status ||
                         "pending",
 
@@ -1379,7 +1387,6 @@ async function loadTransactions() {
             const status =
                 String(
                     transaction.status ||
-                    transaction.Status ||
                     "pending"
                 );
 
