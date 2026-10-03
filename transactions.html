@@ -27,20 +27,13 @@
         body {
             margin: 0;
             font-family: Arial, Helvetica, sans-serif;
-            background:
-                radial-gradient(
-                    circle at 50% -10%,
-                    rgba(15,159,110,0.07),
-                    transparent 35%
-                ),
-                var(--background);
+            background: var(--background);
             color: var(--text);
             min-height: 100vh;
         }
 
         button {
             font-family: inherit;
-            -webkit-tap-highlight-color: transparent;
         }
 
         .topbar {
@@ -55,7 +48,7 @@
             align-items: center;
             gap: 12px;
 
-            background: rgba(255,255,255,0.94);
+            background: rgba(255,255,255,0.96);
             border-bottom: 1px solid var(--border);
 
             backdrop-filter: blur(18px);
@@ -78,12 +71,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-
-            transition: 0.2s ease;
-        }
-
-        .back-button:active {
-            transform: scale(0.94);
         }
 
         .brand {
@@ -104,11 +91,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-
-            box-shadow:
-                0 7px 18px rgba(15,159,110,0.16);
-
-            flex-shrink: 0;
         }
 
         .brand-logo img {
@@ -121,19 +103,14 @@
         .brand-name {
             font-size: 19px;
             font-weight: 800;
-            letter-spacing: -0.3px;
         }
 
         .container {
             width: 100%;
             max-width: 760px;
-
             margin: 0 auto;
 
-            padding:
-                28px
-                16px
-                105px;
+            padding: 28px 16px 105px;
         }
 
         .intro {
@@ -157,8 +134,6 @@
 
             font-size: 29px;
             line-height: 1.1;
-
-            letter-spacing: -0.9px;
         }
 
         .intro p {
@@ -171,25 +146,11 @@
         }
 
         .summary {
-            position: relative;
-            overflow: hidden;
-
-            background:
-                radial-gradient(
-                    circle at 90% 5%,
-                    rgba(255,255,255,0.20),
-                    transparent 28%
-                ),
-                radial-gradient(
-                    circle at 0% 100%,
-                    rgba(255,255,255,0.08),
-                    transparent 32%
-                ),
-                linear-gradient(
-                    135deg,
-                    #0c805b,
-                    #064c3a
-                );
+            background: linear-gradient(
+                135deg,
+                #0c805b,
+                #064c3a
+            );
 
             color: white;
 
@@ -203,25 +164,7 @@
                 0 18px 40px rgba(6,77,60,0.20);
         }
 
-        .summary::after {
-            content: "";
-
-            position: absolute;
-
-            width: 115px;
-            height: 115px;
-
-            right: -35px;
-            bottom: -55px;
-
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 50%;
-        }
-
         .summary-label {
-            position: relative;
-            z-index: 2;
-
             font-size: 11px;
             font-weight: 700;
 
@@ -233,19 +176,11 @@
         }
 
         .summary-title {
-            position: relative;
-            z-index: 2;
-
             font-size: 21px;
             font-weight: 800;
-
-            letter-spacing: -0.3px;
         }
 
         .summary-text {
-            position: relative;
-            z-index: 2;
-
             margin-top: 7px;
 
             font-size: 13px;
@@ -267,7 +202,6 @@
         .section-title {
             font-size: 15px;
             font-weight: 800;
-            color: #243a32;
         }
 
         .section-count {
@@ -281,7 +215,7 @@
         }
 
         .transaction {
-            background: rgba(255,255,255,0.98);
+            background: white;
 
             border: 1px solid var(--border);
 
@@ -297,14 +231,6 @@
 
             box-shadow:
                 0 7px 22px rgba(15,50,39,0.055);
-
-            transition:
-                transform 0.18s ease,
-                box-shadow 0.18s ease;
-        }
-
-        .transaction:active {
-            transform: scale(0.992);
         }
 
         .transaction-left {
@@ -371,7 +297,6 @@
 
         .transaction-right {
             text-align: right;
-
             flex-shrink: 0;
         }
 
@@ -444,9 +369,6 @@
             text-align: center;
 
             color: #91a39c;
-
-            box-shadow:
-                0 7px 22px rgba(15,50,39,0.055);
         }
 
         .empty-icon {
@@ -480,11 +402,6 @@
             line-height: 1.5;
 
             font-size: 13px;
-
-            max-width: 300px;
-
-            margin-left: auto;
-            margin-right: auto;
         }
 
         .loading {
@@ -499,14 +416,10 @@
             text-align: center;
 
             color: #668078;
-
-            box-shadow:
-                0 7px 22px rgba(15,50,39,0.055);
         }
 
         .loading-icon {
             font-size: 28px;
-
             margin-bottom: 10px;
         }
 
@@ -575,23 +488,16 @@
             padding: 8px 10px;
 
             border-radius: 14px;
-
-            transition: 0.2s ease;
         }
 
         .nav-button span {
             font-size: 21px;
-
             line-height: 21px;
         }
 
         .nav-button.active {
             color: var(--green);
             font-weight: 800;
-        }
-
-        .nav-button.active span {
-            transform: translateY(-1px);
         }
 
         @media (max-width: 480px) {
@@ -648,27 +554,15 @@
 
                 max-width: 760px;
 
-                margin:
-                    0 auto 20px;
+                margin: 0 auto 20px;
 
-                border:
-                    1px solid var(--border);
+                border: 1px solid var(--border);
 
                 border-radius: 20px;
-
-                box-shadow:
-                    0 7px 22px rgba(15,50,39,0.055);
             }
 
             .container {
                 padding-bottom: 25px;
-            }
-
-            .transaction:hover {
-                transform: translateY(-1px);
-
-                box-shadow:
-                    0 11px 27px rgba(15,50,39,0.075);
             }
         }
     </style>
@@ -689,10 +583,12 @@
     <div class="brand">
 
         <div class="brand-logo">
+
             <img
                 src="velqora.png.PNG"
                 alt="Velqora Logo"
             >
+
         </div>
 
         <div class="brand-name">
@@ -869,29 +765,14 @@ function getAmountClass(
 
         if (isIncoming) {
 
-            if (
-                cleanStatus === "successful" ||
-                cleanStatus === "success" ||
-                cleanStatus === "completed" ||
-                cleanStatus === "delivered"
-            ) {
-                return "amount-positive";
-            }
+            return "amount-positive";
 
         } else {
 
-            if (
-                cleanStatus === "successful" ||
-                cleanStatus === "success" ||
-                cleanStatus === "completed" ||
-                cleanStatus === "delivered"
-            ) {
-                return "amount-negative";
-            }
+            return "amount-negative";
 
         }
     }
-
 
     if (
         type === "airtime" ||
@@ -906,9 +787,7 @@ function getAmountClass(
         ) {
             return "amount-negative";
         }
-
     }
-
 
     if (
         cleanStatus === "successful" ||
@@ -949,7 +828,6 @@ function getIcon(
     }
 
     if (type === "transfer") {
-
         return isIncoming
             ? "↓"
             : "↗️";
@@ -981,7 +859,6 @@ function getTitle(
     }
 
     if (type === "transfer") {
-
         return isIncoming
             ? "Money Received"
             : "Money Sent";
@@ -1094,7 +971,7 @@ async function loadTransactions() {
 
 
         /*
-         * Wallet funding
+         * WALLET FUNDING
          */
 
         const walletResult =
@@ -1119,7 +996,7 @@ async function loadTransactions() {
 
 
         /*
-         * Airtime
+         * AIRTIME
          */
 
         const airtimeResult =
@@ -1147,7 +1024,7 @@ async function loadTransactions() {
          * DATA
          *
          * IMPORTANT:
-         * The column is lowercase "status".
+         * status is lowercase.
          */
 
         const dataResult =
@@ -1172,11 +1049,10 @@ async function loadTransactions() {
 
 
         /*
-         * Velqora transfers
+         * TRANSFERS
          *
          * IMPORTANT:
-         * The backticks around the .or()
-         * query are required.
+         * The backticks are required here.
          */
 
         const transferResult =
@@ -1186,7 +1062,7 @@ async function loadTransactions() {
                     "id, created_at, user_id, recipient_user_id, bank_code, bank_name, account_number, account_name, amount, fee, tx_ref, status, provider_reference"
                 )
                 .or(
-                    user_id.eq.${user.id},recipient_user_id.eq.${user.id}
+                    `user_id.eq.${user.id},recipient_user_id.eq.${user.id}`
                 );
 
 
@@ -1203,7 +1079,7 @@ async function loadTransactions() {
 
 
         /*
-         * Wallet funding
+         * WALLET TRANSACTIONS
          */
 
         (
@@ -1226,7 +1102,7 @@ async function loadTransactions() {
 
 
         /*
-         * Airtime
+         * AIRTIME TRANSACTIONS
          */
 
         (
@@ -1249,7 +1125,7 @@ async function loadTransactions() {
 
 
         /*
-         * Data
+         * DATA TRANSACTIONS
          */
 
         (
@@ -1276,7 +1152,7 @@ async function loadTransactions() {
 
 
         /*
-         * Velqora transfers
+         * TRANSFERS
          */
 
         (
@@ -1302,7 +1178,7 @@ async function loadTransactions() {
 
 
         /*
-         * Newest first
+         * NEWEST FIRST
          */
 
         allTransactions.sort(
@@ -1322,6 +1198,7 @@ async function loadTransactions() {
         ) {
 
             content.innerHTML = `
+
                 <div class="empty">
 
                     <div class="empty-icon">
@@ -1338,6 +1215,7 @@ async function loadTransactions() {
                     </p>
 
                 </div>
+
             `;
 
             return;
@@ -1353,17 +1231,21 @@ async function loadTransactions() {
                 </div>
 
                 <div class="section-count">
+
                     ${allTransactions.length}
+
                     ${
                         allTransactions.length === 1
                             ? "transaction"
                             : "transactions"
                     }
+
                 </div>
 
             </div>
 
             <div class="transactions">
+
         `;
 
 
@@ -1421,87 +1303,60 @@ async function loadTransactions() {
                     );
 
 
-                /*
-                 * Incoming wallet funding
-                 */
-
-                if (
-                    type === "funding"
-                ) {
-
-                    const cleanStatus =
-                        status.toLowerCase();
-
-                    if (
-                        cleanStatus === "successful" ||
-                        cleanStatus === "success" ||
-                        cleanStatus === "completed" ||
-                        cleanStatus === "delivered"
-                    ) {
-
-                        displayAmount =
-                            "+" +
-                            displayAmount;
-                    }
-
-                }
+                const cleanStatus =
+                    status.toLowerCase();
 
 
                 /*
-                 * Incoming transfer
+                 * Add + for incoming money.
                  */
 
                 if (
-                    type === "transfer" &&
-                    isIncoming
-                ) {
-
-                    const cleanStatus =
-                        status.toLowerCase();
-
-                    if (
-                        cleanStatus === "successful" ||
-                        cleanStatus === "success" ||
-                        cleanStatus === "completed" ||
-                        cleanStatus === "delivered"
-                    ) {
-
-                        displayAmount =
-                            "+" +
-                            displayAmount;
-                    }
-
-                }
-
-
-                /*
-                 * Outgoing purchases/transfers
-                 */
-
-                if (
-                    type === "airtime" ||
-                    type === "data" ||
                     (
-                        type === "transfer" &&
-                        !isIncoming
+                        type === "funding" ||
+                        (
+                            type === "transfer" &&
+                            isIncoming
+                        )
+                    ) &&
+                    (
+                        cleanStatus === "successful" ||
+                        cleanStatus === "success" ||
+                        cleanStatus === "completed" ||
+                        cleanStatus === "delivered"
                     )
                 ) {
 
-                    const cleanStatus =
-                        status.toLowerCase();
+                    displayAmount =
+                        "+" +
+                        displayAmount;
+                }
 
-                    if (
+
+                /*
+                 * Add - for outgoing money.
+                 */
+
+                if (
+                    (
+                        type === "airtime" ||
+                        type === "data" ||
+                        (
+                            type === "transfer" &&
+                            !isIncoming
+                        )
+                    ) &&
+                    (
                         cleanStatus === "successful" ||
                         cleanStatus === "success" ||
                         cleanStatus === "completed" ||
                         cleanStatus === "delivered"
-                    ) {
+                    )
+                ) {
 
-                        displayAmount =
-                            "-" +
-                            displayAmount;
-                    }
-
+                    displayAmount =
+                        "-" +
+                        displayAmount;
                 }
 
 
@@ -1526,7 +1381,9 @@ async function loadTransactions() {
                                 </div>
 
                                 <div class="transaction-date">
-                                    ${formatDate(transaction.created_at)}
+                                    ${formatDate(
+                                        transaction.created_at
+                                    )}
                                 </div>
 
                             </div>
@@ -1622,7 +1479,7 @@ function goProfile() {
 
 
 /*
- * Start loading the activity page.
+ * Start the Activity page.
  */
 
 loadTransactions();
