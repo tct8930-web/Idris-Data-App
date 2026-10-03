@@ -736,22 +736,9 @@
             margin-bottom: 27px;
             padding: 25px;
             background:
-                radial-gradient(
-                    circle at 90% 5%,
-                    rgba(255,255,255,.18),
-                    transparent 27%
-                ),
-                radial-gradient(
-                    circle at 0% 100%,
-                    rgba(0,0,0,.13),
-                    transparent 38%
-                ),
-                linear-gradient(
-                    135deg,
-                    #0d9868 0%,
-                    #076c4d 52%,
-                    #043d31 100%
-                );
+                radial-gradient(circle at 90% 5%, rgba(255,255,255,.18), transparent 27%),
+                radial-gradient(circle at 0% 100%, rgba(0,0,0,.13), transparent 38%),
+                linear-gradient(135deg, #0d9868 0%, #076c4d 52%, #043d31 100%);
             border-radius: 30px;
             color: white;
             box-shadow: 0 23px 50px rgba(6,77,60,.25);
@@ -1175,13 +1162,9 @@
 
 <body>
 
-<!-- LOADING -->
-
 <div id="loading">
     Checking your Velqora account...
 </div>
-
-<!-- PAYMENT LOADING -->
 
 <div id="paymentLoading">
 
@@ -1438,8 +1421,6 @@
     class="dashboard"
 >
 
-    <!-- TOPBAR -->
-
     <header class="topbar">
 
         <div class="brand">
@@ -1489,8 +1470,6 @@
 
     <main class="container">
 
-        <!-- GREETING -->
-
         <div class="greeting">
 
             <p id="greetingText">
@@ -1506,8 +1485,6 @@
             </div>
 
         </div>
-
-        <!-- ACCOUNT NUMBER -->
 
         <div class="account-strip">
 
@@ -1531,8 +1508,6 @@
             </button>
 
         </div>
-
-        <!-- BALANCE -->
 
         <div class="balance-card">
 
@@ -1591,8 +1566,6 @@
 
         </div>
 
-        <!-- SERVICES -->
-
         <div class="section-heading">
 
             <div class="section-title">
@@ -1612,7 +1585,6 @@
                 id="fundActionButton"
                 onclick="startFunding()"
             >
-
                 <div class="action-icon">
                     💰
                 </div>
@@ -1620,14 +1592,12 @@
                 <div class="action-title">
                     Add Money
                 </div>
-
             </button>
 
             <button
                 class="action"
                 onclick="buyData()"
             >
-
                 <div class="action-icon">
                     📶
                 </div>
@@ -1635,14 +1605,12 @@
                 <div class="action-title">
                     Data
                 </div>
-
             </button>
 
             <button
                 class="action"
                 onclick="buyAirtime()"
             >
-
                 <div class="action-icon">
                     ☎️
                 </div>
@@ -1650,14 +1618,12 @@
                 <div class="action-title">
                     Airtime
                 </div>
-
             </button>
 
             <button
                 class="action"
                 onclick="makeTransfer()"
             >
-
                 <div class="action-icon">
                     💸
                 </div>
@@ -1665,14 +1631,12 @@
                 <div class="action-title">
                     Send Money
                 </div>
-
             </button>
 
             <button
                 class="action"
                 onclick="viewTransactions()"
             >
-
                 <div class="action-icon">
                     📊
                 </div>
@@ -1680,14 +1644,12 @@
                 <div class="action-title">
                     Activity
                 </div>
-
             </button>
 
             <button
                 class="action"
                 onclick="goToProfile()"
             >
-
                 <div class="action-icon">
                     👤
                 </div>
@@ -1695,12 +1657,9 @@
                 <div class="action-title">
                     Profile
                 </div>
-
             </button>
 
         </div>
-
-        <!-- RECENT ACTIVITY -->
 
         <div class="section-heading">
 
@@ -1748,8 +1707,6 @@
 
         </div>
 
-        <!-- LOGOUT -->
-
         <button
             class="logout"
             onclick="logout()"
@@ -1759,47 +1716,30 @@
 
     </main>
 
-    <!-- BOTTOM NAV -->
-
     <nav class="bottom-nav">
 
         <button
             class="nav-button active"
             onclick="goHome()"
         >
-
-            <span>
-                ⌂
-            </span>
-
+            <span>⌂</span>
             Home
-
         </button>
 
         <button
             class="nav-button"
             onclick="viewTransactions()"
         >
-
-            <span>
-                ▣
-            </span>
-
+            <span>▣</span>
             Activity
-
         </button>
 
         <button
             class="nav-button"
             onclick="goToProfile()"
         >
-
-            <span>
-                ♙
-            </span>
-
+            <span>♙</span>
             Profile
-
         </button>
 
     </nav>
@@ -1840,8 +1780,7 @@ function updateGreeting() {
 
     document.getElementById(
         "greetingText"
-    ).textContent =
-        greeting;
+    ).textContent = greeting;
 }
 
 /* =========================
@@ -1889,29 +1828,19 @@ function showNotifications() {
     renderNotifications();
 
     document
-        .getElementById(
-            "notificationOverlay"
-        )
-        .classList.add(
-            "active"
-        );
+        .getElementById("notificationOverlay")
+        .classList.add("active");
 
-    document.body.style.overflow =
-        "hidden";
+    document.body.style.overflow = "hidden";
 }
 
 function closeNotifications() {
 
     document
-        .getElementById(
-            "notificationOverlay"
-        )
-        .classList.remove(
-            "active"
-        );
+        .getElementById("notificationOverlay")
+        .classList.remove("active");
 
-    document.body.style.overflow =
-        "";
+    document.body.style.overflow = "";
 }
 
 function handleNotificationBackground(event) {
@@ -1988,9 +1917,7 @@ function markNotificationsRead() {
         );
 
     if (dot) {
-        dot.classList.add(
-            "hidden"
-        );
+        dot.classList.add("hidden");
     }
 
     renderNotifications();
@@ -2138,9 +2065,7 @@ async function loadWallet(userId) {
     }
 
     actualBalance =
-        Number(
-            data.balance
-        );
+        Number(data.balance);
 
     displayBalance();
 }
@@ -2205,21 +2130,17 @@ async function refreshWallet() {
             "refreshButton"
         );
 
-    button.disabled =
-        true;
-
-    button.textContent =
-        "⟳";
+    button.disabled = true;
+    button.textContent = "⟳";
 
     await loadWallet(
         currentUser.id
     );
 
-    button.disabled =
-        false;
+    await loadRecentActivity();
 
-    button.textContent =
-        "↻";
+    button.disabled = false;
+    button.textContent = "↻";
 }
 
 /* =========================
@@ -2288,7 +2209,77 @@ async function loadRecentActivity() {
 
         const results = [];
 
-        /* TRANSFERS */
+        /* =========================
+           WALLET FUNDING
+        ========================= */
+
+        const {
+            data: walletTransactions,
+            error: walletTransactionError
+        } =
+            await supabaseClient
+                .from("wallet_transactions")
+                .select(
+                    "id, created_at, amount, tx_ref, currency, status"
+                )
+                .eq(
+                    "user_id",
+                    currentUser.id
+                )
+                .order(
+                    "created_at",
+                    {
+                        ascending: false
+                    }
+                )
+                .limit(5);
+
+        if (walletTransactionError) {
+
+            console.error(
+                "Recent wallet funding error:",
+                walletTransactionError
+            );
+        }
+
+        (walletTransactions || []).forEach(
+            transaction => {
+
+                results.push({
+
+                    id:
+                        "wallet-" +
+                        transaction.id,
+
+                    created_at:
+                        transaction.created_at,
+
+                    title:
+                        "Wallet funding",
+
+                    icon:
+                        "💰",
+
+                    amount:
+                        Number(
+                            transaction.amount
+                        ),
+
+                    type:
+                        "credit",
+
+                    status:
+                        transaction.status ||
+                        "pending"
+
+                });
+
+            }
+        );
+
+        /* =========================
+           TRANSFERS
+        ========================= */
 
         const {
             data: transfers,
@@ -2357,12 +2348,15 @@ async function loadRecentActivity() {
                     status:
                         transaction.status ||
                         "successful"
+
                 });
 
             }
         );
 
-        /* DATA */
+        /* =========================
+           DATA
+        ========================= */
 
         const {
             data: dataTransactions,
@@ -2371,7 +2365,7 @@ async function loadRecentActivity() {
             await supabaseClient
                 .from("data_transactions")
                 .select(
-                    'id, created_at, phone, network, amount, tx_ref, "Status", provider_reference'
+                    "id, created_at, phone, network, amount, tx_ref, status, provider_reference"
                 )
                 .eq(
                     "user_id",
@@ -2420,14 +2414,17 @@ async function loadRecentActivity() {
                         "debit",
 
                     status:
-                        transaction.Status ||
+                        transaction.status ||
                         "pending"
+
                 });
 
             }
         );
 
-        /* AIRTIME */
+        /* =========================
+           AIRTIME
+        ========================= */
 
         const {
             data: airtimeTransactions,
@@ -2436,7 +2433,7 @@ async function loadRecentActivity() {
             await supabaseClient
                 .from("airtime_transactions")
                 .select(
-                    'id, created_at, phone, network, amount, tx_ref, "Status", provider_reference'
+                    "id, created_at, phone, network, amount, tx_ref, status, provider_reference"
                 )
                 .eq(
                     "user_id",
@@ -2485,14 +2482,17 @@ async function loadRecentActivity() {
                         "debit",
 
                     status:
-                        transaction.Status ||
+                        transaction.status ||
                         "pending"
+
                 });
 
             }
         );
 
-        /* SORT */
+        /* =========================
+           SORT
+        ========================= */
 
         results.sort(
             (a, b) =>
