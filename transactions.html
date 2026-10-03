@@ -526,6 +526,8 @@
             font-size: 13px;
 
             line-height: 1.5;
+
+            word-break: break-word;
         }
 
         .bottom-nav {
@@ -1065,181 +1067,171 @@ async function loadTransactions() {
         document.getElementById("content");
 
 
-    const {
-        data: { user },
-        error: userError
-    } =
-        await supabaseClient.auth.getUser();
+    try {
+
+        const {
+            data: { user },
+            error: userError
+        } =
+            await supabaseClient.auth.getUser();
 
 
-    if (
-        userError ||
-        !user
-    ) {
+        if (userError) {
 
-        window.location.href =
-            "login.html";
-
-        return;
-    }
-
-
-    /*
-     * Wallet funding
-     */
-
-    const walletPromise =
-        supabaseClient
-            .from("wallet_transactions")
-            .select(
-                "id, created_at, amount, tx_ref, currency, status"
-            )
-            .eq(
-                "user_id",
-                user.id
+            throw new Error(
+                userError.message
             );
+        }
 
 
-    /*
-     * Airtime
-     */
+        if (!user) {
 
-    const airtimePromise =
-        supabaseClient
-            .from("airtime_transactions")
-            .select(
-                "id, created_at, phone, network, amount, tx_ref, status, provider_reference"
-            )
-            .eq(
-                "user_id",
-                user.id
+            window.location.href =
+                "login.html";
+
+            return;
+        }
+
+
+        /*
+         * Wallet funding
+         */
+
+        const walletResult =
+            await supabaseClient
+                .from("wallet_transactions")
+                .select(
+                    "id, created_at, amount, tx_ref, currency, status"
+                )
+                .eq(
+                    "user_id",
+                    user.id
+                );
+
+
+        if (walletResult.error) {
+
+            throw new Error(
+                "Wallet activity error: " +
+                walletResult.error.message
             );
+        }
 
 
-    /*
-     * Data
-     *
-     * The database column is now named "status"
-     * with a lowercase s.
-     */
+        /*
+         * Airtime
+         */
 
-    const dataPromise =
-        supabaseClient
-            .from("data_transactions")
-            .select(
-                "id, created_at, phone, network, plan_name, amount, tx_ref, status, provider_reference"
-            )
-            .eq(
-                "user_id",
-                user.id
+        const airtimeResult =
+            await supabaseClient
+                .from("airtime_transactions")
+                .select(
+                    "id, created_at, phone, network, amount, tx_ref, status, provider_reference"
+                )
+                .eq(
+                    "user_id",
+                    user.id
+                );
+
+
+        if (airtimeResult.error) {
+
+            throw new Error(
+                "Airtime activity error: " +
+                airtimeResult.error.message
             );
+        }
 
 
-    /*
-     * Velqora transfers
-     */
+        /*
+         * DATA
+         *
+         * IMPORTANT:
+         * The column is lowercase "status".
+         */
 
-    const transferPromise =
-        supabaseClient
-            .from("transfers")
-            .select(
-                "id, created_at, user_id, recipient_user_id, bank_code, bank_name, account_number, account_name, amount, fee, tx_ref, status, provider_reference"
-            )
-            .or(
-                user_id.eq.${user.id},recipient_user_id.eq.${user.id}
+        const dataResult =
+            await supabaseClient
+                .from("data_transactions")
+                .select(
+                    "id, created_at, phone, network, plan_name, amount, tx_ref, status, provider_reference"
+                )
+                .eq(
+                    "user_id",
+                    user.id
+                );
+
+
+        if (dataResult.error) {
+
+            throw new Error(
+                "Data activity error: " +
+                dataResult.error.message
             );
+        }
 
 
-    const [
-        walletResult,
-        airtimeResult,
-        dataResult,
-        transferResult
-    ] =
-        await Promise.all([
-            walletPromise,
-            airtimePromise,
-            dataPromise,
-            transferPromise
-        ]);
+        /*
+         * Velqora transfers
+         *
+         * IMPORTANT:
+         * The backticks around the .or()
+         * query are required.
+         */
+
+        const transferResult =
+            await supabaseClient
+                .from("transfers")
+                .select(
+                    "id, created_at, user_id, recipient_user_id, bank_code, bank_name, account_number, account_name, amount, fee, tx_ref, status, provider_reference"
+                )
+                .or(
+                    user_id.eq.${user.id},recipient_user_id.eq.${user.id}
+                );
 
 
-    console.log(
-        "Wallet transactions:",
-        walletResult
-    );
+        if (transferResult.error) {
 
-    console.log(
-        "Airtime transactions:",
-        airtimeResult
-    );
-
-    console.log(
-        "Data transactions:",
-        dataResult
-    );
-
-    console.log(
-        "Transfer transactions:",
-        transferResult
-    );
+            throw new Error(
+                "Transfer activity error: " +
+                transferResult.error.message
+            );
+        }
 
 
-    if (
-        walletResult.error
-    ) {
+        let allTransactions = [];
 
-        console.error(
-            "Wallet transaction error:",
-            walletResult.error
+
+        /*
+         * Wallet funding
+         */
+
+        (
+            walletResult.data || []
+        ).forEach(
+            transaction => {
+
+                allTransactions.push({
+
+                    ...transaction,
+
+                    type: "funding",
+
+                    isIncoming: true
+
+                });
+
+            }
         );
 
-        content.innerHTML = `
-            <div class="error">
-                Unable to load your wallet activity right now.
-            </div>
-        `;
 
-        return;
-    }
+        /*
+         * Airtime
+         */
 
-
-    let allTransactions = [];
-
-
-    /*
-     * Wallet funding
-     */
-
-    (
-        walletResult.data || []
-    ).forEach(
-        transaction => {
-
-            allTransactions.push({
-
-                ...transaction,
-
-                type: "funding",
-
-                isIncoming: true
-
-            });
-
-        }
-    );
-
-
-    /*
-     * Airtime
-     */
-
-    if (
-        !airtimeResult.error &&
-        airtimeResult.data
-    ) {
-
-        airtimeResult.data.forEach(
+        (
+            airtimeResult.data || []
+        ).forEach(
             transaction => {
 
                 allTransactions.push({
@@ -1255,19 +1247,14 @@ async function loadTransactions() {
             }
         );
 
-    }
 
+        /*
+         * Data
+         */
 
-    /*
-     * Data
-     */
-
-    if (
-        !dataResult.error &&
-        dataResult.data
-    ) {
-
-        dataResult.data.forEach(
+        (
+            dataResult.data || []
+        ).forEach(
             transaction => {
 
                 allTransactions.push({
@@ -1287,19 +1274,14 @@ async function loadTransactions() {
             }
         );
 
-    }
 
+        /*
+         * Velqora transfers
+         */
 
-    /*
-     * Velqora transfers
-     */
-
-    if (
-        !transferResult.error &&
-        transferResult.data
-    ) {
-
-        transferResult.data.forEach(
+        (
+            transferResult.data || []
+        ).forEach(
             transaction => {
 
                 const isIncoming =
@@ -1318,258 +1300,296 @@ async function loadTransactions() {
             }
         );
 
-    }
+
+        /*
+         * Newest first
+         */
+
+        allTransactions.sort(
+            (a, b) => {
+
+                return (
+                    new Date(b.created_at) -
+                    new Date(a.created_at)
+                );
+
+            }
+        );
 
 
-    /*
-     * Sort newest first.
-     */
+        if (
+            allTransactions.length === 0
+        ) {
 
-    allTransactions.sort(
-        (a, b) => {
+            content.innerHTML = `
+                <div class="empty">
 
-            return (
-                new Date(b.created_at) -
-                new Date(a.created_at)
-            );
+                    <div class="empty-icon">
+                        🧾
+                    </div>
 
+                    <h3>
+                        No activity yet
+                    </h3>
+
+                    <p>
+                        Your wallet activity will appear here
+                        after you make a transaction.
+                    </p>
+
+                </div>
+            `;
+
+            return;
         }
-    );
 
 
-    if (
-        allTransactions.length === 0
-    ) {
+        let html = `
 
-        content.innerHTML = `
-            <div class="empty">
+            <div class="section-header">
 
-                <div class="empty-icon">
-                    🧾
+                <div class="section-title">
+                    Recent transactions
                 </div>
 
-                <h3>No activity yet</h3>
+                <div class="section-count">
+                    ${allTransactions.length}
+                    ${
+                        allTransactions.length === 1
+                            ? "transaction"
+                            : "transactions"
+                    }
+                </div>
 
-                <p>
-                    Your wallet activity will appear here
-                    after you make a transaction.
-                </p>
+            </div>
 
+            <div class="transactions">
+        `;
+
+
+        allTransactions.forEach(
+            transaction => {
+
+                const status =
+                    String(
+                        transaction.status ||
+                        "pending"
+                    );
+
+
+                const type =
+                    transaction.type;
+
+
+                const isIncoming =
+                    transaction.isIncoming === true;
+
+
+                const amountClass =
+                    getAmountClass(
+                        status,
+                        type,
+                        isIncoming
+                    );
+
+
+                const icon =
+                    getIcon(
+                        status,
+                        type,
+                        isIncoming
+                    );
+
+
+                const title =
+                    getTitle(
+                        type,
+                        isIncoming
+                    );
+
+
+                const reference =
+                    getReference(
+                        transaction,
+                        isIncoming
+                    );
+
+
+                let displayAmount =
+                    formatAmount(
+                        transaction.amount
+                    );
+
+
+                /*
+                 * Incoming wallet funding
+                 */
+
+                if (
+                    type === "funding"
+                ) {
+
+                    const cleanStatus =
+                        status.toLowerCase();
+
+                    if (
+                        cleanStatus === "successful" ||
+                        cleanStatus === "success" ||
+                        cleanStatus === "completed" ||
+                        cleanStatus === "delivered"
+                    ) {
+
+                        displayAmount =
+                            "+" +
+                            displayAmount;
+                    }
+
+                }
+
+
+                /*
+                 * Incoming transfer
+                 */
+
+                if (
+                    type === "transfer" &&
+                    isIncoming
+                ) {
+
+                    const cleanStatus =
+                        status.toLowerCase();
+
+                    if (
+                        cleanStatus === "successful" ||
+                        cleanStatus === "success" ||
+                        cleanStatus === "completed" ||
+                        cleanStatus === "delivered"
+                    ) {
+
+                        displayAmount =
+                            "+" +
+                            displayAmount;
+                    }
+
+                }
+
+
+                /*
+                 * Outgoing purchases/transfers
+                 */
+
+                if (
+                    type === "airtime" ||
+                    type === "data" ||
+                    (
+                        type === "transfer" &&
+                        !isIncoming
+                    )
+                ) {
+
+                    const cleanStatus =
+                        status.toLowerCase();
+
+                    if (
+                        cleanStatus === "successful" ||
+                        cleanStatus === "success" ||
+                        cleanStatus === "completed" ||
+                        cleanStatus === "delivered"
+                    ) {
+
+                        displayAmount =
+                            "-" +
+                            displayAmount;
+                    }
+
+                }
+
+
+                html += `
+
+                    <div class="transaction">
+
+                        <div class="transaction-left">
+
+                            <div class="transaction-icon">
+                                ${icon}
+                            </div>
+
+                            <div class="transaction-info">
+
+                                <div class="transaction-title">
+                                    ${title}
+                                </div>
+
+                                <div class="transaction-ref">
+                                    ${reference}
+                                </div>
+
+                                <div class="transaction-date">
+                                    ${formatDate(transaction.created_at)}
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="transaction-right">
+
+                            <div
+                                class="transaction-amount ${amountClass}"
+                            >
+                                ${displayAmount}
+                            </div>
+
+                            <span
+                                class="status ${getStatusClass(status)}"
+                            >
+                                ${status}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                `;
+            }
+        );
+
+
+        html += `
             </div>
         `;
 
-        return;
+
+        content.innerHTML =
+            html;
+
+
+    } catch (error) {
+
+        console.error(
+            "Activity page error:",
+            error
+        );
+
+
+        content.innerHTML = `
+
+            <div class="error">
+
+                <strong>
+                    Activity could not load
+                </strong>
+
+                <br><br>
+
+                ${error.message || error}
+
+            </div>
+
+        `;
     }
-
-
-    let html = `
-
-        <div class="section-header">
-
-            <div class="section-title">
-                Recent transactions
-            </div>
-
-            <div class="section-count">
-                ${allTransactions.length}
-                ${allTransactions.length === 1 ? "transaction" : "transactions"}
-            </div>
-
-        </div>
-
-        <div class="transactions">
-    `;
-
-
-    allTransactions.forEach(
-        transaction => {
-
-            const status =
-                String(
-                    transaction.status ||
-                    "pending"
-                );
-
-
-            const type =
-                transaction.type;
-
-
-            const isIncoming =
-                transaction.isIncoming === true;
-
-
-            const amountClass =
-                getAmountClass(
-                    status,
-                    type,
-                    isIncoming
-                );
-
-
-            const icon =
-                getIcon(
-                    status,
-                    type,
-                    isIncoming
-                );
-
-
-            const title =
-                getTitle(
-                    type,
-                    isIncoming
-                );
-
-
-            const reference =
-                getReference(
-                    transaction,
-                    isIncoming
-                );
-
-
-            let displayAmount =
-                formatAmount(
-                    transaction.amount
-                );
-
-
-            /*
-             * Money received is positive.
-             */
-
-            if (
-                type === "funding"
-            ) {
-
-                const cleanStatus =
-                    status.toLowerCase();
-
-                if (
-                    cleanStatus === "successful" ||
-                    cleanStatus === "success" ||
-                    cleanStatus === "completed" ||
-                    cleanStatus === "delivered"
-                ) {
-
-                    displayAmount =
-                        "+" +
-                        displayAmount;
-                }
-
-            }
-
-
-            if (
-                type === "transfer" &&
-                isIncoming
-            ) {
-
-                const cleanStatus =
-                    status.toLowerCase();
-
-                if (
-                    cleanStatus === "successful" ||
-                    cleanStatus === "success" ||
-                    cleanStatus === "completed" ||
-                    cleanStatus === "delivered"
-                ) {
-
-                    displayAmount =
-                        "+" +
-                        displayAmount;
-                }
-
-            }
-
-
-            if (
-                type === "airtime" ||
-                type === "data" ||
-                (
-                    type === "transfer" &&
-                    !isIncoming
-                )
-            ) {
-
-                const cleanStatus =
-                    status.toLowerCase();
-
-                if (
-                    cleanStatus === "successful" ||
-                    cleanStatus === "success" ||
-                    cleanStatus === "completed" ||
-                    cleanStatus === "delivered"
-                ) {
-
-                    displayAmount =
-                        "-" +
-                        displayAmount;
-                }
-
-            }
-
-
-            html += `
-
-                <div class="transaction">
-
-                    <div class="transaction-left">
-
-                        <div class="transaction-icon">
-                            ${icon}
-                        </div>
-
-                        <div class="transaction-info">
-
-                            <div class="transaction-title">
-                                ${title}
-                            </div>
-
-                            <div class="transaction-ref">
-                                ${reference}
-                            </div>
-
-                            <div class="transaction-date">
-                                ${formatDate(transaction.created_at)}
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="transaction-right">
-
-                        <div
-                            class="transaction-amount ${amountClass}"
-                        >
-                            ${displayAmount}
-                        </div>
-
-                        <span
-                            class="status ${getStatusClass(status)}"
-                        >
-                            ${status}
-                        </span>
-
-                    </div>
-
-                </div>
-
-            `;
-        }
-    );
-
-
-    html += `
-        </div>
-    `;
-
-
-    content.innerHTML =
-        html;
 }
 
 
@@ -1605,20 +1625,7 @@ function goProfile() {
  * Start loading the activity page.
  */
 
-loadTransactions().catch(error => {
-
-    console.error(
-        "Activity page error:",
-        error
-    );
-
-    document.getElementById("content").innerHTML = `
-        <div class="error">
-            Unable to load your activity right now.<br><br>
-            Please refresh the page and try again.
-        </div>
-    `;
-});
+loadTransactions();
 
 </script>
 
