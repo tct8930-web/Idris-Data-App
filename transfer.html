@@ -2,11 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Velqora - Transfers</title>
 
@@ -44,14 +40,12 @@
                 "Segoe UI",
                 Arial,
                 sans-serif;
-
             background:
                 linear-gradient(
                     180deg,
                     #f1f6f3 0%,
                     #f7f9f8 100%
                 );
-
             color: var(--text);
             min-height: 100vh;
             padding-bottom: 105px;
@@ -67,15 +61,10 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* =========================
-           TOP BAR
-        ========================= */
-
         .topbar {
             position: sticky;
             top: 0;
             z-index: 50;
-
             background:
                 linear-gradient(
                     135deg,
@@ -83,18 +72,14 @@
                     #075c38 48%,
                     #0b8150 100%
                 );
-
             color: white;
-
             padding:
                 14px
                 max(18px, calc((100vw - 600px) / 2))
                 16px;
-
             display: flex;
             align-items: center;
             gap: 12px;
-
             box-shadow:
                 0 8px 28px rgba(3, 61, 37, 0.18);
         }
@@ -102,18 +87,13 @@
         .back-btn {
             width: 43px;
             height: 43px;
-
             border: 1px solid rgba(255,255,255,0.15);
             border-radius: 14px;
-
             background: rgba(255,255,255,0.10);
             color: white;
-
             font-size: 21px;
             line-height: 1;
-
             cursor: pointer;
-
             transition:
                 transform 0.2s ease,
                 background 0.2s ease;
@@ -127,14 +107,10 @@
         .logo {
             width: 43px;
             height: 43px;
-
             object-fit: cover;
-
             border-radius: 14px;
             background: white;
-
             flex-shrink: 0;
-
             box-shadow:
                 0 5px 16px rgba(0,0,0,0.14);
         }
@@ -147,23 +123,15 @@
 
         .brand-subtitle {
             margin-top: 3px;
-
             font-size: 11px;
             opacity: 0.76;
         }
 
-        /* =========================
-           PAGE
-        ========================= */
-
         .container {
             width: 100%;
             max-width: 600px;
-
             margin: 0 auto;
-
-            padding:
-                26px 18px 30px;
+            padding: 26px 18px 30px;
         }
 
         .page-heading {
@@ -172,41 +140,30 @@
 
         .eyebrow {
             color: var(--green);
-
             font-size: 10px;
             font-weight: 850;
-
             letter-spacing: 1.4px;
             text-transform: uppercase;
-
             margin-bottom: 7px;
         }
 
         .page-title {
             font-size: 29px;
             line-height: 1.1;
-
             font-weight: 850;
             letter-spacing: -1px;
         }
 
         .subtitle {
             color: var(--muted);
-
             font-size: 14px;
             line-height: 1.55;
-
             margin-top: 8px;
         }
-
-        /* =========================
-           WALLET CARD
-        ========================= */
 
         .wallet-card {
             position: relative;
             overflow: hidden;
-
             background:
                 linear-gradient(
                     135deg,
@@ -214,49 +171,34 @@
                     #07623b 52%,
                     #0c8a55 100%
                 );
-
             color: white;
-
             border-radius: 25px;
-
             padding: 24px;
-
             margin-bottom: 18px;
-
             box-shadow:
                 0 17px 38px rgba(3, 61, 37, 0.20);
         }
 
         .wallet-card::before {
             content: "";
-
             position: absolute;
-
             width: 190px;
             height: 190px;
-
             right: -82px;
             top: -94px;
-
             border-radius: 50%;
-
             background:
                 rgba(255,255,255,0.07);
         }
 
         .wallet-card::after {
             content: "";
-
             position: absolute;
-
             width: 110px;
             height: 110px;
-
             right: 38px;
             bottom: -74px;
-
             border-radius: 50%;
-
             background:
                 rgba(255,255,255,0.05);
         }
@@ -275,86 +217,57 @@
 
         .wallet-label {
             font-size: 11px;
-
             text-transform: uppercase;
             letter-spacing: 0.9px;
-
             font-weight: 750;
-
             opacity: 0.72;
         }
 
         .wallet-badge {
             padding: 6px 9px;
-
             border-radius: 999px;
-
             background:
                 rgba(255,255,255,0.11);
-
             border:
                 1px solid rgba(255,255,255,0.12);
-
             font-size: 10px;
             font-weight: 750;
-
             color: rgba(255,255,255,0.86);
         }
 
         .wallet-balance {
             font-size: 34px;
             line-height: 1;
-
             font-weight: 850;
             letter-spacing: -1.2px;
-
             margin-top: 12px;
         }
 
         .wallet-caption {
             margin-top: 10px;
-
             font-size: 12px;
-
             opacity: 0.68;
         }
 
-        /* =========================
-           TABS
-        ========================= */
-
         .transfer-tabs {
             display: grid;
-
             grid-template-columns: 1fr 1fr;
-
             gap: 5px;
-
             background: #e5eee9;
-
             padding: 5px;
-
             border-radius: 18px;
-
             margin-bottom: 18px;
         }
 
         .tab-button {
             border: none;
-
             padding: 13px 9px;
-
             border-radius: 14px;
-
             background: transparent;
-
             color: #718079;
-
             font-size: 13px;
             font-weight: 800;
-
             cursor: pointer;
-
             transition:
                 background 0.2s ease,
                 color 0.2s ease,
@@ -363,27 +276,17 @@
 
         .tab-button.active {
             background: white;
-
             color: var(--green);
-
             box-shadow:
                 0 4px 13px rgba(16,37,28,0.07);
         }
 
-        /* =========================
-           CARD
-        ========================= */
-
         .card {
             background: white;
-
             border:
                 1px solid rgba(16,37,28,0.045);
-
             border-radius: 25px;
-
             padding: 22px;
-
             box-shadow:
                 0 10px 30px rgba(16,37,28,0.055);
         }
@@ -391,55 +294,40 @@
         .card-header {
             display: flex;
             align-items: center;
-
             gap: 13px;
-
             margin-bottom: 23px;
         }
 
         .service-icon {
             width: 49px;
             height: 49px;
-
             flex-shrink: 0;
-
             border-radius: 16px;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
             background:
                 linear-gradient(
                     135deg,
                     #eaf8f1,
                     #ddf4e9
                 );
-
             color: var(--green);
-
             font-size: 21px;
         }
 
         .card-header h2 {
             font-size: 20px;
             font-weight: 850;
-
             letter-spacing: -0.5px;
         }
 
         .card-header p {
             color: var(--muted);
-
             font-size: 12px;
             line-height: 1.4;
-
             margin-top: 4px;
         }
-
-        /* =========================
-           FORM
-        ========================= */
 
         .field {
             margin-bottom: 18px;
@@ -447,36 +335,24 @@
 
         label {
             display: block;
-
             color: #2d4037;
-
             font-size: 12px;
             font-weight: 800;
-
             margin-bottom: 9px;
         }
 
         input,
         select {
             width: 100%;
-
             min-height: 52px;
-
             padding: 14px 15px;
-
             border:
                 1px solid var(--border);
-
             border-radius: 15px;
-
             background: #fbfcfb;
-
             color: var(--text);
-
             font-size: 16px;
-
             outline: none;
-
             transition:
                 border 0.2s ease,
                 box-shadow 0.2s ease,
@@ -490,9 +366,7 @@
         input:focus,
         select:focus {
             border-color: var(--green);
-
             background: white;
-
             box-shadow:
                 0 0 0 4px rgba(8,116,67,0.08);
         }
@@ -508,25 +382,15 @@
             letter-spacing: -0.5px;
         }
 
-        /* =========================
-           BUTTONS
-        ========================= */
-
         .find-button,
         .send-button,
         .new-transfer-button {
             width: 100%;
-
             border: none;
-
             border-radius: 15px;
-
             color: white;
-
             font-weight: 800;
-
             cursor: pointer;
-
             transition:
                 transform 0.2s ease,
                 box-shadow 0.2s ease,
@@ -535,56 +399,45 @@
 
         .find-button {
             padding: 15px;
-
             background: #10251c;
-
             font-size: 14px;
         }
 
         .find-button:hover:not(:disabled) {
             transform: translateY(-1px);
-
             box-shadow:
                 0 9px 20px rgba(16,37,28,0.13);
         }
 
         .send-button {
             margin-top: 18px;
-
             padding: 16px;
-
             background:
                 linear-gradient(
                     135deg,
                     #045331,
                     #087443
                 );
-
             font-size: 15px;
-
             box-shadow:
                 0 10px 24px rgba(4,83,49,0.17);
         }
 
         .send-button:hover:not(:disabled) {
             transform: translateY(-1px);
-
             box-shadow:
                 0 13px 28px rgba(4,83,49,0.23);
         }
 
         .new-transfer-button {
             margin-top: 21px;
-
             padding: 15px;
-
             background:
                 linear-gradient(
                     135deg,
                     #045331,
                     #087443
                 );
-
             font-size: 14px;
         }
 
@@ -594,129 +447,89 @@
             cursor: not-allowed;
         }
 
-        /* =========================
-           RECIPIENT
-        ========================= */
-
         .recipient-card {
             display: none;
-
             margin-top: 18px;
-
             padding: 17px;
-
             border-radius: 18px;
-
             background:
                 linear-gradient(
                     135deg,
                     #effaf5,
                     #f8fcfa
                 );
-
             border:
                 1px solid #ccefe0;
         }
 
         .recipient-top {
             display: flex;
-
             align-items: center;
-
             gap: 13px;
         }
 
         .recipient-avatar {
             width: 49px;
             height: 49px;
-
             border-radius: 50%;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
             flex-shrink: 0;
-
             background:
                 linear-gradient(
                     135deg,
                     #087443,
                     #16a36b
                 );
-
             color: white;
-
             font-size: 18px;
             font-weight: 850;
-
             box-shadow:
                 0 6px 15px rgba(8,116,67,0.16);
         }
 
         .recipient-label {
             color: #628077;
-
             font-size: 9px;
             font-weight: 850;
-
             letter-spacing: 0.9px;
-
             margin-bottom: 4px;
         }
 
         .recipient-name {
             color: #075d3d;
-
             font-size: 17px;
             font-weight: 850;
         }
 
         .recipient-number {
             color: #74827c;
-
             font-size: 11px;
-
             margin-top: 3px;
         }
 
-        /* =========================
-           AMOUNT / SUMMARY
-        ========================= */
-
         .amount-section {
             display: none;
-
             margin-top: 22px;
         }
 
         .summary {
-            background:
-                #f7faf8;
-
+            background: #f7faf8;
             border:
                 1px solid #e4ece7;
-
             border-radius: 18px;
-
             padding: 14px 16px;
-
             margin-top: 16px;
         }
 
         .summary-row {
             display: flex;
-
             justify-content: space-between;
-
             align-items: center;
-
             gap: 15px;
-
             padding: 8px 0;
-
             color: #6f7d77;
-
             font-size: 12px;
         }
 
@@ -728,210 +541,139 @@
         .summary-row.total {
             border-top:
                 1px solid #dfe8e3;
-
             margin-top: 5px;
-
             padding-top: 13px;
-
             color: #10251c;
-
             font-size: 14px;
             font-weight: 850;
         }
 
         .summary-row.total span:last-child {
             color: var(--green);
-
             font-size: 18px;
             font-weight: 850;
         }
 
-        /* =========================
-           MESSAGES
-        ========================= */
-
         #message {
             display: none;
-
             margin-top: 15px;
-
             padding: 13px 14px;
-
             border-radius: 14px;
-
             font-size: 12px;
             line-height: 1.5;
-
             font-weight: 650;
         }
 
         #message.error {
             display: block;
-
             background: #fff1f1;
             color: var(--danger);
-
             border: 1px solid #ffd4d4;
         }
 
         #message.success {
             display: block;
-
             background: #effaf5;
             color: #087f5b;
-
             border: 1px solid #ccefe0;
         }
 
         #message.loading {
             display: block;
-
             background: #eff6ff;
             color: #1d4ed8;
-
             border: 1px solid #dbeafe;
         }
 
-        /* =========================
-           NOTES
-        ========================= */
-
         .note {
             margin-top: 17px;
-
             padding: 13px 14px;
-
             border-radius: 14px;
-
             background: #f6f9f7;
-
             color: #74827c;
-
             font-size: 11px;
-
             line-height: 1.55;
-
             text-align: center;
-
             border:
                 1px solid #e8eeea;
         }
 
         .bank-info {
             margin-bottom: 18px;
-
             padding: 15px;
-
             border-radius: 16px;
-
             background:
                 linear-gradient(
                     135deg,
                     #f5f8f6,
                     #f9fbfa
                 );
-
             color: #64756d;
-
             font-size: 12px;
-
             line-height: 1.6;
-
             border:
                 1px solid #e7eeea;
         }
 
         .bank-preview {
             display: none;
-
             margin-top: 16px;
-
             padding: 16px;
-
             border-radius: 17px;
-
             background: #effaf5;
-
             border:
                 1px solid #ccefe0;
         }
 
         .bank-preview-title {
             color: #628077;
-
             font-size: 9px;
             font-weight: 850;
-
             letter-spacing: 0.9px;
-
             margin-bottom: 5px;
         }
 
         .bank-preview-name {
             color: #075d3d;
-
             font-size: 15px;
             font-weight: 850;
         }
 
         .bank-note {
             padding: 14px;
-
             border-radius: 15px;
-
             background: #fff8e8;
-
             border:
                 1px solid #f3dfae;
-
             color: #785b13;
-
             font-size: 11px;
-
             line-height: 1.6;
-
             margin-top: 17px;
         }
 
-        /* =========================
-           SUCCESS
-        ========================= */
-
         .success-box {
             display: none;
-
             text-align: center;
-
-            padding:
-                15px
-                3px
-                4px;
+            padding: 15px 3px 4px;
         }
 
         .success-icon {
             width: 76px;
             height: 76px;
-
             margin: 4px auto 17px;
-
             border-radius: 50%;
-
             background:
                 linear-gradient(
                     135deg,
                     #e8f8f0,
                     #d8f2e6
                 );
-
             color: var(--green);
-
             display: flex;
             align-items: center;
             justify-content: center;
-
             font-size: 37px;
             font-weight: 850;
-
             box-shadow:
                 0 10px 25px rgba(8,116,67,0.09);
         }
@@ -939,88 +681,56 @@
         .success-title {
             font-size: 23px;
             font-weight: 850;
-
             letter-spacing: -0.5px;
-
             margin-bottom: 8px;
         }
 
         .success-text {
             color: var(--muted);
-
             font-size: 13px;
-
             line-height: 1.6;
         }
 
-        /* =========================
-           BOTTOM NAV
-        ========================= */
-
         .bottom-nav {
             position: fixed;
-
             left: 0;
             right: 0;
             bottom: 0;
-
             z-index: 40;
-
             padding:
                 10px
                 18px
                 max(12px, env(safe-area-inset-bottom));
-
             background:
                 rgba(244,247,245,0.88);
-
-            backdrop-filter:
-                blur(16px);
-
-            -webkit-backdrop-filter:
-                blur(16px);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
         }
 
         .nav-inner {
             width: 100%;
             max-width: 600px;
-
             margin: 0 auto;
-
             background: white;
-
             border:
                 1px solid #e3ebe6;
-
             border-radius: 20px;
-
             padding: 7px;
-
             display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
+            grid-template-columns: repeat(3, 1fr);
             gap: 5px;
-
             box-shadow:
                 0 10px 30px rgba(16,37,28,0.10);
         }
 
         .nav-item {
             text-decoration: none;
-
             text-align: center;
-
             color: #7b8882;
-
             padding: 9px 4px;
-
             border-radius: 14px;
-
             font-size: 10px;
             font-weight: 750;
-
             transition:
                 background 0.2s ease,
                 color 0.2s ease;
@@ -1033,41 +743,24 @@
 
         .nav-icon {
             display: block;
-
             font-size: 18px;
-
             line-height: 1;
-
             margin-bottom: 4px;
         }
-
-        /* =========================
-           HIDDEN
-        ========================= */
 
         .hidden {
             display: none !important;
         }
 
-        /* =========================
-           RESPONSIVE
-        ========================= */
-
         @media (min-width: 700px) {
-
             body {
                 padding-bottom: 35px;
             }
 
             .bottom-nav {
                 position: static;
-
-                padding:
-                    0 18px
-                    25px;
-
+                padding: 0 18px 25px;
                 background: transparent;
-
                 backdrop-filter: none;
                 -webkit-backdrop-filter: none;
             }
@@ -1078,7 +771,6 @@
         }
 
         @media (max-width: 380px) {
-
             .container {
                 padding-left: 14px;
                 padding-right: 14px;
@@ -1115,499 +807,142 @@
 
 <body>
 
-    <!-- TOP BAR -->
+<header class="topbar">
 
-    <header class="topbar">
+    <button
+        class="back-btn"
+        onclick="goBack()"
+        aria-label="Go back"
+    >
+        ←
+    </button>
 
-        <button
-            class="back-btn"
-            onclick="goBack()"
-            aria-label="Go back"
-        >
-            ←
-        </button>
+    <img
+        src="velqora.png.PNG"
+        alt="Velqora"
+        class="logo"
+    >
 
-        <img
-            src="velqora.png.PNG"
-            alt="Velqora"
-            class="logo"
-        >
+    <div>
+        <div class="brand">Velqora</div>
 
-        <div>
+        <div class="brand-subtitle">
+            Secure money transfers
+        </div>
+    </div>
 
-            <div class="brand">
-                Velqora
-            </div>
+</header>
 
-            <div class="brand-subtitle">
-                Secure money transfers
-            </div>
+<main class="container">
 
+    <section class="page-heading">
+
+        <div class="eyebrow">
+            Wallet service
         </div>
 
-    </header>
+        <h1 class="page-title">
+            Transfers
+        </h1>
 
-    <main class="container">
+        <p class="subtitle">
+            Send money securely from your Velqora wallet.
+        </p>
 
-        <!-- PAGE HEADING -->
+    </section>
 
-        <section class="page-heading">
+    <section class="wallet-card">
 
-            <div class="eyebrow">
-                Wallet service
-            </div>
+        <div class="wallet-content">
 
-            <h1 class="page-title">
-                Transfers
-            </h1>
+            <div class="wallet-top">
 
-            <p class="subtitle">
-                Send money securely from your Velqora wallet.
-            </p>
-
-        </section>
-
-        <!-- WALLET -->
-
-        <section class="wallet-card">
-
-            <div class="wallet-content">
-
-                <div class="wallet-top">
-
-                    <div class="wallet-label">
-                        Available Wallet Balance
-                    </div>
-
-                    <div class="wallet-badge">
-                        ● Ready
-                    </div>
-
+                <div class="wallet-label">
+                    Available Wallet Balance
                 </div>
 
-                <div
-                    class="wallet-balance"
-                    id="walletBalance"
-                >
-                    ₦0.00
-                </div>
-
-                <div class="wallet-caption">
-                    Your available balance for transfers.
+                <div class="wallet-badge">
+                    ● Ready
                 </div>
 
             </div>
-
-        </section>
-
-        <!-- TABS -->
-
-        <div class="transfer-tabs">
-
-            <button
-                class="tab-button active"
-                id="velqoraTab"
-                onclick="showVelqoraTransfer()"
-            >
-                💸 Velqora
-            </button>
-
-            <button
-                class="tab-button"
-                id="bankTab"
-                onclick="showBankTransfer()"
-            >
-                🏦 Bank Transfer
-            </button>
-
-        </div>
-
-        <!-- =========================
-             VELQORA TRANSFER
-        ========================== -->
-
-        <section
-            class="card"
-            id="velqoraCard"
-        >
-
-            <div id="transferForm">
-
-                <div class="card-header">
-
-                    <div class="service-icon">
-                        💸
-                    </div>
-
-                    <div>
-
-                        <h2>
-                            Send money
-                        </h2>
-
-                        <p>
-                            Transfer money to another Velqora user.
-                        </p>
-
-                    </div>
-
-                </div>
-
-                <div class="field">
-
-                    <label for="accountNumber">
-                        Recipient Account Number
-                    </label>
-
-                    <input
-                        type="text"
-                        id="accountNumber"
-                        class="account-input"
-                        inputmode="numeric"
-                        maxlength="10"
-                        placeholder="Enter 10-digit account number"
-                        autocomplete="off"
-                    >
-
-                </div>
-
-                <button
-                    type="button"
-                    class="find-button"
-                    id="findButton"
-                    onclick="findRecipient()"
-                >
-                    Find Account
-                </button>
-
-                <!-- RECIPIENT -->
-
-                <div
-                    class="recipient-card"
-                    id="recipientCard"
-                >
-
-                    <div class="recipient-top">
-
-                        <div
-                            class="recipient-avatar"
-                            id="recipientAvatar"
-                        >
-                            V
-                        </div>
-
-                        <div>
-
-                            <div class="recipient-label">
-                                VERIFIED RECIPIENT
-                            </div>
-
-                            <div
-                                class="recipient-name"
-                                id="recipientName"
-                            >
-                                -
-                            </div>
-
-                            <div
-                                class="recipient-number"
-                                id="recipientNumber"
-                            >
-                                -
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <!-- AMOUNT -->
-
-                <div
-                    class="amount-section"
-                    id="amountSection"
-                >
-
-                    <div class="field">
-
-                        <label for="amount">
-                            Amount to Send
-                        </label>
-
-                        <input
-                            type="number"
-                            id="amount"
-                            class="amount-input"
-                            min="1"
-                            step="1"
-                            placeholder="₦0"
-                            oninput="updateSummary()"
-                        >
-
-                    </div>
-
-                    <div class="summary">
-
-                        <div class="summary-row">
-
-                            <span>
-                                Send amount
-                            </span>
-
-                            <span id="summaryAmount">
-                                ₦0.00
-                            </span>
-
-                        </div>
-
-                        <div class="summary-row">
-
-                            <span>
-                                Transfer fee
-                            </span>
-
-                            <span>
-                                ₦0.00
-                            </span>
-
-                        </div>
-
-                        <div class="summary-row total">
-
-                            <span>
-                                Total
-                            </span>
-
-                            <span id="summaryTotal">
-                                ₦0.00
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                    <button
-                        type="button"
-                        class="send-button"
-                        id="sendButton"
-                        onclick="sendMoney()"
-                    >
-                        Send Money
-                    </button>
-
-                </div>
-
-                <div id="message"></div>
-
-                <div class="note">
-                    🔒 Velqora-to-Velqora transfers are processed
-                    securely through your wallet.
-                </div>
-
-            </div>
-
-            <!-- SUCCESS -->
 
             <div
-                class="success-box"
-                id="successBox"
+                class="wallet-balance"
+                id="walletBalance"
             >
-
-                <div class="success-icon">
-                    ✓
-                </div>
-
-                <div class="success-title">
-                    Money Sent
-                </div>
-
-                <div
-                    class="success-text"
-                    id="successText"
-                >
-                    Your transfer was completed successfully.
-                </div>
-
-                <button
-                    type="button"
-                    class="new-transfer-button"
-                    onclick="newTransfer()"
-                >
-                    Send Another Transfer
-                </button>
-
+                ₦0.00
             </div>
 
-        </section>
+            <div class="wallet-caption">
+                Your available balance for transfers.
+            </div>
 
-        <!-- =========================
-             BANK TRANSFER
-        ========================== -->
+        </div>
 
-        <section
-            class="card hidden"
-            id="bankCard"
+    </section>
+
+    <div class="transfer-tabs">
+
+        <button
+            class="tab-button active"
+            id="velqoraTab"
+            onclick="showVelqoraTransfer()"
         >
+            💸 Velqora
+        </button>
+
+        <button
+            class="tab-button"
+            id="bankTab"
+            onclick="showBankTransfer()"
+        >
+            🏦 Bank Transfer
+        </button>
+
+    </div>
+
+    <section
+        class="card"
+        id="velqoraCard"
+    >
+
+        <div id="transferForm">
 
             <div class="card-header">
 
                 <div class="service-icon">
-                    🏦
+                    💸
                 </div>
 
                 <div>
 
                     <h2>
-                        Bank transfer
+                        Send money
                     </h2>
 
                     <p>
-                        Transfer from Velqora to a Nigerian bank.
+                        Transfer money to another Velqora user.
                     </p>
 
                 </div>
 
             </div>
 
-            <div class="bank-info">
-
-                🏦 Bank transfers are being prepared for secure
-                provider integration. Account-name verification
-                and live bank processing will be connected through
-                the secure backend stage.
-
-            </div>
-
             <div class="field">
 
-                <label for="bankName">
-                    Select Bank
-                </label>
-
-                <select id="bankName">
-
-                    <option value="">
-                        Choose a bank
-                    </option>
-
-                    <option value="opay">
-                        OPay
-                    </option>
-
-                    <option value="palmpay">
-                        PalmPay
-                    </option>
-
-                    <option value="kuda">
-                        Kuda Bank
-                    </option>
-
-                    <option value="moniepoint">
-                        Moniepoint
-                    </option>
-
-                    <option value="access">
-                        Access Bank
-                    </option>
-
-                    <option value="ecobank">
-                        Ecobank
-                    </option>
-
-                    <option value="fcmb">
-                        FCMB
-                    </option>
-
-                    <option value="fidelity">
-                        Fidelity Bank
-                    </option>
-
-                    <option value="firstbank">
-                        First Bank
-                    </option>
-
-                    <option value="globus">
-                        Globus Bank
-                    </option>
-
-                    <option value="gtbank">
-                        GTBank
-                    </option>
-
-                    <option value="keystone">
-                        Keystone Bank
-                    </option>
-
-                    <option value="polaris">
-                        Polaris Bank
-                    </option>
-
-                    <option value="stanbic">
-                        Stanbic IBTC
-                    </option>
-
-                    <option value="standardchartered">
-                        Standard Chartered
-                    </option>
-
-                    <option value="sterling">
-                        Sterling Bank
-                    </option>
-
-                    <option value="uba">
-                        UBA
-                    </option>
-
-                    <option value="union">
-                        Union Bank
-                    </option>
-
-                    <option value="unity">
-                        Unity Bank
-                    </option>
-
-                    <option value="wema">
-                        Wema Bank
-                    </option>
-
-                    <option value="zenith">
-                        Zenith Bank
-                    </option>
-
-                    <option value="providus">
-                        Providus Bank
-                    </option>
-
-                    <option value="titan">
-                        Titan Trust Bank
-                    </option>
-
-                    <option value="premiumtrust">
-                        PremiumTrust Bank
-                    </option>
-
-                    <option value="jaiz">
-                        Jaiz Bank
-                    </option>
-
-                </select>
-
-            </div>
-
-            <div class="field">
-
-                <label for="bankAccountNumber">
-                    Account Number
+                <label for="accountNumber">
+                    Recipient Account Number
                 </label>
 
                 <input
                     type="text"
-                    id="bankAccountNumber"
+                    id="accountNumber"
+                    class="account-input"
                     inputmode="numeric"
                     maxlength="10"
                     placeholder="Enter 10-digit account number"
-                    oninput="checkBankForm()"
+                    autocomplete="off"
                 >
 
             </div>
@@ -1615,49 +950,71 @@
             <button
                 type="button"
                 class="find-button"
-                id="verifyBankButton"
-                onclick="verifyBankAccount()"
+                id="findButton"
+                onclick="findRecipient()"
             >
-                Verify Account
+                Find Account
             </button>
 
             <div
-                class="bank-preview"
-                id="bankPreview"
+                class="recipient-card"
+                id="recipientCard"
             >
 
-                <div class="bank-preview-title">
-                    ACCOUNT NAME
-                </div>
+                <div class="recipient-top">
 
-                <div
-                    class="bank-preview-name"
-                    id="bankAccountName"
-                >
-                    -
+                    <div
+                        class="recipient-avatar"
+                        id="recipientAvatar"
+                    >
+                        V
+                    </div>
+
+                    <div>
+
+                        <div class="recipient-label">
+                            VERIFIED RECIPIENT
+                        </div>
+
+                        <div
+                            class="recipient-name"
+                            id="recipientName"
+                        >
+                            -
+                        </div>
+
+                        <div
+                            class="recipient-number"
+                            id="recipientNumber"
+                        >
+                            -
+                        </div>
+
+                    </div>
+
                 </div>
 
             </div>
 
             <div
                 class="amount-section"
-                id="bankAmountSection"
+                id="amountSection"
             >
 
                 <div class="field">
 
-                    <label for="bankAmount">
+                    <label for="amount">
                         Amount to Send
                     </label>
 
                     <input
                         type="number"
-                        id="bankAmount"
+                        id="amount"
                         class="amount-input"
                         min="1"
                         step="1"
                         placeholder="₦0"
-                        oninput="updateBankSummary()"
+                        oninput="updateSummary()"
                     >
 
                 </div>
@@ -1666,11 +1023,9 @@
 
                     <div class="summary-row">
 
-                        <span>
-                            Send amount
-                        </span>
+                        <span>Send amount</span>
 
-                        <span id="bankSummaryAmount">
+                        <span id="summaryAmount">
                             ₦0.00
                         </span>
 
@@ -1678,23 +1033,17 @@
 
                     <div class="summary-row">
 
-                        <span>
-                            Transfer fee
-                        </span>
+                        <span>Transfer fee</span>
 
-                        <span id="bankFee">
-                            To be confirmed
-                        </span>
+                        <span>₦0.00</span>
 
                     </div>
 
                     <div class="summary-row total">
 
-                        <span>
-                            Total
-                        </span>
+                        <span>Total</span>
 
-                        <span id="bankSummaryTotal">
+                        <span id="summaryTotal">
                             ₦0.00
                         </span>
 
@@ -1705,768 +1054,1184 @@
                 <button
                     type="button"
                     class="send-button"
-                    onclick="startBankTransfer()"
+                    id="sendButton"
+                    onclick="sendMoney()"
                 >
-                    Continue
+                    Send Money
                 </button>
 
             </div>
 
-            <div class="bank-note">
+            <div id="message"></div>
 
-                🔐 Live bank verification and bank transfers
-                are not connected yet. This section will be
-                connected to a secure provider before real bank
-                transfers are enabled.
-
+            <div class="note">
+                🔒 Velqora-to-Velqora transfers are processed
+                securely through your wallet.
             </div>
-
-        </section>
-
-    </main>
-
-    <!-- BOTTOM NAV -->
-
-    <nav class="bottom-nav">
-
-        <div class="nav-inner">
-
-            <a
-                href="index.html"
-                class="nav-item"
-            >
-                <span class="nav-icon">
-                    ⌂
-                </span>
-                Home
-            </a>
-
-            <a
-                href="transactions.html"
-                class="nav-item"
-            >
-                <span class="nav-icon">
-                    ↕
-                </span>
-                Activity
-            </a>
-
-            <a
-                href="profile.html"
-                class="nav-item"
-            >
-                <span class="nav-icon">
-                    ◎
-                </span>
-                Profile
-            </a>
 
         </div>
 
-    </nav>
+        <div
+            class="success-box"
+            id="successBox"
+        >
 
-    <script src="config.js"></script>
+            <div class="success-icon">
+                ✓
+            </div>
 
-    <script>
+            <div class="success-title">
+                Money Sent
+            </div>
 
-        const supabaseClient =
-            window.supabase.createClient(
-                SUPABASE_URL,
-                SUPABASE_KEY
+            <div
+                class="success-text"
+                id="successText"
+            >
+                Your transfer was completed successfully.
+            </div>
+
+            <button
+                type="button"
+                class="new-transfer-button"
+                onclick="newTransfer()"
+            >
+                Send Another Transfer
+            </button>
+
+        </div>
+
+    </section>
+
+    <section
+        class="card hidden"
+        id="bankCard"
+    >
+
+        <div class="card-header">
+
+            <div class="service-icon">
+                🏦
+            </div>
+
+            <div>
+
+                <h2>
+                    Bank transfer
+                </h2>
+
+                <p>
+                    Transfer from Velqora to a Nigerian bank.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="bank-info">
+            🏦 Select a Nigerian bank and enter the account
+            number. Velqora will securely verify the account
+            name before allowing you to continue.
+        </div>
+
+        <div class="field">
+
+            <label for="bankName">
+                Select Bank
+            </label>
+
+            <select id="bankName">
+
+                <option value="">
+                    Choose a bank
+                </option>
+
+                <option value="100004">
+                    OPay
+                </option>
+
+                <option value="100033">
+                    PalmPay
+                </option>
+
+                <option value="090267">
+                    Kuda Bank
+                </option>
+
+                <option value="090405">
+                    Moniepoint
+                </option>
+
+                <option value="044">
+                    Access Bank
+                </option>
+
+                <option value="050">
+                    Ecobank
+                </option>
+
+                <option value="214">
+                    FCMB
+                </option>
+
+                <option value="070">
+                    Fidelity Bank
+                </option>
+
+                <option value="011">
+                    First Bank
+                </option>
+
+                <option value="000027">
+                    Globus Bank
+                </option>
+
+                <option value="058">
+                    GTBank
+                </option>
+
+                <option value="082">
+                    Keystone Bank
+                </option>
+
+                <option value="076">
+                    Polaris Bank
+                </option>
+
+                <option value="221">
+                    Stanbic IBTC
+                </option>
+
+                <option value="068">
+                    Standard Chartered
+                </option>
+
+                <option value="232">
+                    Sterling Bank
+                </option>
+
+                <option value="033">
+                    UBA
+                </option>
+
+                <option value="032">
+                    Union Bank
+                </option>
+
+                <option value="215">
+                    Unity Bank
+                </option>
+
+                <option value="035">
+                    Wema Bank
+                </option>
+
+                <option value="057">
+                    Zenith Bank
+                </option>
+
+                <option value="101">
+                    Providus Bank
+                </option>
+
+                <option value="000025">
+                    Titan Trust Bank
+                </option>
+
+                <option value="000031">
+                    PremiumTrust Bank
+                </option>
+
+                <option value="301">
+                    Jaiz Bank
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="field">
+
+            <label for="bankAccountNumber">
+                Account Number
+            </label>
+
+            <input
+                type="text"
+                id="bankAccountNumber"
+                class="account-input"
+                inputmode="numeric"
+                maxlength="10"
+                placeholder="Enter 10-digit account number"
+                oninput="checkBankForm()"
+            >
+
+        </div>
+
+        <button
+            type="button"
+            class="find-button"
+            id="verifyBankButton"
+            onclick="verifyBankAccount()"
+        >
+            Verify Account
+        </button>
+
+        <div
+            class="bank-preview"
+            id="bankPreview"
+        >
+
+            <div class="bank-preview-title">
+                ACCOUNT NAME
+            </div>
+
+            <div
+                class="bank-preview-name"
+                id="bankAccountName"
+            >
+                -
+            </div>
+
+        </div>
+
+        <div
+            class="amount-section"
+            id="bankAmountSection"
+        >
+
+            <div class="field">
+
+                <label for="bankAmount">
+                    Amount to Send
+                </label>
+
+                <input
+                    type="number"
+                    id="bankAmount"
+                    class="amount-input"
+                    min="1"
+                    step="1"
+                    placeholder="₦0"
+                    oninput="updateBankSummary()"
+                >
+
+            </div>
+
+            <div class="summary">
+
+                <div class="summary-row">
+
+                    <span>
+                        Send amount
+                    </span>
+
+                    <span id="bankSummaryAmount">
+                        ₦0.00
+                    </span>
+
+                </div>
+
+                <div class="summary-row">
+
+                    <span>
+                        Transfer fee
+                    </span>
+
+                    <span id="bankFee">
+                        To be confirmed
+                    </span>
+
+                </div>
+
+                <div class="summary-row total">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <span id="bankSummaryTotal">
+                        ₦0.00
+                    </span>
+
+                </div>
+
+            </div>
+
+            <button
+                type="button"
+                class="send-button"
+                onclick="startBankTransfer()"
+            >
+                Continue
+            </button>
+
+        </div>
+
+        <div class="bank-note">
+            🔐 Bank account verification is connected through
+            the secure Supabase backend. Actual bank-money
+            transfer processing is still disabled until the
+            payout backend is connected and tested.
+        </div>
+
+    </section>
+
+</main>
+
+<nav class="bottom-nav">
+
+    <div class="nav-inner">
+
+        <a
+            href="index.html"
+            class="nav-item"
+        >
+            <span class="nav-icon">⌂</span>
+            Home
+        </a>
+
+        <a
+            href="transactions.html"
+            class="nav-item"
+        >
+            <span class="nav-icon">↕</span>
+            Activity
+        </a>
+
+        <a
+            href="profile.html"
+            class="nav-item"
+        >
+            <span class="nav-icon">◎</span>
+            Profile
+        </a>
+
+    </div>
+
+</nav>
+
+<script src="config.js"></script>
+
+<script>
+
+    const supabaseClient =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_KEY
+        );
+
+    let recipient = null;
+
+    function formatNaira(amount) {
+
+        return "₦" +
+            Number(amount || 0).toLocaleString(
+                "en-NG",
+                {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }
+            );
+    }
+
+    async function checkLogin() {
+
+        const {
+            data: {
+                session
+            }
+        } =
+            await supabaseClient.auth.getSession();
+
+        if (!session) {
+
+            window.location.href =
+                "login.html";
+
+            return null;
+        }
+
+        return session;
+    }
+
+    async function loadWallet() {
+
+        const session =
+            await checkLogin();
+
+        if (!session) {
+            return;
+        }
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .from("wallets")
+                .select("balance")
+                .eq(
+                    "user_id",
+                    session.user.id
+                )
+                .single();
+
+        if (error) {
+
+            console.error(
+                "Wallet error:",
+                error
             );
 
-        let recipient = null;
+            document.getElementById(
+                "walletBalance"
+            ).textContent =
+                "₦0.00";
 
-        function formatNaira(amount) {
-
-            return "₦" +
-                Number(amount || 0).toLocaleString(
-                    "en-NG",
-                    {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2
-                    }
-                );
+            return;
         }
 
-        async function checkLogin() {
+        document.getElementById(
+            "walletBalance"
+        ).textContent =
+            formatNaira(data.balance);
+    }
 
-            const {
-                data: {
-                    session
-                }
-            } =
-                await supabaseClient.auth.getSession();
+    function showMessage(text, type) {
 
-            if (!session) {
+        const message =
+            document.getElementById("message");
 
-                window.location.href =
-                    "login.html";
+        message.className = type;
+        message.textContent = text;
+        message.style.display = "block";
+    }
 
-                return null;
-            }
+    function hideMessage() {
 
-            return session;
+        const message =
+            document.getElementById("message");
+
+        message.style.display = "none";
+        message.textContent = "";
+        message.className = "";
+    }
+
+    function clearRecipient() {
+
+        recipient = null;
+
+        document.getElementById(
+            "recipientCard"
+        ).style.display = "none";
+
+        document.getElementById(
+            "amountSection"
+        ).style.display = "none";
+
+        hideMessage();
+    }
+
+    function showVelqoraTransfer() {
+
+        document.getElementById(
+            "velqoraCard"
+        ).classList.remove("hidden");
+
+        document.getElementById(
+            "bankCard"
+        ).classList.add("hidden");
+
+        document.getElementById(
+            "velqoraTab"
+        ).classList.add("active");
+
+        document.getElementById(
+            "bankTab"
+        ).classList.remove("active");
+
+        loadWallet();
+    }
+
+    function showBankTransfer() {
+
+        document.getElementById(
+            "velqoraCard"
+        ).classList.add("hidden");
+
+        document.getElementById(
+            "bankCard"
+        ).classList.remove("hidden");
+
+        document.getElementById(
+            "velqoraTab"
+        ).classList.remove("active");
+
+        document.getElementById(
+            "bankTab"
+        ).classList.add("active");
+
+        loadWallet();
+    }
+
+    async function findRecipient() {
+
+        const input =
+            document.getElementById(
+                "accountNumber"
+            );
+
+        const button =
+            document.getElementById(
+                "findButton"
+            );
+
+        const accountNumber =
+            input.value.trim();
+
+        clearRecipient();
+
+        if (
+            !/^[0-9]{10}$/.test(
+                accountNumber
+            )
+        ) {
+
+            showMessage(
+                "Enter a valid 10-digit Velqora account number.",
+                "error"
+            );
+
+            return;
         }
 
-        async function loadWallet() {
+        const session =
+            await checkLogin();
 
-            const session =
-                await checkLogin();
+        if (!session) {
+            return;
+        }
 
-            if (!session) {
-                return;
-            }
+        button.disabled = true;
+
+        button.textContent =
+            "Finding Account...";
+
+        showMessage(
+            "Checking Velqora account...",
+            "loading"
+        );
+
+        try {
 
             const {
                 data,
                 error
             } =
-                await supabaseClient
-                    .from("wallets")
-                    .select("balance")
-                    .eq(
-                        "user_id",
-                        session.user.id
-                    )
-                    .single();
+                await supabaseClient.rpc(
+                    "find_velqora_recipient",
+                    {
+                        p_account_number:
+                            accountNumber
+                    }
+                );
 
             if (error) {
 
-                console.error(
-                    "Wallet error:",
-                    error
+                throw new Error(
+                    error.message ||
+                    "Unable to find this account."
                 );
-
-                document.getElementById(
-                    "walletBalance"
-                ).textContent =
-                    "₦0.00";
-
-                return;
             }
 
+            if (
+                !data ||
+                !data.success
+            ) {
+
+                throw new Error(
+                    data?.error ||
+                    "Velqora account number not found."
+                );
+            }
+
+            recipient = {
+
+                accountNumber:
+                    data.account_number,
+
+                accountName:
+                    data.account_name
+
+            };
+
             document.getElementById(
-                "walletBalance"
+                "recipientName"
             ).textContent =
-                formatNaira(data.balance);
-        }
+                data.account_name;
 
-        function showMessage(text, type) {
+            document.getElementById(
+                "recipientNumber"
+            ).textContent =
+                "Account • " +
+                data.account_number;
 
-            const message =
-                document.getElementById(
-                    "message"
-                );
-
-            message.className = type;
-            message.textContent = text;
-            message.style.display = "block";
-        }
-
-        function hideMessage() {
-
-            const message =
-                document.getElementById(
-                    "message"
-                );
-
-            message.style.display = "none";
-            message.textContent = "";
-            message.className = "";
-        }
-
-        function clearRecipient() {
-
-            recipient = null;
+            document.getElementById(
+                "recipientAvatar"
+            ).textContent =
+                data.account_name
+                    .charAt(0)
+                    .toUpperCase();
 
             document.getElementById(
                 "recipientCard"
             ).style.display =
-                "none";
+                "block";
 
             document.getElementById(
                 "amountSection"
             ).style.display =
-                "none";
+                "block";
 
-            hideMessage();
-        }
+            showMessage(
+                "Account found successfully.",
+                "success"
+            );
 
-        function showVelqoraTransfer() {
+        } catch (error) {
 
-            document.getElementById(
-                "velqoraCard"
-            ).classList.remove("hidden");
+            console.error(error);
 
-            document.getElementById(
-                "bankCard"
-            ).classList.add("hidden");
+            showMessage(
+                error.message ||
+                "Unable to find this account.",
+                "error"
+            );
 
-            document.getElementById(
-                "velqoraTab"
-            ).classList.add("active");
+        } finally {
 
-            document.getElementById(
-                "bankTab"
-            ).classList.remove("active");
-
-            loadWallet();
-        }
-
-        function showBankTransfer() {
-
-            document.getElementById(
-                "velqoraCard"
-            ).classList.add("hidden");
-
-            document.getElementById(
-                "bankCard"
-            ).classList.remove("hidden");
-
-            document.getElementById(
-                "velqoraTab"
-            ).classList.remove("active");
-
-            document.getElementById(
-                "bankTab"
-            ).classList.add("active");
-
-            loadWallet();
-        }
-
-        async function findRecipient() {
-
-            const input =
-                document.getElementById(
-                    "accountNumber"
-                );
-
-            const button =
-                document.getElementById(
-                    "findButton"
-                );
-
-            const accountNumber =
-                input.value.trim();
-
-            clearRecipient();
-
-            if (
-                !/^[0-9]{10}$/.test(
-                    accountNumber
-                )
-            ) {
-
-                showMessage(
-                    "Enter a valid 10-digit Velqora account number.",
-                    "error"
-                );
-
-                return;
-            }
-
-            const session =
-                await checkLogin();
-
-            if (!session) {
-                return;
-            }
-
-            button.disabled = true;
+            button.disabled = false;
 
             button.textContent =
-                "Finding Account...";
+                "Find Account";
+        }
+    }
 
-            showMessage(
-                "Checking Velqora account...",
-                "loading"
+    function updateSummary() {
+
+        const amount =
+            Number(
+                document.getElementById(
+                    "amount"
+                ).value || 0
             );
 
-            try {
+        document.getElementById(
+            "summaryAmount"
+        ).textContent =
+            formatNaira(amount);
 
-                const {
-                    data,
-                    error
-                } =
-                    await supabaseClient.rpc(
-                        "find_velqora_recipient",
-                        {
-                            p_account_number:
-                                accountNumber
-                        }
-                    );
+        document.getElementById(
+            "summaryTotal"
+        ).textContent =
+            formatNaira(amount);
+    }
 
-                if (error) {
+    async function sendMoney() {
 
-                    throw new Error(
-                        error.message ||
-                        "Unable to find this account."
-                    );
-                }
+        if (!recipient) {
 
-                if (
-                    !data ||
-                    !data.success
-                ) {
+            showMessage(
+                "Please find the recipient account first.",
+                "error"
+            );
 
-                    throw new Error(
-                        data?.error ||
-                        "Velqora account number not found."
-                    );
-                }
+            return;
+        }
 
-                recipient = {
-
-                    accountNumber:
-                        data.account_number,
-
-                    accountName:
-                        data.account_name
-
-                };
-
+        const amount =
+            Number(
                 document.getElementById(
-                    "recipientName"
-                ).textContent =
-                    data.account_name;
+                    "amount"
+                ).value
+            );
 
-                document.getElementById(
-                    "recipientNumber"
-                ).textContent =
-                    "Account • " +
-                    data.account_number;
+        if (
+            !amount ||
+            amount <= 0
+        ) {
 
-                document.getElementById(
-                    "recipientAvatar"
-                ).textContent =
-                    data.account_name
-                        .charAt(0)
-                        .toUpperCase();
+            showMessage(
+                "Enter a valid amount to send.",
+                "error"
+            );
 
-                document.getElementById(
-                    "recipientCard"
-                ).style.display =
-                    "block";
+            return;
+        }
 
-                document.getElementById(
-                    "amountSection"
-                ).style.display =
-                    "block";
+        const sendButton =
+            document.getElementById(
+                "sendButton"
+            );
 
-                showMessage(
-                    "Account found successfully.",
-                    "success"
+        const session =
+            await checkLogin();
+
+        if (!session) {
+            return;
+        }
+
+        sendButton.disabled = true;
+
+        sendButton.textContent =
+            "Sending...";
+
+        showMessage(
+            "Processing your transfer...",
+            "loading"
+        );
+
+        try {
+
+            const {
+                data,
+                error
+            } =
+                await supabaseClient.rpc(
+                    "send_velqora_money",
+                    {
+                        p_recipient_account_number:
+                            recipient.accountNumber,
+
+                        p_amount:
+                            amount
+                    }
                 );
 
-            } catch (error) {
+            if (error) {
 
-                console.error(
-                    error
-                );
-
-                showMessage(
+                throw new Error(
                     error.message ||
-                    "Unable to find this account.",
-                    "error"
+                    "Unable to complete transfer."
                 );
-
-            } finally {
-
-                button.disabled = false;
-
-                button.textContent =
-                    "Find Account";
             }
-        }
-
-        function updateSummary() {
-
-            const amount =
-                Number(
-                    document.getElementById(
-                        "amount"
-                    ).value || 0
-                );
-
-            document.getElementById(
-                "summaryAmount"
-            ).textContent =
-                formatNaira(amount);
-
-            document.getElementById(
-                "summaryTotal"
-            ).textContent =
-                formatNaira(amount);
-        }
-
-        async function sendMoney() {
-
-            if (!recipient) {
-
-                showMessage(
-                    "Please find the recipient account first.",
-                    "error"
-                );
-
-                return;
-            }
-
-            const amount =
-                Number(
-                    document.getElementById(
-                        "amount"
-                    ).value
-                );
 
             if (
-                !amount ||
-                amount <= 0
+                !data ||
+                !data.success
             ) {
 
-                showMessage(
-                    "Enter a valid amount to send.",
-                    "error"
+                throw new Error(
+                    data?.error ||
+                    "Transfer could not be completed."
                 );
-
-                return;
             }
 
-            const sendButton =
-                document.getElementById(
-                    "sendButton"
-                );
-
-            const session =
-                await checkLogin();
-
-            if (!session) {
-                return;
-            }
-
-            sendButton.disabled = true;
-
-            sendButton.textContent =
-                "Sending...";
-
-            showMessage(
-                "Processing your transfer...",
-                "loading"
-            );
-
-            try {
-
-                const {
-                    data,
-                    error
-                } =
-                    await supabaseClient.rpc(
-                        "send_velqora_money",
-                        {
-                            p_recipient_account_number:
-                                recipient.accountNumber,
-
-                            p_amount:
-                                amount
-                        }
-                    );
-
-                if (error) {
-
-                    throw new Error(
-                        error.message ||
-                        "Unable to complete transfer."
-                    );
-                }
-
-                if (
-                    !data ||
-                    !data.success
-                ) {
-
-                    throw new Error(
-                        data?.error ||
-                        "Transfer could not be completed."
-                    );
-                }
-
-                document.getElementById(
-                    "transferForm"
-                ).style.display =
-                    "none";
-
-                document.getElementById(
-                    "successBox"
-                ).style.display =
-                    "block";
-
-                document.getElementById(
-                    "successText"
-                ).textContent =
-                    formatNaira(amount) +
-                    " was sent successfully to " +
-                    data.recipient_name +
-                    ".";
-
-                await loadWallet();
-
-            } catch (error) {
-
-                console.error(
-                    error
-                );
-
-                showMessage(
-                    error.message ||
-                    "Unable to complete transfer.",
-                    "error"
-                );
-
-                sendButton.disabled = false;
-
-                sendButton.textContent =
-                    "Send Money";
-            }
-        }
-
-        function newTransfer() {
-
-            recipient = null;
-
             document.getElementById(
-                "accountNumber"
-            ).value = "";
-
-            document.getElementById(
-                "amount"
-            ).value = "";
-
-            document.getElementById(
-                "recipientCard"
-            ).style.display =
-                "none";
-
-            document.getElementById(
-                "amountSection"
+                "transferForm"
             ).style.display =
                 "none";
 
             document.getElementById(
                 "successBox"
             ).style.display =
-                "none";
-
-            document.getElementById(
-                "transferForm"
-            ).style.display =
                 "block";
 
-            const sendButton =
-                document.getElementById(
-                    "sendButton"
-                );
+            document.getElementById(
+                "successText"
+            ).textContent =
+                formatNaira(amount) +
+                " was sent successfully to " +
+                data.recipient_name +
+                ".";
+
+            await loadWallet();
+
+        } catch (error) {
+
+            console.error(error);
+
+            showMessage(
+                error.message ||
+                "Unable to complete transfer.",
+                "error"
+            );
 
             sendButton.disabled = false;
 
             sendButton.textContent =
                 "Send Money";
-
-            hideMessage();
-
-            loadWallet();
         }
+    }
 
-        function checkBankForm() {
+    function newTransfer() {
 
-            const input =
-                document.getElementById(
-                    "bankAccountNumber"
-                );
+        recipient = null;
 
-            input.value =
-                input.value.replace(
-                    /\D/g,
-                    ""
-                );
+        document.getElementById(
+            "accountNumber"
+        ).value = "";
 
+        document.getElementById(
+            "amount"
+        ).value = "";
+
+        document.getElementById(
+            "recipientCard"
+        ).style.display =
+            "none";
+
+        document.getElementById(
+            "amountSection"
+        ).style.display =
+            "none";
+
+        document.getElementById(
+            "successBox"
+        ).style.display =
+            "none";
+
+        document.getElementById(
+            "transferForm"
+        ).style.display =
+            "block";
+
+        const sendButton =
+            document.getElementById(
+                "sendButton"
+            );
+
+        sendButton.disabled = false;
+
+        sendButton.textContent =
+            "Send Money";
+
+        hideMessage();
+
+        loadWallet();
+    }
+
+    function checkBankForm() {
+
+        const input =
+            document.getElementById(
+                "bankAccountNumber"
+            );
+
+        input.value =
+            input.value.replace(
+                /[^0-9]/g,
+                ""
+            );
+
+        document.getElementById(
+            "bankPreview"
+        ).style.display =
+            "none";
+
+        document.getElementById(
+            "bankAmountSection"
+        ).style.display =
+            "none";
+
+        window.verifiedBankAccount =
+            null;
+    }
+
+    async function verifyBankAccount() {
+
+        const bank =
+            document.getElementById(
+                "bankName"
+            ).value;
+
+        const accountNumber =
+            document.getElementById(
+                "bankAccountNumber"
+            ).value.trim();
+
+        const button =
+            document.getElementById(
+                "verifyBankButton"
+            );
+
+        const preview =
             document.getElementById(
                 "bankPreview"
-            ).style.display =
-                "none";
+            );
 
+        const accountName =
+            document.getElementById(
+                "bankAccountName"
+            );
+
+        const amountSection =
             document.getElementById(
                 "bankAmountSection"
-            ).style.display =
-                "none";
+            );
+
+        if (!bank) {
+
+            alert(
+                "Please select a bank."
+            );
+
+            return;
         }
 
-        async function verifyBankAccount() {
+        if (
+            !/^[0-9]{10}$/.test(
+                accountNumber
+            )
+        ) {
 
-            const bank =
-                document.getElementById(
-                    "bankName"
-                ).value;
+            alert(
+                "Enter a valid 10-digit bank account number."
+            );
 
-            const accountNumber =
-                document.getElementById(
-                    "bankAccountNumber"
-                ).value.trim();
+            return;
+        }
 
-            const button =
-                document.getElementById(
-                    "verifyBankButton"
+        button.disabled = true;
+
+        button.textContent =
+            "Verifying...";
+
+        preview.style.display =
+            "block";
+
+        amountSection.style.display =
+            "none";
+
+        accountName.textContent =
+            "Verifying account...";
+
+        try {
+
+            const {
+                data,
+                error
+            } =
+                await supabaseClient.functions.invoke(
+                    "bank-account-verify",
+                    {
+                        body: {
+                            account_bank: bank,
+                            account_number:
+                                accountNumber
+                        }
+                    }
                 );
 
-            if (!bank) {
+            if (error) {
 
-                alert(
-                    "Please select a bank."
+                throw new Error(
+                    error.message ||
+                    "Unable to verify bank account."
                 );
-
-                return;
             }
 
             if (
-                !/^[0-9]{10}$/.test(
-                    accountNumber
-                )
+                !data ||
+                !data.success
             ) {
 
-                alert(
-                    "Enter a valid 10-digit bank account number."
+                throw new Error(
+                    data?.error ||
+                    "Bank account could not be verified."
                 );
-
-                return;
             }
 
-            button.disabled = true;
+            if (!data.account_name) {
+
+                throw new Error(
+                    "No account name was returned."
+                );
+            }
+
+            accountName.textContent =
+                data.account_name;
+
+            preview.style.display =
+                "block";
+
+            amountSection.style.display =
+                "block";
+
+            window.verifiedBankAccount = {
+
+                bankCode:
+                    bank,
+
+                accountNumber:
+                    data.account_number ||
+                    accountNumber,
+
+                accountName:
+                    data.account_name
+
+            };
 
             button.textContent =
-                "Verifying...";
+                "Account Verified";
 
-            /*
-                IMPORTANT:
+        } catch (error) {
 
-                This is still only the interface stage.
+            console.error(
+                "Bank verification error:",
+                error
+            );
 
-                It does NOT pretend to verify a real bank
-                account and it does NOT move real money.
+            preview.style.display =
+                "none";
 
-                Real bank account resolution will be connected
-                through a secure Supabase Edge Function in the
-                backend stage.
-            */
+            amountSection.style.display =
+                "none";
 
-            setTimeout(function () {
+            accountName.textContent =
+                "-";
 
+            window.verifiedBankAccount =
+                null;
+
+            alert(
+                error.message ||
+                "Unable to verify this bank account."
+            );
+
+            button.textContent =
+                "Verify Account";
+
+        } finally {
+
+            button.disabled = false;
+
+        }
+    }
+
+    function updateBankSummary() {
+
+        const amount =
+            Number(
                 document.getElementById(
-                    "bankAccountName"
-                ).textContent =
-                    "Account verification will be connected next";
+                    "bankAmount"
+                ).value || 0
+            );
+
+        document.getElementById(
+            "bankSummaryAmount"
+        ).textContent =
+            formatNaira(amount);
+
+        document.getElementById(
+            "bankSummaryTotal"
+        ).textContent =
+            formatNaira(amount);
+    }
+
+    function startBankTransfer() {
+
+        const amount =
+            Number(
+                document.getElementById(
+                    "bankAmount"
+                ).value || 0
+            );
+
+        if (!window.verifiedBankAccount) {
+
+            alert(
+                "Please verify the bank account first."
+            );
+
+            return;
+        }
+
+        if (
+            !amount ||
+            amount <= 0
+        ) {
+
+            alert(
+                "Enter a valid amount."
+            );
+
+            return;
+        }
+
+        alert(
+            "Bank account verification is working. Actual bank transfer processing will be connected in the next backend stage."
+        );
+    }
+
+    document
+        .getElementById(
+            "accountNumber"
+        )
+        .addEventListener(
+            "input",
+            function () {
+
+                this.value =
+                    this.value.replace(
+                        /[^0-9]/g,
+                        ""
+                    );
+
+                clearRecipient();
+            }
+        );
+
+    document
+        .getElementById(
+            "bankName"
+        )
+        .addEventListener(
+            "change",
+            function () {
 
                 document.getElementById(
                     "bankPreview"
                 ).style.display =
-                    "block";
+                    "none";
 
                 document.getElementById(
                     "bankAmountSection"
                 ).style.display =
-                    "block";
+                    "none";
 
-                button.disabled = false;
+                document.getElementById(
+                    "bankAccountName"
+                ).textContent =
+                    "-";
 
-                button.textContent =
-                    "Verify Account";
-
-            }, 600);
-        }
-
-        function updateBankSummary() {
-
-            const amount =
-                Number(
-                    document.getElementById(
-                        "bankAmount"
-                    ).value || 0
-                );
-
-            document.getElementById(
-                "bankSummaryAmount"
-            ).textContent =
-                formatNaira(amount);
-
-            document.getElementById(
-                "bankSummaryTotal"
-            ).textContent =
-                formatNaira(amount);
-        }
-
-        function startBankTransfer() {
-
-            const amount =
-                Number(
-                    document.getElementById(
-                        "bankAmount"
-                    ).value || 0
-                );
-
-            if (
-                !amount ||
-                amount <= 0
-            ) {
-
-                alert(
-                    "Enter a valid amount."
-                );
-
-                return;
+                window.verifiedBankAccount =
+                    null;
             }
+        );
 
-            alert(
-                "Bank transfer processing will be connected securely in the next stage."
-            );
-        }
+    function goBack() {
 
-        document
-            .getElementById(
-                "accountNumber"
+        if (
+            document.referrer &&
+            document.referrer.includes(
+                "tct8930-web.github.io"
             )
-            .addEventListener(
-                "input",
-                function () {
+        ) {
 
-                    this.value =
-                        this.value.replace(
-                            /\D/g,
-                            ""
-                        );
+            history.back();
 
-                    clearRecipient();
-                }
-            );
+        } else {
 
-        function goBack() {
-
-            if (
-                document.referrer &&
-                document.referrer.includes(
-                    "tct8930-web.github.io"
-                )
-            ) {
-
-                history.back();
-
-            } else {
-
-                window.location.href =
-                    "index.html";
-            }
+            window.location.href =
+                "index.html";
         }
+    }
 
-        loadWallet();
+    loadWallet();
 
-    </script>
+</script>
 
 </body>
 </html>
