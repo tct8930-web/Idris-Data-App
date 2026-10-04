@@ -599,6 +599,10 @@ function formatDate(dateValue) {
 
     const date = new Date(dateValue);
 
+    if (isNaN(date.getTime())) {
+        return "Date unavailable";
+    }
+
     return date.toLocaleString(
         "en-NG",
         {
@@ -722,9 +726,7 @@ function getIcon(
     }
 
     if (type === "transfer") {
-        return isIncoming
-            ? "↓"
-            : "↗️";
+        return isIncoming ? "↓" : "↗️";
     }
 
     if (type === "funding") {
@@ -763,6 +765,23 @@ function getTitle(
     }
 
     return "Transaction";
+}
+
+
+function maskAccountNumber(accountNumber) {
+
+    const value =
+        String(accountNumber || "");
+
+    if (value.length !== 10) {
+        return value;
+    }
+
+    return (
+        value.substring(0, 3) +
+        "****" +
+        value.substring(7)
+    );
 }
 
 
@@ -830,8 +849,9 @@ function getReference(
             "Bank";
 
         const accountNumber =
-            transaction.account_number ||
-            "";
+            maskAccountNumber(
+                transaction.account_number
+            );
 
         return (
             "To " +
@@ -865,10 +885,58 @@ function getReference(
 }
 
 
+async function getBankTransfers(userId) {
+
+    try {
+
+        const result =
+            await supabaseClient
+                .from("bank_transfers")
+                .select(
+                    "id, created_at, user_id, account_bank, account_number, account_name, amount, currency, tx_ref, status, flutterwave_transfer_id"
+                )
+                .eq(
+                    "user_id",
+                    userId
+                )
+                .order(
+                    "created_at",
+                    {
+                        ascending: false
+                    }
+                );
+
+
+        if (result.error) {
+
+            console.warn(
+                "Bank transfers could not be loaded:",
+                result.error.message
+            );
+
+            return [];
+        }
+
+
+        return result.data || [];
+
+    } catch (error) {
+
+        console.warn(
+            "Bank transfer activity warning:",
+            error
+        );
+
+        return [];
+    }
+}
+
+
 async function loadTransactions() {
 
     const content =
         document.getElementById("content");
+
 
     try {
 
@@ -897,11 +965,21 @@ async function loadTransactions() {
 
 
         /*
-         * WALLET FUNDING
+         * Load the main activity tables.
+         *
+         * Bank transfers are loaded separately below
+         * so a bank_transfers RLS/schema problem
+         * cannot stop the entire Activity page.
          */
 
-        const walletResult =
-            await supabaseClient
+        const [
+            walletResult,
+            airtimeResult,
+            dataResult,
+            transferResult
+        ] = await Promise.all([
+
+            supabaseClient
                 .from("wallet_transactions")
                 .select(
                     "id, created_at, amount, tx_ref, currency, status"
@@ -909,7 +987,40 @@ async function loadTransactions() {
                 .eq(
                     "user_id",
                     user.id
-                );
+                ),
+
+            supabaseClient
+                .from("airtime_transactions")
+                .select(
+                    "id, created_at, phone, network, amount, tx_ref, status, provider_reference"
+                )
+                .eq(
+                    "user_id",
+                    user.id
+                ),
+
+            supabaseClient
+                .from("data_transactions")
+                .select(
+                    "id, created_at, phone, network, plan_name, amount, tx_ref, status, provider_reference"
+                )
+                .eq(
+                    "user_id",
+                    user.id
+                ),
+
+            supabaseClient
+                .from("transfers")
+                .select(
+                    "id, created_at, user_id, recipient_user_id, bank_code, bank_name, account_number, account_name, amount, fee, tx_ref, status, provider_reference"
+                )
+                .or(
+                    "user_id.eq." +
+                    user.id +
+                    ",recipient_user_id.eq." +
+                    user.id
+                )
+        ]);
 
 
         if (walletResult.error) {
@@ -921,22 +1032,6 @@ async function loadTransactions() {
         }
 
 
-        /*
-         * AIRTIME
-         */
-
-        const airtimeResult =
-            await supabaseClient
-                .from("airtime_transactions")
-                .select(
-                    "id, created_at, phone, network, amount, tx_ref, status, provider_reference"
-                )
-                .eq(
-                    "user_id",
-                    user.id
-                );
-
-
         if (airtimeResult.error) {
 
             throw new Error(
@@ -946,22 +1041,6 @@ async function loadTransactions() {
         }
 
 
-        /*
-         * DATA
-         */
-
-        const dataResult =
-            await supabaseClient
-                .from("data_transactions")
-                .select(
-                    "id, created_at, phone, network, plan_name, amount, tx_ref, status, provider_reference"
-                )
-                .eq(
-                    "user_id",
-                    user.id
-                );
-
-
         if (dataResult.error) {
 
             throw new Error(
@@ -969,21 +1048,6 @@ async function loadTransactions() {
                 dataResult.error.message
             );
         }
-
-
-        /*
-         * VELQORA TRANSFERS
-         */
-
-        const transferResult =
-            await supabaseClient
-                .from("transfers")
-                .select(
-                    "id, created_at, user_id, recipient_user_id, bank_code, bank_name, account_number, account_name, amount, fee, tx_ref, status, provider_reference"
-                )
-                .or(
-                    user_id.eq.${user.id},recipient_user_id.eq.${user.id}
-                );
 
 
         if (transferResult.error) {
@@ -998,36 +1062,20 @@ async function loadTransactions() {
         /*
          * BANK TRANSFERS
          *
-         * These are outgoing transfers from
-         * the Velqora wallet to Nigerian banks.
+         * This is intentionally non-blocking.
          */
 
-        const bankTransferResult =
-            await supabaseClient
-                .from("bank_transfers")
-                .select(
-                    "id, created_at, user_id, account_bank, account_number, account_name, amount, currency, tx_ref, status, flutterwave_transfer_id"
-                )
-                .eq(
-                    "user_id",
-                    user.id
-                );
-
-
-        if (bankTransferResult.error) {
-
-            throw new Error(
-                "Bank transfer activity error: " +
-                bankTransferResult.error.message
+        const bankTransfers =
+            await getBankTransfers(
+                user.id
             );
-        }
 
 
         let allTransactions = [];
 
 
         /*
-         * WALLET TRANSACTIONS
+         * WALLET FUNDING
          */
 
         (
@@ -1050,7 +1098,7 @@ async function loadTransactions() {
 
 
         /*
-         * AIRTIME TRANSACTIONS
+         * AIRTIME
          */
 
         (
@@ -1073,7 +1121,7 @@ async function loadTransactions() {
 
 
         /*
-         * DATA TRANSACTIONS
+         * DATA
          */
 
         (
@@ -1100,7 +1148,7 @@ async function loadTransactions() {
 
 
         /*
-         * VELQORA TRANSFERS
+         * VELQORA-TO-VELQORA
          */
 
         (
@@ -1109,7 +1157,9 @@ async function loadTransactions() {
             transaction => {
 
                 const isIncoming =
-                    transaction.recipient_user_id === user.id;
+                    transaction.recipient_user_id ===
+                    user.id;
+
 
                 allTransactions.push({
 
@@ -1129,9 +1179,7 @@ async function loadTransactions() {
          * BANK TRANSFERS
          */
 
-        (
-            bankTransferResult.data || []
-        ).forEach(
+        bankTransfers.forEach(
             transaction => {
 
                 allTransactions.push({
@@ -1140,11 +1188,11 @@ async function loadTransactions() {
 
                     type: "bank_transfer",
 
-                    isIncoming: false,
-
                     status:
                         transaction.status ||
-                        "pending"
+                        "pending",
+
+                    isIncoming: false
 
                 });
 
@@ -1419,7 +1467,10 @@ async function loadTransactions() {
 
                 <br><br>
 
-                ${error.message || error}
+                ${
+                    error.message ||
+                    error
+                }
 
             </div>
 
@@ -1457,7 +1508,7 @@ function goProfile() {
 
 
 /*
- * Start the Activity page.
+ * Start Activity page.
  */
 
 loadTransactions();
