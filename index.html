@@ -36,11 +36,9 @@
             padding: 0;
         }
 
-
         html {
             scroll-behavior: smooth;
         }
-
 
         body {
             font-family:
@@ -58,22 +56,15 @@
             min-height: 100vh;
         }
 
-
         button,
         input {
             font: inherit;
         }
 
-
         button {
             border: none;
             cursor: pointer;
         }
-
-
-        /* =========================
-           COLORS
-        ========================= */
 
         :root {
 
@@ -111,9 +102,7 @@
         #loading {
 
             position: fixed;
-
             inset: 0;
-
             z-index: 9999;
 
             display: flex;
@@ -124,12 +113,9 @@
             background: #ffffff;
         }
 
-
         .loading-box {
-
             text-align: center;
         }
-
 
         .loading-logo {
 
@@ -148,7 +134,6 @@
                 0 10px 30px rgba(12,149,101,.10);
         }
 
-
         .loading-logo img {
 
             width: 100%;
@@ -157,18 +142,15 @@
             object-fit: contain;
         }
 
-
         .loading-brand {
 
             font-size: 13px;
-
             font-weight: 900;
 
             letter-spacing: 3px;
 
             color: var(--green);
         }
-
 
         .loading-text {
 
@@ -178,7 +160,6 @@
 
             font-size: 12px;
         }
-
 
         .spinner {
 
@@ -196,7 +177,6 @@
             animation:
                 spin .8s linear infinite;
         }
-
 
         @keyframes spin {
 
@@ -231,7 +211,6 @@
                 blur(7px);
         }
 
-
         .payment-box {
 
             width: calc(100% - 40px);
@@ -250,7 +229,6 @@
                 0 30px 80px rgba(0,0,0,.20);
         }
 
-
         .payment-spinner {
 
             width: 48px;
@@ -268,7 +246,6 @@
                 spin .8s linear infinite;
         }
 
-
         .payment-box h3 {
 
             color: var(--text);
@@ -277,7 +254,6 @@
 
             margin-bottom: 8px;
         }
-
 
         .payment-box p {
 
@@ -313,7 +289,6 @@
                 );
         }
 
-
         .welcome {
 
             width: 100%;
@@ -335,7 +310,6 @@
                 0 3px 12px rgba(4,56,46,.04);
         }
 
-
         .welcome-logo {
 
             width: 76px;
@@ -355,7 +329,6 @@
                 0 8px 24px rgba(12,149,101,.10);
         }
 
-
         .welcome-logo img {
 
             width: 100%;
@@ -367,7 +340,6 @@
 
             border-radius: 14px;
         }
-
 
         .welcome-brand {
 
@@ -382,7 +354,6 @@
             letter-spacing: 3px;
         }
 
-
         .welcome h1 {
 
             color: #10201b;
@@ -395,7 +366,6 @@
 
             letter-spacing: -1px;
         }
-
 
         .welcome-description {
 
@@ -410,7 +380,6 @@
             line-height: 1.65;
         }
 
-
         .welcome-features {
 
             display: flex;
@@ -423,7 +392,6 @@
 
             text-align: left;
         }
-
 
         .welcome-feature {
 
@@ -441,7 +409,6 @@
 
             border-radius: 15px;
         }
-
 
         .welcome-feature-icon {
 
@@ -462,7 +429,6 @@
             font-size: 17px;
         }
 
-
         .welcome-feature strong {
 
             display: block;
@@ -476,7 +442,6 @@
             font-weight: 850;
         }
 
-
         .welcome-feature span {
 
             display: block;
@@ -488,12 +453,9 @@
             line-height: 1.35;
         }
 
-
         .welcome-actions {
-
             width: 100%;
         }
-
 
         .welcome-actions button {
 
@@ -512,7 +474,6 @@
                 box-shadow .2s ease;
         }
 
-
         .welcome-login {
 
             color: #ffffff;
@@ -528,7 +489,6 @@
                 0 10px 24px rgba(8,127,89,.18);
         }
 
-
         .welcome-login:hover {
 
             transform:
@@ -537,7 +497,6 @@
             box-shadow:
                 0 13px 30px rgba(8,127,89,.25);
         }
-
 
         .welcome-signup {
 
@@ -550,12 +509,9 @@
             border: 1px solid #cfe4da !important;
         }
 
-
         .welcome-signup:hover {
-
             background: #f5faf8;
         }
-
 
         .welcome-security {
 
@@ -573,7 +529,6 @@
 
             font-size: 10px;
         }
-
 
         .welcome-footer {
 
@@ -601,7 +556,6 @@
             padding-bottom: 90px;
         }
 
-
         .dashboard-top {
 
             background:
@@ -625,7 +579,6 @@
                 30px;
         }
 
-
         .topbar {
 
             display: flex;
@@ -639,7 +592,6 @@
             margin: 0 auto;
         }
 
-
         .brand-area {
 
             display: flex;
@@ -648,7 +600,6 @@
 
             gap: 10px;
         }
-
 
         .brand-logo {
 
@@ -665,7 +616,6 @@
                 0 6px 20px rgba(0,0,0,.10);
         }
 
-
         .brand-logo img {
 
             width: 100%;
@@ -673,7 +623,6 @@
 
             object-fit: contain;
         }
-
 
         .brand-name {
 
@@ -684,7 +633,6 @@
             letter-spacing: 1px;
         }
 
-
         .top-actions {
 
             display: flex;
@@ -692,8 +640,9 @@
             gap: 8px;
         }
 
-
         .top-icon {
+
+            position: relative;
 
             width: 40px;
             height: 40px;
@@ -715,6 +664,69 @@
             border-radius: 13px;
 
             font-size: 17px;
+
+            transition:
+                background .18s ease,
+                transform .18s ease;
+        }
+
+        .top-icon:hover {
+
+            background:
+                rgba(255,255,255,.16);
+
+            transform:
+                translateY(-1px);
+        }
+
+
+        /* =========================
+           NOTIFICATION BUTTON
+        ========================= */
+
+        .notification-button {
+            position: relative;
+        }
+
+        .notification-badge {
+
+            position: absolute;
+
+            top: -5px;
+            right: -5px;
+
+            min-width: 19px;
+            height: 19px;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 0 5px;
+
+            color: #ffffff;
+
+            background: #e34848;
+
+            border:
+                2px solid
+                #075d45;
+
+            border-radius: 999px;
+
+            font-size: 9px;
+
+            font-weight: 900;
+
+            line-height: 1;
+
+            box-shadow:
+                0 3px 8px rgba(0,0,0,.18);
+        }
+
+        .notification-badge.show {
+            display: flex;
         }
 
 
@@ -727,7 +739,6 @@
                 0;
         }
 
-
         .greeting-small {
 
             color:
@@ -738,7 +749,6 @@
             margin-bottom: 5px;
         }
 
-
         .greeting h2 {
 
             font-size: 24px;
@@ -747,7 +757,6 @@
 
             font-weight: 800;
         }
-
 
         .greeting p {
 
@@ -807,7 +816,6 @@
                 0 20px 50px rgba(4,56,46,.12);
         }
 
-
         .wallet-card::after {
 
             content: "";
@@ -826,7 +834,6 @@
                 rgba(12,149,101,.06);
         }
 
-
         .wallet-label {
 
             color: var(--muted);
@@ -840,7 +847,6 @@
             letter-spacing: .5px;
         }
 
-
         .balance-row {
 
             display: flex;
@@ -852,7 +858,6 @@
             margin-top: 8px;
         }
 
-
         .balance {
 
             color: var(--green-deep);
@@ -863,7 +868,6 @@
 
             letter-spacing: -1px;
         }
-
 
         .eye-button {
 
@@ -884,7 +888,6 @@
             font-size: 16px;
         }
 
-
         .account-number {
 
             margin-top: 13px;
@@ -894,7 +897,6 @@
             font-size: 11px;
         }
 
-
         .account-number strong {
 
             color: var(--text-soft);
@@ -903,7 +905,6 @@
 
             letter-spacing: 1px;
         }
-
 
         .fund-button {
 
@@ -952,7 +953,6 @@
                 13px;
         }
 
-
         .section-heading h3 {
 
             font-size: 15px;
@@ -961,7 +961,6 @@
 
             color: var(--text);
         }
-
 
         .section-heading button {
 
@@ -988,7 +987,6 @@
 
             gap: 10px;
         }
-
 
         .service-card {
 
@@ -1022,13 +1020,11 @@
                 transform .18s ease;
         }
 
-
         .service-card:hover {
 
             transform:
                 translateY(-2px);
         }
-
 
         .service-icon {
 
@@ -1048,7 +1044,6 @@
 
             font-size: 19px;
         }
-
 
         .service-card span {
 
@@ -1083,14 +1078,12 @@
                 rgba(4,56,46,.035);
         }
 
-
         .empty-activity {
 
             padding: 32px 20px;
 
             text-align: center;
         }
-
 
         .empty-icon {
 
@@ -1113,7 +1106,6 @@
             font-size: 21px;
         }
 
-
         .empty-activity strong {
 
             display: block;
@@ -1125,7 +1117,6 @@
             margin-bottom: 5px;
         }
 
-
         .empty-activity p {
 
             color: var(--muted);
@@ -1134,7 +1125,6 @@
 
             line-height: 1.5;
         }
-
 
         .activity-item {
 
@@ -1151,12 +1141,9 @@
                 #edf2ef;
         }
 
-
         .activity-item:last-child {
-
             border-bottom: none;
         }
-
 
         .activity-icon {
 
@@ -1173,12 +1160,9 @@
             border-radius: 12px;
         }
 
-
         .activity-details {
-
             flex: 1;
         }
-
 
         .activity-details strong {
 
@@ -1191,14 +1175,12 @@
             margin-bottom: 3px;
         }
 
-
         .activity-details span {
 
             color: var(--muted);
 
             font-size: 10px;
         }
-
 
         .activity-amount {
 
@@ -1232,7 +1214,6 @@
                 blur(5px);
         }
 
-
         .fund-sheet {
 
             width: 100%;
@@ -1260,25 +1241,19 @@
                 fundSheetUp .22s ease-out;
         }
 
-
         @keyframes fundSheetUp {
 
             from {
-
                 transform:
                     translateY(100%);
-
             }
 
             to {
-
                 transform:
                     translateY(0);
-
             }
 
         }
-
 
         .sheet-handle {
 
@@ -1295,7 +1270,6 @@
             border-radius: 20px;
         }
 
-
         .fund-title-row {
 
             display: flex;
@@ -1306,7 +1280,6 @@
 
             margin-bottom: 10px;
         }
-
 
         .fund-title-icon {
 
@@ -1330,7 +1303,6 @@
             font-size: 19px;
         }
 
-
         .fund-title-text h3 {
 
             font-size: 19px;
@@ -1339,7 +1311,6 @@
 
             margin: 0;
         }
-
 
         .fund-title-text span {
 
@@ -1352,7 +1323,6 @@
             font-size: 10px;
         }
 
-
         .fund-sheet-description {
 
             color: var(--muted);
@@ -1363,7 +1333,6 @@
 
             margin-bottom: 19px;
         }
-
 
         .quick-label {
 
@@ -1376,7 +1345,6 @@
             margin-bottom: 9px;
         }
 
-
         .quick-amounts {
 
             display: grid;
@@ -1388,7 +1356,6 @@
 
             margin-bottom: 17px;
         }
-
 
         .quick-amount {
 
@@ -1414,13 +1381,11 @@
                 .15s ease;
         }
 
-
         .quick-amount:hover {
 
             border-color:
                 var(--green);
         }
-
 
         .quick-amount.selected {
 
@@ -1441,7 +1406,6 @@
                 rgba(8,127,89,.16);
         }
 
-
         .amount-label {
 
             display: block;
@@ -1455,12 +1419,9 @@
             margin-bottom: 7px;
         }
 
-
         .amount-wrapper {
-
             position: relative;
         }
-
 
         .amount-currency {
 
@@ -1481,7 +1442,6 @@
 
             pointer-events: none;
         }
-
 
         .amount-input {
 
@@ -1512,7 +1472,6 @@
             background: #f9fbfa;
         }
 
-
         .amount-input:focus {
 
             border-color:
@@ -1525,7 +1484,6 @@
                 rgba(12,149,101,.08);
         }
 
-
         .minimum-text {
 
             color: var(--muted-light);
@@ -1534,7 +1492,6 @@
 
             margin-top: 6px;
         }
-
 
         .fund-summary {
 
@@ -1560,14 +1517,12 @@
             border-radius: 13px;
         }
 
-
         .fund-summary span {
 
             color: var(--muted);
 
             font-size: 11px;
         }
-
 
         .fund-summary strong {
 
@@ -1577,7 +1532,6 @@
 
             font-weight: 850;
         }
-
 
         .fund-security {
 
@@ -1608,7 +1562,6 @@
             line-height: 1.5;
         }
 
-
         .fund-security-icon {
 
             flex: 0 0 auto;
@@ -1617,7 +1570,6 @@
 
             font-size: 13px;
         }
-
 
         .fund-message {
 
@@ -1644,7 +1596,6 @@
             line-height: 1.45;
         }
 
-
         .fund-actions {
 
             display: grid;
@@ -1658,7 +1609,6 @@
             margin-top: 16px;
         }
 
-
         .cancel-button {
 
             height: 50px;
@@ -1671,7 +1621,6 @@
 
             font-weight: 750;
         }
-
 
         .continue-button {
 
@@ -1695,7 +1644,6 @@
                 rgba(8,127,89,.15);
         }
 
-
         .continue-button:disabled {
 
             opacity: .65;
@@ -1707,7 +1655,7 @@
 
 
         /* =========================
-           NOTIFICATION
+           REAL NOTIFICATIONS
         ========================= */
 
         #notificationPanel {
@@ -1725,8 +1673,9 @@
 
             backdrop-filter:
                 blur(4px);
-        }
 
+            padding: 0 14px;
+        }
 
         .notification-sheet {
 
@@ -1746,8 +1695,14 @@
 
             max-height:
                 calc(100vh - 80px);
-        }
 
+            box-shadow:
+                0 30px 80px rgba(0,0,0,.18);
+
+            display: flex;
+
+            flex-direction: column;
+        }
 
         .notification-header {
 
@@ -1762,14 +1717,49 @@
             border-bottom:
                 1px solid
                 var(--border);
+
+            flex-shrink: 0;
         }
 
+        .notification-header-left {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+        }
 
         .notification-header h3 {
 
             font-size: 16px;
+
+            color: var(--text);
         }
 
+        .notification-count-text {
+
+            min-width: 20px;
+
+            height: 20px;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 0 6px;
+
+            color: #ffffff;
+
+            background: var(--green);
+
+            border-radius: 999px;
+
+            font-size: 9px;
+
+            font-weight: 900;
+        }
 
         .notification-close {
 
@@ -1781,32 +1771,280 @@
             background: #f1f5f3;
 
             color: #60716b;
+
+            font-size: 13px;
         }
 
+        .notification-close:hover {
+            background: #e8efec;
+        }
 
-        .notification-item {
+        #notificationList {
 
-            padding: 16px 18px;
+            overflow-y: auto;
+
+            flex: 1;
+        }
+
+        .notification-actions {
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            padding:
+                10px
+                16px;
 
             border-bottom:
                 1px solid
                 #edf2ef;
+
+            background: #fbfdfc;
         }
 
+        .mark-all-button {
+
+            background: transparent;
+
+            color: var(--green-dark);
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            padding: 6px 4px;
+        }
+
+        .notification-item {
+
+            position: relative;
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 12px;
+
+            padding:
+                15px 17px;
+
+            border-bottom:
+                1px solid
+                #edf2ef;
+
+            background: #ffffff;
+
+            cursor: pointer;
+
+            transition:
+                background .18s ease;
+        }
+
+        .notification-item:hover {
+            background: #f8fbf9;
+        }
+
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+
+        .notification-item.unread {
+            background: #f2faf6;
+        }
+
+        .notification-item.unread::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            top: 0;
+            bottom: 0;
+
+            width: 3px;
+
+            background: var(--green);
+        }
+
+        .notification-icon {
+
+            width: 42px;
+            height: 42px;
+
+            flex: 0 0 42px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: var(--green-soft);
+
+            border-radius: 13px;
+
+            font-size: 18px;
+        }
+
+        .notification-content {
+
+            flex: 1;
+
+            min-width: 0;
+        }
+
+        .notification-title-row {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 8px;
+
+            margin-bottom: 4px;
+        }
 
         .notification-item strong {
 
             display: block;
 
+            color: var(--text);
+
             font-size: 12px;
 
-            margin-bottom: 5px;
+            font-weight: 850;
         }
 
+        .notification-unread-dot {
+
+            width: 7px;
+            height: 7px;
+
+            flex: 0 0 7px;
+
+            border-radius: 50%;
+
+            background: var(--green);
+        }
 
         .notification-item p {
 
             color: var(--muted);
+
+            font-size: 11px;
+
+            line-height: 1.5;
+
+            margin: 0;
+        }
+
+        .notification-time {
+
+            display: block;
+
+            margin-top: 7px;
+
+            color: #a0ada8;
+
+            font-size: 9px;
+        }
+
+        .notification-empty {
+
+            padding:
+                45px
+                25px;
+
+            text-align: center;
+        }
+
+        .notification-empty-icon {
+
+            width: 56px;
+            height: 56px;
+
+            margin: 0 auto 13px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: var(--green-soft);
+
+            color: var(--green-dark);
+
+            border-radius: 17px;
+
+            font-size: 23px;
+        }
+
+        .notification-empty strong {
+
+            display: block;
+
+            color: var(--text);
+
+            font-size: 13px;
+
+            margin-bottom: 5px;
+        }
+
+        .notification-empty p {
+
+            color: var(--muted);
+
+            font-size: 10px;
+
+            line-height: 1.5;
+        }
+
+        .notification-loading {
+
+            padding: 35px;
+
+            text-align: center;
+
+            color: var(--muted);
+
+            font-size: 11px;
+        }
+
+        .notification-small-spinner {
+
+            width: 25px;
+            height: 25px;
+
+            margin:
+                0
+                auto
+                10px;
+
+            border:
+                3px solid
+                #dcebe4;
+
+            border-top-color:
+                var(--green);
+
+            border-radius: 50%;
+
+            animation:
+                spin .8s linear infinite;
+        }
+
+        .notification-error {
+
+            padding:
+                35px
+                25px;
+
+            text-align: center;
+
+            color: var(--red);
 
             font-size: 11px;
 
@@ -1840,7 +2078,6 @@
                 blur(6px);
         }
 
-
         .logout-box {
 
             width: 100%;
@@ -1859,7 +2096,6 @@
                 0 30px 80px
                 rgba(0,0,0,.20);
         }
-
 
         .logout-icon {
 
@@ -1882,7 +2118,6 @@
             font-size: 24px;
         }
 
-
         .logout-box h3 {
 
             font-size: 18px;
@@ -1891,7 +2126,6 @@
 
             color: var(--text);
         }
-
 
         .logout-box p {
 
@@ -1904,7 +2138,6 @@
             margin-bottom: 21px;
         }
 
-
         .logout-actions {
 
             display: grid;
@@ -1915,7 +2148,6 @@
 
             gap: 10px;
         }
-
 
         .logout-cancel {
 
@@ -1929,7 +2161,6 @@
 
             font-weight: 750;
         }
-
 
         .logout-confirm {
 
@@ -1995,7 +2226,6 @@
                 blur(15px);
         }
 
-
         .nav-item {
 
             height: 54px;
@@ -2021,7 +2251,6 @@
             font-weight: 750;
         }
 
-
         .nav-item.active {
 
             color: var(--green-dark);
@@ -2029,9 +2258,7 @@
             background: var(--green-soft);
         }
 
-
         .nav-icon {
-
             font-size: 17px;
         }
 
@@ -2046,7 +2273,6 @@
                 padding: 15px;
             }
 
-
             .welcome {
                 padding:
                     32px
@@ -2056,37 +2282,27 @@
                 border-radius: 25px;
             }
 
-
             .welcome-logo {
 
                 width: 70px;
                 height: 70px;
             }
 
-
             .welcome h1 {
-
                 font-size: 26px;
             }
 
-
             .welcome-description {
-
                 font-size: 13px;
             }
 
-
             .welcome-feature {
-
                 padding: 11px;
             }
 
-
             .welcome-actions button {
-
                 min-height: 50px;
             }
-
 
             .dashboard-top {
 
@@ -2096,7 +2312,6 @@
                     105px;
             }
 
-
             .dashboard-content {
 
                 padding:
@@ -2104,34 +2319,38 @@
                     14px;
             }
 
-
             .balance {
-
                 font-size: 27px;
             }
 
-
             .services-grid {
-
                 gap: 8px;
             }
 
-
             .service-card {
-
                 min-height: 100px;
             }
 
-
             .quick-amounts {
-
                 gap: 6px;
             }
 
-
             .quick-amount {
-
                 font-size: 10px;
+            }
+
+            #notificationPanel {
+                padding: 0 8px;
+            }
+
+            .notification-sheet {
+
+                margin-top: 45px;
+
+                max-height:
+                    calc(100vh - 60px);
+
+                border-radius: 22px;
             }
 
         }
@@ -2149,7 +2368,6 @@
                 padding-right: 30px;
             }
 
-
             .dashboard-content {
 
                 padding:
@@ -2157,16 +2375,13 @@
                     25px;
             }
 
-
             .services-grid {
 
                 grid-template-columns:
                     repeat(6,1fr);
             }
 
-
             .service-card {
-
                 min-height: 115px;
             }
 
@@ -2248,7 +2463,6 @@
 
         <div class="welcome">
 
-
             <div class="welcome-logo">
 
                 <img
@@ -2258,16 +2472,13 @@
 
             </div>
 
-
             <div class="welcome-brand">
                 VELQORA
             </div>
 
-
             <h1>
                 Banking made simple.
             </h1>
-
 
             <p class="welcome-description">
 
@@ -2277,9 +2488,7 @@
 
             </p>
 
-
             <div class="welcome-features">
-
 
                 <div class="welcome-feature">
 
@@ -2301,7 +2510,6 @@
 
                 </div>
 
-
                 <div class="welcome-feature">
 
                     <div class="welcome-feature-icon">
@@ -2322,12 +2530,9 @@
 
                 </div>
 
-
             </div>
 
-
             <div class="welcome-actions">
-
 
                 <button
                     class="welcome-login"
@@ -2338,7 +2543,6 @@
                     Log In
                 </button>
 
-
                 <button
                     class="welcome-signup"
                     onclick="
@@ -2348,9 +2552,7 @@
                     Create an Account
                 </button>
 
-
             </div>
-
 
             <div class="welcome-security">
 
@@ -2362,13 +2564,9 @@
 
             </div>
 
-
             <div class="welcome-footer">
-
                 © 2026 Velqora
-
             </div>
-
 
         </div>
 
@@ -2386,12 +2584,9 @@
 
         <div class="dashboard-top">
 
-
             <div class="topbar">
 
-
                 <div class="brand-area">
-
 
                     <div class="brand-logo">
 
@@ -2402,11 +2597,9 @@
 
                     </div>
 
-
                     <div class="brand-name">
                         Velqora
                     </div>
-
 
                 </div>
 
@@ -2414,12 +2607,23 @@
                 <div class="top-actions">
 
 
+                    <!-- REAL NOTIFICATION BUTTON -->
+
                     <button
-                        class="top-icon"
+                        class="top-icon notification-button"
                         onclick="showNotifications()"
                         aria-label="Notifications"
                     >
+
                         🔔
+
+                        <span
+                            id="notificationBadge"
+                            class="notification-badge"
+                        >
+                            0
+                        </span>
+
                     </button>
 
 
@@ -2434,30 +2638,24 @@
 
                 </div>
 
-
             </div>
 
 
             <div class="greeting">
 
-
                 <div class="greeting-small">
                     Your account
                 </div>
-
 
                 <h2 id="greetingText">
                     Welcome back 👋
                 </h2>
 
-
                 <p>
                     Your finances, simplified.
                 </p>
 
-
             </div>
-
 
         </div>
 
@@ -2471,14 +2669,12 @@
 
             <section class="wallet-card">
 
-
                 <div class="wallet-label">
                     Available Wallet Balance
                 </div>
 
 
                 <div class="balance-row">
-
 
                     <div
                         class="balance"
@@ -2496,7 +2692,6 @@
                     >
                         👁
                     </button>
-
 
                 </div>
 
@@ -2518,7 +2713,6 @@
                 >
                     ＋ Add Money
                 </button>
-
 
             </section>
 
@@ -2644,7 +2838,6 @@
                     Recent Activity
                 </h3>
 
-
                 <button
                     onclick="viewTransactions()"
                 >
@@ -2741,9 +2934,7 @@
 
     <div id="fundModal">
 
-
         <div class="fund-sheet">
-
 
             <div class="sheet-handle"></div>
 
@@ -2927,30 +3118,39 @@
 
 
     <!-- =========================
-         NOTIFICATIONS
+         REAL NOTIFICATIONS
     ========================= -->
 
     <div id="notificationPanel">
-
 
         <div class="notification-sheet">
 
 
             <div class="notification-header">
 
+                <div class="notification-header-left">
 
-                <h3>
-                    Notifications
-                </h3>
+                    <h3>
+                        Notifications
+                    </h3>
+
+                    <span
+                        id="notificationCountText"
+                        class="notification-count-text"
+                    >
+                        0
+                    </span>
+
+                </div>
 
 
                 <button
                     class="notification-close"
                     onclick="closeNotifications()"
+                    aria-label="Close notifications"
                 >
                     ✕
                 </button>
-
 
             </div>
 
@@ -3098,27 +3298,236 @@
 
 
         /* =========================
-           NOTIFICATIONS
+           REAL NOTIFICATIONS
         ========================= */
 
-        const velqoraNotifications = [
+        async function loadNotificationCount() {
 
-            {
-                title: "Welcome to Velqora",
-                text:
-                    "Your account is ready. You can manage your wallet, data and airtime from here."
-            },
-
-            {
-                title: "Secure your account",
-                text:
-                    "Keep your login details private and never share your password with anyone."
+            if (!currentUser) {
+                return;
             }
 
-        ];
+
+            const badge =
+                document.getElementById(
+                    "notificationBadge"
+                );
 
 
-        function showNotifications() {
+            const countText =
+                document.getElementById(
+                    "notificationCountText"
+                );
+
+
+            try {
+
+                const {
+                    count,
+                    error
+                } =
+                    await supabaseClient
+                        .from("notifications")
+                        .select(
+                            "id",
+                            {
+                                count: "exact",
+                                head: true
+                            }
+                        )
+                        .eq(
+                            "user_id",
+                            currentUser.id
+                        )
+                        .eq(
+                            "is_read",
+                            false
+                        );
+
+
+                if (error) {
+
+                    console.error(
+                        "Notification count error:",
+                        error
+                    );
+
+                    if (badge) {
+                        badge.classList.remove("show");
+                    }
+
+                    return;
+                }
+
+
+                const unreadCount =
+                    Number(count || 0);
+
+
+                if (badge) {
+
+                    if (unreadCount > 0) {
+
+                        badge.textContent =
+                            unreadCount > 99
+                                ? "99+"
+                                : unreadCount;
+
+                        badge.classList.add(
+                            "show"
+                        );
+
+                    }
+
+                    else {
+
+                        badge.textContent = "0";
+
+                        badge.classList.remove(
+                            "show"
+                        );
+
+                    }
+
+                }
+
+
+                if (countText) {
+
+                    if (unreadCount > 0) {
+
+                        countText.textContent =
+                            unreadCount > 99
+                                ? "99+"
+                                : unreadCount;
+
+                        countText.style.display =
+                            "flex";
+
+                    }
+
+                    else {
+
+                        countText.style.display =
+                            "none";
+
+                    }
+
+                }
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Notification count error:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        function formatNotificationDate(
+            dateString
+        ) {
+
+            if (!dateString) {
+                return "";
+            }
+
+
+            const date =
+                new Date(dateString);
+
+
+            if (
+                Number.isNaN(
+                    date.getTime()
+                )
+            ) {
+
+                return "";
+
+            }
+
+
+            return date.toLocaleString(
+                "en-NG",
+                {
+                    day: "numeric",
+                    month: "short",
+                    year: "numeric",
+                    hour: "numeric",
+                    minute: "2-digit"
+                }
+            );
+
+        }
+
+
+        function getNotificationIcon(
+            type
+        ) {
+
+            switch (type) {
+
+                case "money_received":
+                    return "💰";
+
+                case "transfer_successful":
+                    return "✅";
+
+                case "funding_successful":
+                    return "💳";
+
+                case "airtime":
+                    return "📱";
+
+                case "data":
+                    return "📶";
+
+                default:
+                    return "🔔";
+
+            }
+
+        }
+
+
+        function escapeHtml(
+            value
+        ) {
+
+            return String(
+                value ?? ""
+            )
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
+
+
+        async function showNotifications() {
 
             const panel =
                 document.getElementById(
@@ -3132,39 +3541,389 @@
                 );
 
 
-            list.innerHTML = "";
+            if (!currentUser) {
 
+                list.innerHTML = `
 
-            velqoraNotifications.forEach(
-                notification => {
+                    <div class="notification-empty">
 
-                    const item =
-                        document.createElement("div");
-
-                    item.className =
-                        "notification-item";
-
-
-                    item.innerHTML = `
+                        <div class="notification-empty-icon">
+                            🔒
+                        </div>
 
                         <strong>
-                            ${notification.title}
+                            Sign in required
                         </strong>
 
                         <p>
-                            ${notification.text}
+                            Please sign in to view your notifications.
                         </p>
 
-                    `;
+                    </div>
 
+                `;
 
-                    list.appendChild(item);
+                panel.style.display = "block";
 
-                }
-            );
+                return;
+
+            }
 
 
             panel.style.display = "block";
+
+
+            list.innerHTML = `
+
+                <div class="notification-loading">
+
+                    <div class="notification-small-spinner"></div>
+
+                    Loading your notifications...
+
+                </div>
+
+            `;
+
+
+            try {
+
+                const {
+                    data,
+                    error
+                } =
+                    await supabaseClient
+                        .from("notifications")
+                        .select(
+                            "id, type, title, message, amount, tx_ref, is_read, created_at"
+                        )
+                        .eq(
+                            "user_id",
+                            currentUser.id
+                        )
+                        .order(
+                            "created_at",
+                            {
+                                ascending: false
+                            }
+                        )
+                        .limit(50);
+
+
+                if (error) {
+
+                    console.error(
+                        "Notifications error:",
+                        error
+                    );
+
+
+                    list.innerHTML = `
+
+                        <div class="notification-error">
+
+                            Unable to load your notifications.
+                            Please try again.
+
+                        </div>
+
+                    `;
+
+                    return;
+
+                }
+
+
+                const notifications =
+                    data || [];
+
+
+                if (!notifications.length) {
+
+                    list.innerHTML = `
+
+                        <div class="notification-empty">
+
+                            <div class="notification-empty-icon">
+                                🔔
+                            </div>
+
+                            <strong>
+                                No notifications yet
+                            </strong>
+
+                            <p>
+                                When you receive money,
+                                send money, or complete
+                                important account activity,
+                                it will appear here.
+                            </p>
+
+                        </div>
+
+                    `;
+
+                    await loadNotificationCount();
+
+                    return;
+
+                }
+
+
+                const unreadCount =
+                    notifications.filter(
+                        notification =>
+                            !notification.is_read
+                    ).length;
+
+
+                let html = "";
+
+
+                if (unreadCount > 0) {
+
+                    html += `
+
+                        <div class="notification-actions">
+
+                            <button
+                                class="mark-all-button"
+                                onclick="markAllNotificationsRead()"
+                            >
+                                Mark all as read
+                            </button>
+
+                        </div>
+
+                    `;
+
+                }
+
+
+                notifications.forEach(
+                    notification => {
+
+                        const unread =
+                            !notification.is_read;
+
+
+                        const icon =
+                            getNotificationIcon(
+                                notification.type
+                            );
+
+
+                        const title =
+                            escapeHtml(
+                                notification.title
+                            );
+
+
+                        const message =
+                            escapeHtml(
+                                notification.message
+                            );
+
+
+                        const date =
+                            formatNotificationDate(
+                                notification.created_at
+                            );
+
+
+                        html += `
+
+                            <div
+                                class="notification-item ${unread ? "unread" : ""}"
+                                onclick="markNotificationRead('${escapeHtml(notification.id)}')"
+                            >
+
+                                <div class="notification-icon">
+                                    ${icon}
+                                </div>
+
+                                <div class="notification-content">
+
+                                    <div class="notification-title-row">
+
+                                        <strong>
+                                            ${title}
+                                        </strong>
+
+                                        ${
+                                            unread
+                                                ? `
+                                                    <span
+                                                        class="notification-unread-dot"
+                                                    ></span>
+                                                `
+                                                : ""
+                                        }
+
+                                    </div>
+
+                                    <p>
+                                        ${message}
+                                    </p>
+
+                                    <span class="notification-time">
+                                        ${date}
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                        `;
+
+                    }
+                );
+
+
+                list.innerHTML =
+                    html;
+
+
+                await loadNotificationCount();
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Notification error:",
+                    error
+                );
+
+
+                list.innerHTML = `
+
+                    <div class="notification-error">
+
+                        Something went wrong while
+                        loading your notifications.
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+        async function markNotificationRead(
+            notificationId
+        ) {
+
+            if (!currentUser) {
+                return;
+            }
+
+
+            try {
+
+                const {
+                    error
+                } =
+                    await supabaseClient
+                        .from("notifications")
+                        .update({
+                            is_read: true
+                        })
+                        .eq(
+                            "id",
+                            notificationId
+                        )
+                        .eq(
+                            "user_id",
+                            currentUser.id
+                        );
+
+
+                if (error) {
+
+                    console.error(
+                        "Mark notification read error:",
+                        error
+                    );
+
+                    return;
+
+                }
+
+
+                await loadNotificationCount();
+
+                await showNotifications();
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Mark notification error:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        async function markAllNotificationsRead() {
+
+            if (!currentUser) {
+                return;
+            }
+
+
+            try {
+
+                const {
+                    error
+                } =
+                    await supabaseClient
+                        .from("notifications")
+                        .update({
+                            is_read: true
+                        })
+                        .eq(
+                            "user_id",
+                            currentUser.id
+                        )
+                        .eq(
+                            "is_read",
+                            false
+                        );
+
+
+                if (error) {
+
+                    console.error(
+                        "Mark all notifications error:",
+                        error
+                    );
+
+                    return;
+
+                }
+
+
+                await loadNotificationCount();
+
+                await showNotifications();
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Mark all notifications error:",
+                    error
+                );
+
+            }
 
         }
 
@@ -3173,7 +3932,8 @@
 
             document.getElementById(
                 "notificationPanel"
-            ).style.display = "none";
+            ).style.display =
+                "none";
 
         }
 
@@ -3578,7 +4338,10 @@
                             <div class="activity-details">
 
                                 <strong>
-                                    ${activity.type || "Transaction"}
+                                    ${escapeHtml(
+                                        activity.type ||
+                                        "Transaction"
+                                    )}
                                 </strong>
 
                                 <span>
@@ -3699,7 +4462,9 @@
                         currentUser.id
                     ),
 
-                    loadRecentActivity()
+                    loadRecentActivity(),
+
+                    loadNotificationCount()
 
                 ]);
 
