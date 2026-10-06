@@ -1,294 +1,891 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#075d45"
+    >
 
     <title>Login - Velqora</title>
 
+
     <style>
+
         * {
             box-sizing: border-box;
         }
 
-        body {
-            margin: 0;
-            min-height: 100vh;
-            font-family: Arial, sans-serif;
-            background:
-                radial-gradient(circle at top left, #164e41 0%, transparent 35%),
-                linear-gradient(145deg, #061612, #0b211c 55%, #07110f);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            color: white;
+
+        html {
+            min-height: 100%;
         }
 
-        .container {
-            width: 100%;
-            max-width: 430px;
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+            min-height: 100dvh;
+
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Arial,
+                sans-serif;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #f8fbfa 0%,
+                    #eef6f2 100%
+                );
+
+            color: #10201b;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
         }
+
+
+        button,
+        input {
+            font: inherit;
+        }
+
+
+        button {
+            cursor: pointer;
+        }
+
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =========================
+           PAGE
+        ========================= */
+
+        .page {
+
+            width: 100%;
+
+            max-width: 430px;
+
+            margin: auto;
+        }
+
+
+        /* =========================
+           BRAND
+        ========================= */
 
         .brand {
+
             text-align: center;
-            margin-bottom: 25px;
+
+            margin-bottom: 22px;
         }
+
 
         .logo {
-            width: 65px;
-            height: 65px;
-            margin: 0 auto 12px;
+
+            width: 68px;
+            height: 68px;
+
+            margin:
+                0 auto 13px;
+
+            padding: 6px;
+
+            background: #ffffff;
+
+            border:
+                1px solid
+                #dce9e3;
+
             border-radius: 20px;
-            overflow: hidden;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.2);
+
+            box-shadow:
+                0 10px 30px
+                rgba(12,149,101,.10);
         }
+
 
         .logo img {
+
             width: 100%;
             height: 100%;
-            object-fit: cover;
+
             display: block;
+
+            object-fit: contain;
+
+            border-radius: 13px;
         }
+
 
         .brand-name {
-            font-size: 30px;
-            font-weight: 800;
-            letter-spacing: -1px;
+
+            color: #075d45;
+
+            font-size: 24px;
+
+            font-weight: 900;
+
+            letter-spacing: .5px;
         }
 
-        .tagline {
-            margin-top: 7px;
-            color: #9bb3ac;
-            font-size: 14px;
-        }
 
-        .card {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            padding: 30px;
-            border-radius: 24px;
-            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
-            backdrop-filter: blur(18px);
-        }
+        .brand-subtitle {
 
-        h1 {
-            margin: 0;
-            font-size: 28px;
-        }
+            margin-top: 5px;
 
-        .intro {
-            margin: 9px 0 25px;
-            color: #9bb3ac;
-            font-size: 14px;
+            color: #83938d;
+
+            font-size: 12px;
+
             line-height: 1.5;
         }
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #d0ddd9;
-            font-size: 13px;
-            font-weight: bold;
+
+        /* =========================
+           LOGIN CARD
+        ========================= */
+
+        .card {
+
+            width: 100%;
+
+            padding:
+                29px
+                27px
+                24px;
+
+            background: #ffffff;
+
+            border:
+                1px solid
+                #e1ebe6;
+
+            border-radius: 26px;
+
+            box-shadow:
+                0 24px 70px
+                rgba(4,56,46,.10),
+                0 3px 12px
+                rgba(4,56,46,.035);
         }
+
+
+        .card-top {
+
+            margin-bottom: 24px;
+        }
+
+
+        .card h1 {
+
+            margin: 0;
+
+            color: #10201b;
+
+            font-size: 25px;
+
+            font-weight: 850;
+
+            letter-spacing: -.7px;
+        }
+
+
+        .intro {
+
+            margin-top: 8px;
+
+            color: #7a8b85;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           FORM
+        ========================= */
 
         .input-group {
-            margin-bottom: 18px;
+
+            margin-bottom: 17px;
         }
+
+
+        label {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 8px;
+
+            color: #344941;
+
+            font-size: 12px;
+
+            font-weight: 800;
+        }
+
+
+        .field {
+
+            position: relative;
+        }
+
 
         input {
+
             width: 100%;
-            padding: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.14);
-            border-radius: 13px;
-            background: rgba(0, 0, 0, 0.22);
-            color: white;
-            font-size: 15px;
+
+            height: 52px;
+
+            padding:
+                0
+                48px
+                0
+                15px;
+
+            border:
+                1px solid
+                #dce8e3;
+
+            border-radius: 14px;
+
             outline: none;
+
+            background: #f9fbfa;
+
+            color: #10201b;
+
+            font-size: 14px;
+
+            transition:
+                border-color .2s ease,
+                box-shadow .2s ease,
+                background .2s ease;
         }
+
 
         input::placeholder {
-            color: #71847e;
+
+            color: #a0aea9;
         }
+
 
         input:focus {
-            border-color: #25d366;
-            box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.10);
+
+            background: #ffffff;
+
+            border-color:
+                #0c9565;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(12,149,101,.09);
         }
 
-        button {
-            width: 100%;
-            padding: 16px;
-            border: none;
-            border-radius: 13px;
-            background: linear-gradient(135deg, #25d366, #12a86c);
-            color: white;
+
+        .field-icon {
+
+            position: absolute;
+
+            right: 14px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            color: #8b9c95;
+
             font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
+
+            pointer-events: none;
         }
 
-        button:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.20);
+
+        .password-toggle {
+
+            position: absolute;
+
+            right: 10px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            width: 34px;
+            height: 34px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border: none;
+
+            background: transparent;
+
+            color: #71847d;
+
+            border-radius: 9px;
+
+            font-size: 15px;
         }
 
-        button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
+
+        .password-toggle:hover {
+
+            background: #eef6f2;
+
+            color: #075d45;
         }
 
-        #message {
-            display: none;
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 10px;
-            text-align: center;
-            font-size: 13px;
-            line-height: 1.4;
+
+        /* =========================
+           FORGOT PASSWORD
+        ========================= */
+
+        .forgot-row {
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            margin-top: -5px;
+
+            margin-bottom: 20px;
         }
 
-        .signup {
-            margin-top: 22px;
-            text-align: center;
-            color: #9bb3ac;
-            font-size: 14px;
+
+        .forgot-link {
+
+            color: #0c9565;
+
+            font-size: 11px;
+
+            font-weight: 800;
         }
 
-        .signup p {
-            margin: 0;
-        }
 
-        .signup a {
-            color: #45df82;
-            font-weight: bold;
-            text-decoration: none;
-        }
+        .forgot-link:hover {
 
-        .signup a:hover {
             text-decoration: underline;
         }
 
-        .back {
-            text-align: center;
-            margin-top: 18px;
+
+        /* =========================
+           LOGIN BUTTON
+        ========================= */
+
+        .login-button {
+
+            width: 100%;
+
+            min-height: 52px;
+
+            border: none;
+
+            border-radius: 14px;
+
+            color: #ffffff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0fa96f,
+                    #087f59
+                );
+
+            font-size: 14px;
+
+            font-weight: 850;
+
+            box-shadow:
+                0 10px 24px
+                rgba(8,127,89,.17);
+
+            transition:
+                transform .2s ease,
+                box-shadow .2s ease,
+                opacity .2s ease;
         }
 
-        .back a {
-            color: #839b94;
-            font-size: 13px;
-            text-decoration: none;
+
+        .login-button:hover {
+
+            transform:
+                translateY(-1px);
+
+            box-shadow:
+                0 13px 30px
+                rgba(8,127,89,.23);
         }
 
-        .security {
-            margin-top: 22px;
-            padding-top: 18px;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+        .login-button:disabled {
+
+            opacity: .65;
+
+            cursor: not-allowed;
+
+            transform: none;
+
+            box-shadow: none;
+        }
+
+
+        /* =========================
+           MESSAGE
+        ========================= */
+
+        #message {
+
+            display: none;
+
+            margin-top: 14px;
+
+            padding: 12px 13px;
+
+            border-radius: 11px;
+
             text-align: center;
-            color: #71857f;
+
+            font-size: 11px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           DIVIDER
+        ========================= */
+
+        .divider {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin:
+                22px
+                0
+                18px;
+
+            color: #a0ada8;
+
+            font-size: 10px;
+        }
+
+
+        .divider::before,
+        .divider::after {
+
+            content: "";
+
+            height: 1px;
+
+            flex: 1;
+
+            background: #e7eeeb;
+        }
+
+
+        /* =========================
+           CREATE ACCOUNT
+        ========================= */
+
+        .signup {
+
+            text-align: center;
+
+            color: #7d8e88;
+
             font-size: 12px;
         }
 
+
+        .signup a {
+
+            color: #087f59;
+
+            font-weight: 850;
+        }
+
+
+        .signup a:hover {
+
+            text-decoration: underline;
+        }
+
+
+        /* =========================
+           BACK
+        ========================= */
+
+        .back {
+
+            margin-top: 19px;
+
+            text-align: center;
+        }
+
+
+        .back a {
+
+            color: #82928c;
+
+            font-size: 11px;
+
+            font-weight: 650;
+        }
+
+
+        .back a:hover {
+
+            color: #075d45;
+        }
+
+
+        /* =========================
+           SECURITY
+        ========================= */
+
+        .security {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 6px;
+
+            margin-top: 20px;
+
+            padding-top: 17px;
+
+            border-top:
+                1px solid
+                #edf2ef;
+
+            color: #97a49f;
+
+            font-size: 9px;
+
+            text-align: center;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+
+            margin-top: 17px;
+
+            text-align: center;
+
+            color: #a0ada8;
+
+            font-size: 9px;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
         @media (max-width: 480px) {
+
             body {
-                padding: 16px;
+
+                align-items: flex-start;
+
+                padding:
+                    28px
+                    15px
+                    20px;
             }
 
-            .card {
-                padding: 24px 20px;
+
+            .brand {
+
+                margin-bottom: 18px;
             }
+
+
+            .logo {
+
+                width: 62px;
+                height: 62px;
+            }
+
 
             .brand-name {
-                font-size: 27px;
+
+                font-size: 22px;
             }
+
+
+            .card {
+
+                padding:
+                    25px
+                    20px
+                    21px;
+
+                border-radius: 23px;
+            }
+
+
+            .card h1 {
+
+                font-size: 23px;
+            }
+
+
+            input {
+
+                height: 51px;
+            }
+
+
+            .login-button {
+
+                min-height: 51px;
+            }
+
         }
+
     </style>
+
 </head>
+
 
 <body>
 
-    <div class="container">
+
+    <div class="page">
+
+
+        <!-- =========================
+             BRAND
+        ========================= -->
 
         <div class="brand">
 
+
             <div class="logo">
-                <img src="velqora.png.PNG" alt="Velqora Logo">
+
+                <img
+                    src="velqora.png.PNG"
+                    alt="Velqora"
+                >
+
             </div>
+
 
             <div class="brand-name">
                 Velqora
             </div>
 
-            <div class="tagline">
-                Simple. Secure. Built for your money.
+
+            <div class="brand-subtitle">
+                Simple, secure financial services.
             </div>
+
 
         </div>
 
+
+        <!-- =========================
+             LOGIN CARD
+        ========================= -->
+
         <div class="card">
 
-            <h1>Welcome Back</h1>
 
-            <div class="intro">
-                Login to your Velqora account to access your wallet and financial services.
+            <div class="card-top">
+
+                <h1>
+                    Welcome back
+                </h1>
+
+
+                <div class="intro">
+
+                    Sign in securely to access
+                    your wallet and Velqora services.
+
+                </div>
+
             </div>
 
+
+            <!-- EMAIL -->
+
             <div class="input-group">
+
 
                 <label for="email">
-                    Email Address
+
+                    <span>
+                        Email address
+                    </span>
+
                 </label>
 
-                <input
-                    type="email"
-                    id="email"
-                    placeholder="Enter your email"
-                    autocomplete="email"
-                >
+
+                <div class="field">
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="you@example.com"
+                        autocomplete="email"
+                        autocapitalize="none"
+                    >
+
+
+                    <div class="field-icon">
+                        ✉
+                    </div>
+
+                </div>
 
             </div>
+
+
+            <!-- PASSWORD -->
 
             <div class="input-group">
 
+
                 <label for="password">
-                    Password
+
+                    <span>
+                        Password
+                    </span>
+
                 </label>
 
-                <input
-                    type="password"
-                    id="password"
-                    placeholder="Enter your password"
-                    autocomplete="current-password"
-                >
+
+                <div class="field">
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                    >
+
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        id="passwordToggle"
+                        onclick="togglePassword()"
+                        aria-label="Show password"
+                    >
+                        👁
+                    </button>
+
+                </div>
 
             </div>
+
+
+            <!-- FORGOT -->
+
+            <div class="forgot-row">
+
+                <a
+                    href="#"
+                    class="forgot-link"
+                    onclick="forgotPassword(event)"
+                >
+                    Forgot password?
+                </a>
+
+            </div>
+
+
+            <!-- LOGIN -->
 
             <button
                 type="button"
+                class="login-button"
                 id="loginButton"
                 onclick="login()"
             >
-                Login to Velqora
+                Log In Securely
             </button>
+
+
+            <!-- MESSAGE -->
 
             <div id="message"></div>
 
+
+            <!-- DIVIDER -->
+
+            <div class="divider">
+                <span>
+                    NEW TO VELQORA?
+                </span>
+            </div>
+
+
+            <!-- SIGNUP -->
+
             <div class="signup">
 
-                <p>
-                    Don't have an account?
-                    <a href="signup.html">
-                        Create Account
-                    </a>
-                </p>
+                Don't have an account?
+
+                <a href="signup.html">
+                    Create an Account
+                </a>
 
             </div>
+
+
+            <!-- BACK -->
 
             <div class="back">
 
@@ -298,118 +895,478 @@
 
             </div>
 
+
+            <!-- SECURITY -->
+
             <div class="security">
-                🔒 Your login is securely handled by Supabase.
+
+                <span>🔒</span>
+
+                <span>
+                    Your login is securely handled by Supabase.
+                </span>
+
             </div>
+
 
         </div>
 
+
+        <div class="footer">
+
+            © 2026 Velqora
+
+        </div>
+
+
     </div>
 
+
+    <!-- =========================
+         SUPABASE
+    ========================= -->
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <script src="config.js"></script>
+
 
     <script>
 
-        const supabaseClient = window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_KEY
-        );
+
+        /* =========================
+           SUPABASE CLIENT
+        ========================= */
+
+        const supabaseClient =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_KEY
+            );
+
+
+        /* =========================
+           PASSWORD VISIBILITY
+        ========================= */
+
+        function togglePassword() {
+
+            const password =
+                document.getElementById(
+                    "password"
+                );
+
+
+            const toggle =
+                document.getElementById(
+                    "passwordToggle"
+                );
+
+
+            if (
+                password.type ===
+                "password"
+            ) {
+
+                password.type =
+                    "text";
+
+                toggle.textContent =
+                    "🙈";
+
+                toggle.setAttribute(
+                    "aria-label",
+                    "Hide password"
+                );
+
+            }
+
+            else {
+
+                password.type =
+                    "password";
+
+                toggle.textContent =
+                    "👁";
+
+                toggle.setAttribute(
+                    "aria-label",
+                    "Show password"
+                );
+
+            }
+
+        }
+
+
+        /* =========================
+           MESSAGE
+        ========================= */
+
+        function showMessage(
+            text,
+            type
+        ) {
+
+            const message =
+                document.getElementById(
+                    "message"
+                );
+
+
+            message.style.display =
+                "block";
+
+
+            if (type === "error") {
+
+                message.style.background =
+                    "#fff1f1";
+
+                message.style.color =
+                    "#bd4b4b";
+
+                message.style.border =
+                    "1px solid #f4d6d6";
+
+            }
+
+            else if (type === "success") {
+
+                message.style.background =
+                    "#eef9f4";
+
+                message.style.color =
+                    "#087f59";
+
+                message.style.border =
+                    "1px solid #d5eee2";
+
+            }
+
+            else {
+
+                message.style.background =
+                    "#f1f6f4";
+
+                message.style.color =
+                    "#62756e";
+
+                message.style.border =
+                    "1px solid #e0eae5";
+
+            }
+
+
+            message.textContent =
+                text;
+
+        }
+
+
+        /* =========================
+           LOGIN
+        ========================= */
 
         async function login() {
 
             const email =
-                document.getElementById("email").value.trim();
+                document
+                    .getElementById("email")
+                    .value
+                    .trim();
+
 
             const password =
-                document.getElementById("password").value;
+                document
+                    .getElementById("password")
+                    .value;
 
-            const message =
-                document.getElementById("message");
 
             const button =
-                document.getElementById("loginButton");
+                document.getElementById(
+                    "loginButton"
+                );
 
-            if (!email || !password) {
 
-                message.style.display = "block";
-                message.style.background = "rgba(255, 80, 80, 0.12)";
-                message.style.color = "#ff9b9b";
+            if (!email) {
 
-                message.textContent =
-                    "Please enter your email and password.";
+                showMessage(
+                    "Please enter your email address.",
+                    "error"
+                );
+
+                document
+                    .getElementById("email")
+                    .focus();
 
                 return;
+
             }
 
-            button.disabled = true;
-            button.textContent = "Logging in...";
 
-            message.style.display = "block";
-            message.style.background = "rgba(255,255,255,0.06)";
-            message.style.color = "#c9d8d3";
-            message.textContent = "Logging in...";
+            if (!password) {
 
-            const { data, error } =
-                await supabaseClient.auth.signInWithPassword({
-                    email: email,
-                    password: password
-                });
+                showMessage(
+                    "Please enter your password.",
+                    "error"
+                );
 
-            if (error) {
+                document
+                    .getElementById("password")
+                    .focus();
 
-                message.style.background =
-                    "rgba(255, 80, 80, 0.12)";
+                return;
 
-                message.style.color =
-                    "#ff9b9b";
+            }
 
-                message.textContent =
-                    error.message;
 
-                button.disabled = false;
+            button.disabled =
+                true;
+
+
+            button.textContent =
+                "Signing you in...";
+
+
+            showMessage(
+                "Checking your account securely...",
+                "info"
+            );
+
+
+            try {
+
+                const {
+                    data,
+                    error
+                } =
+                    await supabaseClient
+                        .auth
+                        .signInWithPassword({
+
+                            email:
+                                email,
+
+                            password:
+                                password
+
+                        });
+
+
+                if (error) {
+
+                    console.error(
+                        "Login error:",
+                        error
+                    );
+
+
+                    showMessage(
+                        error.message,
+                        "error"
+                    );
+
+
+                    button.disabled =
+                        false;
+
+
+                    button.textContent =
+                        "Log In Securely";
+
+
+                    return;
+
+                }
+
+
+                if (!data.session) {
+
+                    showMessage(
+                        "Login was not completed. Please try again.",
+                        "error"
+                    );
+
+
+                    button.disabled =
+                        false;
+
+
+                    button.textContent =
+                        "Log In Securely";
+
+
+                    return;
+
+                }
+
+
+                showMessage(
+                    "Login successful. Opening your account...",
+                    "success"
+                );
+
+
                 button.textContent =
-                    "Login to Velqora";
+                    "Opening Velqora...";
 
-                return;
+
+                setTimeout(
+                    function() {
+
+                        window.location.href =
+                            "index.html";
+
+                    },
+                    700
+                );
+
             }
 
-            if (!data.session) {
+            catch (error) {
 
-                message.style.background =
-                    "rgba(255, 80, 80, 0.12)";
+                console.error(
+                    "Unexpected login error:",
+                    error
+                );
 
-                message.style.color =
-                    "#ff9b9b";
 
-                message.textContent =
-                    "Login was not completed. Please try again.";
+                showMessage(
+                    "Something went wrong. Please try again.",
+                    "error"
+                );
 
-                button.disabled = false;
+
+                button.disabled =
+                    false;
+
+
                 button.textContent =
-                    "Login to Velqora";
+                    "Log In Securely";
 
-                return;
             }
 
-            message.style.background =
-                "rgba(37, 211, 102, 0.12)";
-
-            message.style.color =
-                "#65e993";
-
-            message.textContent =
-                "Login successful! Welcome back.";
-
-            setTimeout(function() {
-
-                window.location.href =
-                    "index.html";
-
-            }, 700);
         }
 
+
+        /* =========================
+           FORGOT PASSWORD
+        ========================= */
+
+        async function forgotPassword(
+            event
+        ) {
+
+            event.preventDefault();
+
+
+            const email =
+                document
+                    .getElementById("email")
+                    .value
+                    .trim();
+
+
+            if (!email) {
+
+                showMessage(
+                    "Enter your email address first, then select Forgot password.",
+                    "error"
+                );
+
+
+                document
+                    .getElementById("email")
+                    .focus();
+
+
+                return;
+
+            }
+
+
+            try {
+
+                showMessage(
+                    "Sending password reset instructions...",
+                    "info"
+                );
+
+
+                const {
+                    error
+                } =
+                    await supabaseClient
+                        .auth
+                        .resetPasswordForEmail(
+                            email,
+                            {
+                                redirectTo:
+                                    window.location.origin +
+                                    window.location.pathname
+                            }
+                        );
+
+
+                if (error) {
+
+                    throw error;
+
+                }
+
+
+                showMessage(
+                    "Password reset instructions have been sent to your email.",
+                    "success"
+                );
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Password reset error:",
+                    error
+                );
+
+
+                showMessage(
+                    error.message ||
+                    "Unable to send password reset instructions.",
+                    "error"
+                );
+
+            }
+
+        }
+
+
+        /* =========================
+           ENTER KEY
+        ========================= */
+
+        document
+            .getElementById("password")
+            .addEventListener(
+                "keydown",
+                function(event) {
+
+                    if (
+                        event.key ===
+                        "Enter"
+                    ) {
+
+                        login();
+
+                    }
+
+                }
+            );
+
+
     </script>
+
 
 </body>
 </html>
