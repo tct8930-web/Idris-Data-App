@@ -91,7 +91,7 @@
             padding:
                 18px
                 18px
-                58px;
+                70px;
 
             border-radius:
                 0
@@ -146,9 +146,7 @@
 
 
         .back-btn:active {
-
-            transform:
-                scale(.95);
+            transform: scale(.95);
         }
 
 
@@ -216,7 +214,7 @@
             max-width: 650px;
 
             margin:
-                -34px
+                -42px
                 auto
                 0;
 
@@ -234,11 +232,11 @@
                 1px solid
                 #e1ebe6;
 
-            border-radius: 26px;
+            border-radius: 27px;
 
             padding:
-                26px
-                20px
+                25px
+                18px
                 24px;
 
             box-shadow:
@@ -250,24 +248,35 @@
 
 
         /* =========================
-           PROFILE HEADER
+           PROFILE HERO
         ========================= */
 
         .profile-top {
 
             text-align: center;
+
+            padding-bottom: 4px;
         }
 
 
-        .avatar {
+        .avatar-wrap {
 
-            width: 88px;
-            height: 88px;
+            position: relative;
+
+            width: 94px;
+            height: 94px;
 
             margin:
                 0
                 auto
                 14px;
+        }
+
+
+        .avatar {
+
+            width: 94px;
+            height: 94px;
 
             display: flex;
 
@@ -295,6 +304,38 @@
                 #eef8f3,
                 0 12px 25px
                 rgba(8,127,89,.18);
+        }
+
+
+        .verified-badge {
+
+            position: absolute;
+
+            right: -1px;
+            bottom: 1px;
+
+            width: 27px;
+            height: 27px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border:
+                3px solid
+                white;
+
+            border-radius: 50%;
+
+            background: #087f59;
+
+            color: white;
+
+            font-size: 12px;
+
+            font-weight: 900;
         }
 
 
@@ -334,13 +375,13 @@
 
             align-items: center;
 
-            gap: 5px;
+            gap: 6px;
 
             margin-top: 11px;
 
             padding:
                 6px
-                10px;
+                11px;
 
             border-radius: 999px;
 
@@ -355,6 +396,62 @@
             font-size: 10px;
 
             font-weight: 850;
+        }
+
+
+        .status-dot {
+
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #0fa96f;
+        }
+
+
+        /* =========================
+           EDIT PROFILE BUTTON
+        ========================= */
+
+        .edit-profile-btn {
+
+            width: 100%;
+
+            min-height: 46px;
+
+            margin-top: 19px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            border:
+                1px solid
+                #cfe5db;
+
+            border-radius: 13px;
+
+            background: #f3faf7;
+
+            color: #087f59;
+
+            font-size: 12px;
+
+            font-weight: 850;
+
+            cursor: pointer;
+        }
+
+
+        .edit-profile-btn:active {
+
+            transform:
+                scale(.985);
         }
 
 
@@ -444,7 +541,7 @@
 
         .account-row {
 
-            padding: 17px 15px;
+            padding: 18px 15px;
 
             background:
                 linear-gradient(
@@ -525,8 +622,6 @@
 
         .copy-btn {
 
-            width: auto;
-
             flex-shrink: 0;
 
             padding:
@@ -560,6 +655,81 @@
            SECURITY
         ========================= */
 
+        .security-row {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 12px;
+
+            padding: 15px;
+        }
+
+
+        .security-left {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            min-width: 0;
+        }
+
+
+        .security-icon {
+
+            width: 38px;
+            height: 38px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background: #eef8f3;
+
+            font-size: 16px;
+        }
+
+
+        .security-title {
+
+            color: #17372b;
+
+            font-size: 12px;
+
+            font-weight: 800;
+        }
+
+
+        .security-text {
+
+            margin-top: 3px;
+
+            color: #8a9792;
+
+            font-size: 9px;
+        }
+
+
+        .security-arrow {
+
+            color: #8b9993;
+
+            font-size: 18px;
+        }
+
+
         .secure-note {
 
             display: flex;
@@ -588,7 +758,7 @@
         }
 
 
-        .secure-icon {
+        .secure-icon-note {
 
             flex-shrink: 0;
 
@@ -635,6 +805,8 @@
 
             font-weight: 850;
 
+            text-decoration: none;
+
             box-shadow:
                 0 9px 20px
                 rgba(8,127,89,.16);
@@ -678,75 +850,228 @@
 
 
         /* =========================
-           LOADING
+           EDIT MODAL
         ========================= */
 
-        .loading {
+        #editModal {
 
-            padding:
-                55px
-                15px;
+            position: fixed;
 
-            text-align: center;
+            inset: 0;
 
-            color: #718078;
+            z-index: 200;
 
-            font-size: 12px;
+            display: none;
+
+            align-items: flex-end;
+
+            justify-content: center;
+
+            padding: 15px;
+
+            background:
+                rgba(4,20,15,.48);
+
+            backdrop-filter:
+                blur(7px);
         }
 
 
-        .loading-spinner {
+        .edit-box {
 
-            width: 30px;
-            height: 30px;
+            width: 100%;
 
-            margin:
-                0
-                auto
-                14px;
+            max-width: 520px;
+
+            padding:
+                23px
+                19px
+                20px;
+
+            background: white;
 
             border:
-                3px solid
-                #dcebe5;
+                1px solid
+                #e1ebe6;
 
-            border-top-color:
-                #087f59;
+            border-radius:
+                25px
+                25px
+                20px
+                20px;
 
-            border-radius: 50%;
-
-            animation:
-                spin .8s
-                linear
-                infinite;
+            box-shadow:
+                0 25px 70px
+                rgba(0,0,0,.20);
         }
 
 
-        @keyframes spin {
+        .edit-top {
 
-            to {
-                transform: rotate(360deg);
-            }
+            display: flex;
 
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            margin-bottom: 20px;
         }
 
 
-        /* =========================
-           ERROR
-        ========================= */
+        .edit-top h3 {
 
-        .error {
+            margin: 0;
+
+            color: #10201b;
+
+            font-size: 20px;
+
+            font-weight: 850;
+        }
+
+
+        .close-edit {
+
+            width: 36px;
+            height: 36px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border: none;
+
+            border-radius: 11px;
+
+            background: #f2f6f4;
+
+            color: #61716b;
+
+            cursor: pointer;
+        }
+
+
+        .form-group {
+
+            margin-bottom: 15px;
+        }
+
+
+        .form-label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #53655e;
+
+            font-size: 10px;
+
+            font-weight: 800;
+        }
+
+
+        .form-input {
+
+            width: 100%;
+
+            min-height: 49px;
 
             padding:
-                40px
-                10px;
+                0
+                13px;
 
-            text-align: center;
+            border:
+                1px solid
+                #dce8e2;
 
-            color: #c94b4b;
+            border-radius: 13px;
 
-            font-size: 12px;
+            outline: none;
 
-            line-height: 1.6;
+            background: #f9fbfa;
+
+            color: #17372b;
+
+            font-size: 13px;
+
+            font-weight: 650;
+        }
+
+
+        .form-input:focus {
+
+            border-color:
+                #0fa96f;
+
+            background: white;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(15,169,111,.08);
+        }
+
+
+        .email-readonly {
+
+            background: #f0f4f2;
+
+            color: #788781;
+
+        }
+
+
+        .edit-help {
+
+            margin:
+                5px
+                0
+                16px;
+
+            color: #8a9792;
+
+            font-size: 9px;
+
+            line-height: 1.5;
+        }
+
+
+        .save-profile-btn {
+
+            width: 100%;
+
+            min-height: 49px;
+
+            border: none;
+
+            border-radius: 13px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0fa96f,
+                    #087f59
+                );
+
+            color: white;
+
+            font-size: 13px;
+
+            font-weight: 850;
+
+            cursor: pointer;
+        }
+
+
+        .save-profile-btn:disabled {
+
+            opacity: .65;
+
+            cursor: not-allowed;
         }
 
 
@@ -760,7 +1085,7 @@
 
             inset: 0;
 
-            z-index: 100;
+            z-index: 300;
 
             display: none;
 
@@ -784,7 +1109,10 @@
 
             max-width: 360px;
 
-            padding: 25px 22px 21px;
+            padding:
+                25px
+                22px
+                21px;
 
             background: white;
 
@@ -913,6 +1241,135 @@
 
 
         /* =========================
+           TOAST
+        ========================= */
+
+        #toast {
+
+            position: fixed;
+
+            left: 50%;
+
+            bottom: 91px;
+
+            z-index: 500;
+
+            transform:
+                translate(-50%, 15px);
+
+            min-width: 220px;
+
+            max-width: calc(100vw - 35px);
+
+            padding:
+                12px
+                15px;
+
+            border-radius: 13px;
+
+            background:
+                #10201b;
+
+            color: white;
+
+            text-align: center;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            transition:
+                .25s ease;
+        }
+
+
+        #toast.show {
+
+            opacity: 1;
+
+            transform:
+                translate(-50%, 0);
+        }
+
+
+        /* =========================
+           LOADING
+        ========================= */
+
+        .loading {
+
+            padding:
+                55px
+                15px;
+
+            text-align: center;
+
+            color: #718078;
+
+            font-size: 12px;
+        }
+
+
+        .loading-spinner {
+
+            width: 30px;
+            height: 30px;
+
+            margin:
+                0
+                auto
+                14px;
+
+            border:
+                3px solid
+                #dcebe5;
+
+            border-top-color:
+                #087f59;
+
+            border-radius: 50%;
+
+            animation:
+                spin .8s
+                linear
+                infinite;
+        }
+
+
+        @keyframes spin {
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+
+        /* =========================
+           ERROR
+        ========================= */
+
+        .error {
+
+            padding:
+                40px
+                10px;
+
+            text-align: center;
+
+            color: #c94b4b;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
            BOTTOM NAV
         ========================= */
 
@@ -999,6 +1456,19 @@
 
         @media (min-width: 700px) {
 
+            #editModal {
+
+                align-items: center;
+
+            }
+
+
+            .edit-box {
+
+                border-radius: 25px;
+            }
+
+
             .top {
 
                 padding-left: 30px;
@@ -1008,7 +1478,7 @@
 
             .container {
 
-                margin-top: -38px;
+                margin-top: -46px;
             }
 
 
@@ -1154,11 +1624,19 @@
                 <div class="profile-top">
 
 
-                    <div
-                        class="avatar"
-                        id="avatar"
-                    >
-                        V
+                    <div class="avatar-wrap">
+
+                        <div
+                            class="avatar"
+                            id="avatar"
+                        >
+                            V
+                        </div>
+
+                        <div class="verified-badge">
+                            ✓
+                        </div>
+
                     </div>
 
 
@@ -1180,13 +1658,21 @@
 
                     <div class="status">
 
-                        <span>✓</span>
+                        <span class="status-dot"></span>
 
                         <span>
                             Account active
                         </span>
 
                     </div>
+
+
+                    <button
+                        class="edit-profile-btn"
+                        onclick="openEditProfile()"
+                    >
+                        ✏️ Edit profile
+                    </button>
 
 
                 </div>
@@ -1261,11 +1747,9 @@
 
                     <div class="row">
 
-
                         <div class="label">
                             Full name
                         </div>
-
 
                         <div
                             class="value"
@@ -1274,17 +1758,14 @@
                             -
                         </div>
 
-
                     </div>
 
 
                     <div class="row">
 
-
                         <div class="label">
                             Phone number
                         </div>
-
 
                         <div
                             class="value"
@@ -1293,17 +1774,14 @@
                             -
                         </div>
 
-
                     </div>
 
 
                     <div class="row">
 
-
                         <div class="label">
                             Email address
                         </div>
-
 
                         <div
                             class="value"
@@ -1312,30 +1790,61 @@
                             -
                         </div>
 
-
                     </div>
 
 
                 </div>
 
 
-                <!-- ACCOUNT SECURITY -->
+                <!-- SECURITY -->
 
                 <div class="section-title">
-                    Account Security
+                    Security
                 </div>
 
 
                 <div class="info">
 
 
-                    <div class="row">
+                    <div
+                        class="security-row"
+                        onclick="changePassword()"
+                        style="cursor:pointer;"
+                    >
 
+                        <div class="security-left">
+
+                            <div class="security-icon">
+                                🔐
+                            </div>
+
+                            <div>
+
+                                <div class="security-title">
+                                    Change password
+                                </div>
+
+                                <div class="security-text">
+                                    Keep your Velqora account secure
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="security-arrow">
+                            ›
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
 
                         <div class="label">
                             Account ID
                         </div>
-
 
                         <div
                             class="value"
@@ -1344,22 +1853,18 @@
                             -
                         </div>
 
-
                     </div>
 
 
                     <div class="row">
 
-
                         <div class="label">
                             Account status
                         </div>
 
-
                         <div class="value">
                             Active
                         </div>
-
 
                     </div>
 
@@ -1371,7 +1876,7 @@
 
                 <div class="secure-note">
 
-                    <div class="secure-icon">
+                    <div class="secure-icon-note">
                         🔒
                     </div>
 
@@ -1380,8 +1885,8 @@
 
                         Your Velqora account information is
                         securely connected to your account.
-                        Never share your password or login
-                        details with anyone.
+                        Never share your password, OTP or
+                        login details with anyone.
 
                     </div>
 
@@ -1481,6 +1986,117 @@
     </div>
 
 
+    <!-- EDIT PROFILE MODAL -->
+
+    <div id="editModal">
+
+
+        <div class="edit-box">
+
+
+            <div class="edit-top">
+
+                <h3>
+                    Edit profile
+                </h3>
+
+
+                <button
+                    class="close-edit"
+                    onclick="closeEditProfile()"
+                >
+                    ✕
+                </button>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label
+                    class="form-label"
+                    for="editFullName"
+                >
+                    Full name
+                </label>
+
+
+                <input
+                    id="editFullName"
+                    class="form-input"
+                    type="text"
+                    placeholder="Enter your full name"
+                    maxlength="80"
+                    autocomplete="name"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label
+                    class="form-label"
+                    for="editPhone"
+                >
+                    Phone number
+                </label>
+
+
+                <input
+                    id="editPhone"
+                    class="form-input"
+                    type="tel"
+                    placeholder="Enter your phone number"
+                    maxlength="20"
+                    autocomplete="tel"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label
+                    class="form-label"
+                    for="editEmail"
+                >
+                    Email address
+                </label>
+
+
+                <input
+                    id="editEmail"
+                    class="form-input email-readonly"
+                    type="email"
+                    readonly
+                >
+
+            </div>
+
+
+            <div class="edit-help">
+
+                Your email address is connected to your
+                Velqora login and cannot be changed here.
+
+            </div>
+
+
+            <button
+                id="saveProfileButton"
+                class="save-profile-btn"
+                onclick="saveProfile()"
+            >
+                Save changes
+            </button>
+
+
+        </div>
+
+    </div>
+
+
     <!-- LOGOUT MODAL -->
 
     <div id="logoutModal">
@@ -1533,6 +2149,11 @@
     </div>
 
 
+    <!-- TOAST -->
+
+    <div id="toast"></div>
+
+
     <!-- CONFIG -->
 
     <script src="config.js"></script>
@@ -1549,6 +2170,7 @@
 
 
         let currentAccountNumber = "";
+        let currentUser = null;
 
 
         /* =========================
@@ -1564,13 +2186,45 @@
 
 
         /* =========================
+           TOAST
+        ========================= */
+
+        let toastTimer = null;
+
+
+        function showToast(message) {
+
+            const toast =
+                document.getElementById("toast");
+
+
+            toast.textContent =
+                message;
+
+
+            toast.classList.add("show");
+
+
+            clearTimeout(toastTimer);
+
+
+            toastTimer =
+                setTimeout(() => {
+
+                    toast.classList.remove("show");
+
+                }, 2500);
+
+        }
+
+
+        /* =========================
            LOAD PROFILE
         ========================= */
 
         async function loadProfile() {
 
             try {
-
 
                 const {
                     data: {
@@ -1596,7 +2250,7 @@
                 }
 
 
-                const user =
+                currentUser =
                     session.user;
 
 
@@ -1607,13 +2261,13 @@
                 document
                     .getElementById("email")
                     .textContent =
-                        user.email || "-";
+                        currentUser.email || "-";
 
 
                 document
                     .getElementById("profileEmail")
                     .textContent =
-                        user.email || "-";
+                        currentUser.email || "-";
 
 
                 /* =========================
@@ -1623,7 +2277,7 @@
                 document
                     .getElementById("userId")
                     .textContent =
-                        user.id;
+                        currentUser.id;
 
 
                 /* =========================
@@ -1641,7 +2295,7 @@
                         )
                         .eq(
                             "id",
-                            user.id
+                            currentUser.id
                         )
                         .maybeSingle();
 
@@ -1677,13 +2331,13 @@
 
                 const fullName =
                     profile?.full_name ||
-                    user.user_metadata?.full_name ||
+                    currentUser.user_metadata?.full_name ||
                     "Velqora User";
 
 
                 const phone =
                     profile?.phone ||
-                    user.user_metadata?.phone ||
+                    currentUser.user_metadata?.phone ||
                     "Not provided";
 
 
@@ -1729,18 +2383,10 @@
                    AVATAR
                 ========================= */
 
-                const firstLetter =
-                    fullName
-                        .trim()
-                        .charAt(0)
-                        .toUpperCase();
-
-
                 document
                     .getElementById("avatar")
                     .textContent =
-                        firstLetter ||
-                        "V";
+                        getInitials(fullName);
 
 
                 /* =========================
@@ -1757,7 +2403,6 @@
                     .getElementById("profileContent")
                     .style.display =
                         "block";
-
 
             }
 
@@ -1786,6 +2431,305 @@
 
 
         /* =========================
+           INITIALS
+        ========================= */
+
+        function getInitials(name) {
+
+            const cleanName =
+                String(name || "")
+                    .trim();
+
+
+            if (!cleanName) {
+                return "V";
+            }
+
+
+            const parts =
+                cleanName
+                    .split(/\s+/)
+                    .filter(Boolean);
+
+
+            if (parts.length === 1) {
+
+                return parts[0]
+                    .charAt(0)
+                    .toUpperCase();
+
+            }
+
+
+            return (
+                parts[0].charAt(0) +
+                parts[parts.length - 1].charAt(0)
+            ).toUpperCase();
+
+        }
+
+
+        /* =========================
+           OPEN EDIT PROFILE
+        ========================= */
+
+        function openEditProfile() {
+
+            const name =
+                document
+                    .getElementById("profileName")
+                    .textContent
+                    .trim();
+
+
+            const phone =
+                document
+                    .getElementById("phone")
+                    .textContent
+                    .trim();
+
+
+            const email =
+                document
+                    .getElementById("profileEmail")
+                    .textContent
+                    .trim();
+
+
+            document
+                .getElementById("editFullName")
+                .value =
+                    name === "Velqora User"
+                        ? ""
+                        : name;
+
+
+            document
+                .getElementById("editPhone")
+                .value =
+                    phone === "Not provided"
+                        ? ""
+                        : phone;
+
+
+            document
+                .getElementById("editEmail")
+                .value =
+                    email;
+
+
+            document
+                .getElementById("editModal")
+                .style.display =
+                    "flex";
+
+        }
+
+
+        /* =========================
+           CLOSE EDIT PROFILE
+        ========================= */
+
+        function closeEditProfile() {
+
+            document
+                .getElementById("editModal")
+                .style.display =
+                    "none";
+
+        }
+
+
+        /* =========================
+           SAVE PROFILE
+        ========================= */
+
+        async function saveProfile() {
+
+            if (!currentUser) {
+
+                showToast(
+                    "Please log in again."
+                );
+
+                return;
+
+            }
+
+
+            const nameInput =
+                document
+                    .getElementById("editFullName");
+
+
+            const phoneInput =
+                document
+                    .getElementById("editPhone");
+
+
+            const button =
+                document
+                    .getElementById("saveProfileButton");
+
+
+            const fullName =
+                nameInput.value.trim();
+
+
+            const phone =
+                phoneInput.value.trim();
+
+
+            if (!fullName) {
+
+                showToast(
+                    "Please enter your full name."
+                );
+
+                nameInput.focus();
+
+                return;
+
+            }
+
+
+            if (fullName.length < 2) {
+
+                showToast(
+                    "Please enter a valid name."
+                );
+
+                nameInput.focus();
+
+                return;
+
+            }
+
+
+            button.disabled =
+                true;
+
+
+            button.textContent =
+                "Saving changes...";
+
+
+            try {
+
+                const {
+                    error
+                } =
+                    await supabaseClient
+                        .from("Idris-Data-App")
+                        .update({
+                            full_name:
+                                fullName,
+                            phone:
+                                phone || null
+                        })
+                        .eq(
+                            "id",
+                            currentUser.id
+                        );
+
+
+                if (error) {
+
+                    console.error(
+                        "Save profile error:",
+                        error
+                    );
+
+                    throw error;
+
+                }
+
+
+                /* Update Supabase Auth metadata too */
+
+                const {
+                    error: metadataError
+                } =
+                    await supabaseClient
+                        .auth
+                        .updateUser({
+                            data: {
+                                full_name:
+                                    fullName,
+                                phone:
+                                    phone || null
+                            }
+                        });
+
+
+                if (metadataError) {
+
+                    console.warn(
+                        "Metadata update warning:",
+                        metadataError
+                    );
+
+                }
+
+
+                /* Update screen immediately */
+
+                document
+                    .getElementById("fullName")
+                    .textContent =
+                        fullName;
+
+
+                document
+                    .getElementById("profileName")
+                    .textContent =
+                        fullName;
+
+
+                document
+                    .getElementById("phone")
+                    .textContent =
+                        phone || "Not provided";
+
+
+                document
+                    .getElementById("avatar")
+                    .textContent =
+                        getInitials(fullName);
+
+
+                closeEditProfile();
+
+
+                showToast(
+                    "Profile updated successfully."
+                );
+
+            }
+
+            catch (error) {
+
+                showToast(
+                    error?.message ||
+                    "Unable to update your profile."
+                );
+
+            }
+
+            finally {
+
+                button.disabled =
+                    false;
+
+                button.textContent =
+                    "Save changes";
+
+            }
+
+        }
+
+
+        /* =========================
            COPY ACCOUNT NUMBER
         ========================= */
 
@@ -1795,7 +2739,7 @@
                 !currentAccountNumber
             ) {
 
-                alert(
+                showToast(
                     "Your account number is not available yet."
                 );
 
@@ -1813,16 +2757,80 @@
                     );
 
 
-                alert(
-                    "Account number copied!"
+                showToast(
+                    "Account number copied."
                 );
 
             }
 
             catch (error) {
 
-                alert(
+                showToast(
                     "Unable to copy. Please copy it manually."
+                );
+
+            }
+
+        }
+
+
+        /* =========================
+           CHANGE PASSWORD
+        ========================= */
+
+        async function changePassword() {
+
+            if (!currentUser?.email) {
+
+                showToast(
+                    "Your email address is not available."
+                );
+
+                return;
+
+            }
+
+
+            try {
+
+                const {
+                    error
+                } =
+                    await supabaseClient
+                        .auth
+                        .resetPasswordForEmail(
+                            currentUser.email,
+                            {
+                                redirectTo:
+                                    window.location.origin +
+                                    window.location.pathname
+                            }
+                        );
+
+
+                if (error) {
+
+                    throw error;
+
+                }
+
+
+                showToast(
+                    "Password reset link sent to your email."
+                );
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Password reset error:",
+                    error
+                );
+
+
+                showToast(
+                    "Unable to send password reset email."
                 );
 
             }
@@ -1912,13 +2920,77 @@
                     "Log Out";
 
 
-                alert(
+                showToast(
                     "Unable to log out. Please try again."
                 );
 
             }
 
         }
+
+
+        /* =========================
+           CLOSE MODALS ON BACKDROP
+        ========================= */
+
+        document
+            .getElementById("editModal")
+            .addEventListener(
+                "click",
+                function(event) {
+
+                    if (
+                        event.target ===
+                        this
+                    ) {
+
+                        closeEditProfile();
+
+                    }
+
+                }
+            );
+
+
+        document
+            .getElementById("logoutModal")
+            .addEventListener(
+                "click",
+                function(event) {
+
+                    if (
+                        event.target ===
+                        this
+                    ) {
+
+                        closeLogoutModal();
+
+                    }
+
+                }
+            );
+
+
+        /* =========================
+           ESCAPE KEY
+        ========================= */
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key ===
+                    "Escape"
+                ) {
+
+                    closeEditProfile();
+                    closeLogoutModal();
+
+                }
+
+            }
+        );
 
 
         /* =========================
