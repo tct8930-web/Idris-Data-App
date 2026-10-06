@@ -1,397 +1,997 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Velqora - Profile</title>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#075d45"
+    >
+
+    <title>Profile - Velqora</title>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
     <style>
+
         * {
             box-sizing: border-box;
         }
 
+
         html {
-            scroll-behavior: smooth;
+            min-height: 100%;
         }
 
+
         body {
+
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f8f6;
-            color: #10231c;
-            padding-bottom: 90px;
+
+            min-height: 100vh;
+            min-height: 100dvh;
+
+            padding-bottom: 92px;
+
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Arial,
+                sans-serif;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #f8fbfa 0%,
+                    #eef6f2 100%
+                );
+
+            color: #10201b;
         }
+
+
+        button,
+        input {
+            font: inherit;
+        }
+
+
+        button,
+        a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
 
         /* =========================
            TOP HEADER
         ========================= */
 
         .top {
-            background: linear-gradient(135deg, #063d2b, #087f5b);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #04382e,
+                    #087f59
+                );
+
             color: white;
-            padding: 18px 18px 62px;
-            border-radius: 0 0 30px 30px;
+
+            padding:
+                18px
+                18px
+                58px;
+
+            border-radius:
+                0
+                0
+                30px
+                30px;
         }
+
 
         .top-bar {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+
             max-width: 650px;
+
             margin: 0 auto;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
         }
+
 
         .back-btn {
-            width: 44px;
-            height: 44px;
-            border-radius: 14px;
-            background: rgba(255,255,255,0.14);
-            color: white;
-            border: 1px solid rgba(255,255,255,0.12);
-            font-size: 22px;
-            cursor: pointer;
+
+            width: 43px;
+            height: 43px;
+
             flex-shrink: 0;
-            transition: 0.2s ease;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border:
+                1px solid
+                rgba(255,255,255,.13);
+
+            border-radius: 14px;
+
+            background:
+                rgba(255,255,255,.12);
+
+            color: white;
+
+            font-size: 20px;
+
+            cursor: pointer;
         }
+
 
         .back-btn:active {
-            transform: scale(0.95);
+
+            transform:
+                scale(.95);
         }
+
 
         .brand-logo {
-            width: 44px;
-            height: 44px;
-            border-radius: 14px;
-            overflow: hidden;
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 7px 18px rgba(0,0,0,0.15);
+
+            width: 43px;
+            height: 43px;
+
             flex-shrink: 0;
+
+            padding: 4px;
+
+            border-radius: 14px;
+
+            background: white;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 7px 18px
+                rgba(0,0,0,.15);
         }
+
 
         .brand-logo img {
+
             width: 100%;
             height: 100%;
-            object-fit: cover;
+
             display: block;
+
+            object-fit: contain;
+
+            border-radius: 10px;
         }
+
 
         .brand {
-            font-size: 22px;
-            font-weight: 800;
-            letter-spacing: -0.3px;
+
+            font-size: 20px;
+
+            font-weight: 900;
+
+            letter-spacing: -.3px;
         }
+
 
         .subtitle {
-            margin: 3px 0 0;
-            font-size: 13px;
-            opacity: 0.78;
+
+            margin-top: 3px;
+
+            color:
+                rgba(255,255,255,.70);
+
+            font-size: 11px;
         }
 
+
         /* =========================
-           MAIN CONTAINER
+           MAIN
         ========================= */
 
         .container {
+
             max-width: 650px;
-            margin: -34px auto 0;
-            padding: 0 16px;
+
+            margin:
+                -34px
+                auto
+                0;
+
+            padding:
+                0
+                16px;
         }
 
+
         .profile-card {
+
             background: white;
+
+            border:
+                1px solid
+                #e1ebe6;
+
             border-radius: 26px;
-            padding: 24px 18px;
-            box-shadow: 0 14px 38px rgba(0,0,0,0.07);
+
+            padding:
+                26px
+                20px
+                24px;
+
+            box-shadow:
+                0 24px 65px
+                rgba(4,56,46,.09),
+                0 3px 12px
+                rgba(4,56,46,.03);
         }
+
 
         /* =========================
            PROFILE HEADER
         ========================= */
 
         .profile-top {
+
             text-align: center;
-            padding-top: 3px;
         }
+
 
         .avatar {
-            width: 92px;
-            height: 92px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #0bb77b, #087f5b);
-            color: white;
+
+            width: 88px;
+            height: 88px;
+
+            margin:
+                0
+                auto
+                14px;
+
             display: flex;
+
             align-items: center;
+
             justify-content: center;
-            font-size: 36px;
-            font-weight: 800;
-            margin: 0 auto 15px;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0fa96f,
+                    #087f59
+                );
+
+            color: white;
+
+            font-size: 34px;
+
+            font-weight: 900;
+
             box-shadow:
-                0 0 0 7px #f0faf5,
-                0 10px 25px rgba(8,127,91,0.22);
+                0 0 0 7px
+                #eef8f3,
+                0 12px 25px
+                rgba(8,127,89,.18);
         }
+
 
         .name {
+
+            color: #10201b;
+
             font-size: 24px;
-            font-weight: 800;
-            color: #10231c;
-            margin-bottom: 5px;
+
+            font-weight: 850;
+
+            letter-spacing: -.5px;
+
+            line-height: 1.25;
+
             word-break: break-word;
         }
+
 
         .email {
-            color: #74827c;
-            font-size: 14px;
+
+            margin-top: 6px;
+
+            color: #7b8b85;
+
+            font-size: 12px;
+
             line-height: 1.5;
+
             word-break: break-word;
         }
 
-        .verified {
+
+        .status {
+
             display: inline-flex;
+
             align-items: center;
+
             gap: 5px;
-            margin-top: 10px;
-            padding: 6px 10px;
+
+            margin-top: 11px;
+
+            padding:
+                6px
+                10px;
+
             border-radius: 999px;
+
             background: #edf9f3;
-            color: #087f5b;
-            font-size: 11px;
-            font-weight: 800;
+
+            border:
+                1px solid
+                #d9eee4;
+
+            color: #087f59;
+
+            font-size: 10px;
+
+            font-weight: 850;
         }
 
+
         /* =========================
-           SECTIONS
+           SECTION
         ========================= */
 
         .section-title {
-            margin: 29px 0 11px;
-            font-size: 13px;
-            font-weight: 800;
-            color: #53645d;
+
+            margin:
+                27px
+                0
+                10px;
+
+            color: #65756e;
+
+            font-size: 10px;
+
+            font-weight: 850;
+
+            letter-spacing: .8px;
+
             text-transform: uppercase;
-            letter-spacing: 0.6px;
         }
+
 
         .info {
-            border: 1px solid #e5eee9;
-            border-radius: 18px;
+
             overflow: hidden;
+
             background: white;
+
+            border:
+                1px solid
+                #e3ece7;
+
+            border-radius: 17px;
         }
+
 
         .row {
-            padding: 16px;
-            border-bottom: 1px solid #e8efeb;
-            background: #fff;
+
+            padding:
+                15px;
+
+            border-bottom:
+                1px solid
+                #edf2ef;
         }
 
+
         .row:last-child {
+
             border-bottom: none;
         }
 
+
         .label {
-            font-size: 11px;
-            color: #7c8984;
-            margin-bottom: 6px;
-            font-weight: 600;
+
+            margin-bottom: 5px;
+
+            color: #87948f;
+
+            font-size: 10px;
+
+            font-weight: 700;
         }
 
+
         .value {
-            font-size: 15px;
-            font-weight: 700;
-            word-break: break-word;
+
             color: #17372b;
+
+            font-size: 14px;
+
+            font-weight: 750;
+
             line-height: 1.45;
+
+            word-break: break-word;
         }
+
 
         /* =========================
            ACCOUNT NUMBER
         ========================= */
 
         .account-row {
-            background: linear-gradient(135deg, #effaf5, #f9fcfa);
-            padding: 18px 16px;
+
+            padding: 17px 15px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #effaf5,
+                    #f9fcfa
+                );
         }
+
+
+        .account-label-row {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+        }
+
+
+        .account-label {
+
+            color: #64766e;
+
+            font-size: 10px;
+
+            font-weight: 750;
+        }
+
+
+        .account-badge {
+
+            padding:
+                5px
+                8px;
+
+            border-radius: 999px;
+
+            background: #e3f5ec;
+
+            color: #087f59;
+
+            font-size: 8px;
+
+            font-weight: 850;
+        }
+
 
         .account-number-line {
+
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
+
             gap: 12px;
+
+            margin-top: 9px;
         }
 
+
         .account-number {
-            font-size: 22px;
-            font-weight: 800;
-            letter-spacing: 1.7px;
-            color: #087f5b;
+
+            color: #087f59;
+
+            font-size: 21px;
+
+            font-weight: 900;
+
+            letter-spacing: 1.4px;
+
             word-break: break-all;
         }
 
+
         .copy-btn {
+
             width: auto;
-            padding: 10px 14px;
-            border-radius: 11px;
-            background: #087f5b;
-            color: white;
-            font-size: 12px;
-            font-weight: 800;
+
             flex-shrink: 0;
+
+            padding:
+                9px
+                12px;
+
             border: none;
+
+            border-radius: 10px;
+
+            background: #087f59;
+
+            color: white;
+
+            font-size: 10px;
+
+            font-weight: 850;
+
             cursor: pointer;
-            transition: 0.2s ease;
         }
+
 
         .copy-btn:active {
-            transform: scale(0.96);
+
+            transform:
+                scale(.96);
         }
 
+
         /* =========================
-           SECURITY NOTE
+           SECURITY
         ========================= */
 
         .secure-note {
-            margin-top: 18px;
-            padding: 15px;
-            border-radius: 16px;
-            background: #f0faf5;
-            color: #477064;
-            font-size: 12px;
-            text-align: center;
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 9px;
+
+            margin-top: 17px;
+
+            padding: 14px;
+
+            border:
+                1px solid
+                #dfeee7;
+
+            border-radius: 15px;
+
+            background: #f1faf6;
+
+            color: #547169;
+
+            font-size: 10px;
+
             line-height: 1.6;
-            border: 1px solid #e0f0e8;
         }
 
+
+        .secure-icon {
+
+            flex-shrink: 0;
+
+            font-size: 14px;
+        }
+
+
         /* =========================
-           BUTTONS
+           ACTIONS
         ========================= */
 
         .buttons {
-            margin-top: 22px;
+
             display: grid;
-            gap: 11px;
+
+            gap: 10px;
+
+            margin-top: 21px;
         }
 
-        button,
-        a {
-            width: 100%;
-            padding: 15px;
-            border-radius: 15px;
-            border: none;
-            font-size: 15px;
-            font-weight: 800;
-            text-align: center;
-            text-decoration: none;
-            cursor: pointer;
-            transition: 0.2s ease;
-        }
 
-        .dashboard {
-            background: #087f5b;
+        .dashboard-btn {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-height: 50px;
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0fa96f,
+                    #087f59
+                );
+
             color: white;
-            box-shadow: 0 8px 18px rgba(8,127,91,0.16);
+
+            font-size: 13px;
+
+            font-weight: 850;
+
+            box-shadow:
+                0 9px 20px
+                rgba(8,127,89,.16);
         }
 
-        .dashboard:active {
-            transform: scale(0.98);
+
+        .dashboard-btn:active {
+
+            transform:
+                scale(.985);
         }
 
-        .logout {
-            background: #fff1f1;
-            color: #d93030;
-            border: 1px solid #ffe0e0;
+
+        .logout-btn {
+
+            min-height: 49px;
+
+            border:
+                1px solid
+                #f2dada;
+
+            border-radius: 14px;
+
+            background: #fff5f5;
+
+            color: #c94b4b;
+
+            font-size: 13px;
+
+            font-weight: 850;
+
+            cursor: pointer;
         }
 
-        .logout:active {
-            transform: scale(0.98);
+
+        .logout-btn:active {
+
+            transform:
+                scale(.985);
         }
+
 
         /* =========================
            LOADING
         ========================= */
 
         .loading {
+
+            padding:
+                55px
+                15px;
+
             text-align: center;
-            padding: 55px 15px;
+
             color: #718078;
-            font-size: 14px;
+
+            font-size: 12px;
         }
+
 
         .loading-spinner {
+
             width: 30px;
             height: 30px;
-            border: 3px solid #dcebe5;
-            border-top-color: #087f5b;
+
+            margin:
+                0
+                auto
+                14px;
+
+            border:
+                3px solid
+                #dcebe5;
+
+            border-top-color:
+                #087f59;
+
             border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin: 0 auto 15px;
+
+            animation:
+                spin .8s
+                linear
+                infinite;
         }
 
+
         @keyframes spin {
+
             to {
                 transform: rotate(360deg);
             }
+
         }
+
 
         /* =========================
            ERROR
         ========================= */
 
         .error {
+
+            padding:
+                40px
+                10px;
+
             text-align: center;
-            color: #d93030;
-            padding: 38px 10px;
+
+            color: #c94b4b;
+
+            font-size: 12px;
+
             line-height: 1.6;
-            font-size: 14px;
         }
+
+
+        /* =========================
+           LOGOUT MODAL
+        ========================= */
+
+        #logoutModal {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 100;
+
+            display: none;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                rgba(4,20,15,.48);
+
+            backdrop-filter:
+                blur(7px);
+        }
+
+
+        .logout-box {
+
+            width: 100%;
+
+            max-width: 360px;
+
+            padding: 25px 22px 21px;
+
+            background: white;
+
+            border:
+                1px solid
+                #e1ebe6;
+
+            border-radius: 23px;
+
+            text-align: center;
+
+            box-shadow:
+                0 25px 70px
+                rgba(0,0,0,.20);
+        }
+
+
+        .logout-icon {
+
+            width: 52px;
+            height: 52px;
+
+            margin:
+                0
+                auto
+                14px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #fff1f1;
+
+            color: #c94b4b;
+
+            font-size: 22px;
+        }
+
+
+        .logout-box h3 {
+
+            margin: 0;
+
+            color: #10201b;
+
+            font-size: 20px;
+
+            font-weight: 850;
+        }
+
+
+        .logout-box p {
+
+            margin:
+                8px
+                0
+                20px;
+
+            color: #7a8983;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+
+        .logout-actions {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 9px;
+        }
+
+
+        .cancel-btn,
+        .confirm-logout {
+
+            min-height: 45px;
+
+            border-radius: 12px;
+
+            font-size: 12px;
+
+            font-weight: 850;
+
+            cursor: pointer;
+        }
+
+
+        .cancel-btn {
+
+            border:
+                1px solid
+                #dfe8e4;
+
+            background: #f7faf8;
+
+            color: #60716a;
+        }
+
+
+        .confirm-logout {
+
+            border: none;
+
+            background: #c94b4b;
+
+            color: white;
+        }
+
+
+        .confirm-logout:disabled {
+
+            opacity: .6;
+
+            cursor: not-allowed;
+        }
+
 
         /* =========================
            BOTTOM NAV
         ========================= */
 
         .bottom-nav {
+
             position: fixed;
+
             left: 0;
             right: 0;
             bottom: 0;
-            height: 74px;
-            background: rgba(255,255,255,0.97);
-            backdrop-filter: blur(12px);
-            border-top: 1px solid #e5eee9;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
+
             z-index: 20;
-            padding-bottom: env(safe-area-inset-bottom);
+
+            height: 74px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-around;
+
+            padding-bottom:
+                env(safe-area-inset-bottom);
+
+            background:
+                rgba(255,255,255,.97);
+
+            backdrop-filter:
+                blur(14px);
+
+            border-top:
+                1px solid
+                #e3ece8;
         }
+
 
         .nav-item {
+
             width: auto;
+
             min-width: 70px;
-            padding: 6px 10px;
-            text-decoration: none;
-            color: #87938e;
-            font-size: 11px;
-            font-weight: 700;
-            text-align: center;
+
+            padding:
+                6px
+                10px;
+
             border-radius: 13px;
+
+            color: #87938e;
+
+            font-size: 10px;
+
+            font-weight: 750;
+
+            text-align: center;
+
+            text-decoration: none;
         }
+
 
         .nav-item span {
+
             display: block;
-            font-size: 21px;
-            line-height: 23px;
+
             margin-bottom: 3px;
+
+            font-size: 20px;
+
+            line-height: 22px;
         }
 
+
         .nav-item.active {
-            color: #087f5b;
+
+            color: #087f59;
+
+            background: #eef8f3;
         }
+
 
         /* =========================
            DESKTOP
@@ -400,22 +1000,26 @@
         @media (min-width: 700px) {
 
             .top {
+
                 padding-left: 30px;
                 padding-right: 30px;
             }
 
+
             .container {
+
                 margin-top: -38px;
             }
 
+
             .profile-card {
-                padding: 30px;
+
+                padding:
+                    30px;
             }
 
-            .name {
-                font-size: 26px;
-            }
         }
+
 
         /* =========================
            SMALL PHONES
@@ -424,34 +1028,52 @@
         @media (max-width: 400px) {
 
             .container {
-                padding: 0 12px;
+
+                padding:
+                    0
+                    12px;
             }
+
 
             .profile-card {
-                padding: 22px 15px;
+
+                padding:
+                    23px
+                    15px
+                    21px;
             }
 
-            .account-number-line {
-                align-items: flex-start;
-            }
 
             .account-number {
-                font-size: 18px;
-                letter-spacing: 1px;
+
+                font-size: 17px;
+
+                letter-spacing: .8px;
             }
+
 
             .copy-btn {
-                padding: 9px 11px;
+
+                padding:
+                    8px
+                    10px;
             }
+
 
             .nav-item {
+
                 min-width: 62px;
             }
+
         }
+
     </style>
+
 </head>
 
+
 <body>
+
 
     <!-- TOP HEADER -->
 
@@ -459,21 +1081,38 @@
 
         <div class="top-bar">
 
-            <button class="back-btn" onclick="goBack()" aria-label="Go back">
+
+            <button
+                class="back-btn"
+                onclick="goBack()"
+                aria-label="Go back"
+            >
                 ←
             </button>
 
+
             <div class="brand-logo">
+
                 <img
                     src="velqora.png.PNG"
-                    alt="Velqora Logo"
+                    alt="Velqora"
                 >
+
             </div>
 
+
             <div>
-                <div class="brand">Velqora</div>
-                <div class="subtitle">My Profile</div>
+
+                <div class="brand">
+                    Velqora
+                </div>
+
+                <div class="subtitle">
+                    My Profile
+                </div>
+
             </div>
+
 
         </div>
 
@@ -484,11 +1123,16 @@
 
     <div class="container">
 
+
         <div class="profile-card">
+
 
             <!-- LOADING -->
 
-            <div id="loading" class="loading">
+            <div
+                id="loading"
+                class="loading"
+            >
 
                 <div class="loading-spinner"></div>
 
@@ -497,27 +1141,53 @@
             </div>
 
 
-            <!-- PROFILE CONTENT -->
+            <!-- PROFILE -->
 
-            <div id="profileContent" style="display:none;">
+            <div
+                id="profileContent"
+                style="display:none;"
+            >
+
+
+                <!-- PROFILE HEADER -->
 
                 <div class="profile-top">
 
-                    <div class="avatar" id="avatar">
+
+                    <div
+                        class="avatar"
+                        id="avatar"
+                    >
                         V
                     </div>
 
-                    <div class="name" id="fullName">
+
+                    <div
+                        class="name"
+                        id="fullName"
+                    >
                         Velqora User
                     </div>
 
-                    <div class="email" id="email">
+
+                    <div
+                        class="email"
+                        id="email"
+                    >
                         -
                     </div>
 
-                    <div class="verified">
-                        ✓ Account connected
+
+                    <div class="status">
+
+                        <span>✓</span>
+
+                        <span>
+                            Account active
+                        </span>
+
                     </div>
+
 
                 </div>
 
@@ -525,18 +1195,34 @@
                 <!-- ACCOUNT -->
 
                 <div class="section-title">
-                    Your Velqora Account
+                    Velqora Account
                 </div>
+
 
                 <div class="info">
 
-                    <div class="row account-row">
 
-                        <div class="label">
-                            Velqora Account Number
+                    <div class="account-row">
+
+
+                        <div class="account-label-row">
+
+
+                            <div class="account-label">
+                                Account number
+                            </div>
+
+
+                            <div class="account-badge">
+                                ACTIVE
+                            </div>
+
+
                         </div>
 
+
                         <div class="account-number-line">
+
 
                             <div
                                 class="account-number"
@@ -545,6 +1231,7 @@
                                 -
                             </div>
 
+
                             <button
                                 class="copy-btn"
                                 onclick="copyAccountNumber()"
@@ -552,26 +1239,33 @@
                                 Copy
                             </button>
 
+
                         </div>
+
 
                     </div>
 
+
                 </div>
 
 
-                <!-- ACCOUNT INFORMATION -->
+                <!-- PERSONAL INFORMATION -->
 
                 <div class="section-title">
-                    Account Information
+                    Personal Information
                 </div>
+
 
                 <div class="info">
 
+
                     <div class="row">
 
+
                         <div class="label">
-                            Full Name
+                            Full name
                         </div>
+
 
                         <div
                             class="value"
@@ -580,14 +1274,17 @@
                             -
                         </div>
 
+
                     </div>
 
 
                     <div class="row">
 
+
                         <div class="label">
-                            Phone Number
+                            Phone number
                         </div>
+
 
                         <div
                             class="value"
@@ -596,14 +1293,17 @@
                             -
                         </div>
 
+
                     </div>
 
 
                     <div class="row">
 
+
                         <div class="label">
-                            Email Address
+                            Email address
                         </div>
+
 
                         <div
                             class="value"
@@ -612,14 +1312,30 @@
                             -
                         </div>
 
+
                     </div>
+
+
+                </div>
+
+
+                <!-- ACCOUNT SECURITY -->
+
+                <div class="section-title">
+                    Account Security
+                </div>
+
+
+                <div class="info">
 
 
                     <div class="row">
 
+
                         <div class="label">
-                            User ID
+                            Account ID
                         </div>
+
 
                         <div
                             class="value"
@@ -628,16 +1344,47 @@
                             -
                         </div>
 
+
                     </div>
+
+
+                    <div class="row">
+
+
+                        <div class="label">
+                            Account status
+                        </div>
+
+
+                        <div class="value">
+                            Active
+                        </div>
+
+
+                    </div>
+
 
                 </div>
 
 
-                <!-- SECURITY -->
+                <!-- SECURITY NOTE -->
 
                 <div class="secure-note">
-                    🔒 Your account information is securely connected to Velqora.
-                    Keep your login details private and never share your password.
+
+                    <div class="secure-icon">
+                        🔒
+                    </div>
+
+
+                    <div>
+
+                        Your Velqora account information is
+                        securely connected to your account.
+                        Never share your password or login
+                        details with anyone.
+
+                    </div>
+
                 </div>
 
 
@@ -645,21 +1392,25 @@
 
                 <div class="buttons">
 
+
                     <a
                         href="index.html"
-                        class="dashboard"
+                        class="dashboard-btn"
                     >
                         ← Back to Dashboard
                     </a>
 
+
                     <button
-                        class="logout"
+                        class="logout-btn"
                         onclick="logout()"
                     >
                         Log Out
                     </button>
 
+
                 </div>
+
 
             </div>
 
@@ -671,9 +1422,15 @@
                 class="error"
                 style="display:none;"
             >
-                Unable to load your profile.<br>
+
+                Unable to load your profile.
+
+                <br><br>
+
                 Please refresh the page and try again.
+
             </div>
+
 
         </div>
 
@@ -684,103 +1441,209 @@
 
     <div class="bottom-nav">
 
+
         <a
             href="index.html"
             class="nav-item"
         >
+
             <span>⌂</span>
+
             Home
+
         </a>
+
 
         <a
             href="transactions.html"
             class="nav-item"
         >
+
             <span>▣</span>
+
             Activity
+
         </a>
+
 
         <a
             href="profile.html"
             class="nav-item active"
         >
+
             <span>●</span>
+
             Profile
+
         </a>
+
 
     </div>
 
 
-    <!-- SUPABASE CONFIG -->
+    <!-- LOGOUT MODAL -->
+
+    <div id="logoutModal">
+
+
+        <div class="logout-box">
+
+
+            <div class="logout-icon">
+                ⇥
+            </div>
+
+
+            <h3>
+                Log out of Velqora?
+            </h3>
+
+
+            <p>
+                You will need to sign in again
+                to access your account and wallet.
+            </p>
+
+
+            <div class="logout-actions">
+
+
+                <button
+                    class="cancel-btn"
+                    onclick="closeLogoutModal()"
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    class="confirm-logout"
+                    onclick="confirmLogout()"
+                >
+                    Log Out
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    <!-- CONFIG -->
 
     <script src="config.js"></script>
 
+
     <script>
 
-        const supabaseClient = window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_KEY
-        );
+
+        const supabaseClient =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_KEY
+            );
 
 
         let currentAccountNumber = "";
 
 
+        /* =========================
+           BACK
+        ========================= */
+
         function goBack() {
 
-            window.location.href = "index.html";
+            window.location.href =
+                "index.html";
 
         }
 
+
+        /* =========================
+           LOAD PROFILE
+        ========================= */
 
         async function loadProfile() {
 
             try {
 
+
                 const {
-                    data: { session },
+                    data: {
+                        session
+                    },
                     error: sessionError
-                } = await supabaseClient.auth.getSession();
+                } =
+                    await supabaseClient
+                        .auth
+                        .getSession();
 
 
-                if (sessionError || !session) {
+                if (
+                    sessionError ||
+                    !session
+                ) {
 
-                    window.location.href = "login.html";
+                    window.location.href =
+                        "login.html";
 
                     return;
 
                 }
 
 
-                const user = session.user;
+                const user =
+                    session.user;
 
 
-                document.getElementById("email").textContent =
-                    user.email || "-";
+                /* =========================
+                   EMAIL
+                ========================= */
+
+                document
+                    .getElementById("email")
+                    .textContent =
+                        user.email || "-";
 
 
-                document.getElementById("profileEmail").textContent =
-                    user.email || "-";
+                document
+                    .getElementById("profileEmail")
+                    .textContent =
+                        user.email || "-";
 
 
-                document.getElementById("userId").textContent =
-                    user.id;
+                /* =========================
+                   USER ID
+                ========================= */
 
+                document
+                    .getElementById("userId")
+                    .textContent =
+                        user.id;
+
+
+                /* =========================
+                   PROFILE TABLE
+                ========================= */
 
                 const {
                     data: profile,
                     error
-                } = await supabaseClient
-
-                    .from("Idris-Data-App")
-
-                    .select(
-                        "full_name, phone, account_number"
-                    )
-
-                    .eq("id", user.id)
-
-                    .maybeSingle();
+                } =
+                    await supabaseClient
+                        .from("Idris-Data-App")
+                        .select(
+                            "full_name, phone, account_number"
+                        )
+                        .eq(
+                            "id",
+                            user.id
+                        )
+                        .maybeSingle();
 
 
                 if (error) {
@@ -790,20 +1653,27 @@
                         error
                     );
 
-                    document.getElementById(
-                        "loading"
-                    ).style.display = "none";
+
+                    document
+                        .getElementById("loading")
+                        .style.display =
+                            "none";
 
 
-                    document.getElementById(
-                        "errorMessage"
-                    ).style.display = "block";
+                    document
+                        .getElementById("errorMessage")
+                        .style.display =
+                            "block";
 
 
                     return;
 
                 }
 
+
+                /* =========================
+                   DATA
+                ========================= */
 
                 const fullName =
                     profile?.full_name ||
@@ -823,28 +1693,41 @@
 
 
                 currentAccountNumber =
-                    profile?.account_number || "";
+                    profile?.account_number ||
+                    "";
 
 
-                document.getElementById(
-                    "fullName"
-                ).textContent = fullName;
+                /* =========================
+                   DISPLAY
+                ========================= */
+
+                document
+                    .getElementById("fullName")
+                    .textContent =
+                        fullName;
 
 
-                document.getElementById(
-                    "profileName"
-                ).textContent = fullName;
+                document
+                    .getElementById("profileName")
+                    .textContent =
+                        fullName;
 
 
-                document.getElementById(
-                    "phone"
-                ).textContent = phone;
+                document
+                    .getElementById("phone")
+                    .textContent =
+                        phone;
 
 
-                document.getElementById(
-                    "accountNumber"
-                ).textContent = accountNumber;
+                document
+                    .getElementById("accountNumber")
+                    .textContent =
+                        accountNumber;
 
+
+                /* =========================
+                   AVATAR
+                ========================= */
 
                 const firstLetter =
                     fullName
@@ -853,22 +1736,32 @@
                         .toUpperCase();
 
 
-                document.getElementById(
-                    "avatar"
-                ).textContent =
-                    firstLetter || "V";
+                document
+                    .getElementById("avatar")
+                    .textContent =
+                        firstLetter ||
+                        "V";
 
 
-                document.getElementById(
-                    "loading"
-                ).style.display = "none";
+                /* =========================
+                   SHOW PAGE
+                ========================= */
+
+                document
+                    .getElementById("loading")
+                    .style.display =
+                        "none";
 
 
-                document.getElementById(
-                    "profileContent"
-                ).style.display = "block";
+                document
+                    .getElementById("profileContent")
+                    .style.display =
+                        "block";
 
-            } catch (error) {
+
+            }
+
+            catch (error) {
 
                 console.error(
                     "Profile page error:",
@@ -876,23 +1769,31 @@
                 );
 
 
-                document.getElementById(
-                    "loading"
-                ).style.display = "none";
+                document
+                    .getElementById("loading")
+                    .style.display =
+                        "none";
 
 
-                document.getElementById(
-                    "errorMessage"
-                ).style.display = "block";
+                document
+                    .getElementById("errorMessage")
+                    .style.display =
+                        "block";
 
             }
 
         }
 
 
+        /* =========================
+           COPY ACCOUNT NUMBER
+        ========================= */
+
         async function copyAccountNumber() {
 
-            if (!currentAccountNumber) {
+            if (
+                !currentAccountNumber
+            ) {
 
                 alert(
                     "Your account number is not available yet."
@@ -905,18 +1806,23 @@
 
             try {
 
-                await navigator.clipboard.writeText(
-                    currentAccountNumber
-                );
+                await navigator
+                    .clipboard
+                    .writeText(
+                        currentAccountNumber
+                    );
+
 
                 alert(
                     "Account number copied!"
                 );
 
-            } catch (error) {
+            }
+
+            catch (error) {
 
                 alert(
-                    "Unable to copy. Please copy the number manually."
+                    "Unable to copy. Please copy it manually."
                 );
 
             }
@@ -924,33 +1830,107 @@
         }
 
 
-        async function logout() {
+        /* =========================
+           LOGOUT MODAL
+        ========================= */
 
-            const {
-                error
-            } = await supabaseClient.auth.signOut();
+        function logout() {
+
+            document
+                .getElementById("logoutModal")
+                .style.display =
+                    "flex";
+
+        }
 
 
-            if (error) {
+        function closeLogoutModal() {
+
+            document
+                .getElementById("logoutModal")
+                .style.display =
+                    "none";
+
+        }
+
+
+        /* =========================
+           CONFIRM LOGOUT
+        ========================= */
+
+        async function confirmLogout() {
+
+            const button =
+                document.querySelector(
+                    ".confirm-logout"
+                );
+
+
+            button.disabled =
+                true;
+
+
+            button.textContent =
+                "Logging out...";
+
+
+            try {
+
+                const {
+                    error
+                } =
+                    await supabaseClient
+                        .auth
+                        .signOut();
+
+
+                if (error) {
+
+                    throw error;
+
+                }
+
+
+                window.location.href =
+                    "login.html";
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Logout error:",
+                    error
+                );
+
+
+                button.disabled =
+                    false;
+
+
+                button.textContent =
+                    "Log Out";
+
 
                 alert(
                     "Unable to log out. Please try again."
                 );
 
-                return;
-
             }
-
-
-            window.location.href =
-                "login.html";
 
         }
 
 
+        /* =========================
+           START
+        ========================= */
+
         loadProfile();
+
 
     </script>
 
+
 </body>
+
 </html>
