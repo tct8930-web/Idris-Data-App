@@ -4135,256 +4135,453 @@
            RECENT ACTIVITY
         ========================= */
 
-        async function loadRecentActivity() {
-
-            const activityList =
-                document.getElementById(
-                    "activityList"
-                );
-
-
-            if (!currentUser) {
-                return;
-            }
-
-
-            try {
-
-                const userId =
-                    currentUser.id;
-
-
-                const results =
-                    await Promise.all([
-
-                        supabaseClient
-                            .from(
-                                "wallet_transactions"
-                            )
-                            .select("*")
-                            .eq(
-                                "user_id",
-                                userId
-                            )
-                            .order(
-                                "created_at",
-                                {
-                                    ascending: false
-                                }
-                            )
-                            .limit(5),
-
-                        supabaseClient
-                            .from(
-                                "transfers"
-                            )
-                            .select("*")
-                            .eq(
-                                "user_id",
-                                userId
-                            )
-                            .order(
-                                "created_at",
-                                {
-                                    ascending: false
-                                }
-                            )
-                            .limit(5),
-
-                        supabaseClient
-                            .from(
-                                "data_transactions"
-                            )
-                            .select("*")
-                            .eq(
-                                "user_id",
-                                userId
-                            )
-                            .order(
-                                "created_at",
-                                {
-                                    ascending: false
-                                }
-                            )
-                            .limit(5),
+       async function loadRecentActivity() {
+
+    const activityList =
+        document.getElementById("activityList");
 
-                        supabaseClient
-                            .from(
-                                "airtime_transactions"
-                            )
-                            .select("*")
-                            .eq(
-                                "user_id",
-                                userId
-                            )
-                            .order(
-                                "created_at",
-                                {
-                                    ascending: false
-                                }
-                            )
-                            .limit(5)
-
-                    ]);
-
-
-                let activities = [];
+    if (!activityList || !currentUser) {
+        return;
+    }
+
+    try {
+
+        const userId = currentUser.id;
+
+        const results = await Promise.all([
+
+            supabaseClient
+                .from("wallet_transactions")
+                .select("*")
+                .eq("user_id", userId)
+                .order("created_at", {
+                    ascending: false
+                })
+                .limit(10),
+
+            supabaseClient
+                .from("transfers")
+                .select("*")
+                .eq("user_id", userId)
+                .order("created_at", {
+                    ascending: false
+                })
+                .limit(10),
+
+            supabaseClient
+                .from("data_transactions")
+                .select("*")
+                .eq("user_id", userId)
+                .order("created_at", {
+                    ascending: false
+                })
+                .limit(10),
+
+            supabaseClient
+                .from("airtime_transactions")
+                .select("*")
+                .eq("user_id", userId)
+                .order("created_at", {
+                    ascending: false
+                })
+                .limit(10)
+
+        ]);
+
+
+        let activities = [];
+
+
+        /* =========================
+           WALLET TRANSACTIONS
+        ========================= */
+
+        if (results[0].data) {
+
+            results[0].data.forEach(tx => {
+
+                const rawType = String(
+                    tx.type ||
+                    tx.transaction_type ||
+                    tx.description ||
+                    ""
+                ).toLowerCase();
+
+                const incoming =
+                    rawType.includes("fund") ||
+                    rawType.includes("deposit") ||
+                    rawType.includes("credit") ||
+                    rawType.includes("received");
+
+                activities.push({
+
+                    title: incoming
+                        ? "Wallet funded"
+                        : "Wallet transaction",
+
+                    description: incoming
+                        ? "Money added to your wallet"
+                        : (
+                            tx.description ||
+                            "Wallet activity"
+                        ),
+
+                    amount:
+                        Number(tx.amount || 0),
+
+                    incoming:
+                        incoming,
+
+                    status:
+                        tx.status ||
+                        "successful",
+
+                    created_at:
+                        tx.created_at,
 
+                    reference:
+                        tx.reference ||
+                        tx.tx_ref ||
+                        "N/A",
 
-                results.forEach(
-                    result => {
+                    icon:
+                        incoming
+                            ? "↓"
+                            : "↕"
 
-                        if (
-                            result.data &&
-                            result.data.length
-                        ) {
+                });
 
-                            activities =
-                                activities.concat(
-                                    result.data
-                                );
-
-                        }
-
-                    }
-                );
-
-
-                activities.sort(
-                    (a, b) =>
-                        new Date(
-                            b.created_at
-                        ) -
-                        new Date(
-                            a.created_at
-                        )
-                );
-
-
-                activities =
-                    activities.slice(0, 5);
-
-
-                if (!activities.length) {
-
-                    activityList.innerHTML = `
-
-                        <div class="empty-activity">
-
-                            <div class="empty-icon">
-                                ↕
-                            </div>
-
-                            <strong>
-                                No recent activity
-                            </strong>
-
-                            <p>
-                                Your latest wallet activity
-                                will appear here.
-                            </p>
-
-                        </div>
-
-                    `;
-
-                    return;
-
-                }
-
-
-                activityList.innerHTML = "";
-
-
-                activities.forEach(
-                    activity => {
-
-                        const item =
-                            document.createElement(
-                                "div"
-                            );
-
-
-                        item.className =
-                            "activity-item";
-
-
-                        const amount =
-                            Number(
-                                activity.amount || 0
-                            );
-
-
-                        const date =
-                            activity.created_at
-                                ? new Date(
-                                    activity.created_at
-                                ).toLocaleDateString(
-                                    "en-NG",
-                                    {
-                                        day: "numeric",
-                                        month: "short"
-                                    }
-                                )
-                                : "";
-
-
-                        item.innerHTML = `
-
-                            <div class="activity-icon">
-                                ↕
-                            </div>
-
-                            <div class="activity-details">
-
-                                <strong>
-                                    ${escapeHtml(
-                                        activity.type ||
-                                        "Transaction"
-                                    )}
-                                </strong>
-
-                                <span>
-                                    ${date}
-                                </span>
-
-                            </div>
-
-                            <div class="activity-amount">
-
-                                ₦${amount.toLocaleString(
-                                    "en-NG",
-                                    {
-                                        minimumFractionDigits: 2,
-                                        maximumFractionDigits: 2
-                                    }
-                                )}
-
-                            </div>
-
-                        `;
-
-
-                        activityList.appendChild(
-                            item
-                        );
-
-                    }
-                );
-
-            }
-
-            catch (error) {
-
-                console.error(
-                    "Activity error:",
-                    error
-                );
-
-            }
+            });
 
         }
 
+
+        /* =========================
+           VELQORA TRANSFERS
+        ========================= */
+
+        if (results[1].data) {
+
+            results[1].data.forEach(tx => {
+
+                const isIncoming =
+                    tx.recipient_user_id === userId;
+
+                activities.push({
+
+                    title:
+                        isIncoming
+                            ? "Money received"
+                            : "Transfer successful",
+
+                    description:
+                        isIncoming
+                            ? `From ${
+                                tx.account_name ||
+                                "Velqora User"
+                            }`
+                            : `To ${
+                                tx.account_name ||
+                                "Velqora User"
+                            }`,
+
+                    amount:
+                        Number(tx.amount || 0),
+
+                    incoming:
+                        isIncoming,
+
+                    status:
+                        tx.status ||
+                        "successful",
+
+                    created_at:
+                        tx.created_at,
+
+                    reference:
+                        tx.tx_ref ||
+                        tx.provider_reference ||
+                        "N/A",
+
+                    icon:
+                        isIncoming
+                            ? "↓"
+                            : "↑"
+
+                });
+
+            });
+
+        }
+
+
+        /* =========================
+           DATA PURCHASES
+        ========================= */
+
+        if (results[2].data) {
+
+            results[2].data.forEach(tx => {
+
+                activities.push({
+
+                    title:
+                        "Data purchase",
+
+                    description:
+                        tx.network
+                            ? `${tx.network} data`
+                            : "Mobile data",
+
+                    amount:
+                        Number(tx.amount || 0),
+
+                    incoming:
+                        false,
+
+                    status:
+                        tx.status ||
+                        "successful",
+
+                    created_at:
+                        tx.created_at,
+
+                    reference:
+                        tx.reference ||
+                        tx.tx_ref ||
+                        "N/A",
+
+                    icon:
+                        "▣"
+
+                });
+
+            });
+
+        }
+
+
+        /* =========================
+           AIRTIME PURCHASES
+        ========================= */
+
+        if (results[3].data) {
+
+            results[3].data.forEach(tx => {
+
+                activities.push({
+
+                    title:
+                        "Airtime purchase",
+
+                    description:
+                        tx.network
+                            ? `${tx.network} airtime`
+                            : "Mobile airtime",
+
+                    amount:
+                        Number(tx.amount || 0),
+
+                    incoming:
+                        false,
+
+                    status:
+                        tx.status ||
+                        "successful",
+
+                    created_at:
+                        tx.created_at,
+
+                    reference:
+                        tx.reference ||
+                        tx.tx_ref ||
+                        "N/A",
+
+                    icon:
+                        "☎"
+
+                });
+
+            });
+
+        }
+
+
+        /* =========================
+           SORT NEWEST FIRST
+        ========================= */
+
+        activities.sort(
+            (a, b) =>
+                new Date(b.created_at) -
+                new Date(a.created_at)
+        );
+
+
+        activities =
+            activities.slice(0, 5);
+
+
+        /* =========================
+           EMPTY STATE
+        ========================= */
+
+        if (!activities.length) {
+
+            activityList.innerHTML = `
+
+                <div class="empty-activity">
+
+                    <div class="empty-icon">
+                        ↕
+                    </div>
+
+                    <strong>
+                        No recent activity
+                    </strong>
+
+                    <p>
+                        Your latest wallet activity
+                        will appear here.
+                    </p>
+
+                </div>
+
+            `;
+
+            return;
+        }
+
+
+        /* =========================
+           DISPLAY ACTIVITY
+        ========================= */
+
+        activityList.innerHTML = "";
+
+
+        activities.forEach(activity => {
+
+            const item =
+                document.createElement("div");
+
+            item.className =
+                "activity-item";
+
+
+            const amount =
+                Number(activity.amount || 0);
+
+
+            const date =
+                activity.created_at
+                    ? new Date(
+                        activity.created_at
+                    ).toLocaleString(
+                        "en-NG",
+                        {
+                            day: "numeric",
+                            month: "short",
+                            hour: "numeric",
+                            minute: "2-digit"
+                        }
+                    )
+                    : "";
+
+
+            const amountClass =
+                activity.incoming
+                    ? "incoming"
+                    : "outgoing";
+
+
+            const amountSign =
+                activity.incoming
+                    ? "+"
+                    : "−";
+
+
+            const iconClass =
+                activity.incoming
+                    ? "activity-incoming"
+                    : "activity-outgoing";
+
+
+            item.innerHTML = `
+
+                <div class="activity-icon ${iconClass}">
+                    ${activity.icon}
+                </div>
+
+
+                <div class="activity-details">
+
+                    <strong>
+                        ${escapeHtml(
+                            activity.title
+                        )}
+                    </strong>
+
+                    <span>
+                        ${escapeHtml(
+                            activity.description
+                        )}
+                    </span>
+
+                    <small>
+                        ${escapeHtml(date)}
+                    </small>
+
+                </div>
+
+
+                <div class="activity-amount">
+
+                    <strong class="${amountClass}">
+                        ${amountSign}₦${amount.toLocaleString(
+                            "en-NG",
+                            {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            }
+                        )}
+                    </strong>
+
+                    <small>
+                        ${escapeHtml(
+                            activity.status
+                        )}
+                    </small>
+
+                </div>
+
+            `;
+
+
+            activityList.appendChild(item);
+
+        });
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Activity error:",
+            error
+        );
+
+        activityList.innerHTML = `
+
+            <div class="activity-error">
+                Unable to load recent activity.
+            </div>
+
+        `;
+
+    }
+
+}
 
         /* =========================
            CHECK USER
