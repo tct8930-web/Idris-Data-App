@@ -4150,6 +4150,10 @@
 
         const results = await Promise.all([
 
+            /* =========================
+               WALLET TRANSACTIONS
+            ========================= */
+
             supabaseClient
                 .from("wallet_transactions")
                 .select("*")
@@ -4159,14 +4163,27 @@
                 })
                 .limit(10),
 
+
+            /* =========================
+               VELQORA TRANSFERS
+               Includes sent AND received
+            ========================= */
+
             supabaseClient
                 .from("transfers")
                 .select("*")
-                .eq("user_id", userId)
+                .or(
+                    `user_id.eq.${userId},recipient_user_id.eq.${userId}`
+                )
                 .order("created_at", {
                     ascending: false
                 })
                 .limit(10),
+
+
+            /* =========================
+               DATA PURCHASES
+            ========================= */
 
             supabaseClient
                 .from("data_transactions")
@@ -4176,6 +4193,11 @@
                     ascending: false
                 })
                 .limit(10),
+
+
+            /* =========================
+               AIRTIME PURCHASES
+            ========================= */
 
             supabaseClient
                 .from("airtime_transactions")
@@ -4215,16 +4237,18 @@
 
                 activities.push({
 
-                    title: incoming
-                        ? "Wallet funded"
-                        : "Wallet transaction",
+                    title:
+                        incoming
+                            ? "Wallet funded"
+                            : "Wallet transaction",
 
-                    description: incoming
-                        ? "Money added to your wallet"
-                        : (
-                            tx.description ||
-                            "Wallet activity"
-                        ),
+                    description:
+                        incoming
+                            ? "Money added to your wallet"
+                            : (
+                                tx.description ||
+                                "Wallet activity"
+                            ),
 
                     amount:
                         Number(tx.amount || 0),
@@ -4582,7 +4606,6 @@
     }
 
 }
-
         /* =========================
            CHECK USER
         ========================= */
